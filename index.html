@@ -1,8 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3169103084290208"
-     crossorigin="anonymous"></script>
+    <script>
+  function loadAdsense() {
+    let s = document.createElement("script");
+    s.async = true;
+    s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3169103084290208";
+    s.setAttribute("crossorigin", "anonymous");
+    document.head.appendChild(s);
+  }
+
+  if (localStorage.getItem("sp_cookie_ok")) {
+    loadAdsense();
+  } else {
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("cookieAccept");
+      if (btn) btn.addEventListener("click", loadAdsense);
+    });
+  }
+</script>
+
     <meta charset="UTF-8" />
     <title>Silicon Pen — Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -133,6 +150,7 @@
     <footer class="site-footer">
       <div class="container footer-inner">
         <p>© 2025 SiliconPen. All rights reserved.</p>
+        <a href="/privacy-policy.html">Privacy Policy</a>
       </div>
     </footer>
 
@@ -233,5 +251,50 @@
 
   loadPosts();
 </script>
+<div id="cookieConsent">
+  <p>
+    SiliconPen uses cookies for analytics and personalized ads to improve your experience.
+    <a href="/privacy-policy.html">Learn more</a>
+  </p>
+  <button id="cookieAccept">OK</button>
+</div>
+
+<style>
+  #cookieConsent {
+    position: fixed;
+    bottom: 22px;
+    right: 22px;
+    background: #0c1328;
+    border-radius: 10px;
+    color: #fff;
+    padding: 14px 22px;
+    font-size: 14px;
+    max-width: 330px;
+    display: none;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    z-index: 9999;
+  }
+  #cookieConsent button {
+    margin-top: 8px;
+    background: #1b76ff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  if (!localStorage.getItem("sp_cookie_ok")) {
+    document.getElementById("cookieConsent").style.display = "block";
+  }
+  document.getElementById("cookieAccept").onclick = () => {
+    localStorage.setItem("sp_cookie_ok", "yes");
+    document.getElementById("cookieConsent").style.display = "none";
+  };
+</script>
+
   </body>
 </html>

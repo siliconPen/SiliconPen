@@ -1,8 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3169103084290208"
-     crossorigin="anonymous"></script>
+    <script>
+  function loadAdsense() {
+    let s = document.createElement("script");
+    s.async = true;
+    s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3169103084290208";
+    s.setAttribute("crossorigin", "anonymous");
+    document.head.appendChild(s);
+  }
+
+  if (localStorage.getItem("sp_cookie_ok")) {
+    loadAdsense();
+  } else {
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("cookieAccept");
+      if (btn) btn.addEventListener("click", loadAdsense);
+    });
+  }
+</script>
     <meta charset="UTF-8" />
     <title>Arduino Uno Board Basics Explained — Silicon Pen</title>
     <meta name="description" content="Learn about the components and functions of the Arduino Uno board to enhance your coding and circuit-building skills">
@@ -1785,6 +1801,7 @@
     <footer class="site-footer">
       <div class="container footer-inner">
         <p>© 2025 SiliconPen. All rights reserved.</p>
+        <a href="../privacy-policy.html">Learn more</a>
       </div>
     </footer>
 
@@ -1932,6 +1949,14 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 
 </script>
-
+<script>
+  if (!localStorage.getItem("sp_cookie_ok")) {
+    document.getElementById("cookieConsent").style.display = "block";
+  }
+  document.getElementById("cookieAccept").onclick = () => {
+    localStorage.setItem("sp_cookie_ok", "yes");
+    document.getElementById("cookieConsent").style.display = "none";
+  };
+</script>
   </body>
 </html>

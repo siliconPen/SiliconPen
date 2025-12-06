@@ -70,6 +70,7 @@
     <footer class="site-footer">
       <div class="container footer-inner">
         <p>© 2025 SiliconPen. All rights reserved.</p>
+        <a href="../privacy-policy.html">Learn more</a>
       </div>
     </footer>
 
@@ -92,5 +93,14 @@
         dropdownMenu.classList.remove("dropdown-open");
       });
     </script>
+    <script>
+  if (!localStorage.getItem("sp_cookie_ok")) {
+    document.getElementById("cookieConsent").style.display = "block";
+  }
+  document.getElementById("cookieAccept").onclick = () => {
+    localStorage.setItem("sp_cookie_ok", "yes");
+    document.getElementById("cookieConsent").style.display = "none";
+  };
+</script>
   </body>
 </html>
