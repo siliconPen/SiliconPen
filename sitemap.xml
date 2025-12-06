@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Core pages -->
+  <url>
+    <loc>https://siliconpen.com/</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/articles.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/references.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/series/oscillations.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/series/rant-electronics.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/series/pathway-to-arduino.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/about.html</loc>
+  </url>
+
+  <!-- Add about/contact if you have them -->
+  <!--
+  
+
+  <url>
+    <loc>https://siliconpen.com/contact.html</loc>
+  </url>
+  -->
+
+  <!-- Posts (add more as you create them) -->
+
+  <url>
+    <loc>https://siliconpen.com/posts/the-ghibli-effect-why-are-chatgpts-processors-melting.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/posts/how-to-read-circuit-diagrams.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/posts/overview-rant-electronics-0.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/posts/the-mighty-switch-rant-electronics-1.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/posts/overview-oscillations-0.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/posts/wires-the-sneaky-snakes-of-circuits-rant-electronics-2-part-1.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/posts/wires-the-sneaky-snakes-of-circuits-rant-electronics-2-part-2.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/posts/oscillations-1.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/posts/oscillations-2.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/posts/watts-really-going-on-inside-the-lightbulb-part-1-rant-electronics-3.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/posts/watts-really-going-on-inside-the-lightbulb-part-2-rant-electronics-3.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/posts/what-is-arduino.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/posts/understanding-the-arduino-uno-board.html</loc>
+  </url>
+
+</urlset>

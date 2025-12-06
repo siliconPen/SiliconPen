@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>SiliconPen</title>
+    <link>https://siliconpen.com/</link>
+    <description>Essays on electronics, AI, circuits, and the tech war – by SiliconPen.</description>
+    <language>en</language>
+
+    <!-- Last updated date (you can update whenever you publish) -->
+    <lastBuildDate>Sun, 07 Dec 2025 20:00:00 +0530</lastBuildDate>
+
+    <!-- 1. Example item -->
+    <item>
+      <title>The Ghibli Effect: Why are ChatGPT's Processors Melting?</title>
+      <link>https://siliconpen.com/posts/the-ghibli-effect-why-are-chatgpts-processors-melting.html</link>
+      <guid>https://siliconpen.com/posts/the-ghibli-effect-why-are-chatgpts-processors-melting.html</guid>
+      <pubDate>Wed, 02 Apr 2025 12:00:00 +0530</pubDate>
+      <description>
+        Explore how a cute Ghibli-style trend nearly set GPUs on fire, and what it says about AI, compute, and culture.
+      </description>
+    </item>
+
+    <!-- 2. Example item -->
+    <item>
+      <title>How to Read Circuit Diagrams: A Beginner’s Guide</title>
+      <link>https://siliconpen.com/posts/how-to-read-circuit-diagrams.html</link>
+      <guid>https://siliconpen.com/posts/how-to-read-circuit-diagrams.html</guid>
+      <pubDate>Wed, 02 Apr 2025 12:00:00 +0530</pubDate>
+      <description>
+        A practical, analogy-driven guide to understanding circuit diagrams, series/parallel, and Ohm’s law.
+      </description>
+    </item>
+
+    <!-- 3. Add rest of posts in similar fashion -->
+    <item>
+      <title>Overview [Rant Electronics #0]</title>
+      <link>https://www.siliconpen.com/posts/overview-rant-electronics-0.html</link>
+      <guid>https://www.siliconpen.com/posts/overview-rant-electronics-0.html</guid>
+      <pubDate>Thr, 15 May 2025 12:00:00 +0530</pubDate>
+      <description>Engineering tantrums dressed as insights.</description>
+    </item>
+    
+    <item>
+      <title>The Mighty Switch [Rant Electronics #1]</title>
+      <link>https://www.siliconpen.com/posts/the-mighty-switch-rant-electronics-1.html</link>
+      <guid>https://www.siliconpen.com/posts/the-mighty-switch-rant-electronics-1.html</guid>
+      <pubDate>Fri, 16 May 2025 12:00:00 +0530</pubDate>
+      <description>Engineering tantrums dressed as insights.</description>
+    </item>
+
+    <item>
+      <title>Overview: Oscillations #0</title>
+      <link>https://www.siliconpen.com/posts/overview-oscillations-0.html</link>
+      <guid>https://www.siliconpen.com/posts/overview-oscillations-0.html</guid>
+      <pubDate>Sat, 17 May 2025 12:00:00 +0530</pubDate>
+      <description>Not just headlines — oscillations of a changing world, filtered through ambition, soul, and silicon.</description>
+    </item>
+
+    <item>
+      <title>Wires — The Sneaky Snakes of Circuits [Rant Electronics #2] Part 1</title>
+      <link>https://www.siliconpen.com/posts/wires-the-sneaky-snakes-of-circuits-rant-electronics-2-part-1.html</link>
+      <guid>https://www.siliconpen.com/posts/wires-the-sneaky-snakes-of-circuits-rant-electronics-2-part-1.html</guid>
+      <pubDate>Mon, 26 May 2025 12:00:00 +0530</pubDate>
+      <description>Engineering tantrums dressed as insights.</description>
+    </item>
+
+    <item>
+      <title>Wires — The Sneaky Snakes of Circuits [Rant Electronics #2] Part 2</title>
+      <link>https://www.siliconpen.com/posts/wires-the-sneaky-snakes-of-circuits-rant-electronics-2-part-2.html</link>
+      <guid>https://www.siliconpen.com/posts/wires-the-sneaky-snakes-of-circuits-rant-electronics-2-part-2.html</guid>
+      <pubDate>Sat, 31 May 2025 12:00:00 +0530</pubDate>
+      <description>Engineering tantrums dressed as insights.</description>
+    </item>
+
+    <item>
+      <title>Oscillations #1</title>
+      <link>https://www.siliconpen.com/posts/oscillations-1.html</link>
+      <guid>https://www.siliconpen.com/posts/oscillations-1.html</guid>
+      <pubDate>Sun, 01 Jun 2025 12:00:00 +0530</pubDate>
+      <description>Not just headlines — oscillations of a changing world, filtered through ambition, soul, and silicon.</description>
+    </item>
+
+    <item>
+      <title>Watt’s Really Going On Inside the Lightbulb Part-1 [Rant Electronics #3]</title>
+      <link>https://www.siliconpen.com/posts/watts-really-going-on-inside-the-lightbulb-part-1-rant-electronics-3.html</link>
+      <guid>https://www.siliconpen.com/posts/watts-really-going-on-inside-the-lightbulb-part-1-rant-electronics-3.html</guid>
+      <pubDate>Sat, 07 Jun 2025 12:00:00 +0530</pubDate>
+      <description>Engineering tantrums dressed as insights.</description>
+    </item>
+
+    <item>
+      <title>Oscillations #2</title>
+      <link>https://www.siliconpen.com/posts/oscillations-2.html</link>
+      <guid>https://www.siliconpen.com/posts/oscillations-2.html</guid>
+      <pubDate>Sun, 08 Jun 2025 12:00:00 +0530</pubDate>
+      <description>Not just headlines — oscillations of a changing world, filtered through ambition, soul, and silicon.</description>
+    </item>
+
+    <item>
+      <title>Watt’s Really Going On Inside the Lightbulb Part-2 [Rant Electronics #3]</title>
+      <link>https://www.siliconpen.com/posts/watts-really-going-on-inside-the-lightbulb-part-2-rant-electronics-3.html</link>
+      <guid>https://www.siliconpen.com/posts/watts-really-going-on-inside-the-lightbulb-part-2-rant-electronics-3.html</guid>
+      <pubDate>Sat, 14 Jun 2025 12:00:00 +0530</pubDate>
+      <description>Engineering tantrums dressed as insights.</description>
+    </item>
+
+    <item>
+      <title>What Is Arduino?</title>
+      <link>https://www.siliconpen.com/posts/what-is-arduino.html</link>
+      <guid>https://www.siliconpen.com/posts/what-is-arduino.html</guid>
+      <pubDate>Thr, 04 Dec 2025 12:00:00 +0530</pubDate>
+      <description>Overview for arduino and its working.</description>
+    </item>
+
+    <item>
+      <title>Understanding the Arduino Uno Board</title>
+      <link>https://siliconpen.com/posts/understanding-the-arduino-uno-board.html</link>
+      <guid>https://siliconpen.com/posts/understanding-the-arduino-uno-board.html</guid>
+      <pubDate>Fri, 05 Dec 2025 12:00:00 +0530</pubDate>
+      <description>Peeking into Arduino’s circuits and core blocks in a friendly breakdown.</description>
+    </item>
+    
+    
+
+  </channel>
+</rss>
