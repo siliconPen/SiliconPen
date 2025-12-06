@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>About — Silicon Pen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-22XHW1HR4J"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-22XHW1HR4J");
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Same header -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand">
+          <img src="logo.png" alt="Silicon Pen logo" class="brand-logo" />
+          <span class="brand-name">Silicon Pen</span>
+        </a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+
+        <nav class="nav-pill">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="about.html" class="nav-link nav-link-active">About</a>
+          <a href="articles.html" class="nav-link">All Articles</a>
+
+          <div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle" type="button">
+              Explore ▾
+            </button>
+            <div class="dropdown-menu">
+              <a href="references.html">References</a>
+              <a href="series.html">Series</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <section class="post-content-shell">
+          <div class="post-main">
+      <div class="post-content">
+      <p class="has-line-data" data-line-start="0" data-line-end="1">I’m <strong>Rishi Srivastava</strong>, a university student pursuing a <strong>B.Tech in Electronics and Communication Engineering</strong>. My passion for electronics started early—fidgeting with home electronics always got me scolded, so I took up <strong>electronics engineering</strong> where I could finally burn some circuits <em>without</em> getting into trouble! 🔥</p>
+<p class="has-line-data" data-line-start="2" data-line-end="3">Beyond hardware, I’m a <strong>coding hobbyist</strong>, exploring different languages and working on small personal projects to automate tasks at home. Over time, I realized the immense possibilities when <strong>hardware meets coding</strong>, and that’s what drives my curiosity today.</p>
+<hr>
+<h2 class="code-line" data-line-start=6 data-line-end=7 ><a id="Why_I_Started_SiliconPen_6"></a><strong>Why I Started SiliconPen</strong></h2>
+<p class="has-line-data" data-line-start="8" data-line-end="9">I’ve always been <em>that guy</em>—the one who explains concepts to friends <strong>5 minutes before an exam</strong>. When I entered college, I noticed a gap: many students struggled with understanding core concepts because the way professors taught <strong>didn’t resonate with them</strong>.</p>
+<p class="has-line-data" data-line-start="10" data-line-end="11">People <strong>grasp concepts better when they’re explained by someone who truly understands their struggles</strong>. That’s why I started <strong>SiliconPen</strong>—to make <strong>electronics and circuits simpler</strong> for anyone eager to learn. If even one person benefits from this, it’ll be worth it.</p>
+<hr>
+<h2 class="code-line" data-line-start=14 data-line-end=15 ><a id="Whats_in_It_for_You_14"></a><strong>What’s in It for You?</strong></h2>
+<p class="has-line-data" data-line-start="16" data-line-end="20">🔹 <strong>Struggling with circuit diagrams?</strong> I’ve got you covered.<br>
+🔹 <strong>Curious about electronics and hardware?</strong> Hop on board! 🚀<br>
+🔹 <strong>Want to explore the latest tech and engineering concepts?</strong> You’re in the right place.<br>
+🔹 <strong>Beginner in electronics?</strong> I’ll guide you with <strong>easy explanations &amp; project ideas</strong>.</p>
+<hr>
+<h2 class="code-line" data-line-start=23 data-line-end=24 ><a id="Why_Trust_Me_23"></a><strong>Why Trust Me?</strong></h2>
+<p class="has-line-data" data-line-start="25" data-line-end="29">✔️ <strong>B.Tech ECE Student at VIT Chennai</strong> (a reputed college)<br>
+✔️ <strong>Active in workshops &amp; always learning new things</strong><br>
+✔️ <strong>Passionate about making complex topics easy to understand</strong></p>
+<hr>
+<h2 class="code-line" data-line-start=32 data-line-end=33 ><a id="_Lets_Connect_32"></a><strong>📌 Let’s Connect!</strong></h2>
+<p class="has-line-data" data-line-start="34" data-line-end="35">If you’re interested in <strong>electronics, circuits, or tech discussions</strong>, feel free to connect with me on <strong>LinkedIn</strong>! I’m always open to learning, sharing knowledge, and discussing new ideas.</p>
+<p class="has-line-data" data-line-start="36" data-line-end="37">🔗 <a href="http://www.linkedin.com/in/rishisrivastavavece">www.linkedin.com/in/rishisrivastavavece</a></p>
+</div>
+</div>
+</section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© 2025 SiliconPen. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      const navToggle = document.querySelector(".nav-toggle");
+      const navPill = document.querySelector(".nav-pill");
+      const dropdownToggle = document.querySelector(".dropdown-toggle");
+      const dropdownMenu = document.querySelector(".dropdown-menu");
+
+      navToggle.addEventListener("click", () => {
+        navPill.classList.toggle("nav-open");
+      });
+
+      dropdownToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle("dropdown-open");
+      });
+
+      document.addEventListener("click", () => {
+        dropdownMenu.classList.remove("dropdown-open");
+      });
+    </script>
+  </body>
+</html>

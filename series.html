@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Series — Silicon Pen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-22XHW1HR4J"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-22XHW1HR4J");
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand">
+          <img src="logo.png" alt="Silicon Pen logo" class="brand-logo" />
+          <span class="brand-name">Silicon Pen</span>
+        </a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+
+        <nav class="nav-pill">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="about.html" class="nav-link">About</a>
+          <a href="articles.html" class="nav-link">All Articles</a>
+
+          <div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle" type="button">
+              Explore ▾
+            </button>
+            <div class="dropdown-menu dropdown-open">
+              <a href="references.html">References</a>
+              <a href="series.html">Series</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="series-page">
+  <h1 class="series-headline">Series</h1>
+  <p class="series-subtext">Explore content grouped into themes and learning paths.</p>
+
+  <div class="series-list"></div>
+</main>
+
+<script src="series.js"></script>
+
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© 2025 SiliconPen. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      const navToggle = document.querySelector(".nav-toggle");
+      const navPill = document.querySelector(".nav-pill");
+      const dropdownToggle = document.querySelector(".dropdown-toggle");
+      const dropdownMenu = document.querySelector(".dropdown-menu");
+
+      navToggle.addEventListener("click", () => {
+        navPill.classList.toggle("nav-open");
+      });
+
+      dropdownToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle("dropdown-open");
+      });
+
+      document.addEventListener("click", () => {
+        dropdownMenu.classList.remove("dropdown-open");
+      });
+    </script>
+  </body>
+</html>

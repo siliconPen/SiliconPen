@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>
+      How to Read Circuit Diagrams: A Beginner’s Guide to Electronics — Silicon Pen
+    </title>
+    <meta name="description" content="Learn how to read circuit diagrams like a pro! This beginner-friendly guide breaks down symbols, connections, and tips to decode schematics with ease.">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-22XHW1HR4J"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-22XHW1HR4J");
+    </script>
+
+    <!-- Fonts (same as other pages) -->
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <!-- HEADER (same as other pages) -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="../index.html" class="brand">
+          <img src="../logo.png" alt="Silicon Pen logo" class="brand-logo" />
+          <span class="brand-name">Silicon Pen</span>
+        </a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+
+        <nav class="nav-pill">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="../about.html" class="nav-link">About</a>
+          <a href="../articles.html" class="nav-link">All Articles</a>
+          <div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle" type="button">
+              Explore ▾
+            </button>
+            <div class="dropdown-menu">
+              <a href="../references.html">References</a>
+              <a href="../series.html">Series</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <article class="container post-article">
+        <!-- Cover image + overlay heading -->
+<header class="post-hero-wrapper">
+  <div class="post-hero">
+    <img
+      src="../images/teach/cover.webp"
+      alt="Post cover"
+      class="post-hero-image"
+    />
+  </div>
+
+  <!-- Title BELOW the cover -->
+  <h1 class="post-title-main">
+    How to Read Circuit Diagrams: A Beginner’s Guide
+  </h1>
+
+  <!-- Subtitle below title -->
+  <p class="post-subtitle-bar">
+    "Explore circuit diagrams with ease by grasping basic symbols and
+    essential electronics insights."
+  </p>
+</header>
+
+<!-- Meta row: date + reading time -->
+<div class="post-meta-bar">
+  <span class="post-date">April 2, 2025</span>
+  <span class="post-reading-time" id="reading-time"></span>
+</div>
+
+
+
+        <!-- Content box -->
+        <section class="post-content-shell">
+          <div class="post-content">
+           <h1 id=\"heading-ever-looked-at-a-circuit-and-felt-lost\">Ever looked at a circuit and felt lost?</h1><p><em>"Ahh, what are these arrows and zigzag lines??"</em><br />Were these the words spinning in your head when you first saw that plain, daunting sketch in your circuit theory book? Do you want to <strong>decode those confusing circuits</strong> and <strong>earn the respect of your classmates</strong>? Worry not! I’m here to make those intimidating circuits a <strong>cakewalk</strong> for you.</p><p>Understanding electrical circuits is <strong>integral</strong> to mastering electronics and fully experiencing the <strong>joy of this fascinating art</strong>. Yes, you heard that right—circuit diagrams are an <strong>art</strong>. They simplify our understanding of <strong>how electricity flows</strong>, how components interact, and how to <strong>prevent accidental disasters</strong> (like blowing up an expensive component :).</p><p>With just one diagram, you can <strong>pre-analyze</strong> everything—the <strong>voltage across each component, the current flowing through it, the power it dissipates</strong>, and much more—all <strong>before even turning the switch ON</strong>. Fascinating, isn’t it?</p><p><strong>Let’s dive in!</strong></p><hr  class="section-divider"/><h1 id=\"heading-what-this-article-covers\">What This Article Covers:</h1><p>📌 <strong>What is a circuit diagram?</strong> – Understanding the basics and key terms.<br />📌 <strong>Common symbols and meanings</strong> – Breaking down basic components.<br />📌 <strong>Understanding connections</strong> – Seeing the flow in any circuit.<br />📌 <strong>Reading a circuit</strong> – Step-by-step guide to decoding circuits.<br />📌 <strong>Practical example &amp; questions</strong> – Breaking down a real circuit.<br />📌 <strong>Important tips</strong> – Pro tricks to read circuits faster.<br />📌 <strong>Conclusion &amp; References</strong></p><hr  class="section-divider"/><h1 id=\"heading-what-is-a-circuit-diagram\">What is a circuit diagram?</h1><p>The electric circuit has is scientifically defined as:</p><p>“<em>An electric circuit is a closed-loop conductive pathway that allows electric current to flow, typically consisting of an energy source, conductive elements, and electrical components that regulate, control, or utilize the flow of charge according to established physical laws such as Ohm’s Law and Kirchhoff’s Laws.</em>”</p><p>Now, let's simplify things and understand the basic idea of a circuit in an intuitive way, without technical jargon.</p><h2 id=\"heading-an-analogy-think-of-water-pipeline\">An Analogy: Think of Water Pipeline</h2><p>What all things are the key elements in this system.</p><ul><li><p><strong>The Pipeline:</strong> Contains the water.</p></li><li><p><strong>The Pump:</strong> Which pushes or forces water in a certain direction.</p></li><li><p><strong>The Water:</strong> Goes all arounds the pipe,</p></li><li><p><strong>A Turbine:</strong> The load attached to the pipeline.</p></li></ul><p>The pushed water in the pipeline which goes all around in the <strong><em>closed looping pipeline</em></strong>, now as this water rotates the turbines installed inside the pipe, generating power or in very simple terms \"does something\". <em>We can say the pump transferred power from itself through the water to the turbine and the turbine used that energy to do its \"work\"</em>. (Make sure to fully grasp this analogy has it will help a lot in the upcoming sections).</p><p>Now think, of a <strong>metallic wire</strong>. Metals contain <strong>free electrons</strong> (electrons which are 'free' to 'flow' in the metal body, i.e. here the wire). The wire is our closed pipeline which contains electrons, the water, which is pushed by our <strong>battery</strong>, the pump, which goes into the <strong>load</strong>, the turbine, and in simple terms transfer their energy to the load so that the load and \"do its work\". Water flows to the turbine, the turbine rotates, electrons go to the load, e.g. an LED, it glows. Keep it that simple for now.</p><p><img src="../images/teach/1.png" alt class=\"image--center mx-auto\" /></p><p>After this short discussion, let's try to define the terms with our own understanding.</p><ul><li><p>Circuit - A closed path through which electric current flows, consisting of an energy source, conductive connections, and electrical components.</p></li><li><p>Battery - A device that converts chemical energy into electrical energy, providing a voltage (the push for electron) source for a circuit.</p></li><li><p>Load - Any component or device in a circuit that consumes electrical energy to perform work, such as a resistor, motor, or light bulb.</p></li></ul><p><strong>Let's continue our discussion forward.</strong></p><p>Now imagine we had a pump whose power level can we varied, i.e., <em>the pressure provided by it to push the water can be controlled</em>. Now what does that do? <strong>YES!</strong> Its changes the <strong>speed</strong> by which the water is flowing through the pipe. Does this have any effect on our turbine? <strong>YES!</strong> The turbine moves faster, i.e. it is getting <strong>more power</strong> by the water. Now the new terms which we introduced here <strong><em>'pressure'</em></strong> and <strong><em>'speed of water'</em></strong> are called <strong><em>'voltage'</em></strong> and <strong><em>'current'</em></strong> in the world of electricity.</p><h2 id=\"heading-voltage-and-current\">Voltage and Current</h2><p>First, we'll deal with <strong>voltage</strong>, shall we? As mentioned before, voltage can be understood as the push provided by the pump or, in this case, the battery. By changing its value, we can directly affect the speed or amount of current.</p><p>Now, coming to <strong>current</strong>, it can be understood as the speed at which charges (here, electrons) flow through the circuit. The faster they move, the more energy they transfer.</p><p>Now that we have laid a solid intuitive base for the most important terms of the electric circuit, its time to go technical and bring the mathematics into picture. (Don't worry, Its gonna be as intuitive as it was till now)</p><h2 id=\"heading-mathematical-analysis-v-ir\">Mathematical Analysis: \(V = IR\)</h2><p>The letter \(I\) and \(V\) denotes current and voltage respectively. The current \(I\) is measured in ampere (A) and voltage \(V\) is measured in volts (V). As we understood that voltage and current as directly related, we can draw a mathematical relation here: “<strong><em>voltage is directly proportional to current I”</em></strong>, which resolves by introducing a constant called <strong>resistance</strong>.</p><p>We get the famous result.</p><p>$$V=IR$$</p><h2 id=\"heading-resistance\">Resistance</h2><p>What is resistance, you ask? It is the obstacle that resists the flow of charges through it and affects the flow rate. Too hard to grasp? Let's go back to the water analogy. As we all know, pipes have sizes, specifically their diameter. Now, imagine a big, BIG, <em>BIG</em> pipe. Water will flow through it so easily, and a lot of it, wouldn't it? Now, imagine narrowing the pipe. Even if we maintain the same pressure, the overall amount of water flowing through (the flow rate) will decrease because the pipe is restricting the flow. Similarly, in electric circuits, resistance determines how much the circuit opposes the flow of current.</p><p><img src="../images/teach/2.png" alt class=\"image--center mx-auto\" /></p><p>Is the circuit resisting? <strong>YES!</strong> Everything resists the flow of current, or we can say that they allow current to flow only up to a certain limit. Materials that provide the least to negligible resistance are called <strong>conductors</strong> (e.g., metals). On the other hand, materials that provide maximum resistance are called <strong>insulators</strong> (e.g., wood). Now, the metal wire through which current is flowing also provides some resistance, but in an ideal world, we assume the resistance of the wire to be zero (a perfect conductor).</p><p>Hence to compensate for this, we as a rule, always add a <strong>resistor</strong> (coming up in a moment, stay with me) into the circuit whose resistance value is considerable and is huge compared to that of the wire hence in the ideal world we only need to consider the resistance of that resistor and not of the wire. This ensures that our ideal assumptions are not drastically different from the real world, making calculations more practical.</p><h2 id=\"heading-resistor\">Resistor</h2><p>A resistor, as you might have guessed, is “<strong><em>a device that provides a specific amount of resistance based on our needs</em></strong>”. Imagine a small-sized pipe fitted between a normal-sized pipe. Regardless of the resistance of the normal pipe, the flow now depends entirely on the size of the smaller pipe. Similarly, does the load also provide resistance? Of course! Wouldn’t a turbine act as an obstacle from the perspective of the water trying to flow? Every load has its own resistance, which it adds to the circuit. (In fact, resistance is the very principle behind how these electrical components function! We'll dive deeper into this in upcoming articles.) It is measured in ohm.</p><p><img src="../images/teach/3.png" alt class=\"image--center mx-auto\" /></p><p>Sooo, to sum up whatever we understood till now. Voltage, Current, Circuits, Resistance and the relation \(V=IR\). Lets move towards learning about common components symbols and their meanings.</p><hr  class="section-divider"/><h1 id=\"heading-common-symbols-and-meanings\"><strong>Common symbols and meanings</strong></h1><p>Obviously, we cannot always draw intricate diagrams or describe a circuit using words alone. Hence, we use symbols. Here, we’ll discuss the symbols for various circuit components we’ve covered so far.</p><p><img src="../images/teach/4.webp" alt class=\"image--center mx-auto\" /></p><p>In a battery symbol, the longer side represents the positive terminal, while the shorter side represents the negative terminal. What are these terminals? Remember when we discussed the direction of water flow in relation to the pump? The same concept applies here. The terminals indicate the direction of current flow—current always flows from the positive terminal to the negative terminal. (For those wondering about charge movement and terminal polarities, don’t worry! We’ll clarify this in upcoming articles.)</p><p>Now, let’s look at the symbols for a resistor, capacitor, and inductor, and a chart of common circuit symbols.</p><p><img src="../images/teach/5.webp" alt class=\"image--center mx-auto\" /></p><p>Also we a component called switch, which is exacly what its name suggest. Its turns ON/OFF the circuit by Closing(Completing)/Opening(Breaking) the circuit. Now tell what’s current in the circuit in the cover picture:)</p><p><img src="../images/teach/6.png" alt class=\"image--center mx-auto\" /></p><p>Lets put all of them together and make a complete circuit.</p><p><img src="../images/teach/7.png" alt class=\"image--center mx-auto\" /></p><hr  class="section-divider"/><h1 id=\"heading-understanding-connections\"><strong>Understanding connections</strong></h1><p>Now, let’s understand how components connect in a circuit. We have our basic circuit: a voltage source (battery) \(V\), current \(I\), resistance \(R\), and a load (an LED). As mentioned before, current flows from the positive terminal of the battery to the negative terminal through the resistor and the load.</p><p>Since \(V\) and \(R\) are values we set, we can determine the current using <strong>Ohm’s Law</strong>:</p><p>$$I=\frac{V}{R}​$$</p><h2 id=\"heading-series-connection\">Series Connection</h2><p>Simple? Now, let’s go further. Imagine there are two resistors in the circuit, placed one after the other. What happens now? We still know \(V\), but what about \(R\)? Will the total resistance be equal to \(R_{1}\), \(R_{2}\)​, their product, or their sum?</p><p><img src="../images/teach/8.png" alt class=\"image--center mx-auto\" /></p><p>Think of it like water flowing through two different-sized smaller pipes placed at different points in a larger pipeline. The total resistance to flow will be the sum of the individual resistances. If the first pipe restricts <strong>x</strong> amount of water and the second restricts <strong>y</strong> amount, the total restriction will be <strong>x + y</strong>. Similarly, in a series circuit, the total resistance is given by:</p><p>$$R_{total}=R_{1}+R_{2}$$</p><p>Also called the “<strong><em>equivalent resistance</em></strong>”, \(R_{Equivalent}\) of the circuit (because if we replace the two resistors with a single resistor with the value \(R_{1}+R_{2}\) then the values of current for the same value of voltage will be the same). i.e.</p><p>$$V=I(R_{1}+R_{2})$$</p><p><img src="../images/teach/9.webp" alt class=\"image--center mx-auto\" /></p><p>This type of circuit, where resistors are placed <strong>one after the other</strong>, is called a <strong>series circuit</strong>, meaning the resistors are <strong>connected in series</strong>. Since the path remains the same, the <strong>same amount of current flows through both resistors.</strong></p><h2 id=\"heading-deriving-requivalent-in-series\">Deriving \(R_{Equivalent}\) In Series</h2><p>Now, some may ask: <em>If the current is the same but the resistance values are different, then according to the relation</em> \(V=IR\), <em>will the voltage across the two resistors vary?</em> Like \(V_{1}=IR_{1}\) and \(V_{2}=IR_{2}\)<strong>​</strong>? <strong>YES!</strong></p><p>Back to the water analogy—imagine the pressure near the mouths of two different pipes. Would it vary? Why, you ask? Since the same amount of water is flowing through both, think of each pipe individually:</p><ul><li><p>The same water flows through a <strong>small pipe</strong> (less pressure).</p></li><li><p>The same water flows through an <strong>even smaller pipe</strong> (higher pressure).</p></li></ul><p>Similarly, in an electric circuit, the voltage across each resistor depends on its resistance. (Did this sparks some deep questions—we’ll cover them up in future articles:) Now, the sum of these two voltages is equal to the total voltage applied by the battery. \(V_{1}+V_{2}=V\)</p><p>A little bit of math:</p><p>$$V_{1}+ V_{2}=IR_{1}+IR_{2}$$</p><p>$$V_{1}+V_{2}=I(R_{1}+R_{2})$$</p><p>See where this is going? Using <strong>Ohm’s Law</strong>:</p><p>$$V=I(R_{1}+R_{2})$$</p><p>$$R_{Equivalent}=R_{1}+R_{2}$$</p><p>Now this fundamental formula can go upto \(N\) number of resistors connected in series. i.e.</p><p>$$R_{Equivalent}=R_{1}+R_{2}+R_{3}+...+R_{N}$$</p><h2 id=\"heading-paralle-connection\">Paralle Connection</h2><p>Okayy, so is this the only type of circuit you'll deal with? Nope. There's another. What is you get something like this.</p><p><img src="../images/teach/10.png" alt class=\"image--center mx-auto\" /></p><p>So now the two resistors are in different paths we see. The thing here to notice is that “<strong><em>they are connected end to end and hence are said to be connected in parallel”</em></strong>. Hmm, What happens now?</p><p>Let’s go back to our <strong>water analogy</strong>. This time, the water in the pipe has <strong>two different paths</strong> to flow through. But how much water will flow through each path?</p><p>That depends <strong>solely on the resistance</strong> of each path because <strong>voltage remains constant here</strong>. Huh what?—yea yea. Think about it—both paths <strong>connect at the same points</strong> (like two pipes that branch out from the same source and meet at the same exit). Since these points are common, the <strong>pressure (voltage) at these points must be the same</strong> for both paths.</p><p>So, the path with <strong>less resistance</strong> will allow <strong>more water (current) to flow</strong>, while the path with <strong>higher resistance</strong> will allow <strong>less</strong>. Mathematically speaking,</p><p>$$I_{1}=\frac{V}{R_{1}}, I_{2}=\frac{V}{R_{2}}$$</p><p>See? Just like <strong>current was constant in series circuits</strong>, here <strong>voltage remains constant</strong> across both resistors. Also, we can see that “<strong><em>current and resistance are inversely proportional</em></strong>“.</p><p>So how do we find equivalent resistance?</p><h2 id=\"heading-deriving-requivalent-in-parallel\">Deriving \(R_{Equivalent}\) in Parallel</h2><p>Recalling the <strong>point where the water splits</strong> into two pipes, let’s now focus on the <strong>end</strong>, where the two streams <strong>merge back</strong> into one.</p><p><img src="../images/teach/11.png" alt class=\"image--center mx-auto\" /></p><p>In terms of <strong>current</strong>, this means:</p><p>$$I=I_{1}+I_{2}$$</p><p>where \(I_{1}\) and \(I_{2}\)​ are the currents flowing through each resistor.</p><p>Using <strong>Ohm’s Law</strong> \(V = IR\), we substitute:</p><p>$$I=\frac{V}{R_{1}}+\frac{V}{R_{2}}$$</p><p>Factor out \(V\):</p><p>$$I=V(\frac{1}{R_{1}}+\frac{1}{R_{2}})$$</p><p>Since <strong>Ohm’s Law</strong> also states \(V=IR_{Equivalent}\)​, we get:</p><p>$$\frac{1}{R_{Equivalent}}=\frac{1}{R_{1}}+\frac{1}{R_{2}}$$</p><p>This is the formula for the <strong>equivalent resistance</strong> in a <strong>parallel circuit</strong>. We can extend this even further to \(N\) resistor connected in parallel.</p><p>$$\frac{1}{R_{Equivalent}}=\frac{1}{R_{1}}+\frac{1}{R_{2}}+\frac{1}{R_{3}}+...+\frac{1}{R_{N}}$$</p><p>Now that we have covered <strong>how current flows in a circuit</strong>, it’s time to move on to the <strong>interesting part—decoding an actual circuit</strong>. First, we’ll analyze two basic circuits, and then we’ll explore the different types of questions that are commonly asked and how to approach them effectively.</p><hr  class="section-divider"/><h1 id=\"heading-reading-a-circuit\"><strong>Reading a circuit</strong></h1><p>Since this is for beginners, we’ll start with <strong>simple circuits</strong> and gradually move on to <strong>more advanced concepts</strong> as we progress.</p><h2 id=\"heading-steps-to-analyze-a-circuit\">Steps to Analyze a Circuit:</h2><p>1️⃣ <strong>Note down the given data</strong> – Identify the values of <strong>voltage, current,</strong> or <strong>resistances</strong> provided.<br />2️⃣ <strong>Find the equivalent resistance</strong> – Apply the <strong>series and parallel</strong> resistance rules to simplify the circuit.<br />3️⃣ <strong>Use Ohm’s Law</strong> – Apply \(V=IR\) to solve for the unknowns.</p><p>Now, let's break it down with an example!</p><p><img src="../images/teach/12.png" alt class=\"image--center mx-auto\" /></p><p><strong>Step 1.</strong> Given: \(V=10v\), \(R_{1}=5ohm\), \(R_{2}=15ohm\). To Find: I</p><p><strong>Step 2.</strong> Using series resistance formula we get \(R_{total}=R_{1}+R_{2}=5+15=20ohm\)</p><p><img src="../images/teach/13.webp" alt class=\"image--center mx-auto\" /></p><p><strong>Step 3.</strong> Using \(V=IR\) total, We get \(I=\frac{V}{R_{total}}=\frac{10}{20}=0.5A\)</p><p><img src="../images/teach/14.webp" alt class=\"image--center mx-auto\" /></p><hr  class="section-divider"/><h1 id=\"heading-practical-example-amp-questions\"><strong>Practical example &amp; questions</strong></h1><p>Here are some more examples for you to go through. The answers have been provided. Comment the exact step by step procedure below to show you understood it.</p><p>1.</p><p><img src="../images/teach/15.webp" alt class=\"image--center mx-auto\" /></p><p>2.</p><p><img src="../images/teach/16.webp" alt class=\"image--center mx-auto\" /></p><p>3.</p><p><img src="../images/teach/17.webp" alt class=\"image--center mx-auto\" /></p><p>This last one is a special type which maybe confusing for some beginners. The answer to this will be provided in next article with each step. If you know how to solve it, you may comment your answers below and i’ll verify it.</p><p><img src="../images/teach/18.png" alt class=\"image--center mx-auto\" /></p><hr  class="section-divider"/><h1 id=\"heading-important-tips\"><strong>Important tips</strong></h1><p>Here are some tricks to solve the series and paralle circuits faster and quickly.</p><p>If we have same \(N\) resistors in</p><ul><li><p>In series: \(R_{total}=NR\)</p></li><li><p>In parallel: \(R_{total} = \frac{R}{N}\)</p></li></ul><p>For parallel solving two resistors, we have an formula: \(R_{total} = \frac{R_{1}R_{2}}{R_{1}+R_{2}}\)</p><p>Apart from this, two other important facts</p><ul><li><p>In serier: The total resistance is always greater than the largest resistance.</p></li><li><p>In parallel: The total resistance is always smaller than the smallest resistance.</p></li></ul><hr  class="section-divider"/><h1 id=\"heading-conclusion-amp-references\"><strong>Conclusion &amp; References</strong></h1><p>By now, you should have a clear understanding of how electric circuits work—from the fundamental concepts of voltage, current, and resistance to analyzing <strong>series and parallel circuits</strong> using Ohm’s Law. We explored <strong>real-world analogies</strong> to make these ideas intuitive and learned the <strong>step-by-step approach</strong> to solving circuit problems.</p><p>Mastering these basics sets the foundation for tackling more complex circuits in the future. As we move forward, we’ll dive deeper into <strong>circuit components, advanced problem-solving techniques, and real-world applications.</strong> So, stay curious and keep experimenting—because understanding circuits is the first step toward building incredible electronic systems!</p><p>For future articles, we’ll go through capacitors, inductors and even more advance components of the circuit. Also I am open to constructive critisim and reviews to update and improve my content.</p><p>Some book recommendation for further reading:</p><li><p><strong>Fundamentals of Electric Circuits</strong></p><p>  Book by Charles K. Alexander and Matthew N.O. Sadiku</p></li><li><p><strong>Electrical Engineering: Principles and Applications</strong></p><p>  Book by Allan R. Hambley</p></li><li><p>Engineering Circuit Analysis</p><p>  Book by William H. Hayt</p></li><li><p><strong>The Art of Electronics</strong></p><p>  Textbook by Paul Horowitz and Winfield Hill</p></li>
+            <!-- Newsletter signup -->
+            <div class="post-newsletter">
+              <style type="text/css">
+                @import url("https://assets.mlcdn.com/fonts.css?version=1747380");
+              </style>
+              <style type="text/css">
+                /* LOADER */
+                .ml-form-embedSubmitLoad {
+                  display: inline-block;
+                  width: 20px;
+                  height: 20px;
+                }
+
+                .g-recaptcha {
+                  transform: scale(1);
+                  -webkit-transform: scale(1);
+                  transform-origin: 0 0;
+                  -webkit-transform-origin: 0 0;
+                  height: 0;
+                }
+
+                .sr-only {
+                  position: absolute;
+                  width: 1px;
+                  height: 1px;
+                  padding: 0;
+                  margin: -1px;
+                  overflow: hidden;
+                  clip: rect(0, 0, 0, 0);
+                  border: 0;
+                }
+
+                .ml-form-embedSubmitLoad:after {
+                  content: " ";
+                  display: block;
+                  width: 11px;
+                  height: 11px;
+                  margin: 1px;
+                  border-radius: 50%;
+                  border: 4px solid #fff;
+                  border-color: #ffffff #ffffff #ffffff transparent;
+                  animation: ml-form-embedSubmitLoad 1.2s linear infinite;
+                }
+                @keyframes ml-form-embedSubmitLoad {
+                  0% {
+                    transform: rotate(0deg);
+                  }
+                  100% {
+                    transform: rotate(360deg);
+                  }
+                }
+                #mlb2-26090569.ml-form-embedContainer {
+                  box-sizing: border-box;
+                  display: table;
+                  margin: 0 auto;
+                  position: static;
+                  width: 100% !important;
+                }
+                #mlb2-26090569.ml-form-embedContainer h4,
+                #mlb2-26090569.ml-form-embedContainer p,
+                #mlb2-26090569.ml-form-embedContainer span,
+                #mlb2-26090569.ml-form-embedContainer button {
+                  text-transform: none !important;
+                  letter-spacing: normal !important;
+                }
+                #mlb2-26090569.ml-form-embedContainer .ml-form-embedWrapper {
+                  background-color: #f6f6f6;
+
+                  border-width: 0px;
+                  border-color: transparent;
+                  border-radius: 4px;
+                  border-style: solid;
+                  box-sizing: border-box;
+                  display: inline-block !important;
+                  margin: 0;
+                  padding: 0;
+                  position: relative;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper.embedPopup,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper.embedDefault {
+                  width: 400px;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper.embedForm {
+                  max-width: 400px;
+                  width: 100%;
+                }
+                #mlb2-26090569.ml-form-embedContainer .ml-form-align-left {
+                  text-align: left;
+                }
+                #mlb2-26090569.ml-form-embedContainer .ml-form-align-center {
+                  text-align: center;
+                }
+                #mlb2-26090569.ml-form-embedContainer .ml-form-align-default {
+                  display: table-cell !important;
+                  vertical-align: middle !important;
+                  text-align: center !important;
+                }
+                #mlb2-26090569.ml-form-embedContainer .ml-form-align-right {
+                  text-align: right;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedHeader
+                  img {
+                  border-top-left-radius: 4px;
+                  border-top-right-radius: 4px;
+                  height: auto;
+                  margin: 0 auto !important;
+                  max-width: 100%;
+                  width: undefinedpx;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-successBody {
+                  padding: 20px 20px 0 20px;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody.ml-form-embedBodyHorizontal {
+                  padding-bottom: 0;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedContent,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-successBody
+                  .ml-form-successContent {
+                  text-align: left;
+                  margin: 0 0 20px 0;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedContent
+                  h4,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-successBody
+                  .ml-form-successContent
+                  h4 {
+                  color: #000000;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-size: 30px;
+                  font-weight: 400;
+                  margin: 0 0 10px 0;
+                  text-align: left;
+                  word-break: break-word;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedContent
+                  p,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-successBody
+                  .ml-form-successContent
+                  p {
+                  color: #000000;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-size: 14px;
+                  font-weight: 400;
+                  line-height: 20px;
+                  margin: 0 0 10px 0;
+                  text-align: left;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedContent
+                  ul,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedContent
+                  ol,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-successBody
+                  .ml-form-successContent
+                  ul,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-successBody
+                  .ml-form-successContent
+                  ol {
+                  color: #000000;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-size: 14px;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedContent
+                  ol
+                  ol,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-successBody
+                  .ml-form-successContent
+                  ol
+                  ol {
+                  list-style-type: lower-alpha;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedContent
+                  ol
+                  ol
+                  ol,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-successBody
+                  .ml-form-successContent
+                  ol
+                  ol
+                  ol {
+                  list-style-type: lower-roman;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedContent
+                  p
+                  a,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-successBody
+                  .ml-form-successContent
+                  p
+                  a {
+                  color: #000000;
+                  text-decoration: underline;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-block-form
+                  .ml-field-group {
+                  text-align: left !important;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-block-form
+                  .ml-field-group
+                  label {
+                  margin-bottom: 5px;
+                  color: #333333;
+                  font-size: 14px;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-weight: bold;
+                  font-style: normal;
+                  text-decoration: none;
+                  display: inline-block;
+                  line-height: 20px;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedContent
+                  p:last-child,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-successBody
+                  .ml-form-successContent
+                  p:last-child {
+                  margin: 0;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  form {
+                  margin: 0;
+                  width: 100%;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-formContent,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow {
+                  margin: 0 0 20px 0;
+                  width: 100%;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow {
+                  float: left;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-formContent.horozintalForm {
+                  margin: 0;
+                  padding: 0 0 20px 0;
+                  width: 100%;
+                  height: auto;
+                  float: left;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow {
+                  margin: 0 0 10px 0;
+                  width: 100%;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow.ml-last-item {
+                  margin: 0;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow.ml-formfieldHorizintal {
+                  margin: 0;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  input {
+                  background-color: #ffffff !important;
+                  color: #333333 !important;
+                  border-color: #cccccc;
+                  border-radius: 4px !important;
+                  border-style: solid !important;
+                  border-width: 1px !important;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-size: 14px !important;
+                  height: auto;
+                  line-height: 21px !important;
+                  margin-bottom: 0;
+                  margin-top: 0;
+                  margin-left: 0;
+                  margin-right: 0;
+                  padding: 10px 10px !important;
+                  width: 100% !important;
+                  box-sizing: border-box !important;
+                  max-width: 100% !important;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  input::-webkit-input-placeholder,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  input::-webkit-input-placeholder {
+                  color: #333333;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  input::-moz-placeholder,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  input::-moz-placeholder {
+                  color: #333333;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  input:-ms-input-placeholder,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  input:-ms-input-placeholder {
+                  color: #333333;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  input:-moz-placeholder,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  input:-moz-placeholder {
+                  color: #333333;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  textarea,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  textarea {
+                  background-color: #ffffff !important;
+                  color: #333333 !important;
+                  border-color: #cccccc;
+                  border-radius: 4px !important;
+                  border-style: solid !important;
+                  border-width: 1px !important;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-size: 14px !important;
+                  height: auto;
+                  line-height: 21px !important;
+                  margin-bottom: 0;
+                  margin-top: 0;
+                  padding: 10px 10px !important;
+                  width: 100% !important;
+                  box-sizing: border-box !important;
+                  max-width: 100% !important;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-radio
+                  .custom-control-label::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-radio
+                  .custom-control-label::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-checkbox
+                  .custom-control-label::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-checkbox
+                  .custom-control-label::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptionsCheckbox
+                  .label-description::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-interestGroupsRow
+                  .ml-form-interestGroupsRowCheckbox
+                  .label-description::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  .label-description::before {
+                  border-color: #cccccc !important;
+                  background-color: #ffffff !important;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  input.custom-control-input[type="checkbox"] {
+                  box-sizing: border-box;
+                  padding: 0;
+                  position: absolute;
+                  z-index: -1;
+                  opacity: 0;
+                  margin-top: 5px;
+                  margin-left: -1.5rem;
+                  overflow: visible;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-checkbox
+                  .custom-control-label::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-checkbox
+                  .custom-control-label::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptionsCheckbox
+                  .label-description::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-interestGroupsRow
+                  .ml-form-interestGroupsRowCheckbox
+                  .label-description::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  .label-description::before {
+                  border-radius: 4px !important;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  input[type="checkbox"]:checked
+                  ~ .label-description::after,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptionsCheckbox
+                  input[type="checkbox"]:checked
+                  ~ .label-description::after,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-checkbox
+                  .custom-control-input:checked
+                  ~ .custom-control-label::after,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-checkbox
+                  .custom-control-input:checked
+                  ~ .custom-control-label::after,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-interestGroupsRow
+                  .ml-form-interestGroupsRowCheckbox
+                  input[type="checkbox"]:checked
+                  ~ .label-description::after {
+                  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-radio
+                  .custom-control-input:checked
+                  ~ .custom-control-label::after,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-radio
+                  .custom-control-input:checked
+                  ~ .custom-control-label::after {
+                  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-radio
+                  .custom-control-input:checked
+                  ~ .custom-control-label::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-radio
+                  .custom-control-input:checked
+                  ~ .custom-control-label::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-checkbox
+                  .custom-control-input:checked
+                  ~ .custom-control-label::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-checkbox
+                  .custom-control-input:checked
+                  ~ .custom-control-label::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptionsCheckbox
+                  input[type="checkbox"]:checked
+                  ~ .label-description::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-interestGroupsRow
+                  .ml-form-interestGroupsRowCheckbox
+                  input[type="checkbox"]:checked
+                  ~ .label-description::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  input[type="checkbox"]:checked
+                  ~ .label-description::before {
+                  border-color: #000000 !important;
+                  background-color: #000000 !important;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-radio
+                  .custom-control-label::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-radio
+                  .custom-control-label::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-radio
+                  .custom-control-label::after,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-radio
+                  .custom-control-label::after,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-checkbox
+                  .custom-control-label::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-checkbox
+                  .custom-control-label::after,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-checkbox
+                  .custom-control-label::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-checkbox
+                  .custom-control-label::after {
+                  top: 2px;
+                  box-sizing: border-box;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptionsCheckbox
+                  .label-description::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptionsCheckbox
+                  .label-description::after,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  .label-description::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  .label-description::after {
+                  top: 0px !important;
+                  box-sizing: border-box !important;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  .label-description::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  .label-description::after {
+                  top: 0px !important;
+                  box-sizing: border-box !important;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-interestGroupsRow
+                  .ml-form-interestGroupsRowCheckbox
+                  .label-description::after {
+                  top: 0px !important;
+                  box-sizing: border-box !important;
+                  position: absolute;
+                  left: -1.5rem;
+                  display: block;
+                  width: 1rem;
+                  height: 1rem;
+                  content: "";
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-interestGroupsRow
+                  .ml-form-interestGroupsRowCheckbox
+                  .label-description::before {
+                  top: 0px !important;
+                  box-sizing: border-box !important;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .custom-control-label::before {
+                  position: absolute;
+                  top: 4px;
+                  left: -1.5rem;
+                  display: block;
+                  width: 16px;
+                  height: 16px;
+                  pointer-events: none;
+                  content: "";
+                  background-color: #ffffff;
+                  border: #adb5bd solid 1px;
+                  border-radius: 50%;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .custom-control-label::after {
+                  position: absolute;
+                  top: 2px !important;
+                  left: -1.5rem;
+                  display: block;
+                  width: 1rem;
+                  height: 1rem;
+                  content: "";
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptionsCheckbox
+                  .label-description::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-interestGroupsRow
+                  .ml-form-interestGroupsRowCheckbox
+                  .label-description::before,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  .label-description::before {
+                  position: absolute;
+                  top: 4px;
+                  left: -1.5rem;
+                  display: block;
+                  width: 16px;
+                  height: 16px;
+                  pointer-events: none;
+                  content: "";
+                  background-color: #ffffff;
+                  border: #adb5bd solid 1px;
+                  border-radius: 50%;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptionsCheckbox
+                  .label-description::after {
+                  position: absolute;
+                  top: 0px !important;
+                  left: -1.5rem;
+                  display: block;
+                  width: 1rem;
+                  height: 1rem;
+                  content: "";
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  .label-description::after {
+                  position: absolute;
+                  top: 0px !important;
+                  left: -1.5rem;
+                  display: block;
+                  width: 1rem;
+                  height: 1rem;
+                  content: "";
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .custom-radio
+                  .custom-control-label::after {
+                  background: no-repeat 50%/50% 50%;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .custom-checkbox
+                  .custom-control-label::after,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptionsCheckbox
+                  .label-description::after,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-interestGroupsRow
+                  .ml-form-interestGroupsRowCheckbox
+                  .label-description::after,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  .label-description::after {
+                  background: no-repeat 50%/50% 50%;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-control,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-control {
+                  position: relative;
+                  display: block;
+                  min-height: 1.5rem;
+                  padding-left: 1.5rem;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-radio
+                  .custom-control-input,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-radio
+                  .custom-control-input,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-checkbox
+                  .custom-control-input,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-checkbox
+                  .custom-control-input {
+                  position: absolute;
+                  z-index: -1;
+                  opacity: 0;
+                  box-sizing: border-box;
+                  padding: 0;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-radio
+                  .custom-control-label,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-radio
+                  .custom-control-label,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-checkbox
+                  .custom-control-label,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-checkbox
+                  .custom-control-label {
+                  color: #000000;
+                  font-size: 12px !important;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  line-height: 22px;
+                  margin-bottom: 0;
+                  position: relative;
+                  vertical-align: top;
+                  font-style: normal;
+                  font-weight: 700;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-fieldRow
+                  .custom-select,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  .custom-select {
+                  background-color: #ffffff !important;
+                  color: #333333 !important;
+                  border-color: #cccccc;
+                  border-radius: 4px !important;
+                  border-style: solid !important;
+                  border-width: 1px !important;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-size: 14px !important;
+                  line-height: 20px !important;
+                  margin-bottom: 0;
+                  margin-top: 0;
+                  padding: 10px 28px 10px 12px !important;
+                  width: 100% !important;
+                  box-sizing: border-box !important;
+                  max-width: 100% !important;
+                  height: auto;
+                  display: inline-block;
+                  vertical-align: middle;
+                  background: url("https://assets.mlcdn.com/ml/images/default/dropdown.svg")
+                    no-repeat right 0.75rem center/8px 10px;
+                  -webkit-appearance: none;
+                  -moz-appearance: none;
+                  appearance: none;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow {
+                  height: auto;
+                  width: 100%;
+                  float: left;
+                }
+                .ml-form-formContent.horozintalForm
+                  .ml-form-horizontalRow
+                  .ml-input-horizontal {
+                  width: 70%;
+                  float: left;
+                }
+                .ml-form-formContent.horozintalForm
+                  .ml-form-horizontalRow
+                  .ml-button-horizontal {
+                  width: 30%;
+                  float: left;
+                }
+                .ml-form-formContent.horozintalForm
+                  .ml-form-horizontalRow
+                  .ml-button-horizontal.labelsOn {
+                  padding-top: 25px;
+                }
+                .ml-form-formContent.horozintalForm
+                  .ml-form-horizontalRow
+                  .horizontal-fields {
+                  box-sizing: border-box;
+                  float: left;
+                  padding-right: 10px;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  input {
+                  background-color: #ffffff;
+                  color: #333333;
+                  border-color: #cccccc;
+                  border-radius: 4px;
+                  border-style: solid;
+                  border-width: 1px;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-size: 14px;
+                  line-height: 20px;
+                  margin-bottom: 0;
+                  margin-top: 0;
+                  padding: 10px 10px;
+                  width: 100%;
+                  box-sizing: border-box;
+                  overflow-y: initial;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  button {
+                  background-color: #000000 !important;
+                  border-color: #000000;
+                  border-style: solid;
+                  border-width: 1px;
+                  border-radius: 4px;
+                  box-shadow: none;
+                  color: #ffffff !important;
+                  cursor: pointer;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-size: 14px !important;
+                  font-weight: 700;
+                  line-height: 20px;
+                  margin: 0 !important;
+                  padding: 10px !important;
+                  width: 100%;
+                  height: auto;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-horizontalRow
+                  button:hover {
+                  background-color: #333333 !important;
+                  border-color: #333333 !important;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  input[type="checkbox"] {
+                  box-sizing: border-box;
+                  padding: 0;
+                  position: absolute;
+                  z-index: -1;
+                  opacity: 0;
+                  margin-top: 5px;
+                  margin-left: -1.5rem;
+                  overflow: visible;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  .label-description {
+                  color: #000000;
+                  display: block;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-size: 12px;
+                  text-align: left;
+                  margin-bottom: 0;
+                  position: relative;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  label {
+                  font-weight: normal;
+                  margin: 0;
+                  padding: 0;
+                  position: relative;
+                  display: block;
+                  min-height: 24px;
+                  padding-left: 24px;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  label
+                  a {
+                  color: #000000;
+                  text-decoration: underline;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  label
+                  p {
+                  color: #000000 !important;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif !important;
+                  font-size: 12px !important;
+                  font-weight: normal !important;
+                  line-height: 18px !important;
+                  padding: 0 !important;
+                  margin: 0 5px 0 0 !important;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow
+                  label
+                  p:last-child {
+                  margin: 0;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedSubmit {
+                  margin: 0 0 20px 0;
+                  float: left;
+                  width: 100%;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedSubmit
+                  button {
+                  background-color: #000000 !important;
+                  border: none !important;
+                  border-radius: 4px !important;
+                  box-shadow: none !important;
+                  color: #ffffff !important;
+                  cursor: pointer;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif !important;
+                  font-size: 14px !important;
+                  font-weight: 700 !important;
+                  line-height: 21px !important;
+                  height: auto;
+                  padding: 10px !important;
+                  width: 100% !important;
+                  box-sizing: border-box !important;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedSubmit
+                  button.loading {
+                  display: none;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedSubmit
+                  button:hover {
+                  background-color: #333333 !important;
+                }
+                .ml-subscribe-close {
+                  width: 30px;
+                  height: 30px;
+                  background: url("https://assets.mlcdn.com/ml/images/default/modal_close.png")
+                    no-repeat;
+                  background-size: 30px;
+                  cursor: pointer;
+                  margin-top: -10px;
+                  margin-right: -10px;
+                  position: absolute;
+                  top: 0;
+                  right: 0;
+                }
+                .ml-error input,
+                .ml-error textarea,
+                .ml-error select {
+                  border-color: red !important;
+                }
+
+                .ml-error .custom-checkbox-radio-list {
+                  border: 1px solid red !important;
+                  border-radius: 4px;
+                  padding: 10px;
+                }
+
+                .ml-error .label-description,
+                .ml-error .label-description p,
+                .ml-error .label-description p a,
+                .ml-error label:first-child {
+                  color: #ff0000 !important;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow.ml-error
+                  .label-description
+                  p,
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-checkboxRow.ml-error
+                  .label-description
+                  p:first-letter {
+                  color: #ff0000 !important;
+                }
+                @media only screen and (max-width: 400px) {
+                  .ml-form-embedWrapper.embedDefault,
+                  .ml-form-embedWrapper.embedPopup {
+                    width: 100% !important;
+                  }
+                  .ml-form-formContent.horozintalForm {
+                    float: left !important;
+                  }
+                  .ml-form-formContent.horozintalForm .ml-form-horizontalRow {
+                    height: auto !important;
+                    width: 100% !important;
+                    float: left !important;
+                  }
+                  .ml-form-formContent.horozintalForm
+                    .ml-form-horizontalRow
+                    .ml-input-horizontal {
+                    width: 100% !important;
+                  }
+                  .ml-form-formContent.horozintalForm
+                    .ml-form-horizontalRow
+                    .ml-input-horizontal
+                    > div {
+                    padding-right: 0px !important;
+                    padding-bottom: 10px;
+                  }
+                  .ml-form-formContent.horozintalForm .ml-button-horizontal {
+                    width: 100% !important;
+                  }
+                  .ml-form-formContent.horozintalForm
+                    .ml-button-horizontal.labelsOn {
+                    padding-top: 0px !important;
+                  }
+                }
+              </style>
+
+              <style type="text/css">
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions {
+                  text-align: left;
+                  float: left;
+                  width: 100%;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsContent {
+                  margin: 0 0 15px 0;
+                  text-align: left;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsContent.horizontal {
+                  margin: 0 0 15px 0;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsContent
+                  h4 {
+                  color: #000000;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-size: 12px;
+                  font-weight: 700;
+                  line-height: 18px;
+                  margin: 0 0 10px 0;
+                  word-break: break-word;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsContent
+                  p {
+                  color: #000000;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-size: 12px;
+                  line-height: 18px;
+                  margin: 0 0 10px 0;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsContent.privacy-policy
+                  p {
+                  color: #000000;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-size: 12px;
+                  line-height: 22px;
+                  margin: 0 0 10px 0;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsContent.privacy-policy
+                  p
+                  a {
+                  color: #000000;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsContent.privacy-policy
+                  p:last-child {
+                  margin: 0;
+                }
+
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsContent
+                  p
+                  a {
+                  color: #000000;
+                  text-decoration: underline;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsContent
+                  p:last-child {
+                  margin: 0 0 15px 0;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptions {
+                  margin: 0;
+                  padding: 0;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptionsCheckbox {
+                  margin: 0 0 10px 0;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptionsCheckbox:last-child {
+                  margin: 0;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptionsCheckbox
+                  label {
+                  font-weight: normal;
+                  margin: 0;
+                  padding: 0;
+                  position: relative;
+                  display: block;
+                  min-height: 24px;
+                  padding-left: 24px;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptionsCheckbox
+                  .label-description {
+                  color: #000000;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-size: 12px;
+                  line-height: 18px;
+                  text-align: left;
+                  margin-bottom: 0;
+                  position: relative;
+                  vertical-align: top;
+                  font-style: normal;
+                  font-weight: 700;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptionsCheckbox
+                  .description {
+                  color: #000000;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-size: 12px;
+                  font-style: italic;
+                  font-weight: 400;
+                  line-height: 18px;
+                  margin: 5px 0 0 0;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedPermissionsOptionsCheckbox
+                  input[type="checkbox"] {
+                  box-sizing: border-box;
+                  padding: 0;
+                  position: absolute;
+                  z-index: -1;
+                  opacity: 0;
+                  margin-top: 5px;
+                  margin-left: -1.5rem;
+                  overflow: visible;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedMailerLite-GDPR {
+                  padding-bottom: 20px;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedMailerLite-GDPR
+                  p {
+                  color: #000000;
+                  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+                  font-size: 10px;
+                  line-height: 14px;
+                  margin: 0;
+                  padding: 0;
+                }
+                #mlb2-26090569.ml-form-embedContainer
+                  .ml-form-embedWrapper
+                  .ml-form-embedBody
+                  .ml-form-embedPermissions
+                  .ml-form-embedMailerLite-GDPR
+                  p
+                  a {
+                  color: #000000;
+                  text-decoration: underline;
+                }
+                @media (max-width: 768px) {
+                  #mlb2-26090569.ml-form-embedContainer
+                    .ml-form-embedWrapper
+                    .ml-form-embedBody
+                    .ml-form-embedPermissions
+                    .ml-form-embedPermissionsContent
+                    p {
+                    font-size: 12px !important;
+                    line-height: 18px !important;
+                  }
+                  #mlb2-26090569.ml-form-embedContainer
+                    .ml-form-embedWrapper
+                    .ml-form-embedBody
+                    .ml-form-embedPermissions
+                    .ml-form-embedMailerLite-GDPR
+                    p {
+                    font-size: 10px !important;
+                    line-height: 14px !important;
+                  }
+                }
+              </style>
+
+              <div
+                id="mlb2-26090569"
+                class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-26090569"
+              >
+                <div class="ml-form-align-center">
+                  <div class="ml-form-embedWrapper embedForm">
+                    <div
+                      class="ml-form-embedBody ml-form-embedBodyDefault row-form"
+                    >
+                      <div class="ml-form-embedContent">
+                        <h4>Newsletter</h4>
+                        <p>
+                          Signup for updates about my latest articles and post!!
+                        </p>
+                      </div>
+
+                      <form
+                        class="ml-block-form"
+                        action="https://assets.mailerlite.com/jsonp/1527172/forms/154629942434333832/subscribe"
+                        data-code=""
+                        method="post"
+                        target="_blank"
+                      >
+                        <div class="ml-form-formContent">
+                          <div class="ml-form-fieldRow ml-last-item">
+                            <div
+                              class="ml-field-group ml-field-email ml-validate-email ml-validate-required"
+                            >
+                              <!-- input -->
+                              <input
+                                aria-label="email"
+                                aria-required="true"
+                                type="email"
+                                class="form-control"
+                                data-inputmask=""
+                                name="fields[email]"
+                                placeholder="Email"
+                                autocomplete="email"
+                              />
+                              <!-- /input -->
+
+                              <!-- textarea -->
+
+                              <!-- /textarea -->
+
+                              <!-- select -->
+
+                              <!-- /select -->
+
+                              <!-- checkboxes -->
+
+                              <!-- /checkboxes -->
+
+                              <!-- radio -->
+
+                              <!-- /radio -->
+
+                              <!-- countries -->
+
+                              <!-- /countries -->
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Privacy policy -->
+                        <div class="ml-form-embedPermissions">
+                          <div
+                            class="ml-form-embedPermissionsContent default privacy-policy"
+                          >
+                            <p>You can unsubscribe anytime.</p>
+                          </div>
+                        </div>
+                        <!-- /Privacy policy -->
+
+                        <input type="hidden" name="ml-submit" value="1" />
+
+                        <div class="ml-form-embedSubmit">
+                          <button type="submit" class="primary">
+                            Subscribe
+                          </button>
+
+                          <button
+                            disabled="disabled"
+                            style="display: none"
+                            type="button"
+                            class="loading"
+                          >
+                            <div class="ml-form-embedSubmitLoad"></div>
+                            <span class="sr-only">Loading...</span>
+                          </button>
+                        </div>
+
+                        <input type="hidden" name="anticsrf" value="true" />
+                      </form>
+                    </div>
+
+                    <div
+                      class="ml-form-successBody row-success"
+                      style="display: none"
+                    >
+                      <div class="ml-form-successContent">
+                        <h4>Thank you!</h4>
+
+                        <p>You have successfully joined our subscriber list.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <script>
+                function ml_webform_success_26090569() {
+                  var $ = ml_jQuery || jQuery;
+                  $(".ml-subscribe-form-26090569 .row-success").show();
+                  $(".ml-subscribe-form-26090569 .row-form").hide();
+                }
+              </script>
+
+              <script
+                src="https://groot.mailerlite.com/js/w/webforms.min.js?v176e10baa5e7ed80d35ae235be3d5024"
+                type="text/javascript"
+              ></script>
+              <script>
+                fetch(
+                  "https://assets.mailerlite.com/jsonp/1527172/forms/154629942434333832/takel"
+                );
+              </script>
+            </div>
+          </div>
+        </section>
+        <!-- Share + next posts -->
+        <section class="post-footer-extra">
+          <div class="post-share-row">
+            <span class="post-share-label">Share:</span>
+            <button type="button" class="share-btn" id="copy-link-btn">Copy link</button>
+            <a href="#" target="_blank" rel="noopener" class="share-btn" id="share-x">X</a>
+            <a href="#" target="_blank" rel="noopener" class="share-btn" id="share-linkedin">LinkedIn</a>
+            <a href="#" target="_blank" rel="noopener" class="share-btn" id="share-whatsapp">WhatsApp</a>
+          </div>
+
+<div class="post-related">
+            <h1>Read next</h1>
+          <a href="the-ghibli-effect-why-are-chatgpts-processors-melting.html" class="post-related-card">
+      <div class="related-thumb">
+        <img src="../images/the-ghibli-effect-why-are-chatgpts-processors-melting/cover.webp" alt="Cover image">
+      </div>
+      <h3 class="related-title">The Ghibli Effect: Why are ChatGPT's Processors Melting?</h3>
+    </a>
+              <a href="overview-rant-electronics-0.html" class="post-related-card">
+      <div class="related-thumb">
+        <img src="../images/rant-electronics/cover.webp" alt="Cover image">
+      </div>
+      <h3 class="related-title">Rant Electronics: Overview</h3>
+    </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Comments placeholder (we'll plug Giscus or similar later) -->
+        <section class="post-comments" id="comments">
+          <h1>Comments</h1>
+          <p>Comments coming soon.</p>
+        </section>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© 2025 SiliconPen. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      const navToggle = document.querySelector(".nav-toggle");
+      const navPill = document.querySelector(".nav-pill");
+      const dropdownToggle = document.querySelector(".dropdown-toggle");
+      const dropdownMenu = document.querySelector(".dropdown-menu");
+
+      // Reading time calculator
+      const contentEl = document.querySelector(".post-content");
+      const readingEl = document.getElementById("reading-time");
+
+      if (contentEl && readingEl) {
+        const text = contentEl.innerText || "";
+        const words = text.trim().split(/\s+/).length;
+        const minutes = Math.max(1, Math.round(words / 200)); // ~200 wpm
+        readingEl.textContent = `${minutes} min read`;
+      }
+
+      // Share buttons
+        const pageUrl = encodeURIComponent(window.location.href);
+        const pageTitle = encodeURIComponent(document.title);
+
+        const copyBtn   = document.getElementById('copy-link-btn');
+        const xLink     = document.getElementById('share-x');
+        const liLink    = document.getElementById('share-linkedin');
+        const waLink    = document.getElementById('share-whatsapp');
+
+        if (xLink) {
+          xLink.href = `https://twitter.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+        }
+
+        if (liLink) {
+          liLink.href = `https://www.linkedin.com/sharing/share-offsite/?url=${pageUrl}`;
+        }
+
+        if (waLink) {
+          // Works on mobile & desktop WhatsApp Web
+          waLink.href = `https://api.whatsapp.com/send?text=${pageTitle}%20-%20${pageUrl}`;
+        }
+
+        if (copyBtn) {
+          copyBtn.addEventListener('click', async () => {
+            try {
+              await navigator.clipboard.writeText(window.location.href);
+              copyBtn.textContent = "Copied!";
+              setTimeout(() => (copyBtn.textContent = "Copy link"), 1500);
+            } catch (e) {
+              copyBtn.textContent = "Failed :(";
+            }
+          });
+        }
+
+
+      navToggle.addEventListener("click", () => {
+        navPill.classList.toggle("nav-open");
+      });
+
+      dropdownToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle("dropdown-open");
+      });
+
+      document.addEventListener("click", () => {
+        dropdownMenu.classList.remove("dropdown-open");
+      });
+    </script>
+  </body>
+</html>

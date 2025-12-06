@@ -1,0 +1,104 @@
+[
+  {
+    "slug": "posts/how-to-read-circuit-diagrams.html",
+    "title": "How to Read Circuit Diagrams: A Beginner’s Guide",
+    "subtitle": "Explore circuit diagrams with ease by grasping basic symbols and essential electronics insights.",
+    "cover": "images/teach/cover.webp",
+    "date": "2025-04-02"
+  },
+  {
+    "slug": "posts/the-ghibli-effect-why-are-chatgpts-processors-melting.html",
+    "title": "The Ghibli Effect: Why are ChatGPT's Processors Melting?",
+    "subtitle": "Tracing the GenAI Boom Through Ghibli Aesthetics, Model Mayhem, and Online Debates.",
+    "cover": "images/the-ghibli-effect-why-are-chatgpts-processors-melting/cover.webp",
+    "date": "2025-04-10"
+  },
+  {
+    "slug": "posts/overview-rant-electronics-0.html",
+    "title": "Overview [Rant Electronics #0]",
+    "subtitle": "Engineering tantrums dressed as insights.",
+    "cover": "images/rant-electronics/cover.webp",
+    "date": "2025-05-15",
+    "series": "rant-electronics"
+  },
+  {
+    "slug": "posts/the-mighty-switch-rant-electronics-1.html",
+    "title": "The Mighty Switch [Rant Electronics #1]",
+    "subtitle": "Engineering tantrums dressed as insights.",
+    "cover": "images/rant-electronics/cover.webp",
+    "date": "2025-05-16",
+    "series": "rant-electronics"
+  },
+  {
+    "slug": "posts/overview-oscillations-0.html",
+    "title": "Overview: Oscillations #0",
+    "subtitle": "Not just headlines — oscillations of a changing world, filtered through ambition, soul, and silicon.",
+    "cover": "images/oscillations/cover.webp",
+    "date": "2025-05-17",
+    "series": "oscillations"
+  },
+  {
+    "slug": "posts/wires-the-sneaky-snakes-of-circuits-rant-electronics-2-part-1.html",
+    "title": "Wires — The Sneaky Snakes of Circuits [Rant Electronics #2] Part 1",
+    "subtitle": "Engineering tantrums dressed as insights.",
+    "cover": "images/rant-electronics/cover.webp",
+    "date": "2025-05-26",
+    "series": "rant-electronics"
+  },
+  {
+    "slug": "posts/wires-the-sneaky-snakes-of-circuits-rant-electronics-2-part-2.html",
+    "title": "Wires — The Sneaky Snakes of Circuits [Rant Electronics #2] Part 2",
+    "subtitle": "Engineering tantrums dressed as insights.",
+    "cover": "images/rant-electronics/cover.webp",
+    "date": "2025-05-31",
+    "series": "rant-electronics"
+  },
+  {
+    "slug": "posts/oscillations-1.html",
+    "title": "Oscillations #1",
+    "subtitle": "Not just headlines — oscillations of a changing world, filtered through ambition, soul, and silicon.",
+    "cover": "images/oscillations/cover.webp",
+    "date": "2025-06-01",
+    "series": "oscillations"
+  },
+  {
+    "slug": "posts/watts-really-going-on-inside-the-lightbulb-part-1-rant-electronics-3.html",
+    "title": "Watt’s Really Going On Inside the Lightbulb Part-1 [Rant Electronics #3]",
+    "subtitle": "Engineering tantrums dressed as insights.",
+    "cover": "images/rant-electronics/cover.webp",
+    "date": "2025-06-07",
+    "series": "rant-electronics"
+  },
+  {
+    "slug": "posts/oscillations-2.html",
+    "title": "Oscillations #2",
+    "subtitle": "Not just headlines — oscillations of a changing world, filtered through ambition, soul, and silicon.",
+    "cover": "images/oscillations/cover.webp",
+    "date": "2025-06-08",
+    "series": "oscillations"
+  },
+  {
+    "slug": "posts/watts-really-going-on-inside-the-lightbulb-part-2-rant-electronics-3.html",
+    "title": "Watt’s Really Going On Inside the Lightbulb Part-2 [Rant Electronics #3]",
+    "subtitle": "Engineering tantrums dressed as insights.",
+    "cover": "images/rant-electronics/cover.webp",
+    "date": "2025-06-14",
+    "series": "rant-electronics"
+  },
+  {
+    "slug": "posts/what-is-arduino.html",
+    "title": "What Is Arduino?",
+    "subtitle": "Overview for arduino and its working.",
+    "cover": "images/pathway-to-arduino/cover.webp",
+    "date": "2025-12-04",
+    "series": "pathway-to-arduino"
+  },
+  {
+    "slug": "posts/understanding-the-arduino-uno-board.html",
+    "title": "Understanding the Arduino Uno Board",
+    "subtitle": "Peeking into arduino's circuits.",
+    "cover": "images/pathway-to-arduino/cover.webp",
+    "date": "2025-12-05",
+    "series": "pathway-to-arduino"
+  }
+]
