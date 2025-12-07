@@ -100,5 +100,12 @@
     "cover": "images/pathway-to-arduino/cover.webp",
     "date": "2025-12-05",
     "series": "pathway-to-arduino"
+  },
+  {
+    "slug": "posts/welcome-to-the-new-siliconpen.html",
+    "title": "Welcome to the New SiliconPen",
+    "subtitle": "Migration To a New Home.",
+    "cover": "images/cover.webp",
+    "date": "2025-12-07"
   }
 ]
