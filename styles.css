@@ -454,7 +454,8 @@ body {
   margin: 0 auto;
   color: #f5f5f0;             /* creamy white */
   font-size: 0.98rem;
-  
+   word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Typography inside post */
