@@ -1,5 +1,5 @@
 ## Hi there 👋
-
+This is my personal website. If you are interested into electronics, do check it out!
 <!--
 **siliconPen/SiliconPen** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
