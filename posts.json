@@ -107,5 +107,13 @@
     "subtitle": "Migration To a New Home.",
     "cover": "images/cover.webp",
     "date": "2025-12-07"
+  },
+  {
+    "slug": "posts/setting-up-the-arduino-IDE.html",
+    "title": "Setting Up the Arduino IDE",
+    "subtitle": "Starting up the Arduino Engine!",
+    "cover": "images/pathway-to-arduino/cover.webp",
+    "date": "2025-12-13",
+    "series": "pathway-to-arduino"
   }
 ]

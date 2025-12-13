@@ -491,7 +491,7 @@ body {
 
 .post-content code {
   font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 0.9em;
+  font-size: 1.1em;
   background: rgba(15, 23, 42, 0.8);
   padding: 2px 5px;
   border-radius: 4px;
@@ -759,7 +759,7 @@ em {
 }
 .post-content a {
   color: #ffffff;        /* same as text */
-  text-decoration: none;
+  text-decoration: underline;
   font-weight: 600;
 }
 
@@ -1314,4 +1314,27 @@ em {
   font-family: "Poppins", system-ui, sans-serif;
   font-size: 1.1rem;
   margin-bottom: 6px;
+}
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+  margin: 28px auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.video-caption {
+  font-size: 0.9rem;
+  color: #cfcfcf;
+  text-align: center;
+  margin-top: 8px;
 }

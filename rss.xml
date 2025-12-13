@@ -128,6 +128,13 @@
       <description>SiliconPen has moved from Hashnode to its own home. Here’s why the move happened, what’s new on the site, and what’s still being built.</description>
     </item>
     
+    <item>
+      <title>Setting Up the Arduino IDE</title>
+      <link>https://siliconpen.com/posts/setting-up-the-arduino-IDE.html</link>
+      <guid>https://siliconpen.com/posts/setting-up-the-arduino-IDE.html</guid>
+      <pubDate>Sat, 13 Dec 2025 12:00:00 +0530</pubDate>
+      <description>Starting up our Arduino IDE engine. Taking our first step into microcontroller programming.</description>
+    </item>
 
   </channel>
 </rss>
