@@ -111,10 +111,7 @@
 
     <!-- Content box -->
     <div class="post-layout">
-    <aside class="post-left">
-    <!-- placeholder for now -->
-    <!-- later: newsletter box, ad unit, category index etc -->
-    </aside>
+    <div id="post-left"></div>
     <section class="post-content-shell">
     <div class="post-main">
     <div class="post-content">
@@ -187,6 +184,8 @@
     loadPartial("share-row", "../partials/share-row.html", () => {
         initPost();
     });
+    
+    loadPartial("post-left", "../partials/post-left.html");
 
     document.addEventListener("DOMContentLoaded", () => {
         initTOC();

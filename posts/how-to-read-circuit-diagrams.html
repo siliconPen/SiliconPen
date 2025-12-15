@@ -163,8 +163,10 @@
     });
 
     loadPartial("share-row", "../partials/share-row.html", () => {
-  initPost();
-});
+        initPost();
+    });
+ loadPartial("post-left", "../partials/post-left.html");
+
 document.addEventListener("DOMContentLoaded", () => {
         initTOC();
         initScrollProgress();
