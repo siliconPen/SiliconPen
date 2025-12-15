@@ -91,7 +91,7 @@ function initTOC() {
         .replace(/(^-|-$)/g, "");
     }
 
-    const level = h.tagName === "H2" ? 2 : 1;
+    const level = h.tagName === "H1" ? 2 : 3;
 
     const link = document.createElement("a");
     link.href = `#${h.id}`;
