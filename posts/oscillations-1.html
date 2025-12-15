@@ -176,11 +176,10 @@
         initComments();
     });
 
-    loadPartial("share-row", "../partials/share-row.html");
-
-
-    document.addEventListener("DOMContentLoaded", () => {
-        initPost();
+    loadPartial("share-row", "../partials/share-row.html", () => {
+  initPost();
+});
+document.addEventListener("DOMContentLoaded", () => {
         initTOC();
         initScrollProgress();
         initCookie();
