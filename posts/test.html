@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!--Title and Description-->
+    <title>TITLE</title>
+    <meta name="description" content="description">
+    
+    <!--#########################################################################################################################-->
+    
+    <!--Favicon-->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+    <!--Adsense-->
+    <script>
+    function loadAdsense() {
+        let s = document.createElement("script");
+        s.async = true;
+        s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3169103084290208";
+        s.setAttribute("crossorigin", "anonymous");
+        document.head.appendChild(s);
+    }
+
+    if (localStorage.getItem("sp_cookie_ok")) {
+        loadAdsense();
+    } else {
+        document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById("cookieAccept");
+        if (btn) btn.addEventListener("click", loadAdsense);
+        });
+    }
+    </script>
+
+    <!--Meta Data-->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--Google Analytics-->
+    <!--Google tag (gtag.js)-->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-22XHW1HR4J"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-22XHW1HR4J");
+    </script>
+
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="../styles.css" />
+    <!--#########################################################################################################################-->
+
+</head>
+
+<body>
+
+    <!--####################################################################################################################################-->
+    <!--Header-->
+    <div id="header"></div>
+
+    <main class="page-main">
+    <article class="container post-article">
+
+    <!--Cover image + overlay heading-->
+    <header class="post-hero-wrapper">
+    <!--Cover-->
+    <div class="post-hero">
+        <img
+        src="../images/"
+        alt="Post cover"
+        class="post-hero-image"
+        />
+    </div>
+
+    <!--Title BELOW the cover-->
+    <h1 class="post-title-main">
+        TitleBelowCover
+    </h1>
+
+    <!-- Subtitle below title -->
+    <p class="post-subtitle-bar">
+        “Subtitle”
+    </p>
+    </header>
+
+    <!-- Meta row: date + reading time -->
+    <div class="post-meta-bar">
+    <span class="post-date">Dec 13, 2025</span>
+    <span class="post-reading-time" id="reading-time"></span>
+    </div>
+    <div class="scroll-progress-bar">
+    <div class="scroll-progress-fill"></div>
+    </div>
+
+    <!-- Content box -->
+    <div class="post-layout">
+    <aside class="post-left">
+    <!-- placeholder for now -->
+    <!-- later: newsletter box, ad unit, category index etc -->
+    </aside>
+    <section class="post-content-shell">
+    <div class="post-main">
+    <div class="post-content">
+
+<!--#################################################################################################-->
+<h1>bla</h1> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim laboriosam necessitatibus animi possimus soluta. Itaque aut animi quidem sapiente quibusdam! Amet, eos est velit ut sint explicabo possimus ad cumque.
+<!--#################################################################################################-->
+        
+    <!--Newlettter and TOC-->
+    <div id="newsletter"></div>
+    </div>
+    </div>
+    </section>
+    <aside class="post-toc">
+    <div class="post-toc-title">On this page</div>
+    <nav id="post-toc-list"></nav>
+    </aside>
+    </div>
+        
+    <!-- Share + next posts -->
+    <section class="post-footer-extra">
+    <div id="share-row"></div>
+    <div class="post-related">
+    <h1>Read next</h1>
+    <div class="post-related-grid">
+        <!--CARD 1-->
+        <a href="what-is-arduino.html" class="post-related-card">
+        <div class="related-thumb">
+        <img src="../images/pathway-to-arduino/cover.webp" alt="Cover image">
+        </div>
+        <h3 class="related-title">What Is Arduino?</h3>
+        </a>
+        <!--CARD 2-->
+        <a href="understanding-the-arduino-uno-board.html" class="post-related-card">
+        <div class="related-thumb">
+        <img src="../images/pathway-to-arduino/cover.webp" alt="Cover image">
+        </div>
+        <h3 class="related-title">Understanding The Arduino Uno Board</h3>
+        </a>
+    </div>
+    </div>
+    </section>
+
+
+    <section id="comments"></section>
+    </article>
+    </main>
+
+    <div id="footer"></div>
+    <div id="scripts"></div>
+
+    <script src="../js/partials.js"></script>
+    <script src="../js/site.js"></script>
+
+    <script>
+    loadPartial("header", "../partials/header.html", () => {
+        initHeader();          // header elements now exist
+    });
+
+    loadPartial("footer", "../partials/footer.html");
+
+    loadPartial("newsletter", "../partials/newsletter.html", () => {
+        initNewsletter();
+    });
+
+    loadPartial("comments", "../partials/comments.html", () => {
+        initComments();
+    });
+
+    loadPartial("share-row", "../partials/share-row.html");
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+        initPost();
+        initTOC();
+        initScrollProgress();
+        initCookie();
+    });
+    </script>
+
+</body>
+</html>

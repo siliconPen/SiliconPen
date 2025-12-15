@@ -23,7 +23,7 @@
   }
 </script>
     <meta charset="UTF-8" />
-    <title>About — Silicon Pen</title>
+    <title>All Articles — Silicon Pen</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Google tag (gtag.js) -->
     <script
@@ -85,6 +85,21 @@
     <p class="archive-intro">
       Every post on SiliconPen, in one place. Use this page to browse older pieces.
     </p>
+    <input
+  type="search"
+  id="articleSearch"
+  class="archive-search"
+  placeholder="Search articles..."
+  aria-label="Search articles"
+/>
+<div class="archive-controls">
+  <select id="sortSelect" class="archive-sort">
+    <option value="latest">Latest first</option>
+    <option value="oldest">Oldest first</option>
+    <option value="az">A → Z</option>
+  </select>
+</div>
+
 
     <div class="archive-list">
       <!-- One card per article -->
@@ -122,30 +137,79 @@
       });
     </script>
     <script>
+let ALL_POSTS = [];
+let CURRENT_POSTS = [];
+
+const container = document.querySelector(".archive-list");
+const searchInput = document.getElementById("articleSearch");
+const sortSelect  = document.getElementById("sortSelect");
+
+function renderPosts(posts) {
+  container.innerHTML = "";
+
+  if (posts.length === 0) {
+    container.innerHTML = "<p>No articles found.</p>";
+    return;
+  }
+
+  posts.forEach(post => {
+    const card = `
+      <a href="${post.slug}" class="archive-item">
+        <div class="archive-thumb">
+          <img src="${post.cover}" alt="">
+        </div>
+
+        <div class="archive-info">
+          <h2>${post.title}</h2>
+          <p>${post.subtitle}</p>
+          <span class="archive-date">${post.date}</span>
+        </div>
+      </a>
+    `;
+    container.insertAdjacentHTML("beforeend", card);
+  });
+}
+
+function applySort(posts, mode) {
+  const sorted = [...posts];
+
+  if (mode === "latest") {
+    sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
+  } 
+  else if (mode === "oldest") {
+    sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
+  } 
+  else if (mode === "az") {
+    sorted.sort((a, b) => a.title.localeCompare(b.title));
+  }
+
+  return sorted;
+}
+
+function updateView() {
+  const query = searchInput.value.toLowerCase();
+  const sortMode = sortSelect.value;
+
+  let filtered = ALL_POSTS.filter(post =>
+    post.title.toLowerCase().includes(query) ||
+    post.subtitle.toLowerCase().includes(query)
+  );
+
+  filtered = applySort(filtered, sortMode);
+  CURRENT_POSTS = filtered;
+
+  renderPosts(filtered);
+}
+
 fetch("posts.json")
   .then(res => res.json())
   .then(posts => {
-    posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-    const container = document.querySelector(".archive-list");
-
-    posts.forEach(post => {
-      const card = `
-        <a href="${post.slug}" class="archive-item">
-          <div class="archive-thumb">
-            <img src="${post.cover}">
-          </div>
-
-          <div class="archive-info">
-            <h2>${post.title}</h2>
-            <p>${post.subtitle}</p>
-            <span class="archive-date">${post.date}</span>
-          </div>
-        </a>
-      `;
-      container.insertAdjacentHTML("beforeend", card);
-    });
+    ALL_POSTS = posts;
+    updateView(); // initial render
   });
 
+searchInput.addEventListener("input", updateView);
+sortSelect.addEventListener("change", updateView);
 </script>
 <script>
   if (!localStorage.getItem("sp_cookie_ok")) {

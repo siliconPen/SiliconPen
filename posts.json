@@ -19,7 +19,8 @@
     "subtitle": "Engineering tantrums dressed as insights.",
     "cover": "images/rant-electronics/cover.webp",
     "date": "2025-05-15",
-    "series": "rant-electronics"
+    "series": "rant-electronics",
+    "order": 1
   },
   {
     "slug": "posts/the-mighty-switch-rant-electronics-1.html",
@@ -27,7 +28,8 @@
     "subtitle": "Engineering tantrums dressed as insights.",
     "cover": "images/rant-electronics/cover.webp",
     "date": "2025-05-16",
-    "series": "rant-electronics"
+    "series": "rant-electronics",
+    "order": 2
   },
   {
     "slug": "posts/overview-oscillations-0.html",
@@ -35,7 +37,8 @@
     "subtitle": "Not just headlines — oscillations of a changing world, filtered through ambition, soul, and silicon.",
     "cover": "images/oscillations/cover.webp",
     "date": "2025-05-17",
-    "series": "oscillations"
+    "series": "oscillations",
+    "order": 1
   },
   {
     "slug": "posts/wires-the-sneaky-snakes-of-circuits-rant-electronics-2-part-1.html",
@@ -43,7 +46,8 @@
     "subtitle": "Engineering tantrums dressed as insights.",
     "cover": "images/rant-electronics/cover.webp",
     "date": "2025-05-26",
-    "series": "rant-electronics"
+    "series": "rant-electronics",
+    "order": 3
   },
   {
     "slug": "posts/wires-the-sneaky-snakes-of-circuits-rant-electronics-2-part-2.html",
@@ -51,7 +55,8 @@
     "subtitle": "Engineering tantrums dressed as insights.",
     "cover": "images/rant-electronics/cover.webp",
     "date": "2025-05-31",
-    "series": "rant-electronics"
+    "series": "rant-electronics",
+    "order": 4
   },
   {
     "slug": "posts/oscillations-1.html",
@@ -59,7 +64,8 @@
     "subtitle": "Not just headlines — oscillations of a changing world, filtered through ambition, soul, and silicon.",
     "cover": "images/oscillations/cover.webp",
     "date": "2025-06-01",
-    "series": "oscillations"
+    "series": "oscillations",
+    "order": 2
   },
   {
     "slug": "posts/watts-really-going-on-inside-the-lightbulb-part-1-rant-electronics-3.html",
@@ -67,7 +73,8 @@
     "subtitle": "Engineering tantrums dressed as insights.",
     "cover": "images/rant-electronics/cover.webp",
     "date": "2025-06-07",
-    "series": "rant-electronics"
+    "series": "rant-electronics",
+    "order": 5
   },
   {
     "slug": "posts/oscillations-2.html",
@@ -75,7 +82,8 @@
     "subtitle": "Not just headlines — oscillations of a changing world, filtered through ambition, soul, and silicon.",
     "cover": "images/oscillations/cover.webp",
     "date": "2025-06-08",
-    "series": "oscillations"
+    "series": "oscillations",
+    "order": 3
   },
   {
     "slug": "posts/watts-really-going-on-inside-the-lightbulb-part-2-rant-electronics-3.html",
@@ -83,7 +91,8 @@
     "subtitle": "Engineering tantrums dressed as insights.",
     "cover": "images/rant-electronics/cover.webp",
     "date": "2025-06-14",
-    "series": "rant-electronics"
+    "series": "rant-electronics",
+    "order": 6
   },
   {
     "slug": "posts/what-is-arduino.html",
@@ -91,7 +100,8 @@
     "subtitle": "Overview for arduino and its working.",
     "cover": "images/pathway-to-arduino/cover.webp",
     "date": "2025-12-04",
-    "series": "pathway-to-arduino"
+    "series": "pathway-to-arduino",
+    "order": 1
   },
   {
     "slug": "posts/understanding-the-arduino-uno-board.html",
@@ -99,7 +109,8 @@
     "subtitle": "Peeking into arduino's circuits.",
     "cover": "images/pathway-to-arduino/cover.webp",
     "date": "2025-12-05",
-    "series": "pathway-to-arduino"
+    "series": "pathway-to-arduino",
+    "order": 2
   },
   {
     "slug": "posts/welcome-to-the-new-siliconpen.html",
@@ -114,6 +125,7 @@
     "subtitle": "Starting up the Arduino Engine!",
     "cover": "images/pathway-to-arduino/cover.webp",
     "date": "2025-12-13",
-    "series": "pathway-to-arduino"
+    "series": "pathway-to-arduino",
+    "order": 3
   }
 ]
