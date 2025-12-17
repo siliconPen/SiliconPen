@@ -136,5 +136,13 @@
       <description>Starting up our Arduino IDE engine. Taking our first step into microcontroller programming.</description>
     </item>
 
+    <item>
+      <title>Blink with an External LED</title>
+      <link>https://siliconpen.com/posts/blink-with-an-external-LED.html</link>
+      <guid>https://siliconpen.com/posts/blink-with-an-external-LED.html</guid>
+      <pubDate>Sat, 17 Dec 2025 12:00:00 +0530</pubDate>
+      <description>Here we discuss about blink example program and then create a External LED circuit.</description>
+    </item>
+
   </channel>
 </rss>
