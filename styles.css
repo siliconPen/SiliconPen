@@ -1487,3 +1487,178 @@ em {
     max-width: 100%;
   }
 }
+
+
+/* GENERAL STYLE RESET FOR CUSTOM TAGS */
+sp-line, sp-rule, sp-warning, sp-tip, sp-fact, sp-example,
+sp-error, sp-success, sp-q, sp-answer, sp-pro, sp-con,
+sp-equation, sp-block, sp-sidenote, sp-quote {
+  display: block;
+  padding: 12px 18px;
+  margin: 22px 0;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+  line-height: 1.6;
+}
+
+/* 1. sp-line — simple left bar */
+sp-line {
+  border-left: 4px solid #888;
+  background: #ffffff05;
+  font-size: 1.05rem;
+}
+
+/* 2. sp-rule — engineering rule */
+sp-rule {
+  border-left: 4px solid #4fc3f7;
+  background: #bbf0ff10;
+  font-weight: 600;
+}
+
+/* 3. sp-warning — danger */
+sp-warning {
+  border-left: 4px solid #ff4444;
+  background: #ff33331a;
+  color: #ffb3b3;
+  font-weight: 600;
+}
+
+/* 4. sp-tip — green helpful note */
+sp-tip {
+  border-left: 4px solid #57ff57;
+  background: #00ff0a10;
+  color: #c6ffc6;
+}
+
+/* 5. sp-fact — neutral fact box */
+sp-fact {
+  background: #ffffff0a;
+  border: 1px solid #ffffff22;
+  font-style: italic;
+}
+
+/* 6. sp-example — highlight example */
+sp-example {
+  border-left: 4px solid #ffa726;
+  background: #ff910012;
+  color: #ffd7a2;
+}
+
+/* 7. sp-error — common mistakes */
+sp-error {
+  border-left: 4px solid #e53935;
+  background: #e5393512;
+  color: #ffaaaa;
+  font-weight: 600;
+}
+
+/* 8. sp-success — succeeded outcome */
+sp-success {
+  border-left: 4px solid #4caf50;
+  background: #4caf5012;
+  color: #b6ffb6;
+}
+
+/* 9. sp-q — question highlight */
+sp-q {
+  border-left: 4px solid #90caf9;
+  background: #90caf912;
+  font-weight: 600;
+}
+
+/* 10. sp-answer — highlighted answer */
+sp-answer {
+  border-left: 4px solid #81c784;
+  background: #81c78412;
+}
+
+/* 11. sp-pro — pros (green) */
+sp-pro {
+  border-left: 4px solid #66bb6a;
+  background: #66bb6a12;
+  color: #d9ffd9;
+}
+
+/* 12. sp-con — cons (red) */
+sp-con {
+  border-left: 4px solid #ef5350;
+  background: #ef535012;
+  color: #ffd4d4;
+}
+
+/* 13. sp-equation — formula highlight */
+sp-equation {
+  border: 1px solid #ffffff25;
+  background: #ffffff07;
+  font-family: "Poppins", monospace;
+  font-size: 1.15rem;
+  text-align: center;
+  padding: 14px;
+}
+
+/* 14. sp-block — whiteboard style */
+sp-block {
+  background: #00000020;
+  border: 1px dashed #ffffff30;
+  font-family: "Inter", sans-serif;
+  padding: 18px 20px;
+}
+
+/* 15. sp-sidenote — margin note */
+sp-sidenote {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-style: italic;
+  background: #ffffff05;
+  border-left: 3px dotted #aaa;
+}
+
+/* 16. sp-quote — engineering quote */
+sp-quote {
+  border-left: 4px solid #b388ff;
+  background: #b388ff12;
+  padding: 16px 20px;
+  font-style: italic;
+  color: #e3d4ff;
+}
+
+.post-content h1, 
+.post-content h2 {
+  text-shadow: 0 0 20px rgba(255,255,255,0.03);
+}
+html {
+  scroll-behavior: smooth;
+}
+code, pre {
+  background: #111;
+  border: 1px solid #ffffff22;
+  padding: 12px;
+  border-radius: 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.9rem;
+  color: #d0e8ff;
+}
+.code-block {
+  position: relative;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ffffff15;
+  border: 1px solid #ffffff33;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.copy-btn:hover {
+  background: #ffffff30;
+}
+a {
+  position: relative;
+}

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!--Title and Description-->
+    <title>Using Digital Inputs in Arduino: Understanding Buttons and Switches</title>
+    <meta name="description" content="Learn how digital inputs work in Arduino using buttons and switches. Understand how the board listens to external signals, reads HIGH/LOW states, and reacts to real-world interactions. Perfect for beginners building interactive projects.">
+
+    <!-- Open Graph (Social Media Preview) -->
+    <meta property="og:title" content="Digital Inputs Explained: How Arduino Reads Buttons & Switches">
+    <meta property="og:description" content="A beginner-friendly guide on how Arduino listens to the outside world. Learn how buttons, switches, and external signals are detected using digital input pins.">
+    <meta property="og:image" content="https://siliconpen.com/images/pathway-to-arduino/cover.webp">
+    <meta property="og:url" content="https://siliconpen.com/posts/using-digital-inputs-in-arduino.html">
+    <meta property="og:type" content="article">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Digital Inputs Explained: How Arduino Reads Buttons & Switches">
+    <meta name="twitter:description" content="A beginner-friendly guide on how Arduino listens to the outside world. Learn how buttons, switches, and external signals are detected using digital input pins.">
+    <meta name="twitter:image" content="https://siliconpen.com/images/pathway-to-arduino/cover.webp">
+    
+    <!--#########################################################################################################################-->
+    
+    <!--Favicon-->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+    <!--Adsense-->
+    <script>
+    function loadAdsense() {
+        let s = document.createElement("script");
+        s.async = true;
+        s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3169103084290208";
+        s.setAttribute("crossorigin", "anonymous");
+        document.head.appendChild(s);
+    }
+
+    if (localStorage.getItem("sp_cookie_ok")) {
+        loadAdsense();
+    } else {
+        document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById("cookieAccept");
+        if (btn) btn.addEventListener("click", loadAdsense);
+        });
+    }
+    </script>
+
+    <!--Meta Data-->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--Google Analytics-->
+    <!--Google tag (gtag.js)-->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-22XHW1HR4J"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-22XHW1HR4J");
+    </script>
+
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="../styles.css" />
+    <!--#########################################################################################################################-->
+
+</head>
+
+<body>
+
+    <!--####################################################################################################################################-->
+    <!--Header-->
+    <div id="header"></div>
+
+    <main class="page-main">
+    <article class="container post-article">
+
+    <!--Cover image + overlay heading-->
+    <header class="post-hero-wrapper">
+    <!--Cover-->
+    <div class="post-hero">
+        <img
+        src="../images/pathway-to-arduino/cover.webp"
+        alt="Post cover"
+        class="post-hero-image"
+        />
+    </div>
+
+    <!--Title BELOW the cover-->
+    <h1 class="post-title-main">
+        Using Digital Inputs In Arduino
+    </h1>
+
+    <!-- Subtitle below title -->
+    <p class="post-subtitle-bar">
+        “How Arduino Listens to the World Through Buttons, Switches, and Digital Input Signals”
+    </p>
+    </header>
+
+    <!-- Meta row: date + reading time -->
+    <div class="post-meta-bar">
+    <span class="post-date">Jan 01, 2026</span>
+    <span class="post-reading-time" id="reading-time"></span>
+    </div>
+    <div class="scroll-progress-bar">
+    <div class="scroll-progress-fill"></div>
+    </div>
+
+    <!-- Content box -->
+    <div class="post-layout">
+    <div id="post-left"></div>
+    <section class="post-content-shell">
+    <div class="post-main">
+    <div class="post-content">
+
+<!--#################################################################################################-->
+
+<h1>Chapter 6</h1>
+<p>So far, we’ve controlled the outside world using digital output.<br>Now we flip the direction.</p>
+<p>Instead of Arduino sending signals, we’ll make it listen.</p>
+<p>This chapter answers a simple but important question:<br><sp-line>How does Arduino know when something has happened outside?</sp-line></p>
+<hr class="section-divider"/>
+
+<h1>🔘 What Is a Digital Input?</h1>
+<p>A digital input pin can read only two states:</p>
+<ul>
+<li><p>HIGH → voltage present</p>
+</li>
+<li><p>LOW → no voltage</p>
+</li>
+</ul>
+<p>Just like digital output — but now the direction is reversed.</p>
+<p>Instead of Arduino controlling voltage, <strong>external components control the pin’s voltage</strong>, and Arduino reads it.</p>
+<hr class="section-divider"/>
+
+<h1>🧠 The Button as an Input Device</h1>
+<p><sp-quote>A push button is the simplest input device.</sp-quote></p>
+<p>At its core, a button:</p>
+<ul>
+<li><p>either connects a pin to voltage</p>
+</li>
+<li><p>or disconnects it</p>
+</li>
+</ul>
+<p>No magic. No data. Just electrical connections.</p>
+<hr class="section-divider"/>
+
+<h1>🔌 The Basic Button Circuit (Concept First)</h1>
+<img src="../images/pathway-to-arduino/using-digital-inputs-in-arduino/1.png" alt="buttons">
+<p>Imagine this logic:</p>
+<ul>
+<li><p>Button not pressed → pin reads LOW</p>
+</li>
+<li><p>Button pressed → pin reads HIGH</p>
+</li>
+</ul>
+<p>That’s all we want.</p>
+<p>But here’s the catch…</p>
+<hr class="section-divider"/>
+
+<h1>⚠️ The Floating Pin Problem</h1>
+<p><sp-rule>If a pin is not connected to anything, it is said to be floating.</sp-rule></p>
+<p>A floating pin:</p>
+<ul>
+<li><p>can randomly read HIGH or LOW</p>
+</li>
+<li><p>picks up electrical noise</p>
+</li>
+<li><p>causes unpredictable behavior</p>
+</li>
+</ul>
+<p>This is one of the most confusing beginner issues — and it’s not a code bug.</p>
+<hr class="section-divider"/>
+
+<h1>🧲 Pull-Down Resistor (Classic Solution)</h1>
+<p>To avoid floating, we force the pin into a <strong>known state</strong>.</p>
+<img src="../images/pathway-to-arduino/using-digital-inputs-in-arduino/2.png" alt="buttons">
+<p>With a <strong>pull-down resistor</strong>:</p>
+<ul>
+<li><p>the pin is connected to GND through a resistor</p>
+</li>
+<li><p>default state = LOW</p>
+</li>
+<li><p>when button is pressed, pin connects to 5V</p>
+</li>
+</ul>
+<p>This guarantees clean readings.</p>
+<hr class="section-divider"/>
+
+<h1>🧠 Arduino’s Shortcut: Internal Pull-Up</h1>
+<p>Arduino gives us an easier method.</p>
+<p>Instead of using an external pull-down resistor, we can use an <strong>internal pull-up resistor</strong>.</p>
+<p><code>pinMode(2, INPUT_PULLUP);</code></p>
+<p>This does two things:</p>
+<ul>
+<li><p>sets the pin as input</p>
+</li>
+<li><p>connects it internally to 5V through a resistor</p>
+</li>
+</ul>
+<p>Now:</p>
+<ul>
+<li><p>button not pressed → HIGH</p>
+</li>
+<li><p>button pressed → LOW</p>
+</li>
+</ul>
+<p><sp-warning>⚠️ The logic is inverted!</sp-warning></p>
+<h3>🔄 Why Inverted Logic Is OK</h3>
+<p>People often panic when they see this.</p>
+<p>But inverted logic is actually:</p>
+<ul>
+<li><p>stable</p>
+</li>
+<li><p>noise-resistant</p>
+</li>
+<li><p>widely used in real systems</p>
+</li>
+</ul>
+<p>All because this circuitry is provided by Arduino Internally!</p>
+<p>You just have to think clearly:</p>
+<ul>
+<li>LOW means pressed</li>
+<li>HIGH means released</li>
+</ul>
+<p>Once you accept this, life becomes easier. :)</p>
+<hr class="section-divider"/>
+
+<h1>🔌 Wiring Time</h1>
+<p>Okay, bring out your hardware and start building!</p>
+<h2>Using an External Pull-Down Resistor</h2>
+<p>We’ll first show you the beginner-friendly and intuitive way to do this, using an external resistor so you can see what’s happening electrically.</p>
+<blockquote>Arduino Pin 2 → Button → Resistor → GND
+</blockquote>
+<p>Connect the components exactly in this order.
+<!--<br>If you’re not familiar with how switches work internally, you can refer to this article: <a href="basics-of-switches.html">Swtiches</a>.-->
+<br>A simple schematic is also shown in the image below to help you visualize the connections.
+<img src="../images/pathway-to-arduino/using-digital-inputs-in-arduino/3.png" alt="buttons">
+</p>
+<h3><p>In this configuration:</p></h3>
+<ul>
+<li><p>When the button is not pressed, the resistor pulls the pin to GND, so Arduino reads LOW</p>
+</li>
+<li><p>When the button is pressed, the pin connects to 5V, and Arduino reads HIGH</p>
+</li>
+</ul>
+
+
+<p>This resistor ensures the pin is never floating, which is extremely important for reliable input reading.</p>
+<p>Once everything is connected properly, plug in your Arduino and upload the code below:</p>
+<pre><code>
+const int buttonPin = 2;   // Button connected to pin 2
+
+void setup() {
+  pinMode(buttonPin, INPUT);   // Set pin 2 as input
+  Serial.begin(9600);          // Start Serial Monitor (for debugging)
+}
+
+void loop() {
+  int buttonState = digitalRead(buttonPin);  // Read the button state
+
+  if (buttonState == HIGH) {
+    Serial.println("Button Pressed");
+  } else {
+    Serial.println("Button Not Pressed");
+  }
+
+  delay(200);  // Small delay for readability
+}
+
+</code></pre>
+
+<p>And hit <strong>Upload!</strong><br>Use the Serial Monitor to see the output.</p>
+<details><summary>A Quick Note on the Serial Monitor</summary>
+
+<p>The Serial Monitor is a simple tool that lets Arduino send text back to your computer.</p>
+<p>Right now, we’re using it only to see what the Arduino is reading — nothing more.</p>
+<p>Think of it like Arduino saying:</p>
+<p><em>“Hey, this is what I’m seeing right now.”</em></p>
+<p>We’ll explore the Serial Monitor properly later as a debugging tool, where it becomes one of the most powerful ways to understand what your code and hardware are doing behind the scenes.</p>
+</details>
+
+<p>Click on the serial monitor on the top right corner. The serial monitor tab will open next to output tab.</p>
+<img src="../images/pathway-to-arduino/using-digital-inputs-in-arduino/4.png" alt="buttons">
+<h3>Now,</h3>
+<ul>
+<li>Click on the button</li>
+<li>Check the serial output tab</li>
+<li>You should see &quot;<strong>Button Pressed</strong>&quot; printed!</li>
+</ul>
+
+
+<h3>Code Explanation</h3>
+<ul>
+<li><p><code>const int buttonPin = 2;</code><br>A variable named <code>buttonPin</code> is created and assigned the value 2.<br>A variable is a named container that holds a value.<br> Instead of directly using pin numbers everywhere,<br> we use variables—this makes the code easier to modify and maintain later.</p>
+</li>
+<li><p><code>pinMode(buttonPin, INPUT);</code><br>This sets pin 2 as an input pin, meaning Arduino will read voltage levels from it instead of sending voltage out.</p>
+</li>
+<li><p><code> Serial.begin(9600);</code><br>This initializes the Serial Monitor and sets the communication speed to 9600 baud. Without this line, nothing will appear in the Serial Monitor.</p>
+</li>
+<li><p><code>int buttonState = digitalRead(buttonPin);</code>The variable <code>buttonState</code> stores the value returned by the <code>digitalRead()</code> function.</p>
+</li>
+</ul>
+<details><summary>digitalRead([pin name])</summary>
+<p>is an Arduino function that reads the state of a pin and returns:</p>
+<ul>
+<li>HIGH (1) → 5V</li>
+<li>LOW (0) → 0V</li>
+</ul>
+</details>
+
+<ul>
+<li><p><code> if (buttonState == HIGH) {code};</code><br>This is a conditional statement.<br>The code inside {} runs only if the given condition is TRUE (i.e., equals HIGH or 1).</p>
+</li>
+<li><p><code>Serial.println(&quot;Button Pressed&quot;)</code><br>This prints the text inside the quotation marks to the Serial Monitor.</p>
+</li>
+<li><p><code>else {Serial.println(&quot;Button Not Pressed&quot;);}</code><br>The else block runs when the if condition is FALSE.<br>In this case, it prints &quot;Button Not Pressed&quot;.</p>
+</li>
+<li><p><code>delay</code><br>This pauses the program for the given number of milliseconds.<br>The delay is added to make the Serial Monitor output easier to read.</p>
+</li>
+</ul>
+<p>When you press the switch, the voltage at pin 2 becomes 5V, causing the condition to evaluate as TRUE, and &quot;Button Pressed&quot; gets printed.<br>When the switch is not pressed, the pin stays at 0V, so &quot;Button Not Pressed&quot; is printed.</p>
+<p>This process keeps repeating inside the loop() function.</p>
+<h2>Using the Internal Pull-Up Resistor</h2>
+<p>Now its the time to use the power of Arduino&#39;s <strong>Internal Pull-Up Resistor</strong>.</p>
+<blockquote>Arduino Pin 2 → Button → GND
+</blockquote>
+<p>That’s it.
+<br>No external resistor required.</p>
+
+<img src="../images/pathway-to-arduino/using-digital-inputs-in-arduino/5.png" alt="buttons">
+
+<h3>In this configuration:</h3>
+<ul>
+<li><p>When the button is not pressed, the resistor pulls up the pin to 5v,<br>so Arduino reads HIGH</p>
+</li>
+<li><p>When the button is pressed, the pin connects to GND,<br> and Arduino reads LOW</p>
+</li>
+</ul>
+<p>Once everything is connected properly, plug in your Arduino and upload the code below:</p>
+<pre><code>
+const int buttonPin = 2;   // Button connected to pin 2
+
+void setup() {
+  pinMode(2, INPUT_PULLUP);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int buttonState = digitalRead(2);
+
+  if (buttonState == LOW) {    // As you see we inverted the logic here!
+    Serial.println("Button Pressed");
+  } else {
+    Serial.println("Button Released");
+  }
+
+  delay(200);
+}
+
+</code></pre>
+
+<p>Hit <strong>Upload!</strong><br>Use the Serial Monitor to see the output.</p>
+<h3>Now,</h3>
+<ul>
+<li>Click on the button</li>
+<li>Check the serial output tab</li>
+<li>You should see &quot;<strong>Button Pressed</strong>&quot; printed!</li>
+</ul>
+<h3>What Changed ?</h3>
+<ul>
+<li><p><code>pinMode(buttonPin, INPUT_PULLUP);</code><br>This sets pin 2 as an input pin connected to the internal pullup resistor.</p>
+</li>
+<li><p><code> if (buttonState == LOW) {code};</code><br>As you observer we inverted the logic! When the voltage reads LOW, we know the button is pressed.</p>
+</li>
+</ul>
+<p>When you press the switch, the voltage at pin 2 becomes GND, causing the condition to evaluate as LOW, and &quot;Button Pressed&quot; gets printed.<br>When the switch is not pressed, the pin stays at 5V, so &quot;Button Not Pressed&quot; is printed.</p>
+<hr class="section-divider">
+
+<h1>🧰 Common Beginner Mistakes</h1>
+<ul>
+<li><p>Forgetting pull-up or pull-down resistors</p>
+</li>
+<li><p>Expecting stable readings from floating pins</p>
+</li>
+<li><p>Thinking button logic is “reversed by mistake”</p>
+</li>
+<li><p>Debugging code instead of checking wiring</p>
+</li>
+<li><p>Buttons fail electrically before they fail logically.</p>
+</li>
+</ul>
+<p>In short, the inputs are not information, rather they are change in the voltage at pins which gets interpreted as logic and we build our program around it!</p>
+<p>Every sensor you come across will reduce its input information to a voltage level!</p>
+<hr class="section-divider">
+
+<h1>📌 What Comes Next</h1>
+<p>You may have noticed something odd:</p>
+<ul>
+<li>one button press sometimes prints multiple times</li>
+</ul>
+<p>That’s not your fault.</p>
+<p>That’s physics.</p>
+<p>👉 Next Chapter — Debouncing: Why Buttons Misbehave<br>Coming SOON!</p>
+
+<!--#################################################################################################-->
+        
+    <!--Newlettter and TOC-->
+    <div id="newsletter"></div>
+    </div>
+    </div>
+    </section>
+    <aside class="post-toc">
+    <div class="post-toc-title">On this page</div>
+    <nav id="post-toc-list"></nav>
+    </aside>
+    </div>
+        
+    <!-- Share + next posts -->
+    <section class="post-footer-extra">
+    <div id="share-row"></div>
+    <div class="post-related">
+    <h1>Read next</h1>
+    <div class="post-related-grid">
+        <!--CARD 1-->
+        <a href="understanding-digital-output.html" class="post-related-card">
+        <div class="related-thumb">
+        <img src="../images/pathway-to-arduino/cover.webp" alt="Cover image">
+        </div>
+        <h3 class="related-title">Understanding Digital Output</h3>
+        </a>
+        <!--CARD 2-->
+        <a href="../series/pathway-to-arduino.html" class="post-related-card">
+        <div class="related-thumb">
+        <img src="../images/pathway-to-arduino/cover.webp" alt="Cover image">
+        </div>
+        <h3 class="related-title">Pathway To Arduino: Full Series</h3>
+        </a>
+    </div>
+    </div>
+    </section>
+
+
+    <section id="comments"></section>
+    </article>
+    </main>
+
+    <div id="footer"></div>
+    <div id="scripts"></div>
+
+    <script src="../js/partials.js"></script>
+    <script src="../js/site.js"></script>
+
+    <script>
+    loadPartial("header", "../partials/header.html", () => {
+        initHeader();          // header elements now exist
+    });
+
+    loadPartial("footer", "../partials/footer.html");
+
+    loadPartial("newsletter", "../partials/newsletter.html", () => {
+        initNewsletter();
+    });
+
+    loadPartial("comments", "../partials/comments.html", () => {
+        initComments();
+    });
+
+    loadPartial("share-row", "../partials/share-row.html", () => {
+        initPost();
+    });
+    
+    loadPartial("post-left", "../partials/post-left.html");
+
+    document.addEventListener("DOMContentLoaded", () => {
+        initTOC();
+        initScrollProgress();
+        initCookie();
+        enableCodeCopy();
+    });
+    </script>
+
+</body>
+</html>

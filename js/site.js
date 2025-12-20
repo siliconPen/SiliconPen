@@ -184,3 +184,26 @@ function initComments() {
 
   container.appendChild(script);
 }
+function enableCodeCopy() {
+  const blocks = document.querySelectorAll("pre");
+
+  blocks.forEach((pre) => {
+    // wrap
+    pre.classList.add("code-block");
+
+    // button
+    const btn = document.createElement("button");
+    btn.classList.add("copy-btn");
+    btn.innerText = "Copy";
+
+    btn.onclick = () => {
+      const code = pre.innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        btn.innerText = "Copied!";
+        setTimeout(() => (btn.innerText = "Copy"), 1500);
+      });
+    };
+
+    pre.appendChild(btn);
+  });
+}
