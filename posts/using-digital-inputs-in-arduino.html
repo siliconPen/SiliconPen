@@ -246,12 +246,14 @@
 <p>Okay, bring out your hardware and start building!</p>
 <h2>Using an External Pull-Down Resistor</h2>
 <p>We’ll first show you the beginner-friendly and intuitive way to do this, using an external resistor so you can see what’s happening electrically.</p>
+<img src="../images/pathway-to-arduino/using-digital-inputs-in-arduino/3.jpeg" alt="">
 <blockquote>Arduino Pin 2 → Button → Resistor → GND
 </blockquote>
-<p>Connect the components exactly in this order.
+<p>Connect the components exactly in this order. (Any large resistor would work!)
 <!--<br>If you’re not familiar with how switches work internally, you can refer to this article: <a href="basics-of-switches.html">Swtiches</a>.-->
 <br>A simple schematic is also shown in the image below to help you visualize the connections.
-<img src="../images/pathway-to-arduino/using-digital-inputs-in-arduino/3.png" alt="buttons">
+<img src="../images/pathway-to-arduino/using-digital-inputs-in-arduino/4.png" alt="buttons">
+<img src="../images/pathway-to-arduino/using-digital-inputs-in-arduino/5.jpeg" alt="buttons">
 </p>
 <h3><p>In this configuration:</p></h3>
 <ul>
@@ -297,7 +299,7 @@ void loop() {
 </details>
 
 <p>Click on the serial monitor on the top right corner. The serial monitor tab will open next to output tab.</p>
-<img src="../images/pathway-to-arduino/using-digital-inputs-in-arduino/4.png" alt="buttons">
+<img src="../images/pathway-to-arduino/using-digital-inputs-in-arduino/6.png" alt="buttons">
 <h3>Now,</h3>
 <ul>
 <li>Click on the button</li>
@@ -305,6 +307,17 @@ void loop() {
 <li>You should see &quot;<strong>Button Pressed</strong>&quot; printed!</li>
 </ul>
 
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/rjBdaUb70OM"
+    title="Live demo: Arduino Uno explanation"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+<p class="video-caption">
+  External Pull-Down Resistor Switch Circuit Demo
+</p>
 
 <h3>Code Explanation</h3>
 <ul>
@@ -339,13 +352,14 @@ void loop() {
 <p>This process keeps repeating inside the loop() function.</p>
 <h2>Using the Internal Pull-Up Resistor</h2>
 <p>Now its the time to use the power of Arduino&#39;s <strong>Internal Pull-Up Resistor</strong>.</p>
+<img src="../images/pathway-to-arduino/using-digital-inputs-in-arduino/7.jpeg" alt="buttons">
 <blockquote>Arduino Pin 2 → Button → GND
 </blockquote>
 <p>That’s it.
 <br>No external resistor required.</p>
 
-<img src="../images/pathway-to-arduino/using-digital-inputs-in-arduino/5.png" alt="buttons">
-
+<img src="../images/pathway-to-arduino/using-digital-inputs-in-arduino/8.png" alt="buttons">
+<img src="../images/pathway-to-arduino/using-digital-inputs-in-arduino/9.jpeg" alt="buttons">
 <h3>In this configuration:</h3>
 <ul>
 <li><p>When the button is not pressed, the resistor pulls up the pin to 5v,<br>so Arduino reads HIGH</p>
@@ -383,6 +397,17 @@ void loop() {
 <li>Check the serial output tab</li>
 <li>You should see &quot;<strong>Button Pressed</strong>&quot; printed!</li>
 </ul>
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/--gNV4AALw0"
+    title="Live demo: Arduino Uno explanation"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+<p class="video-caption">
+  Internal Pull-Up Resistor Switch Circuit Demo
+</p>
 <h3>What Changed ?</h3>
 <ul>
 <li><p><code>pinMode(buttonPin, INPUT_PULLUP);</code><br>This sets pin 2 as an input pin connected to the internal pullup resistor.</p>

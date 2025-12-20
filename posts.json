@@ -145,5 +145,14 @@
     "date": "2025-12-20",
     "series": "pathway-to-arduino",
     "order": 5
+  },
+  {
+    "slug": "posts/overview-real-circuits.html",
+    "title": "Overview: Real Circuits",
+    "subtitle": "A Practical Journey into How Electronic Components Behave in the Real World",
+    "cover": "images/real-circuits/cover.png",
+    "date": "2025-12-20",
+    "series": "real-circuits",
+    "order": 1
   }
 ]
