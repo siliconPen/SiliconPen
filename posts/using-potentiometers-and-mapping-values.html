@@ -130,7 +130,168 @@
     <div class="post-content">
 
 <!--#################################################################################################-->
-<h1>bla</h1> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim laboriosam necessitatibus animi possimus soluta. Itaque aut animi quidem sapiente quibusdam! Amet, eos est velit ut sint explicabo possimus ad cumque.
+<h1>Chapter 9</h1>
+<p>In the previous chapter, you learned how Arduino reads analog values using <code>analogRead()</code>.</p>
+<p>You saw numbers between <strong>0 and 1023</strong> scrolling in the Serial Monitor.</p>
+<p>But here’s the real question:</p>
+<p>What do we do with those numbers?</p>
+<p>Because raw numbers by themselves don’t mean much.</p>
+<p>This chapter is about <strong>turning readings into control</strong>.</p>
+<hr class="section-divider"/>
+
+<h1>🔘 What Is a Potentiometer (Really)?</h1>
+<p>A potentiometer is not just a “knob”.</p>
+<p>Electrically, it is a <strong>variable voltage divider</strong>.</p>
+<h3>It has three pins:</h3>
+<ul>
+<li><p>one connected to 5V</p>
+</li>
+<li><p>one connected to GND</p>
+</li>
+<li><p>the middle pin outputs a variable voltage</p>
+</li>
+</ul>
+<h3>As you turn the knob:</h3>
+<ul>
+<li><p>the voltage at the middle pin changes</p>
+</li>
+<li><p>Arduino reads that voltage using <code>analogRead()</code></p>
+</li>
+</ul>
+<h2>🔌 Wiring the Potentiometer</h2>
+<h3>Connect it like this:</h3>
+<ul>
+<li>One side pin  → 5V</li>
+<li>Other side   → GND</li>
+<li>Middle pin  → A0</li>
+</ul>
+<p>That’s it.<br>No extra components required.</p>
+<p>I have an full tutorial on potentiometer, check it out to know more!</p>
+<hr class="section-divider"/>
+
+<h1>💻 Reading the Potentiometer</h1>
+<pre><code>void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int potValue = analogRead(A0);
+  Serial.println(potValue);
+  delay(200);
+}
+</code></pre>
+
+<p>Now turn the knob.</p>
+<p>You should see values smoothly changing between:</p>
+<ul>
+<li>0 (near GND)</li>
+<li>1023 (near 5V)</li>
+</ul>
+<hr class="section-divider"/>
+
+<h1>🧠 What You Should Notice</h1>
+<ul>
+<li><p>The change is continuous</p>
+</li>
+<li><p>Small turns → small changes</p>
+</li>
+<li><p>Fast turns → fast changes</p>
+</li>
+</ul>
+<p>This is analog control in its pure form.</p>
+<hr class="section-divider"/>
+
+<h1>🔄 Why Mapping Is Needed</h1>
+<h3>The problem:</h3>
+<ul>
+<li><code>analogRead()</code> → 0 to 1023</li>
+</ul>
+<h3>But real-world outputs often need:</h3>
+<ul>
+<li><p>0 to 255 (PWM)</p>
+</li>
+<li><p>0 to 180 (servo angle)</p>
+</li>
+<li><p>specific ranges</p>
+</li>
+</ul>
+<p>So we need a way to <strong>convert one range into another</strong>.</p>
+<p>That’s where <code>map()</code> comes in.</p>
+<hr class="section-divider"/>
+
+<h1>🔢 The <code>map()</code> Function</h1>
+<h3>Arduino provides a helper function:</h3>
+<p><code>map(value, fromLow, fromHigh, toLow, toHigh)</code></p>
+<h3>Example:</h3>
+<p><code>int mappedValue = map(potValue, 0, 1023, 0, 255);</code></p>
+<p>Now turning the potentiometer controls values between 0 and 255!</p>
+<hr class="section-divider"/>
+
+<h1>🧪 Hardware Time: Potentiometer → Serial Output</h1>
+<pre><code>void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int potValue = analogRead(A0);
+  int mappedValue = map(potValue, 0, 1023, 0, 255);
+
+  Serial.print("Raw: ");
+  Serial.print(potValue);
+  Serial.print("  Mapped: ");
+  Serial.println(mappedValue);
+
+  delay(200);
+}
+</code></pre>
+
+<p>This shows you both:</p>
+<ul>
+<li><p>what Arduino reads</p>
+</li>
+<li><p>what Arduino uses</p>
+</li>
+</ul>
+<hr class="section-divider"/>
+
+<h1>⚠️ Important Notes About <code>map()</code></h1>
+<ul>
+<li><p><code>map()</code> does not limit values automatically</p>
+</li>
+<li><p>If inputs exceed range, outputs can too</p>
+</li>
+<li><p>It works only with integers</p>
+</li>
+</ul>
+<hr class="section-divider"/>
+
+<h1>🧰 Common Beginner Mistakes</h1>
+<ul>
+<li><p>Forgetting to connect GND</p>
+</li>
+<li><p>Wiring the middle pin incorrectly</p>
+</li>
+<li><p>Expecting perfect stability (analog is noisy)</p>
+</li>
+<li><p>Thinking <code>map()</code> changes voltage (it doesn’t)</p>
+</li>
+</ul>
+<p><code>map()</code> changes numbers, not signals.</p>
+<hr class="section-divider"/>
+
+<h1>📌 What Comes Next</h1>
+<p>Now that we can:</p>
+<ul>
+<li><p>read analog values</p>
+</li>
+<li><p>convert them into useful ranges</p>
+</li>
+</ul>
+<p>The next step is to use them to control something visible.</p>
+<h3>👉 Next Chapter — Understanding PWM &amp; LED Fading</h3>
+<p>This is where analog input meets digital output.</p>
+
+
 <!--#################################################################################################-->
         
     <!--Newlettter and TOC-->

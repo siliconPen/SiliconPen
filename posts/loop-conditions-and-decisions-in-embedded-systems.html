@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!--Title and Description-->
+    <title>Loops and Conditions in Arduino: How Embedded Systems Make Decisions</title>
+    <meta name="description" content="Learn how Arduino makes decisions using loops, conditions, and control flow. This chapter explains how embedded systems think, react, and choose actions based on real-world inputs — the foundation of intelligent behavior in electronics.">
+
+    <!-- Open Graph (Social Media Preview) -->
+    <meta property="og:title" content="How Arduino Thinks: Loops, Conditions & Real Decisions in Embedded Systems">
+    <meta property="og:description" content="A simple, practical explanation of how embedded systems make decisions. Learn how Arduino uses loops and conditions to react intelligently to the world around it.">
+    <meta property="og:image" content="https://siliconpen.com/images/pathway-to-arduino/cover.webp">
+    <meta property="og:url" content="https://siliconpen.com/posts/loop-conditions-and-decisions-in-embedded-systems.html">
+    <meta property="og:type" content="article">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How Arduino Thinks: Loops, Conditions & Real Decisions in Embedded Systems">
+    <meta name="twitter:description" content="A simple, practical explanation of how embedded systems make decisions. Learn how Arduino uses loops and conditions to react intelligently to the world around it.">
+    <meta name="twitter:image" content="https://siliconpen.com/images/pathway-to-arduino/cover.webp">
+    
+    <!--#########################################################################################################################-->
+    
+    <!--Favicon-->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+    <!--Adsense-->
+    <script>
+    function loadAdsense() {
+        let s = document.createElement("script");
+        s.async = true;
+        s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3169103084290208";
+        s.setAttribute("crossorigin", "anonymous");
+        document.head.appendChild(s);
+    }
+
+    if (localStorage.getItem("sp_cookie_ok")) {
+        loadAdsense();
+    } else {
+        document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById("cookieAccept");
+        if (btn) btn.addEventListener("click", loadAdsense);
+        });
+    }
+    </script>
+
+    <!--Meta Data-->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--Google Analytics-->
+    <!--Google tag (gtag.js)-->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-22XHW1HR4J"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-22XHW1HR4J");
+    </script>
+
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="../styles.css" />
+    <!--#########################################################################################################################-->
+
+</head>
+
+<body>
+
+    <!--####################################################################################################################################-->
+    <!--Header-->
+    <div id="header"></div>
+
+    <main class="page-main">
+    <article class="container post-article">
+
+    <!--Cover image + overlay heading-->
+    <header class="post-hero-wrapper">
+    <!--Cover-->
+    <div class="post-hero">
+        <img
+        src="../images/pathway-to-arduino/cover.webp"
+        alt="Post cover"
+        class="post-hero-image"
+        />
+    </div>
+
+    <!--Title BELOW the cover-->
+    <h1 class="post-title-main">
+        Loops, Conditions & Decisions in Embedded Systems
+
+    <!-- Subtitle below title -->
+    <p class="post-subtitle-bar">
+        “How Arduino Uses Logic to Think, React, and Make Real Decisions”
+    </p>
+    </header>
+
+    <!-- Meta row: date + reading time -->
+    <div class="post-meta-bar">
+    <span class="post-date">Jan 13, 2026</span>
+    <span class="post-reading-time" id="reading-time"></span>
+    </div>
+    <div class="scroll-progress-bar">
+    <div class="scroll-progress-fill"></div>
+    </div>
+
+    <!-- Content box -->
+    <div class="post-layout">
+    <div id="post-left"></div>
+    <section class="post-content-shell">
+    <div class="post-main">
+    <div class="post-content">
+
+<!--#################################################################################################-->
+
+<h1>Chapter 14</h1>
+<p>So far, Arduino has been:</p>
+<ul>
+<li><p>reading inputs</p>
+</li>
+<li><p>changing outputs</p>
+</li>
+<li><p>following instructions</p>
+</li>
+</ul>
+<p>Now we make it <strong>decide.</strong></p>
+<p>This chapter is about how Arduino chooses what to do based on conditions — which is the foundation of all intelligent behavior in embedded systems.</p>
+<hr class="section-divider"/>
+
+<h1>🔁 Understanding the Loop</h1>
+<p>You already know this:</p>
+<pre><code>void loop() {
+  // code here
+}</code></pre>
+
+
+<p>But let’s say it clearly:</p>
+<p><code>loop()</code> runs continuously, thousands of times per second.</p>
+<p>Arduino doesn’t run code once and stop.<br>It <strong>checks conditions repeatedly</strong> and reacts.</p>
+<p>This is very different from normal computer programs.</p>
+<hr class="section-divider"/>
+
+<h1>❓ Conditions — Asking Questions</h1>
+<p>A <strong>condition</strong> is a question with a YES or NO answer.</p>
+<p>Example:</p>
+<pre><code>if (digitalRead(buttonPin) == LOW) {
+  // do something
+}
+</code></pre>
+<p>Arduino asks:</p>
+<p>“Is the button pressed right now?”</p>
+<p>If YES → run the code<br>If NO → skip it</p>
+<p>That’s decision-making.</p>
+<hr class="section-divider"/>
+
+<h1>🧠 The <code>if</code> Statement</h1>
+<p>Basic form:</p>
+<pre><code>if (condition) {
+  // runs if condition is true
+}
+</code></pre>
+
+<p>Example:</p>
+<pre><code>if (sensorValue > 500) {
+  digitalWrite(ledPin, HIGH);
+}
+</code></pre>
+
+<p>Meaning:</p>
+<p>“If the sensor value crosses a threshold, turn the LED ON.”</p>
+<hr class="section-divider"/>
+
+<h1>🔄 <code>else</code> — The Other Case</h1>
+<pre><code>if (condition) {
+  // do this
+} else {
+  // do that
+}
+</code></pre>
+
+<p>Example:</p>
+<pre><code>if (buttonState == LOW) {
+  digitalWrite(ledPin, HIGH);
+} else {
+  digitalWrite(ledPin, LOW);
+}
+</code></pre>
+
+<p>Now Arduino explicitly handles <strong>both situations.</strong></p>
+<hr class="section-divider"/>
+
+<h1>🔁 Multiple Conditions (<code>else if</code>)</h1>
+<p>Sometimes, two options aren’t enough.</p>
+<pre><code>if (value < 300) {
+  // low
+} else if (value < 700) {
+  // medium
+} else {
+  // high
+}
+</code></pre>
+
+<p>This is how you build:</p>
+<ul>
+<li><p>ranges</p>
+</li>
+<li><p>modes</p>
+</li>
+<li><p>states</p>
+</li>
+</ul>
+<p>Very common in sensor-based systems.</p>
+<hr class="section-divider"/>
+
+<h1>🔂 Loops Inside Code (<code>for</code> and <code>while</code>)</h1>
+<p><code>for</code> Loop — Repeating a Known Number of Times</p>
+<pre><code>for (int i = 0; i < 5; i++) {
+  blinkLED(9, 200);
+}
+</code></pre>
+
+<p>Used when:</p>
+<ul>
+<li><p>count is known</p>
+</li>
+<li><p>behavior is repetitive</p>
+</li>
+</ul>
+<p><code>while</code> Loop — Repeating Until a Condition Changes</p>
+<pre><code>while (digitalRead(buttonPin) == LOW) {
+  // keep doing something
+}
+</code></pre>
+
+<p>Be careful:</p>
+<ul>
+<li>if the condition never changes, Arduino gets stuck</li>
+</ul>
+<p>In embedded systems, <code>while</code> must be used very carefully.</p>
+<hr class="section-divider"/>
+
+<h1>⚠️ A Critical Embedded Rule</h1>
+<p>Never block the system unintentionally.</p>
+<p>Bad example:</p>
+<pre><code>while (true) {
+  // infinite loop
+}
+</code></pre>
+
+<p>Unless you really know what you’re doing, this freezes everything.</p>
+<p>This connects back to the delay vs millis() chapter.</p>
+<hr class="section-divider"/>
+
+<h1>🧪 Example: Button-Controlled LED</h1>
+<pre><code>if (digitalRead(buttonPin) == LOW) {
+  digitalWrite(ledPin, HIGH);
+} else {
+  digitalWrite(ledPin, LOW);
+}
+</code></pre>
+
+<p>Arduino:</p>
+<ul>
+<li><p>reads input</p>
+</li>
+<li><p>evaluates condition</p>
+</li>
+<li><p>decides output</p>
+</li>
+<li><p>repeats</p>
+</li>
+</ul>
+<p>This is the core loop of <strong>all control systems.</strong></p>
+<hr class="section-divider"/>
+
+<h1>🧰 Common Beginner Mistakes</h1>
+<ul>
+<li><p>Using = instead of ==</p>
+</li>
+<li><p>Forgetting braces {}</p>
+</li>
+<li><p>Writing deeply nested conditions</p>
+</li>
+<li><p>Blocking logic with long delays</p>
+</li>
+</ul>
+<p>Simple logic &gt; clever logic.</p>
+<hr class="section-divider"/>
+
+<h1>📌 What Comes Next</h1>
+<p>Now that Arduino can:</p>
+<ul>
+<li><p>read inputs</p>
+</li>
+<li><p>make decisions</p>
+</li>
+<li><p>execute logic</p>
+</li>
+</ul>
+<p>We need to make sure those inputs are <strong>stable</strong> by design.</p>
+<h3>👉 Next Chapter — Pull-up &amp; Pull-down Resistors (Internal vs External)</h3>
+
+
+<!--#################################################################################################-->
+        
+    <!--Newlettter and TOC-->
+    <div id="newsletter"></div>
+    </div>
+    </div>
+    </section>
+    <aside class="post-toc">
+    <div class="post-toc-title">On this page</div>
+    <nav id="post-toc-list"></nav>
+    </aside>
+    </div>
+        
+    <!-- Share + next posts -->
+    <section class="post-footer-extra">
+    <div id="share-row"></div>
+    <div class="post-related">
+    <h1>Read next</h1>
+    <div class="post-related-grid">
+        <!--CARD 1-->
+        <a href="variables-functions-and-clean-code-structure.html" class="post-related-card">
+        <div class="related-thumb">
+        <img src="../images/pathway-to-arduino/cover.webp" alt="Cover image">
+        </div>
+        <h3 class="related-title">Variables, Functions and Clean Code Structure</h3>
+        </a>
+        <!--CARD 2-->
+        <a href="../series/pathway-to-arduino.html" class="post-related-card">
+        <div class="related-thumb">
+        <img src="../images/pathway-to-arduino/cover.webp" alt="Cover image">
+        </div>
+        <h3 class="related-title">Pathway To Arduino: Full Series</h3>
+        </a>
+    </div>
+    </div>
+    </section>
+
+
+    <section id="comments"></section>
+    </article>
+    </main>
+
+    <div id="footer"></div>
+    <div id="scripts"></div>
+
+    <script src="../js/partials.js"></script>
+    <script src="../js/site.js"></script>
+
+    <script>
+    loadPartial("header", "../partials/header.html", () => {
+        initHeader();          // header elements now exist
+    });
+
+    loadPartial("footer", "../partials/footer.html");
+
+    loadPartial("newsletter", "../partials/newsletter.html", () => {
+        initNewsletter();
+    });
+
+    loadPartial("comments", "../partials/comments.html", () => {
+        initComments();
+    });
+
+    loadPartial("share-row", "../partials/share-row.html", () => {
+        initPost();
+    });
+    
+    loadPartial("post-left", "../partials/post-left.html");
+
+    document.addEventListener("DOMContentLoaded", () => {
+        initTOC();
+        initScrollProgress();
+        initCookie();
+        enableCodeCopy();
+    });
+    </script>
+
+</body>
+</html>

@@ -154,5 +154,14 @@
     "date": "2025-12-20",
     "series": "real-circuits",
     "order": 1
+  },
+  {
+    "slug": "posts/know-your-weapons.html",
+    "title": "Know Your Weapons: The Electronics You’ll Work With",
+    "subtitle": "A Practical Introduction to the Core Components You’ll Touch in Every Electronics Project",
+    "cover": "images/real-circuits/cover.png",
+    "date": "2025-12-24",
+    "series": "real-circuits",
+    "order": 2
   }
 ]

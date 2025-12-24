@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!--Title and Description-->
+    <title>Delay vs millis() in Arduino: Writing Non-Blocking Code the Right Way</title>
+    <meta name="description" content="Using delay() works for beginners, but it stops your Arduino from doing multiple tasks. This chapter explains why delay() becomes a bottleneck and how millis() helps you write smooth, non-blocking, multitasking-friendly code.">
+
+    <!-- Open Graph (Social Media Preview) -->
+    <meta property="og:title" content="Delays vs Non-Blocking Code: Why millis() Changes Everything in Arduino">
+    <meta property="og:description" content="A simple, practical explanation of why delay() freezes your Arduino and how millis() lets you run multiple tasks at once. Perfect for anyone learning real embedded programming.">
+    <meta property="og:image" content="https://siliconpen.com/images/pathway-to-arduino/cover.webp">
+    <meta property="og:url" content="https://siliconpen.com/posts/delays-vs-non-blocking-code-millis.html">
+    <meta property="og:type" content="article">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Delays vs Non-Blocking Code: Why millis() Changes Everything in Arduino">
+    <meta name="twitter:description" content="A simple, practical explanation of why delay() freezes your Arduino and how millis() lets you run multiple tasks at once. Perfect for anyone learning real embedded programming.">
+    <meta name="twitter:image" content="https://siliconpen.com/images/pathway-to-arduino/cover.webp">
+    
+    <!--#########################################################################################################################-->
+    
+    <!--Favicon-->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+    <!--Adsense-->
+    <script>
+    function loadAdsense() {
+        let s = document.createElement("script");
+        s.async = true;
+        s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3169103084290208";
+        s.setAttribute("crossorigin", "anonymous");
+        document.head.appendChild(s);
+    }
+
+    if (localStorage.getItem("sp_cookie_ok")) {
+        loadAdsense();
+    } else {
+        document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById("cookieAccept");
+        if (btn) btn.addEventListener("click", loadAdsense);
+        });
+    }
+    </script>
+
+    <!--Meta Data-->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--Google Analytics-->
+    <!--Google tag (gtag.js)-->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-22XHW1HR4J"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-22XHW1HR4J");
+    </script>
+
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="../styles.css" />
+    <!--#########################################################################################################################-->
+
+</head>
+
+<body>
+
+    <!--####################################################################################################################################-->
+    <!--Header-->
+    <div id="header"></div>
+
+    <main class="page-main">
+    <article class="container post-article">
+
+    <!--Cover image + overlay heading-->
+    <header class="post-hero-wrapper">
+    <!--Cover-->
+    <div class="post-hero">
+        <img
+        src="../images/pathway-to-arduino/cover.webp"
+        alt="Post cover"
+        class="post-hero-image"
+        />
+    </div>
+
+    <!--Title BELOW the cover-->
+    <h1 class="post-title-main">
+        Delays vs Non-Blocking Code millis()
+
+    <!-- Subtitle below title -->
+    <p class="post-subtitle-bar">
+        “Why delay() Freezes Your Arduino — and How millis() Frees It”
+    </p>
+    </header>
+
+    <!-- Meta row: date + reading time -->
+    <div class="post-meta-bar">
+    <span class="post-date">Jan 13, 2026</span>
+    <span class="post-reading-time" id="reading-time"></span>
+    </div>
+    <div class="scroll-progress-bar">
+    <div class="scroll-progress-fill"></div>
+    </div>
+
+    <!-- Content box -->
+    <div class="post-layout">
+    <div id="post-left"></div>
+    <section class="post-content-shell">
+    <div class="post-main">
+    <div class="post-content">
+
+<!--#################################################################################################-->
+
+<h1>Chapter 11</h1>
+<p>Up to now, we’ve used <code>delay()</code> everywhere.</p>
+<p>And that’s okay — for learning.</p>
+<p>But at some point, <code>delay()</code> stops being your friend.</p>
+<p>This chapter explains why, and introduces a better way to handle time on Arduino.</p>
+<hr class="section-divider"/>
+
+<h1>⏳ What <code>delay()</code> Actually Does</h1>
+<p>When you write:<br><code>delay(1000);</code></p>
+<p>Arduino does exactly this:</p>
+<p>Stop everything. Wait for 1 second. Then continue.</p>
+<p>During that delay:</p>
+<ul>
+<li><p>no buttons are read</p>
+</li>
+<li><p>no sensors are checked</p>
+</li>
+<li><p>no logic runs</p>
+</li>
+<li><p>nothing else happens</p>
+</li>
+</ul>
+<p>The microcontroller is literally doing nothing.</p>
+<hr class="section-divider"/>
+
+<h1>🧠 Why This Is a Problem</h1>
+<p>Imagine you want to:</p>
+<ul>
+<li><p>blink an LED</p>
+</li>
+<li><p>read a button</p>
+</li>
+<li><p>update a display</p>
+</li>
+</ul>
+<p>at the same time.</p>
+<p>With <code>delay()</code>:</p>
+<ul>
+<li><p>LED blocks button reading</p>
+</li>
+<li><p>button blocks sensor updates</p>
+</li>
+<li><p>everything waits on everything else</p>
+</li>
+</ul>
+<p>This creates <strong>unresponsive systems</strong>.</p>
+<hr class="section-divider"/>
+
+<h1>🧪 Simple Example of the Problem</h1>
+<pre><code>digitalWrite(LED_PIN, HIGH);
+delay(1000);
+digitalWrite(LED_PIN, LOW);
+delay(1000);
+</code></pre>
+<p>During those 2 seconds:</p>
+<ul>
+<li><p>a button press is ignored</p>
+</li>
+<li><p>a sensor change is missed</p>
+</li>
+</ul>
+<p>This is fine for demos, <strong>not for real systems</strong>.</p>
+<hr class="section-divider"/>
+
+<h1>🔢 What Is millis()?</h1>
+<p>Instead of waiting, we can ask Arduino:</p>
+<p>“Has enough time passed?”</p>
+<p>That’s what <code>millis()</code> does.</p>
+<h3><code>millis()</code> returns:</h3>
+<ul>
+<li><p>the number of milliseconds</p>
+</li>
+<li><p>since the Arduino started running</p>
+</li>
+</ul>
+<p>It keeps increasing:</p>
+<pre>0, 1, 2, 3, ...</pre>
+
+<p>And it never blocks your program.</p>
+<hr class="section-divider"/>
+
+<h1>🔁 The Core Idea (Very Important)</h1>
+<p>Instead of this:<br><code>delay(1000);</code></p>
+<h3>We do this:</h3>
+<ul>
+<li><p>remember the last time something happened</p>
+</li>
+<li><p>compare it to the current time</p>
+</li>
+<li><p>act only if enough time has passed</p>
+</li>
+</ul>
+<hr class="section-divider"/>
+
+<h1>🧩 Non-Blocking Blink Example</h1>
+<pre><code>const int ledPin = 13;
+unsigned long previousTime = 0;
+const long interval = 1000;
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  unsigned long currentTime = millis();
+
+  if (currentTime - previousTime >= interval) {
+    previousTime = currentTime;
+    digitalWrite(ledPin, !digitalRead(ledPin));
+  }
+}
+</code></pre>
+<p>This LED still blinks every second.</p>
+<p>But now:</p>
+<ul>
+<li><p>the loop keeps running</p>
+</li>
+<li><p>buttons can be read</p>
+</li>
+<li><p>sensors can be checked</p>
+</li>
+<li><p>multiple tasks can coexist</p>
+</li>
+</ul>
+<hr class="section-divider"/>
+
+<h1>🧠 Why This Works</h1>
+<p>You’re no longer <strong>pausing time</strong>.</p>
+<p>You’re:</p>
+<ul>
+<li><p>letting the program run freely</p>
+</li>
+<li><p>making decisions based on time differences</p>
+</li>
+</ul>
+<p>This is how <strong>real embedded systems</strong> work.</p>
+<hr class="section-divider"/>
+
+<h1>⚠️ Important Notes</h1>
+<ul>
+<li><p><code>millis()</code> uses <code>unsigned long</code></p>
+</li>
+<li><p>it overflows after ~49 days (we’ll handle that later)</p>
+</li>
+<li><p>this pattern scales to many tasks</p>
+</li>
+</ul>
+<p>Don’t worry if this feels harder than <code>delay()</code> — that’s normal.</p>
+<hr class="section-divider"/>
+
+<h1>🧰 Common Beginner Mistakes</h1>
+<ul>
+<li><p>Mixing <code>delay()</code> and <code>millis()</code> blindly</p>
+</li>
+<li><p>Forgetting to update previous time</p>
+</li>
+<li><p>Using <code>int</code> instead of <code>unsigned long</code></p>
+</li>
+<li><p>Overcomplicating the logic early</p>
+</li>
+</ul>
+<p>Master the <strong>idea</strong>, not the syntax.</p>
+<hr class="section-divider"/>
+
+<h1>📌 What Comes Next</h1>
+<p>Now that we can:</p>
+<ul>
+<li><p>control outputs</p>
+</li>
+<li><p>read inputs</p>
+</li>
+<li><p>handle time properly</p>
+</li>
+</ul>
+<p>We need a way to see what’s happening inside our code.</p>
+<h3>👉 Next Chapter — Serial Monitor: Your First Debug Tool</h3>
+
+
+<!--#################################################################################################-->
+        
+    <!--Newlettter and TOC-->
+    <div id="newsletter"></div>
+    </div>
+    </div>
+    </section>
+    <aside class="post-toc">
+    <div class="post-toc-title">On this page</div>
+    <nav id="post-toc-list"></nav>
+    </aside>
+    </div>
+        
+    <!-- Share + next posts -->
+    <section class="post-footer-extra">
+    <div id="share-row"></div>
+    <div class="post-related">
+    <h1>Read next</h1>
+    <div class="post-related-grid">
+        <!--CARD 1-->
+        <a href="understanding-PWM-and-LED-fading.html" class="post-related-card">
+        <div class="related-thumb">
+        <img src="../images/pathway-to-arduino/cover.webp" alt="Cover image">
+        </div>
+        <h3 class="related-title">Understanding PWM and LED Fading</h3>
+        </a>
+        <!--CARD 2-->
+        <a href="../series/pathway-to-arduino.html" class="post-related-card">
+        <div class="related-thumb">
+        <img src="../images/pathway-to-arduino/cover.webp" alt="Cover image">
+        </div>
+        <h3 class="related-title">Pathway To Arduino: Full Series</h3>
+        </a>
+    </div>
+    </div>
+    </section>
+
+
+    <section id="comments"></section>
+    </article>
+    </main>
+
+    <div id="footer"></div>
+    <div id="scripts"></div>
+
+    <script src="../js/partials.js"></script>
+    <script src="../js/site.js"></script>
+
+    <script>
+    loadPartial("header", "../partials/header.html", () => {
+        initHeader();          // header elements now exist
+    });
+
+    loadPartial("footer", "../partials/footer.html");
+
+    loadPartial("newsletter", "../partials/newsletter.html", () => {
+        initNewsletter();
+    });
+
+    loadPartial("comments", "../partials/comments.html", () => {
+        initComments();
+    });
+
+    loadPartial("share-row", "../partials/share-row.html", () => {
+        initPost();
+    });
+    
+    loadPartial("post-left", "../partials/post-left.html");
+
+    document.addEventListener("DOMContentLoaded", () => {
+        initTOC();
+        initScrollProgress();
+        initCookie();
+        enableCodeCopy();
+    });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!--Title and Description-->
+    <title>Understanding PWM in Arduino: How LED Fading and Speed Control Actually Work</title>
+    <meta name="description" content="If Arduino can only output HIGH or LOW, how does it control brightness or motor speed? This chapter explains Pulse Width Modulation (PWM) in simple terms—how it fakes analog output and lets you fade LEDs or control power smoothly.">
+
+    <!-- Open Graph (Social Media Preview) -->
+    <meta property="og:title" content="PWM Explained: How Arduino Controls Brightness & Speed Using Digital Pins">
+    <meta property="og:description" content="A beginner-friendly breakdown of Pulse Width Modulation. Learn how digital pins mimic analog output, enabling LED fading, motor control, and smooth power adjustments.">
+    <meta property="og:image" content="https://siliconpen.com/images/pathway-to-arduino/cover.webp">
+    <meta property="og:url" content="https://siliconpen.com/posts/understanding-PWM-and-LED-fading.html">
+    <meta property="og:type" content="article">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PWM Explained: How Arduino Controls Brightness & Speed Using Digital Pins">
+    <meta name="twitter:description" content="A beginner-friendly breakdown of Pulse Width Modulation. Learn how digital pins mimic analog output, enabling LED fading, motor control, and smooth power adjustments.">
+    <meta name="twitter:image" content="https://siliconpen.com/images/pathway-to-arduino/cover.webp">
+    
+    <!--#########################################################################################################################-->
+    
+    <!--Favicon-->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+    <!--Adsense-->
+    <script>
+    function loadAdsense() {
+        let s = document.createElement("script");
+        s.async = true;
+        s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3169103084290208";
+        s.setAttribute("crossorigin", "anonymous");
+        document.head.appendChild(s);
+    }
+
+    if (localStorage.getItem("sp_cookie_ok")) {
+        loadAdsense();
+    } else {
+        document.addEventListener("DOMContentLoaded", () => {
+        const btn = document.getElementById("cookieAccept");
+        if (btn) btn.addEventListener("click", loadAdsense);
+        });
+    }
+    </script>
+
+    <!--Meta Data-->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!--Google Analytics-->
+    <!--Google tag (gtag.js)-->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-22XHW1HR4J"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-22XHW1HR4J");
+    </script>
+
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="../styles.css" />
+    <!--#########################################################################################################################-->
+
+</head>
+
+<body>
+
+    <!--####################################################################################################################################-->
+    <!--Header-->
+    <div id="header"></div>
+
+    <main class="page-main">
+    <article class="container post-article">
+
+    <!--Cover image + overlay heading-->
+    <header class="post-hero-wrapper">
+    <!--Cover-->
+    <div class="post-hero">
+        <img
+        src="../images/pathway-to-arduino/cover.webp"
+        alt="Post cover"
+        class="post-hero-image"
+        />
+    </div>
+
+    <!--Title BELOW the cover-->
+    <h1 class="post-title-main">
+        Understanding PWM & LED Fading
+    </h1>
+
+    <!-- Subtitle below title -->
+    <p class="post-subtitle-bar">
+        “How Arduino Fakes Analog Output Using High-Speed Digital Switching”
+    </p>
+    </header>
+
+    <!-- Meta row: date + reading time -->
+    <div class="post-meta-bar">
+    <span class="post-date">Jan 13, 2026</span>
+    <span class="post-reading-time" id="reading-time"></span>
+    </div>
+    <div class="scroll-progress-bar">
+    <div class="scroll-progress-fill"></div>
+    </div>
+
+    <!-- Content box -->
+    <div class="post-layout">
+    <div id="post-left"></div>
+    <section class="post-content-shell">
+    <div class="post-main">
+    <div class="post-content">
+
+<!--#################################################################################################-->
+
+<h1>Chapter 10</h1>
+<p>In the previous chapter, you used a potentiometer to generate smooth values between 0 and 1023, and then mapped them into useful ranges.</p>
+<p>Now comes a natural question:</p>
+<p>If Arduino outputs only HIGH or LOW, how does it control brightness or speed?</p>
+<p>This chapter answers that with PWM.</p>
+<hr class="section-divider"/>
+
+<h1>💡 The Problem PWM Solves</h1>
+<p>Digital output pins can only do this:</p>
+<ul>
+<li><p>HIGH → 5V</p>
+</li>
+<li><p>LOW → 0V</p>
+</li>
+</ul>
+<p>But LEDs don’t just need ON or OFF.<br>They can be <strong>dim, bright,</strong> or anything in between.</p>
+<p>So how do we fake an “analog output” using a digital pin?</p>
+<hr class="section-divider"/>
+
+<h1>⚡ What Is PWM?</h1>
+<p>PWM stands for <strong>Pulse Width Modulation</strong>.</p>
+<p>Instead of outputting a steady voltage, Arduino:</p>
+<ul>
+<li><p>switches the pin <strong>ON and OFF</strong> very fast</p>
+</li>
+<li><p>controls <strong>how long</strong> it stays ON vs OFF</p>
+</li>
+</ul>
+<p>This ratio is called the <strong>duty cycle</strong>.</p>
+<hr class="section-divider"/>
+
+<h1>🧠 Think of PWM Like This</h1>
+<p>Imagine flipping a switch very fast:</p>
+<ul>
+<li><p>ON for long time → looks bright</p>
+</li>
+<li><p>ON for short time → looks dim</p>
+</li>
+</ul>
+<p>Your eyes (and motors) don’t see the rapid switching —<br>they see the <strong>average effect</strong>.</p>
+<p>That’s PWM.</p>
+<hr class="section-divider"/>
+
+<h1>📊 Duty Cycle Explained</h1>
+<ul>
+<li><p>0% duty cycle → always OFF</p>
+</li>
+<li><p>50% duty cycle → ON half the time</p>
+</li>
+<li><p>100% duty cycle → always ON</p>
+</li>
+</ul>
+<p>Arduino expresses this using numbers:</p>
+<ul>
+<li>0   → 0%   (OFF)</li>
+<li>128 → ~50%</li>
+<li>255 → 100% (FULL ON)</li>
+</ul>
+<hr class="section-divider"/>
+
+<h1>🔌 PWM Pins on Arduino Uno</h1>
+<p>Not all pins support PWM.</p>
+<p>On Arduino Uno, PWM pins are marked with <code>~</code>:</p>
+<pre>3, 5, 6, 9, 10, 11</pre>
+
+<p>Only these pins can use <code>analogWrite()</code>.</p>
+<hr class="section-divider"/>
+
+<h1>💻 Basic PWM Example (LED Fade)</h1>
+<pre><code>void setup() {
+  pinMode(9, OUTPUT);
+}
+
+void loop() {
+  analogWrite(9, 128); // ~50% brightness
+}
+</code></pre>
+<p>Even though the function is called <code>analogWrite()</code>,<br>it is still <strong>digital PWM</strong>, not true analog voltage.</p>
+<hr class="section-divider"/>
+
+<h1>🔄 Fading an LED Smoothly</h1>
+<pre><code>void setup() {
+  pinMode(9, OUTPUT);
+}
+
+void loop() {
+  for (int i = 0; i <= 255; i++) {
+    analogWrite(9, i);
+    delay(10);
+  }
+
+  for (int i = 255; i >= 0; i--) {
+    analogWrite(9, i);
+    delay(10);
+  }
+}
+</code></pre>
+<p>This gradually changes the duty cycle, making the LED fade in and out.</p>
+<hr class="section-divider"/>
+
+<h1>🔁 Potentiometer → PWM Control</h1>
+<p>Now combine what you learned earlier:</p>
+<pre><code>void setup() {
+  pinMode(9, OUTPUT);
+}
+
+void loop() {
+  int potValue = analogRead(A0);
+  int pwmValue = map(potValue, 0, 1023, 0, 255);
+  analogWrite(9, pwmValue);
+}
+</code></pre>
+<p>Turning the potentiometer now directly controls LED brightness.</p>
+<hr class="section-divider"/>
+
+<h1>⚠️ Important PWM Facts</h1>
+<ul>
+<li><p>PWM does not change voltage level</p>
+</li>
+<li><p>It changes time ON vs OFF</p>
+</li>
+<li><p>Average voltage is what devices respond to</p>
+</li>
+<li><p>Frequency is fixed by Arduino timers (for now)</p>
+</li>
+</ul>
+<p>Later, we’ll talk about PWM frequency, noise, and motors.</p>
+<hr class="section-divider"/>
+
+<h1>🧰 Common Beginner Mistakes</h1>
+<ul>
+<li><p>Using <code>analogWrite()</code> on non-PWM pins</p>
+</li>
+<li><p>Expecting smooth fade on wrong pin</p>
+</li>
+<li><p>Forgetting the resistor for LED</p>
+</li>
+<li><p>Thinking PWM is “real analog output”</p>
+</li>
+</ul>
+<p>PWM is a clever illusion, not true analog.</p>
+<hr class="section-divider"/>
+
+<h1>📌 What Comes Next</h1>
+<p>You’ve now completed the core I/O fundamentals:</p>
+<ul>
+<li><p>Digital Output</p>
+</li>
+<li><p>Digital Input</p>
+</li>
+<li><p>Analog Input</p>
+</li>
+<li><p>PWM Output</p>
+</li>
+</ul>
+<p>Next, we fix a problem you’ve already seen but maybe ignored:</p>
+<h3>👉 Delays vs Non-Blocking Code (millis())</h3>
+
+
+<!--#################################################################################################-->
+        
+    <!--Newlettter and TOC-->
+    <div id="newsletter"></div>
+    </div>
+    </div>
+    </section>
+    <aside class="post-toc">
+    <div class="post-toc-title">On this page</div>
+    <nav id="post-toc-list"></nav>
+    </aside>
+    </div>
+        
+    <!-- Share + next posts -->
+    <section class="post-footer-extra">
+    <div id="share-row"></div>
+    <div class="post-related">
+    <h1>Read next</h1>
+    <div class="post-related-grid">
+        <!--CARD 1-->
+        <a href="using-potentiometers-and-mapping-values.html" class="post-related-card">
+        <div class="related-thumb">
+        <img src="../images/pathway-to-arduino/cover.webp" alt="Cover image">
+        </div>
+        <h3 class="related-title">Using Potentiometer and Mapping Values</h3>
+        </a>
+        <!--CARD 2-->
+        <a href="../series/pathway-to-arduino.html" class="post-related-card">
+        <div class="related-thumb">
+        <img src="../images/pathway-to-arduino/cover.webp" alt="Cover image">
+        </div>
+        <h3 class="related-title">Pathway To Arduino: Full Series</h3>
+        </a>
+    </div>
+    </div>
+    </section>
+
+
+    <section id="comments"></section>
+    </article>
+    </main>
+
+    <div id="footer"></div>
+    <div id="scripts"></div>
+
+    <script src="../js/partials.js"></script>
+    <script src="../js/site.js"></script>
+
+    <script>
+    loadPartial("header", "../partials/header.html", () => {
+        initHeader();          // header elements now exist
+    });
+
+    loadPartial("footer", "../partials/footer.html");
+
+    loadPartial("newsletter", "../partials/newsletter.html", () => {
+        initNewsletter();
+    });
+
+    loadPartial("comments", "../partials/comments.html", () => {
+        initComments();
+    });
+
+    loadPartial("share-row", "../partials/share-row.html", () => {
+        initPost();
+    });
+    
+    loadPartial("post-left", "../partials/post-left.html");
+
+    document.addEventListener("DOMContentLoaded", () => {
+        initTOC();
+        initScrollProgress();
+        initCookie();
+        enableCodeCopy();
+    });
+    </script>
+
+</body>
+</html>
