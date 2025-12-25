@@ -144,6 +144,7 @@
 <p>There is <strong>no state holding</strong>.</p>
 <h2>Types of Push Buttons</h2>
 <h3>a) NO — Normally Open</h3>
+<img src="../images/real-circuits/switches/1.png" alt="">
 <ul>
 <li><p>Circuit is open by default</p>
 </li>
@@ -151,22 +152,25 @@
 </li>
 </ul>
 <h3>b) NC — Normally Closed</h3>
+<img src="../images/real-circuits/switches/2.png" alt="">
 <ul>
 <li><p>Circuit is closed by default</p>
 </li>
 <li><p>Circuit opens only while the button is pressed</p>
 </li>
 </ul>
-<h2>Inside a Push Button</h2>
-<p>(Insert internal diagram/image here)</p>
+<h2>Inside a Push Button (Super Simplified😅)</h2>
+<img src="../images/real-circuits/switches/3.png" alt="">
+<img src="../images/real-circuits/switches/16.png" alt="">
 <h3>Inside a push button:</h3>
 <ul>
-<li><p>A small metal contact bridges two terminals when pressed</p>
+<li><p>A small metal contact bridges/separates two terminals when pressed</p>
 </li>
-<li><p>When released, the contact separates again</p>
+<li><p>When released, the contact separates/connects again</p>
 </li>
 </ul>
 <p><sp-warning>⚠️ Important practical detail</sp-warning></p>
+<img src="../images/real-circuits/switches/4.png" alt="">
 <h3>In common 4-pin push buttons:</h3>
 <ul>
 <li><p>The two pins on each side are internally connected</p>
@@ -178,7 +182,24 @@
 <p><sp-q>Always use <strong>diagonally opposite</strong> pins when wiring a push button.
 <br>This avoids confusion and wiring mistakes.</sp-q></p>
 <h2>Practical Circuit — Push Button + LED</h2>
-<p>(Insert: components list)<br>(Insert: circuit diagram)<br>(Insert: completed circuit photo)<br>(Insert: demo video)</p>
+<p>Component List: </p>
+<img src="../images/real-circuits/switches/5.jpeg" alt="">
+<p>Circuit Diagram: </p>
+<img src="../images/real-circuits/switches/6.png" alt="">
+<p>Completed Circuit: </p>
+<img src="../images/real-circuits/switches/7.jpeg" alt="">
+<p>Video Link: </p>
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/5pkq0bPZbTw"
+    title="Live demo: Push Button Switch Test"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+<p class="video-caption">
+  Push Button Switch Test Demo
+</p>
 <p>This lets you see current flow only while the button is pressed.</p>
 <h2>Where Push Buttons Are Used</h2>
 <ul>
@@ -198,8 +219,8 @@
 <p>After momentary switches, we need switches that can <strong>hold their state</strong> even after the user lets go.</p>
 <p>This is where <strong>toggle switches</strong> come in.</p>
 <p>A toggle switch uses a <strong>mechanical latching mechanism</strong> that stays in position until changed again</p>
-<h2>Inside a Toggle Switch</h2>
-<p>(Insert internal diagram/image here)</p>
+<h2>Inside a Toggle Switch (Super Simplified😅)</h2>
+<img src="../images/real-circuits/switches/8.png" alt="">
 <h3>Internally:</h3>
 <ul>
 <li><p>A moving metal contact switches between two different plates</p>
@@ -215,7 +236,25 @@
 </li>
 </ul>
 <h2>Practical Circuit — Toggle Switch + LED</h2>
-<p>(Insert: components list)<br>(Insert: circuit diagram)<br>(Insert: completed circuit photo)<br>(Insert: demo video)</p>
+<p>Component List: </p>
+<img src="../images/real-circuits/switches/9.jpeg" alt="">
+<img src="../images/real-circuits/switches/10.jpeg" alt="">
+<p>Circuit Diagram: </p>
+<img src="../images/real-circuits/switches/11.png" alt="">
+<p>Completed Circuit: </p>
+<img src="../images/real-circuits/switches/12.jpeg" alt="">
+<p>Video Link: </p>
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/JHGH36uPBlM"
+    title="Live demo: Toggle Switch Test"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+<p class="video-caption">
+  Toggle Switch Test Demo
+</p>
 <h2>Making a Simple ON–OFF Circuit</h2>
 <p>If we remove the second circuit:</p>
 <ul>
@@ -237,7 +276,7 @@
 <li><p>Commonly used on modules and PCBs</p>
 </li>
 </ul>
-<p>(Insert internal mechanism image here)</p>
+<img src="../images/real-circuits/switches/13.png" alt="">
 <h2>Why Slide Switches Are Sometimes Better</h2>
 <h3>With toggle switches:</h3>
 <ul>
@@ -248,7 +287,24 @@
 </ul>
 <p><sp-fact>Slide switches usually avoid this problem and provide <strong>cleaner transitions</strong>.</sp-fact></p>
 <h2>Practical Circuit — Slide Switch + LED</h2>
-<p>(Insert: components list)<br>(Insert: circuit diagram)<br>(Insert: completed circuit photo)<br>(Insert: demo video)</p>
+<p>Component List: </p>
+<p>Use the same components as toggle switch, <br>just replace the toggle swtich with slide switch. And <br>we need only <ul><li>1 LED</li> <li>and 1 resistor</li></ul></p>
+<p>Circuit Diagram: </p>
+<img src="../images/real-circuits/switches/14.png" alt="">
+<p>Completed Circuit: </p>
+<img src="../images/real-circuits/switches/15.jpeg" alt="">
+<p>Video Link: </p>
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/ClgjuZKZp10"
+    title="Live demo: Slide Switch Test"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+<p class="video-caption">
+  Slide Switch Test
+</p>
 <hr class="section-divider"/>
 
 <h1>Quick Fact</h1>
@@ -289,7 +345,7 @@
 <h1>🔗 Switches + Microcontrollers</h1>
 <p>Now that you understand what a switch physically does,<br>we can let a microcontroller <strong>read</strong> that behavior.</p>
 <p>I’ll link a dedicated article on <strong>digital inputs using a button here</strong>,<br>where we handle the code side properly.</p>
-<p>(Insert Arduino article link when ready)</p>
+
 <hr class="section-divider"/>
 
 <h1>❌ Common Mistakes (Short but Real)</h1>
