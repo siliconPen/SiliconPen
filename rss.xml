@@ -160,5 +160,13 @@
       <description>A practical introduction to the core components of electronics. No heavy theory—just clear explanations to help you recognize, understand, and work confidently with the building blocks of real circuits.</description>
     </item>
 
+    <item>
+      <title>How Switches Really Work: A Simple, Practical Guide to Real-World Switching</title>
+      <link>https://siliconpen.com/posts/switches.html</link>
+      <guid>https://siliconpen.com/posts/switches.html</guid>
+      <pubDate>Sun, 28 Dec 2025 12:00:00 +0530</pubDate>
+      <description>Understand switches the right way—by seeing how they feel, behave, and connect in real circuits. No theory overload. Just a clear, practical explanation of what a switch actually is and how it controls current in your projects.</description>
+    </item>
+
   </channel>
 </rss>

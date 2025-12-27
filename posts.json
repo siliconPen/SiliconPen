@@ -163,5 +163,14 @@
     "date": "2025-12-24",
     "series": "real-circuits",
     "order": 2
+  },
+  {
+    "slug": "posts/switches.html",
+    "title": "Switches",
+    "subtitle": "A Hands-On Look at How Switches Behave in Real Circuits",
+    "cover": "images/real-circuits/cover.png",
+    "date": "2025-12-28",
+    "series": "real-circuits",
+    "order": 3
   }
 ]

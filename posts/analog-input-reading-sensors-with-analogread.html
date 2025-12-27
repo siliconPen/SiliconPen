@@ -170,6 +170,7 @@
 <h1>🔌 Analog Pins on Arduino</h1>
 <p>On the Arduino Uno, analog input pins are labeled:</p>
 <blockquote>A0, A1, A2, A3, A4, A5</blockquote>
+<img src="../images/pathway-to-arduino/analog-input-reading-sensors-with-analogread/1.png" alt="">
 
 <p>These pins are connected to an internal circuit called the <strong>ADC</strong><br>(<em>Analog-to-Digital Converter</em>).</p>
 <hr class="section-divider"/>
@@ -215,13 +216,14 @@
 <p>A potentiometer is the easiest analog sensor to understand.</p>
 <p>It is a <em><strong>variable voltage divider</strong></em>.<br>Check this article to learn more about <a href="potentiometer.html">potentiometer</a>.</p>
 <h3>Now,</h3>
+<img src="../images/pathway-to-arduino/analog-input-reading-sensors-with-analogread/2.png" alt="">
 <p>Connect the three pins of the potentiometer in the given way!</p>
 <blockquote><br>
 One end → 5V<br>  
 Other end → GND<br>  
 Middle pin → A0
 </blockquote>
-
+<img src="../images/pathway-to-arduino/analog-input-reading-sensors-with-analogread/3.jpeg" alt="">
 <p>Once done, upload the code given below to Arduino.</p>
 <h3>Code:</h3>
 <pre><code>
@@ -238,7 +240,29 @@ void loop() {
 
 <p>Paste and hit <strong>Upload!</strong><br>Open the serial monitor on the top right corner.</p>
 <p>Turn the knob and watch the numbers change.</p>
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/GH0lQ8gcdgc"
+    title="Live demo: Arduino and Potentiometer"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+<p class="video-caption">
+  Live demo of Arduino and Potentiometer.
+</p>
 <p><sp-answer>This is analog input in its purest form.</sp-answer></p>
+<br>
+<sp-lab
+  title="Arduino Potentiometer Input"
+  subtitle="Interactive simulation built in Tinkercad"
+  link="https://www.tinkercad.com/things/28BDNczwmpV-reading-potentiometer-using-arduino"
+  button="Open Simulation in Tinkercad"
+  image="../images/pathway-to-arduino/analog-input-reading-sensors-with-analogread/2.png"
+>
+  Try rotating the potentiometer and observe how the analog value
+  changes in the Serial Monitor.
+</sp-lab>
 <br>
 <h3>Why didn&#39;t we use <code>pinMode()</code> here?</h3>
 <p><sp-q>You might be wondering why we didn’t explicitly set pin <strong>A0</strong> as INPUT using <code>pinMode()</code>.</sp-q></p>
@@ -346,6 +370,7 @@ void loop() {
 
     <script src="../js/partials.js"></script>
     <script src="../js/site.js"></script>
+    <script src="../js/custom-elements.js"></script>
 
     <script>
     loadPartial("header", "../partials/header.html", () => {
