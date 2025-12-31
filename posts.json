@@ -172,5 +172,21 @@
     "date": "2025-12-28",
     "series": "real-circuits",
     "order": 3
+  },
+  {
+    "slug": "posts/newyear26.html",
+    "title": "From Confusion to Curiosity — One Year of SiliconPen",
+    "subtitle": "Learning didn’t start with answers — it started with taking the steps!",
+    "cover": "images/cover.webp",
+    "date": "2026-01-01"
+  },
+  {
+    "slug": "posts/using-digital-inputs-in-arduino.html",
+    "title": "Using Digital Inputs In Arduino",
+    "subtitle": "How Arduino Listens to the World Through Buttons, Switches, and Digital Input Signals",
+    "cover": "images/pathway-to-arduino/cover.webp",
+    "date": "2026-01-01",
+    "series": "pathway-to-arduino",
+    "order": 6
   }
 ]

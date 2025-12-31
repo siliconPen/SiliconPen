@@ -1,3 +1,5 @@
+console.log("site.js loaded");
+
 function initHeader() {
   const navToggle = document.querySelector(".nav-toggle");
   const navPill = document.querySelector(".nav-pill");
@@ -157,6 +159,9 @@ function initCookie() {
     banner.style.display = "none";
   };
 }
+function initNewsletter() {
+  // placeholder
+}
 function initComments() {
   const container = document.getElementById("giscus_thread");
   if (!container) return;
@@ -207,3 +212,4 @@ function enableCodeCopy() {
     pre.appendChild(btn);
   });
 }
+

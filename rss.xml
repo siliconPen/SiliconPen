@@ -168,5 +168,21 @@
       <description>Understand switches the right way—by seeing how they feel, behave, and connect in real circuits. No theory overload. Just a clear, practical explanation of what a switch actually is and how it controls current in your projects.</description>
     </item>
 
+    <item>
+      <title>From Confusion to Curiosity: One Year of Learning Electronics with SiliconPen</title>
+      <link>https://siliconpen.com/posts/newyear26.html</link>
+      <guid>https://siliconpen.com/posts/newyear26.html</guid>
+      <pubDate>Thr, 01 Jan 2026 12:00:00 +0530</pubDate>
+      <description>SiliconPen began with confusion—not clarity. This New Year reflection looks back at one year of questioning, unlearning, and rebuilding understanding in electronics, moving from memorized formulas to real curiosity and intuition.</description>
+    </item>
+
+    <item>
+      <title>Using Digital Inputs in Arduino: Understanding Buttons and Switches</title>
+      <guid>https://siliconpen.com/posts/using-digital-inputs-in-arduino.html</guid>
+      <link>https://siliconpen.com/posts/using-digital-inputs-in-arduino.html</link>
+      <pubDate>Thr, 01 Jan 2026 12:00:00 +0530</pubDate>
+      <description>Learn how digital inputs work in Arduino using buttons and switches. Understand how the board listens to external signals, reads HIGH/LOW states, and reacts to real-world interactions. Perfect for beginners building interactive projects.</description>
+    </item>    
+
   </channel>
 </rss>
