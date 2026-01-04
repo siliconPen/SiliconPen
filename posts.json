@@ -188,5 +188,14 @@
     "date": "2026-01-01",
     "series": "pathway-to-arduino",
     "order": 6
+  },
+  {
+    "slug": "posts/debouncing-why-buttons-misbehave.html",
+    "title": "Debouncing: Why Buttons Misbehave",
+    "subtitle": "Understanding Switch Bounce and How Arduino Handles Noisy Button Presses",
+    "cover": "images/pathway-to-arduino/cover.webp",
+    "date": "2026-01-05",
+    "series": "pathway-to-arduino",
+    "order": 7
   }
 ]

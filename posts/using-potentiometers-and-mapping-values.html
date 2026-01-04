@@ -167,10 +167,12 @@
 <li>Middle pin  → A0</li>
 </ul>
 <p>That’s it.<br>No extra components required.</p>
-<p>I have an full tutorial on potentiometer, check it out to know more!</p>
+<p>I have an full tutorial on <a href="potentiometer.html">potentiometer</a>, check it out to know more!</p>
 <hr class="section-divider"/>
 
 <h1>💻 Reading the Potentiometer</h1>
+<p>We have done this in our <a href="analog-input-reading-sensors-with-analogread.html#hardware-time-reading-a-potentiometer">previous chapter.</a></p>
+<img src="../images/pathway-to-arduino/using-potentiometers-and-mapping-values/2.png" alt="">
 <pre><code>void setup() {
   Serial.begin(9600);
 }
@@ -188,6 +190,23 @@ void loop() {
 <li>0 (near GND)</li>
 <li>1023 (near 5V)</li>
 </ul>
+<sp-lab
+  title="Arduino Potentiometer Input"
+  subtitle="Interactive simulation built in Tinkercad"
+  link="https://www.tinkercad.com/things/28BDNczwmpV-reading-potentiometer-using-arduino"
+  button="Open Simulation in Tinkercad"
+  image="../images/pathway-to-arduino/analog-input-reading-sensors-with-analogread/2.png"
+>
+  Try rotating the potentiometer and observe how the analog value
+  changes in the Serial Monitor.
+</sp-lab>
+<br>
+<sp-video
+  src="https://www.youtube.com/embed/GH0lQ8gcdgc"
+  title="Live demo: Arduino and Potentiometer"
+  caption="Live demo of Arduino and Potentiometer.">
+</sp-video>
+<br>
 <hr class="section-divider"/>
 
 <h1>🧠 What You Should Notice</h1>
@@ -199,11 +218,11 @@ void loop() {
 <li><p>Fast turns → fast changes</p>
 </li>
 </ul>
-<p>This is analog control in its pure form.</p>
+<sp-answer>This is analog control in its pure form.</sp-answer>
 <hr class="section-divider"/>
 
 <h1>🔄 Why Mapping Is Needed</h1>
-<h3>The problem:</h3>
+<h2>The problem:</h2>
 <ul>
 <li><code>analogRead()</code> → 0 to 1023</li>
 </ul>
@@ -221,7 +240,7 @@ void loop() {
 <hr class="section-divider"/>
 
 <h1>🔢 The <code>map()</code> Function</h1>
-<h3>Arduino provides a helper function:</h3>
+<h2>Arduino provides a helper function:</h2>
 <p><code>map(value, fromLow, fromHigh, toLow, toHigh)</code></p>
 <h3>Example:</h3>
 <p><code>int mappedValue = map(potValue, 0, 1023, 0, 255);</code></p>
@@ -229,6 +248,7 @@ void loop() {
 <hr class="section-divider"/>
 
 <h1>🧪 Hardware Time: Potentiometer → Serial Output</h1>
+<p>Same circuit, change the code to this!</p>
 <pre><code>void setup() {
   Serial.begin(9600);
 }
@@ -253,6 +273,43 @@ void loop() {
 <li><p>what Arduino uses</p>
 </li>
 </ul>
+<p>Now you can see how the original value is efficiently mapped into our specified range.</p>
+<hr class="section-divider"/>
+<h1>🎯Let's Recall!!</h1>
+<sp-quiz title="Arduino Basics">
+  <sp-q>
+    <q>What happens if a digital input pin is left floating?</q>
+    <o correct>It can randomly read HIGH or LOW</o>
+    <o>It always reads LOW</o>
+    <o>It becomes OUTPUT</o>
+  </sp-q>
+
+  <sp-q>
+    <q>Why do we use pull-up resistors?</q>
+    <o>To increase current</o>
+    <o correct>To prevent floating inputs</o>
+    <o>To protect the microcontroller</o>
+  </sp-q>
+
+  <sp-q>
+    <q>Which function is used to read analog inputs?</q>
+    <o>serial.Print</o>
+    <o correct>analogRead</o>
+    <o>analogReader</o>
+  </sp-q>
+  </sp-quiz>
+
+  <sp-reveal title="Quiz Answers!">
+  1. It can randomly read HIGH or LOW<br>
+  2. To prevent floating inputs<br>
+  3. analogRead
+
+  <p>Check these if you got them wrong: </p>
+  <ul>
+  <li><a href="using-digital-inputs-in-arduino.html#the-floating-pin-problem">Floating Pin Concepts</a></li>
+  <li><a href="analog-input-reading-sensors-with-analogread.html">Analog Inputs</a></li>
+  </ul>
+  </sp-reveal>
 <hr class="section-divider"/>
 
 <h1>⚠️ Important Notes About <code>map()</code></h1>
@@ -340,6 +397,7 @@ void loop() {
 
     <script src="../js/partials.js"></script>
     <script src="../js/site.js"></script>
+    <script src="../js/custom-elements.js"></script>
 
     <script>
     loadPartial("header", "../partials/header.html", () => {

@@ -125,5 +125,9 @@
     <loc>https://siliconpen.com/posts/using-digital-inputs-in-arduino.html</loc>
   </url>
 
+  <url>
+    <loc>https://siliconpen.com/posts/debouncing-why-buttons-misbehave.html</loc>
+  </url>
+
 
 </urlset>

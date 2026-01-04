@@ -184,5 +184,13 @@
       <description>Learn how digital inputs work in Arduino using buttons and switches. Understand how the board listens to external signals, reads HIGH/LOW states, and reacts to real-world interactions. Perfect for beginners building interactive projects.</description>
     </item>    
 
+    <item>
+      <title>Debouncing in Arduino: Why Buttons Bounce and How to Fix It</title>
+      <guid>https://siliconpen.com/posts/debouncing-why-buttons-misbehave.html</guid>
+      <link>https://siliconpen.com/posts/debouncing-why-buttons-misbehave.html</link>
+      <pubDate>Mon, 05 Jan 2026 12:00:00 +0530</pubDate>
+      <description>Learn why a simple button press can cause multiple signals in Arduino. This chapter explains the physics behind switch bounce, how it affects digital inputs, and the practical debouncing techniques used in real electronics.</description>
+    </item>   
+
   </channel>
 </rss>
