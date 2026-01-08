@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <script>
+  function loadAdsense() {
+    let s = document.createElement("script");
+    s.async = true;
+    s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3169103084290208";
+    s.setAttribute("crossorigin", "anonymous");
+    document.head.appendChild(s);
+  }
+
+  if (localStorage.getItem("sp_cookie_ok")) {
+    loadAdsense();
+  } else {
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.getElementById("cookieAccept");
+      if (btn) btn.addEventListener("click", loadAdsense);
+    });
+  }
+</script>
+    <meta charset="UTF-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-22XHW1HR4J"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-22XHW1HR4J");
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="../index.html" class="brand">
+          <img src="../logo.png" alt="Silicon Pen logo" class="brand-logo" />
+          <span class="brand-name">Silicon Pen</span>
+        </a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+
+        <nav class="nav-pill">
+          <a href="../index.html" class="nav-link">Home</a>
+          <a href="../about.html" class="nav-link">About</a>
+          <a href="../articles.html" class="nav-link">All Articles</a>
+          <a href="../newletter.html" class="nav-link">Newsletter</a>
+          <a href="../contacts.html" class="nav-link">Contacts</a>
+
+          <div class="nav-dropdown">
+            <button class="nav-link dropdown-toggle" type="button">
+              Explore ▾
+            </button>
+            <div class="dropdown-menu">
+              <a href="../references.html">References</a>
+              <a href="../series.html">Series</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <h1 id="tag-title"></h1>
+<div id="archive-list"></div>
+
+
+<script>
+let allPosts = [];
+
+function renderPosts(posts) {
+  const container = document.getElementById("archive-list");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  if (!posts.length) {
+    container.innerHTML = "<p>No matching articles found.</p>";
+    return;
+  }
+
+  posts.forEach(post => {
+    const card = `
+      <a href="${post.slug}" class="archive-item">
+        <div class="archive-thumb">
+          <img src="${post.cover}" alt="">
+        </div>
+
+        <div class="archive-info">
+          <h2>${post.title}</h2>
+          <p>${post.subtitle}</p>
+          <span class="archive-date">${post.date}</span>
+        </div>
+      </a>
+    `;
+    container.insertAdjacentHTML("beforeend", card);
+  });
+}
+
+function postMatchesQuery(post, query) {
+  const q = query.toLowerCase();
+  return (
+    post.title.toLowerCase().includes(q) ||
+    post.subtitle.toLowerCase().includes(q) ||
+    post.tags?.some(tag => tag.includes(q))
+  );
+}
+
+const params = new URLSearchParams(window.location.search);
+const tag = params.get("tag");
+
+fetch("/posts.json")
+  .then(r => r.json())
+  .then(posts => {
+    allPosts = posts;
+
+    const filtered = tag
+      ? posts.filter(p => p.tags?.includes(tag))
+      : posts;
+
+    document.getElementById("tag-title").textContent =
+      tag ? `Posts tagged with #${tag}` : "All tags";
+
+    document.title = tag ? `#${tag} – SiliconPen` : "Tags – SiliconPen";
+
+    renderPosts(filtered);
+  });
+
+const searchInput = document.getElementById("search");
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
+    if (!query) {
+      renderPosts(allPosts);
+      return;
+    }
+    renderPosts(allPosts.filter(p => postMatchesQuery(p, query)));
+  });
+}
+</script>
+
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>© 2025 SiliconPen. All rights reserved.</p>
+        <a href="../privacy-policy.html">Learn more</a>
+      </div>
+    </footer>
+
+    <script>
+      const navToggle = document.querySelector(".nav-toggle");
+      const navPill = document.querySelector(".nav-pill");
+      const dropdownToggle = document.querySelector(".dropdown-toggle");
+      const dropdownMenu = document.querySelector(".dropdown-menu");
+
+      navToggle.addEventListener("click", () => {
+        navPill.classList.toggle("nav-open");
+      });
+
+      dropdownToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle("dropdown-open");
+      });
+
+      document.addEventListener("click", () => {
+        dropdownMenu.classList.remove("dropdown-open");
+      });
+    </script>
+    <script>
+  if (!localStorage.getItem("sp_cookie_ok")) {
+    document.getElementById("cookieConsent").style.display = "block";
+  }
+  document.getElementById("cookieAccept").onclick = () => {
+    localStorage.setItem("sp_cookie_ok", "yes");
+    document.getElementById("cookieConsent").style.display = "none";
+  };
+</script>
+  </body>
+</html>

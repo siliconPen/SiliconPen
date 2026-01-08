@@ -1901,3 +1901,73 @@ sp-reveal {
 .sp-reveal-box.open .sp-reveal-content {
   display: block;
 }
+
+.sp-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 24px 0;
+}
+
+.sp-list li {
+  position: relative;
+  padding-left: 1.8em;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+/* ✔ Tick */
+.sp-tick li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #5dff9b;
+  font-weight: 600;
+}
+
+/* ✖ Cross */
+.sp-cross li::before {
+  content: "✖";
+  position: absolute;
+  left: 0;
+  color: #ff6b6b;
+  font-weight: 600;
+}
+
+/* ℹ Info */
+.sp-info li::before {
+  content: "ℹ";
+  position: absolute;
+  left: 0;
+  color: #4da3ff;
+  font-weight: 600;
+}
+
+/* ⚠ Warning */
+.sp-warn li::before {
+  content: "⚠";
+  position: absolute;
+  left: 0;
+  color: #ffb84d;
+  font-weight: 600;
+}
+.post-tags {
+  margin: 16px 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-chip {
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(46, 59, 96, 0.08);
+  color: #2a2929;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.tag-chip:hover {
+  background: rgba(120,180,255,0.25);
+  color: #fff;
+}

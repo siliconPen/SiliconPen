@@ -292,6 +292,7 @@ Digital logic is clean only after we tame reality.
     <!-- Share + next posts -->
     <section class="post-footer-extra">
     <div id="share-row"></div>
+    <div class="post-tags"></div>
     <div class="post-related">
     <h1>Read next</h1>
     <div class="post-related-grid">
@@ -339,7 +340,8 @@ Digital logic is clean only after we tame reality.
         initComments();
     });
 
-    loadPartial("share-row", "../partials/share-row.html", () => {
+    loadPartial("share-row", "../partials/share-row.html", async() => {
+        await loadPostDataFromJSON();
         initPost();
     });
     

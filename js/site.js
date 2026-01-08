@@ -1,4 +1,22 @@
 console.log("site.js loaded");
+async function loadPostDataFromJSON() {
+  try {
+    const res = await fetch("/posts.json");
+    const posts = await res.json();
+
+    const path = window.location.pathname.replace(/^\/+/, "");
+
+    const post = posts.find(p => p.slug === path);
+
+    if (!post) return;
+
+    window.POST_DATA = post;
+
+  } catch (err) {
+    console.warn("POST_DATA load failed", err);
+  }
+}
+
 
 function initHeader() {
   const navToggle = document.querySelector(".nav-toggle");
@@ -66,6 +84,9 @@ function initPost() {
         copyBtn.textContent = "Failed :(";
       }
     });
+  }
+  if (window.POST_DATA?.tags) {
+  renderPostTags(window.POST_DATA.tags);
   }
 }
 function initTOC() {
@@ -212,4 +233,14 @@ function enableCodeCopy() {
     pre.appendChild(btn);
   });
 }
+function renderPostTags(tags) {
+  const container = document.querySelector(".post-tags");
+  if (!container || !Array.isArray(tags)) return;
 
+  container.innerHTML = tags
+    .map(
+      tag =>
+        `<a href="/tags.html?tag=${encodeURIComponent(tag)}" class="tag-chip">#${tag}</a>`
+    )
+    .join("");
+}

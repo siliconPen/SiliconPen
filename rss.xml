@@ -192,5 +192,14 @@
       <description>Learn why a simple button press can cause multiple signals in Arduino. This chapter explains the physics behind switch bounce, how it affects digital inputs, and the practical debouncing techniques used in real electronics.</description>
     </item>   
 
+    <item>
+      <title>Potentiometers Explained: How Variable Resistors Give You Smooth Control</title>
+      <guid>https://siliconpen.com/posts/potentiometer.html</guid>
+      <link>https://siliconpen.com/posts/potentiometer.html</link>
+      <pubDate>Fri, 09 Jan 2026 12:00:00 +0530</pubDate>
+      <description>A beginner-friendly look at potentiometers—what they are, how they work, and why they let humans control circuits smoothly instead of just ON/OFF. Clear, practical, and perfect for real-world electronics learning.</description>
+      <img>
+    </item>   
+
   </channel>
 </rss>

@@ -196,6 +196,28 @@
     "cover": "images/pathway-to-arduino/cover.webp",
     "date": "2026-01-05",
     "series": "pathway-to-arduino",
-    "order": 7
+    "order": 7,
+    "tags": ["electronics",
+              "embedded-systems",
+              "arduino",
+              "digital",
+              "inputs",
+              "foundations",
+              "explainer"]
+  },
+  {
+    "slug": "posts/potentiometer.html",
+    "title": "Potentiometer",
+    "subtitle": "The Variable Resistor That Lets You Control Electronics Smoothly",
+    "cover": "images/real-circuits/cover.png",
+    "date": "2026-01-09",
+    "series": "real-circuits",
+    "order": 4,
+    "tags": ["electronics",
+             "analog",
+             "circuits",
+             "inputs",
+             "foundations",
+             "explainer"]
   }
 ]
