@@ -201,5 +201,14 @@
       <img>
     </item>   
 
+    <item>
+      <title>Analog Input in Arduino: How analogRead() Reads Real-World Sensor Values</title>
+      <guid>https://siliconpen.com/posts/analog-input-reading-sensors-with-analogread.html</guid>
+      <link>https://siliconpen.com/posts/analog-input-reading-sensors-with-analogread.html</link>
+      <pubDate>Tue, 13 Jan 2026 12:00:00 +0530</pubDate>
+      <description>Learn how Arduino reads real-world signals using analogRead(). This chapter explains analog inputs, voltage levels, and how sensors provide continuous values instead of simple HIGH/LOW signals. Perfect for beginners exploring sensors and data.</description>
+      <img>
+    </item>  
+
   </channel>
 </rss>

@@ -219,5 +219,20 @@
              "inputs",
              "foundations",
              "explainer"]
+  },
+  {
+    "slug": "posts/analog-input-reading-sensors-with-analogread.html",
+    "title": "Analog Input: Reading Sensors with analogRead()",
+    "subtitle": "“How Arduino Measures the Real World Through Voltage Levels and Sensors”",
+    "cover": "images/pathway-to-arduino/cover.webp",
+    "date": "2026-01-13",
+    "series": "pathway-to-arduino",
+    "order": 8,
+    "tags": ["electronics",
+              "arduino",
+              "analog",
+              "inputs",
+              "signals",
+              "explainer"]
   }
 ]
