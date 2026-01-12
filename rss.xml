@@ -198,7 +198,6 @@
       <link>https://siliconpen.com/posts/potentiometer.html</link>
       <pubDate>Fri, 09 Jan 2026 12:00:00 +0530</pubDate>
       <description>A beginner-friendly look at potentiometers—what they are, how they work, and why they let humans control circuits smoothly instead of just ON/OFF. Clear, practical, and perfect for real-world electronics learning.</description>
-      <img>
     </item>   
 
     <item>
@@ -207,7 +206,6 @@
       <link>https://siliconpen.com/posts/analog-input-reading-sensors-with-analogread.html</link>
       <pubDate>Tue, 13 Jan 2026 12:00:00 +0530</pubDate>
       <description>Learn how Arduino reads real-world signals using analogRead(). This chapter explains analog inputs, voltage levels, and how sensors provide continuous values instead of simple HIGH/LOW signals. Perfect for beginners exploring sensors and data.</description>
-      <img>
     </item>  
 
   </channel>
