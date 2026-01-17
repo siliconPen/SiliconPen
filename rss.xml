@@ -208,5 +208,13 @@
       <description>Learn how Arduino reads real-world signals using analogRead(). This chapter explains analog inputs, voltage levels, and how sensors provide continuous values instead of simple HIGH/LOW signals. Perfect for beginners exploring sensors and data.</description>
     </item>  
 
+    <item>
+      <title>Using Potentiometers in Arduino: Mapping analogRead() Values for Real Control</title>
+      <guid>https://siliconpen.com/posts/using-potentiometers-and-mapping-values.html</guid>
+      <link>https://siliconpen.com/posts/using-potentiometers-and-mapping-values.html</link>
+      <pubDate>Sat, 17 Jan 2026 12:00:00 +0530</pubDate>
+      <description>Learn how to use potentiometers with Arduino and convert raw analogRead() values into useful ranges. This chapter explains voltage division, reading 0–1023 values, and mapping them to angles, brightness, speed, or any custom scale.</description>
+    </item>  
+
   </channel>
 </rss>
