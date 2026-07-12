@@ -115,7 +115,7 @@
 
     <!-- Meta row: date + reading time -->
     <div class="post-meta-bar">
-    <span class="post-date">Jan 21, 2026</span>
+    <span class="post-date">July 13, 2026</span>
     <span class="post-reading-time" id="reading-time"></span>
     </div>
     <div class="scroll-progress-bar">
@@ -133,9 +133,9 @@
 
 <h1>Chapter 10</h1>
 <p>In the previous chapter, you used a potentiometer to generate smooth values between 0 and 1023, and then mapped them into useful ranges.</p>
-<p>Now comes a natural question:</p>
-<p>If Arduino outputs only HIGH or LOW, how does it control brightness or speed?</p>
-<p>This chapter answers that with PWM.</p>
+<sp-q><p>Now comes a natural question:</p>
+<p>If Arduino outputs only HIGH or LOW, how does it control brightness or speed?</p></sp-q>
+<p>This chapter answers that with <strong>PWM</strong></p>
 <hr class="section-divider"/>
 
 <h1>💡 The Problem PWM Solves</h1>
@@ -151,7 +151,7 @@
 <hr class="section-divider"/>
 
 <h1>⚡ What Is PWM?</h1>
-<p>PWM stands for <strong>Pulse Width Modulation</strong>.</p>
+<blockquote><p>PWM stands for <strong>Pulse Width Modulation</strong>.</p></blockquote>
 <p>Instead of outputting a steady voltage, Arduino:</p>
 <ul>
 <li><p>switches the pin <strong>ON and OFF</strong> very fast</p>
@@ -170,8 +170,8 @@
 <li><p>ON for short time → looks dim</p>
 </li>
 </ul>
-<p>Your eyes (and motors) don’t see the rapid switching —<br>they see the <strong>average effect</strong>.</p>
-<p>That’s PWM.</p>
+<sp-sidenote><p>Your eyes (and motors) don’t see the rapid switching —<br>they see the <strong>average effect</strong>.</p></sp-sidenote>
+<p>That’s <h3>PWM.</h3></p>
 <hr class="section-divider"/>
 
 <h1>📊 Duty Cycle Explained</h1>
@@ -197,6 +197,7 @@
 <pre>3, 5, 6, 9, 10, 11</pre>
 
 <p>Only these pins can use <code>analogWrite()</code>.</p>
+<p>Click here to learn about pin scheme of <a href="understanding-the-arduino-uno-board.html">Arduino.</a></p>
 <hr class="section-divider"/>
 
 <h1>💻 Basic PWM Example (LED Fade)</h1>
@@ -208,6 +209,15 @@ void loop() {
   analogWrite(9, 128); // ~50% brightness
 }
 </code></pre>
+<sp-lab
+  title="Arduino Basic PWM"
+  subtitle="Interactive simulation built in Tinkercad"
+  link="https://www.tinkercad.com/things/8wEFnZn7DDA-pwm-basic"
+  button="Open Simulation in Tinkercad"
+  image="../images/pathway-to-arduino/understanding-PWM-and-LED-fading/1.png"
+>
+  Try playing with the voltage value and see different levels of brightness!
+</sp-lab>
 <p>Even though the function is called <code>analogWrite()</code>,<br>it is still <strong>digital PWM</strong>, not true analog voltage.</p>
 <hr class="section-divider"/>
 
@@ -228,6 +238,15 @@ void loop() {
   }
 }
 </code></pre>
+<sp-lab
+  title="Arduino Fading LED PWM"
+  subtitle="Interactive simulation built in Tinkercad"
+  link="https://www.tinkercad.com/things/kTncBdyO7dY-pwm-fading-led"
+  button="Open Simulation in Tinkercad"
+  image="../images/pathway-to-arduino/understanding-PWM-and-LED-fading/1.png"
+>
+  Try changing the delay to obtain different speeds of fading!
+</sp-lab>
 <p>This gradually changes the duty cycle, making the LED fade in and out.</p>
 <hr class="section-divider"/>
 
@@ -243,7 +262,54 @@ void loop() {
   analogWrite(9, pwmValue);
 }
 </code></pre>
+<sp-lab
+  title="Arduino PWM using Potentiometer Input"
+  subtitle="Interactive simulation built in Tinkercad"
+  link="https://www.tinkercad.com/things/gHHbhdqs8h7-using-pwm-with-potentiometer"
+  button="Open Simulation in Tinkercad"
+  image="../images/pathway-to-arduino/understanding-PWM-and-LED-fading/2.png"
+>
+  Try rotating the potentiometer and observe how the LED brightness
+  changes in real time.
+</sp-lab>
 <p>Turning the potentiometer now directly controls LED brightness.</p>
+<hr class="section-divider"/>
+
+<h1>🎯Let's Recall Previous Chapters!!</h1>
+<sp-quiz title="Arduino Basics">
+  <sp-q>
+    <q>What happens if a digital input pin is left floating?</q>
+    <o correct>It can randomly read HIGH or LOW</o>
+    <o>It always reads LOW</o>
+    <o>It becomes OUTPUT</o>
+  </sp-q>
+
+  <sp-q>
+    <q>Why do we use pull-up resistors?</q>
+    <o>To increase current</o>
+    <o correct>To prevent floating inputs</o>
+    <o>To protect the microcontroller</o>
+  </sp-q>
+
+  <sp-q>
+    <q>Which function is used to read analog inputs?</q>
+    <o>serial.Print</o>
+    <o correct>analogRead</o>
+    <o>analogReader</o>
+  </sp-q>
+  </sp-quiz>
+
+  <sp-reveal title="Quiz Answers!">
+  1. It can randomly read HIGH or LOW<br>
+  2. To prevent floating inputs<br>
+  3. analogRead
+
+  <p>Check these if you got them wrong: </p>
+  <ul>
+  <li><a href="using-digital-inputs-in-arduino.html#the-floating-pin-problem">Floating Pin Concepts</a></li>
+  <li><a href="analog-input-reading-sensors-with-analogread.html">Analog Inputs</a></li>
+  </ul>
+  </sp-reveal>
 <hr class="section-divider"/>
 
 <h1>⚠️ Important PWM Facts</h1>
@@ -306,6 +372,7 @@ void loop() {
     <!-- Share + next posts -->
     <section class="post-footer-extra">
     <div id="share-row"></div>
+    <div class="post-tags"></div>
     <div class="post-related">
     <h1>Read next</h1>
     <div class="post-related-grid">
@@ -337,6 +404,7 @@ void loop() {
 
     <script src="../js/partials.js"></script>
     <script src="../js/site.js"></script>
+    <script src="../js/custom-elements.js"></script>
 
     <script>
     loadPartial("header", "../partials/header.html", () => {
@@ -353,7 +421,8 @@ void loop() {
         initComments();
     });
 
-    loadPartial("share-row", "../partials/share-row.html", () => {
+    loadPartial("share-row", "../partials/share-row.html", async() => {
+        await loadPostDataFromJSON();
         initPost();
     });
     

@@ -216,5 +216,13 @@
       <description>Learn how to use potentiometers with Arduino and convert raw analogRead() values into useful ranges. This chapter explains voltage division, reading 0–1023 values, and mapping them to angles, brightness, speed, or any custom scale.</description>
     </item>  
 
+    <item>
+      <title>Understanding PWM in Arduino: How LED Fading and Speed Control Actually Work</title>
+      <guid>https://siliconpen.com/posts/understanding-PWM-and-LED-fading.html</guid>
+      <link>https://siliconpen.com/posts/understanding-PWM-and-LED-fading.html</link>
+      <pubDate>Mon, 13 July 2026 12:00:00 +0530</pubDate>
+      <description>A beginner-friendly breakdown of Pulse Width Modulation. Learn how digital pins mimic analog output, enabling LED fading, motor control, and smooth power adjustments.</description>
+    </item>  
+
   </channel>
 </rss>
