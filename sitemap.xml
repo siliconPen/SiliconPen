@@ -145,5 +145,9 @@
     <loc>https://siliconpen.com/posts/understanding-PWM-and-LED-fading.html</loc>
   </url>
 
+  <url>
+    <loc>https://siliconpen.com/posts/delays-vs-non-blocking-code-millis.html</loc>
+  </url>
+
 
 </urlset>

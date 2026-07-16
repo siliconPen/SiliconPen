@@ -265,5 +265,20 @@
               "signals",
               "explainer",
               "PWM"]
+  },
+  {
+    "slug": "posts/delays-vs-non-blocking-code-millis.html",
+    "title": "Delays vs Non-Blocking Code millis()",
+    "subtitle": "Why delay() Freezes Your Arduino — and How millis() Frees It",
+    "cover": "images/pathway-to-arduino/cover.webp",
+    "date": "2026-07-20",
+    "series": "pathway-to-arduino",
+    "order": 11,
+    "tags": ["electronics",
+              "arduino",
+              "delay",
+              "inputs",
+              "signals",
+              "explainer"]
   }
 ]

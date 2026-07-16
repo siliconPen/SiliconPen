@@ -301,6 +301,7 @@ void loop() {
     <!-- Share + next posts -->
     <section class="post-footer-extra">
     <div id="share-row"></div>
+    <div class="post-tags"></div>
     <div class="post-related">
     <h1>Read next</h1>
     <div class="post-related-grid">
@@ -332,6 +333,7 @@ void loop() {
 
     <script src="../js/partials.js"></script>
     <script src="../js/site.js"></script>
+    <script src="../js/custom-elements.js"></script>
 
     <script>
     loadPartial("header", "../partials/header.html", () => {
@@ -348,7 +350,8 @@ void loop() {
         initComments();
     });
 
-    loadPartial("share-row", "../partials/share-row.html", () => {
+    loadPartial("share-row", "../partials/share-row.html", async() => {
+        await loadPostDataFromJSON();
         initPost();
     });
     

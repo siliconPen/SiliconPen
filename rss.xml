@@ -224,5 +224,13 @@
       <description>A beginner-friendly breakdown of Pulse Width Modulation. Learn how digital pins mimic analog output, enabling LED fading, motor control, and smooth power adjustments.</description>
     </item>  
 
+    <item>
+      <title>Delays vs Non-Blocking Code: Why millis() Changes Everything in Arduino</title>
+      <guid>https://siliconpen.com/posts/delays-vs-non-blocking-code-millis.html</guid>
+      <link>https://siliconpen.com/posts/delays-vs-non-blocking-code-millis.html</link>
+      <pubDate>Mon, 20 July 2026 12:00:00 +0530</pubDate>
+      <description>A simple, practical explanation of why delay() freezes your Arduino and how millis() lets you run multiple tasks at once. Perfect for anyone learning real embedded programming.</description>
+    </item>  
+
   </channel>
 </rss>

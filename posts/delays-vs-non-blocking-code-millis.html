@@ -114,7 +114,7 @@
 
     <!-- Meta row: date + reading time -->
     <div class="post-meta-bar">
-    <span class="post-date">Jan 25, 2026</span>
+    <span class="post-date">July 20, 2026</span>
     <span class="post-reading-time" id="reading-time"></span>
     </div>
     <div class="scroll-progress-bar">
@@ -133,14 +133,14 @@
 <h1>Chapter 11</h1>
 <p>Up to now, we’ve used <code>delay()</code> everywhere.</p>
 <p>And that’s okay — for learning.</p>
-<p>But at some point, <code>delay()</code> stops being your friend.</p>
+<sp-quote><p>But at some point, <code>delay()</code> stops being your friend.</p></sp-quote>
 <p>This chapter explains why, and introduces a better way to handle time on Arduino.</p>
 <hr class="section-divider"/>
 
 <h1>⏳ What <code>delay()</code> Actually Does</h1>
 <p>When you write:<br><code>delay(1000);</code></p>
 <p>Arduino does exactly this:</p>
-<p>Stop everything. Wait for 1 second. Then continue.</p>
+<sp-warning><p>Stop everything. Wait for 1 second. Then continue.</p></sp-warning>
 <p>During that delay:</p>
 <ul>
 <li><p>no buttons are read</p>
@@ -175,7 +175,7 @@
 <li><p>everything waits on everything else</p>
 </li>
 </ul>
-<p>This creates <strong>unresponsive systems</strong>.</p>
+<sp-example><p>This creates <strong>unresponsive systems</strong>.</p></sp-example>
 <hr class="section-divider"/>
 
 <h1>🧪 Simple Example of the Problem</h1>
@@ -192,11 +192,20 @@ delay(1000);
 </li>
 </ul>
 <p>This is fine for demos, <strong>not for real systems</strong>.</p>
+<sp-lab
+  title="Blocking Delays"
+  subtitle="Interactive simulation built in Tinkercad"
+  link="https://www.tinkercad.com/things/1fkyfMkIOo6-blocking-delay"
+  button="Open Simulation in Tinkercad"
+  image="../images/pathway-to-arduino/delays-vs-non-blocking-code-millis/1.png"
+  >
+    Try using the button in this simulation to notice the blocking nature of Delay!
+  </sp-lab>
 <hr class="section-divider"/>
 
 <h1>🔢 What Is millis()?</h1>
 <p>Instead of waiting, we can ask Arduino:</p>
-<p>“Has enough time passed?”</p>
+<sp-fact><p>“Has enough time passed?”</p></sp-fact>
 <p>That’s what <code>millis()</code> does.</p>
 <h3><code>millis()</code> returns:</h3>
 <ul>
@@ -254,10 +263,19 @@ void loop() {
 <li><p>multiple tasks can coexist</p>
 </li>
 </ul>
+ <sp-lab
+  title="Non-Blocking Millis"
+  subtitle="Interactive simulation built in Tinkercad"
+  link="https://www.tinkercad.com/things/jzL6xxqgbjb-non-blocking-delay-millus"
+  button="Open Simulation in Tinkercad"
+  image="../images/pathway-to-arduino/delays-vs-non-blocking-code-millis/1.png"
+  >
+    Try using the button in this simulation to notice the non blocking nature of Millis!
+  </sp-lab>
 <hr class="section-divider"/>
 
 <h1>🧠 Why This Works</h1>
-<p>You’re no longer <strong>pausing time</strong>.</p>
+<sp-pro><p>You’re no longer <strong>pausing time</strong>.</p></sp-pro>
 <p>You’re:</p>
 <ul>
 <li><p>letting the program run freely</p>
@@ -268,6 +286,28 @@ void loop() {
 <p>This is how <strong>real embedded systems</strong> work.</p>
 <hr class="section-divider"/>
 
+<sp-quiz title="Delays vs Non-Blocking Code (millis())">
+  <sp-q>
+    <q>What happens when your Arduino executes <code>delay(1000)</code>?</q>
+    <o>It can perform other tasks while waiting</o>
+    <o correct>It pauses the program, preventing other code from running during the delay</o>
+    <o>It automatically checks button inputs in the background</o>
+  </sp-q>
+
+  <sp-q>
+    <q>Why is <code>millis()</code> preferred over <code>delay()</code> for many Arduino projects?</q>
+    <o>It makes the Arduino run faster</o>
+    <o correct>It allows multiple tasks to run without blocking the program</o>
+    <o>It uses less memory than variables</o>
+  </sp-q>
+</sp-quiz>
+
+<sp-reveal title="Quiz Answers!">
+Using <code>delay()</code> blocks the Arduino from doing anything else until the delay finishes.
+With <code>millis()</code>, the Arduino keeps checking the elapsed time while continuing to read sensors, respond to buttons, and control outputs.
+</sp-reveal>
+
+<hr class="section-divider"/>
 <h1>⚠️ Important Notes</h1>
 <ul>
 <li><p><code>millis()</code> uses <code>unsigned long</code></p>
@@ -324,6 +364,7 @@ void loop() {
     <!-- Share + next posts -->
     <section class="post-footer-extra">
     <div id="share-row"></div>
+    <div class="post-tags"></div>
     <div class="post-related">
     <h1>Read next</h1>
     <div class="post-related-grid">
@@ -355,6 +396,7 @@ void loop() {
 
     <script src="../js/partials.js"></script>
     <script src="../js/site.js"></script>
+    <script src="../js/custom-elements.js"></script>
 
     <script>
     loadPartial("header", "../partials/header.html", () => {
@@ -371,7 +413,8 @@ void loop() {
         initComments();
     });
 
-    loadPartial("share-row", "../partials/share-row.html", () => {
+    loadPartial("share-row", "../partials/share-row.html", async() => {
+        await loadPostDataFromJSON();
         initPost();
     });
     

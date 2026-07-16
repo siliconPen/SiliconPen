@@ -146,6 +146,7 @@
 
     <script src="../js/partials.js"></script>
     <script src="../js/site.js"></script>
+    <script src="../js/custom-elements.js"></script>
 
     <script>
     loadPartial("header", "../partials/header.html", () => {
@@ -162,7 +163,8 @@
         initComments();
     });
 
-    loadPartial("share-row", "../partials/share-row.html", () => {
+    loadPartial("share-row", "../partials/share-row.html", async() => {
+        await loadPostDataFromJSON();
         initPost();
     });
  loadPartial("post-left", "../partials/post-left.html");
