@@ -114,7 +114,7 @@
 
     <!-- Meta row: date + reading time -->
     <div class="post-meta-bar">
-    <span class="post-date">Jan 29, 2026</span>
+    <span class="post-date">July 27, 2026</span>
     <span class="post-reading-time" id="reading-time"></span>
     </div>
     <div class="scroll-progress-bar">
@@ -140,14 +140,15 @@
 <li><p>changing pin states</p>
 </li>
 </ul>
-<p>But you couldn’t see what it was thinking.</p>
-<p>That’s a problem.</p>
-<p>This chapter introduces the <strong>Serial Monitor</strong> — the simplest and most powerful way to look inside your program.ur First Debug Tool</p>
+<sp-warning><p>But you couldn’t see what it was thinking.</p>
+<p>That’s a problem.</p></sp-warning>
+<p>This chapter introduces the <strong><sp-pro>Serial Monitor</sp-pro></strong> — the simplest and most powerful way to look inside your program. </p><p><h3>Your First Debug Tool</h3></p>
 <hr class="section-divider"/>
 
 <h1>🧠 Why We Need Debugging</h1>
 <p>When something doesn’t work, beginners often think:</p>
-<p>“My code is wrong.”</p>
+<sp-block>“My code is wrong.”</sp-block>
+<img src="../images/pathway-to-arduino/serial-monitor-your-first-debug-tool/1.png" alt="Arduino thinking"/>
 <p>But in electronics, problems usually come from:</p>
 <ul>
 <li><p>wiring mistakes</p>
@@ -160,17 +161,18 @@
 </li>
 </ul>
 <p>The Serial Monitor helps you answer one critical question:</p>
-<p>What is my Arduino actually seeing right now?</p>
+<sp-quote>What is my Arduino actually seeing right now?</sp-quote>
 <hr class="section-divider"/>
 
 <h1>🔌 What Is Serial Communication?</h1>
 <p>Serial communication is a way for Arduino to <strong>send text data</strong> to your computer over USB.</p>
 <p>Think of it as:</p>
-<p>Arduino talking to you using messages.</p>
-<p>We don’t care how it works internally yet.<br>We only care that it works.</p>
+<ul><p><i>Arduino talking to you using messages.</i></p></ul>
+<sp-sidenote>We don’t care how it works internally yet.<br>We only care that it works.</sp-sidenote>
 <hr class="section-divider"/>
 
 <h1>🛠️ Starting the Serial Monitor</h1>
+<img src="../images/pathway-to-arduino/serial-monitor-your-first-debug-tool/2.png" alt="Starting the Serial Monitor"/>
 <p>There are two steps, and both are mandatory.</p>
 <h2>1️⃣ Initialize Serial Communication</h2>
 <pre><code>Serial.begin(9600);
@@ -180,6 +182,7 @@
 <p>“I’m going to talk to the computer.”</p>
 <p>The number <strong>9600</strong> is the communication speed (baud rate).<br>For now, just remember: <strong>the number must match in both places.</strong></p>
 <h2>2️⃣ Open the Serial Monitor</h2>
+
 <ul>
 <li><p>Click the <strong>Serial Monitor icon</strong> in the top-right of the Arduino IDE</p>
 </li>
@@ -217,6 +220,7 @@ Serial.println(value);</code></pre>
 <hr class="section-divider"/>
 
 <h1>🔁 Serial Monitor in a Loop</h1>
+<img src="../images/pathway-to-arduino/serial-monitor-your-first-debug-tool/3.png" alt="Starting the Serial Monitor"/>
 <h3>Example:</h3>
 <pre><code>void loop() {
   int buttonState = digitalRead(2);
@@ -231,9 +235,40 @@ Serial.println(value);</code></pre>
 <li><p><code>0</code> when LOW</p>
 </li>
 </ul>
+<sp-lab
+  title="Serial Monitor"
+  subtitle="Interactive simulation built in Tinkercad"
+  link="https://www.tinkercad.com/things/esmuApJAw3g-serial-monitor"
+  button="Open Simulation in Tinkercad"
+  image="../images/pathway-to-arduino/serial-monitor-your-first-debug-tool/4.png"
+  >
+    Try using the button and seeing the serial monitor window change.
+</sp-lab>
 <p>This turns invisible logic into visible data.</p>
-<hr class="section-divider"/>
 
+<hr class="section-divider"/>
+<sp-quiz title="Serial Monitor: Your First Debug Tool">
+  <sp-q>
+    <q>What is the primary purpose of the Serial Monitor?</q>
+    <o correct>To display data sent from the microcontroller</o>
+    <o>To upload code to the board</o>
+    <o>To power external components</o>
+  </sp-q>
+
+  <sp-q>
+    <q>Which function is commonly used to send text to the Serial Monitor?</q>
+    <o>digitalWrite()</o>
+    <o correct>Serial.println()</o>
+    <o>pinMode()</o>
+  </sp-q>
+</sp-quiz>
+
+<sp-reveal title="Quiz Answers!">
+1. a)
+2. b)
+</sp-reveal>
+
+<hr class="section-divider"/>
 <h1>⚠️ Common Beginner Issues</h1>
 <ul>
 <li><p>Forgetting <code>Serial.begin()</code></p>

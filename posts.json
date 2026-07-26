@@ -280,5 +280,19 @@
               "inputs",
               "signals",
               "explainer"]
+  },
+  {
+    "slug": "posts/serial-monitor-your-first-debug-tool.html",
+    "title": "Serial Monitor: Your First Debug Tool",
+    "subtitle": "The Window That Lets You See What Your Arduino Is Really Doing",
+    "cover": "images/pathway-to-arduino/cover.webp",
+    "date": "2026-07-26",
+    "series": "pathway-to-arduino",
+    "order": 12,
+    "tags": ["electronics",
+              "arduino",
+              "inputs",
+              "serial monitor",
+              "explainer"]
   }
 ]

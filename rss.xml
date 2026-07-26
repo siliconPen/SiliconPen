@@ -232,5 +232,13 @@
       <description>A simple, practical explanation of why delay() freezes your Arduino and how millis() lets you run multiple tasks at once. Perfect for anyone learning real embedded programming.</description>
     </item>  
 
+    <item>
+      <title>Serial Monitor: Your First Debug Tool</title>
+      <guid>https://siliconpen.com/posts/serial-monitor-your-first-debug-tool.html</guid>
+      <link>https://siliconpen.com/posts/serial-monitor-your-first-debug-tool.html</link>
+      <pubDate>Mon, 26 July 2026 12:00:00 +0530</pubDate>
+      <description>The window that lets you see what your Arduino is really doing.</description>
+    </item>  
+
   </channel>
 </rss>
