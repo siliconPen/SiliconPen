@@ -294,5 +294,33 @@
               "inputs",
               "serial monitor",
               "explainer"]
+  },
+  {
+    "slug": "posts/variables-functions-and-clean-code-structure.html",
+    "title": "Variables, Functions & Clean Code Structure",
+    "subtitle": "How to Organize Your Arduino Programs So They Stay Clean, Simple, and Easy to Fix",
+    "cover": "images/pathway-to-arduino/cover.webp",
+    "date": "2026-08-03",
+    "series": "pathway-to-arduino",
+    "order": 13,
+    "tags": ["electronics",
+              "arduino",
+              "inputs",
+              "code",
+              "explainer"]
+  },
+  {
+    "slug": "posts/loop-conditions-and-decisions-in-embedded-systems.html",
+    "title": "Loop Conditions & Decisions in Embedded Systems",
+    "subtitle": "How Arduino Uses Logic to Think, React, and Make Real Decisions",
+    "cover": "images/pathway-to-arduino/cover.webp",
+    "date": "2026-08-10",
+    "series": "pathway-to-arduino",
+    "order": 14,
+    "tags": ["electronics",
+              "arduino",
+              "inputs",
+              "code",
+              "explainer"]
   }
 ]

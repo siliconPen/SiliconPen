@@ -114,7 +114,7 @@
 
     <!-- Meta row: date + reading time -->
     <div class="post-meta-bar">
-    <span class="post-date">Feb 02, 2026</span>
+    <span class="post-date">Aug 03, 2026</span>
     <span class="post-reading-time" id="reading-time"></span>
     </div>
     <div class="scroll-progress-bar">
@@ -132,13 +132,14 @@
 
 <h1>Chapter 13</h1>
 <p>Up to now, our programs have worked.</p>
-<p>But let’s be honest —<br>they’re starting to look <strong>messy</strong>.</p>
-<p>Numbers appear randomly.<br>Code repeats itself.<br>Small changes require editing many lines.</p>
-<p>This chapter is about fixing that — not by learning <em>more code</em>, but by learning <strong>how to organize what you already know.</strong></p>
+<p>But let’s be honest —<br><sp-warning>they’re starting to look <strong>'messy!'</strong></sp-warning></p>
+<ul><li>Numbers appear randomly.</li><li>Code repeats itself.</li><li>Small changes require editing many lines.</li></ul>
+<p>This chapter is about fixing that — not by learning <em>more code</em>, but by learning <br><sp-rule><strong>how to organize what you already know.</strong></sp-rule></p>
+<sp-sidenote>Don't worry—we're not becoming software engineers today.<br>We'll simply learn a few habits that make our Arduino projects easier to build, debug, and improve.</sp-sidenote>
 <hr class="section-divider"/>
 
 <h1>🧠 Why Clean Code Matters (Even for Arduino)</h1>
-<p>When projects grow, bad structure causes:</p>
+<h3>When projects grow, bad structure causes:</h3>
 <ul>
 <li><p>confusion</p>
 </li>
@@ -149,7 +150,7 @@
 <li><p>copy-paste disasters</p>
 </li>
 </ul>
-<p>Clean code gives you:</p>
+<h3>Clean code gives you:</h3>
 <ul>
 <li><p>readability</p>
 </li>
@@ -160,10 +161,11 @@
 <li><p>scalability</p>
 </li>
 </ul>
-<p>This matters even more in embedded systems.</p>
+<sp-quote>This matters even more in embedded systems.</sp-quote>
 <hr class="section-divider"/>
 
 <h1>📦 Variables — Naming Values</h1>
+<img src="../images/pathway-to-arduino/variables-functions-and-clean-code-structure/1.png" alt="varibles"/>
 <p>A <strong>variable</strong> is a named container that holds a value.</p>
 <p>Instead of writing this everywhere:</p>
 <p><code>digitalWrite(13, HIGH);</code></p>
@@ -218,6 +220,7 @@ int sensorValue = analogRead(A0);</code></pre>
 <hr class="section-divider"/>
 
 <h1>🔁 Functions — Avoid Repeating Yourself</h1>
+<img src="../images/pathway-to-arduino/variables-functions-and-clean-code-structure/2.png" alt="Functions"/>
 <p>If you write the same code again and again, that’s a sign.</p>
 <p>Example problem:</p>
 <pre><code>digitalWrite(9, HIGH);
@@ -295,6 +298,37 @@ void blinkLED(int pin, int delayTime) {
 </ul>
 <hr class="section-divider"/>
 
+<sp-quiz title="Variables, Functions & Clean Code Structure">
+  <sp-q>
+    <q>What is the main purpose of a variable in programming?</q>
+    <o correct>To store data that can be used and changed</o>
+    <o>To display output on the screen</o>
+    <o>To create hardware connections</o>
+  </sp-q>
+
+  <sp-q>
+    <q>Why do we use functions in a program?</q>
+    <o>To make the program run slower</o>
+    <o correct>To organize reusable code into smaller tasks</o>
+    <o>To replace variables</o>
+  </sp-q>
+
+  <sp-q>
+    <q>Which of the following is a good clean code practice?</q>
+    <o>Using single-letter variable names everywhere</o>
+    <o>Writing all code inside one long function</o>
+    <o correct>Using meaningful names and keeping functions focused</o>
+  </sp-q>
+</sp-quiz>
+
+<sp-reveal title="Quiz Answers!">
+  a. b. c.
+Good code is not just about making it work—it should also be easy to read,
+understand, and maintain. Meaningful variable names and small, reusable
+functions make programs easier to debug and improve.
+</sp-reveal>
+
+<hr class="section-divider"/>
 <h1>🧰 Common Beginner Mistakes</h1>
 <ul>
 <li><p>Using raw numbers everywhere</p>

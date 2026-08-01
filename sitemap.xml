@@ -153,4 +153,12 @@
     <loc>https://siliconpen.com/posts/serial-monitor-your-first-debug-tool.html</loc>
   </url>
 
+  <url>
+    <loc>https://siliconpen.com/posts/variables-functions-and-clean-code-structure.html</loc>
+  </url>
+
+  <url>
+    <loc>https://siliconpen.com/posts/loop-conditions-and-decisions-in-embedded-systems.html</loc>
+  </url>
+
 </urlset>

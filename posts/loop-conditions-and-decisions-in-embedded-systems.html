@@ -114,7 +114,7 @@
 
     <!-- Meta row: date + reading time -->
     <div class="post-meta-bar">
-    <span class="post-date">Feb 06, 2026</span>
+    <span class="post-date">Aug 10, 2026</span>
     <span class="post-reading-time" id="reading-time"></span>
     </div>
     <div class="scroll-progress-bar">
@@ -140,7 +140,7 @@
 <li><p>following instructions</p>
 </li>
 </ul>
-<p>Now we make it <strong>decide.</strong></p>
+<sp-line>Now we make it <strong>decide.</strong></sp-line>
 <p>This chapter is about how Arduino chooses what to do based on conditions — which is the foundation of all intelligent behavior in embedded systems.</p>
 <hr class="section-divider"/>
 
@@ -153,11 +153,12 @@
 
 <p>But let’s say it clearly:</p>
 <p><code>loop()</code> runs continuously, thousands of times per second.</p>
-<p>Arduino doesn’t run code once and stop.<br>It <strong>checks conditions repeatedly</strong> and reacts.</p>
+<sp-fact>Arduino doesn’t run code once and stop.<br>It <strong>checks conditions repeatedly</strong> and reacts.</sp-fact>
 <p>This is very different from normal computer programs.</p>
 <hr class="section-divider"/>
 
 <h1>❓ Conditions — Asking Questions</h1>
+<img src="../images/pathway-to-arduino/loop-conditions-and-decisions-in-embedded-systems/1.png" alt="if-else"/>
 <p>A <strong>condition</strong> is a question with a YES or NO answer.</p>
 <p>Example:</p>
 <pre><code>if (digitalRead(buttonPin) == LOW) {
@@ -165,7 +166,7 @@
 }
 </code></pre>
 <p>Arduino asks:</p>
-<p>“Is the button pressed right now?”</p>
+<sp-q>“Is the button pressed right now?”</sp-q>
 <p>If YES → run the code<br>If NO → skip it</p>
 <p>That’s decision-making.</p>
 <hr class="section-divider"/>
@@ -230,6 +231,7 @@
 <hr class="section-divider"/>
 
 <h1>🔂 Loops Inside Code (<code>for</code> and <code>while</code>)</h1>
+<img src="../images/pathway-to-arduino/loop-conditions-and-decisions-in-embedded-systems/2.png" alt="for-while"/>
 <p><code>for</code> Loop — Repeating a Known Number of Times</p>
 <pre><code>for (int i = 0; i < 5; i++) {
   blinkLED(9, 200);
@@ -251,7 +253,7 @@
 
 <p>Be careful:</p>
 <ul>
-<li>if the condition never changes, Arduino gets stuck</li>
+<li><sp-warning>if the condition never changes, Arduino gets stuck</sp-warning></li>
 </ul>
 <p>In embedded systems, <code>while</code> must be used very carefully.</p>
 <hr class="section-divider"/>
@@ -269,7 +271,7 @@
 <hr class="section-divider"/>
 
 <h1>🧪 Example: Button-Controlled LED</h1>
-<pre><code>if (digitalRead(buttonPin) == LOW) {
+<pre><code>if (digitalRead(buttonPin) == HIGH) {
   digitalWrite(ledPin, HIGH);
 } else {
   digitalWrite(ledPin, LOW);
@@ -287,9 +289,40 @@
 <li><p>repeats</p>
 </li>
 </ul>
+<sp-lab
+  title="Decision-Making Simulation"
+  subtitle="Interactive simulation built in Tinkercad"
+  link="https://www.tinkercad.com/things/2eWyPW5EN2l-decision-making"
+  button="Open Simulation in Tinkercad"
+  image="../images/pathway-to-arduino/loop-conditions-and-decisions-in-embedded-systems/3.png"
+  >
+    Try pressing the button and observe how the LED responds in real-time.
+  </sp-lab>
 <p>This is the core loop of <strong>all control systems.</strong></p>
 <hr class="section-divider"/>
 
+<sp-quiz title="Loops, Conditions & Decisions in Embedded Systems">
+  <sp-q>
+    <q>Which loop is guaranteed to execute at least once?</q>
+    <o>for loop</o>
+    <o>while loop</o>
+    <o correct>do...while loop</o>
+  </sp-q>
+
+  <sp-q>
+    <q>Which statement is used to make decisions based on a condition?</q>
+    <o>break</o>
+    <o correct>if...else</o>
+    <o>continue</o>
+  </sp-q>
+</sp-quiz>
+
+<sp-reveal title="Quiz Answers!">
+<code>do...while loop</code>Loops allow a program to run atleast once as it checks the condition after running the block <code>if...else</code> enable the microcontroller to make decisions based on
+sensor inputs or other conditions.
+</sp-reveal>
+
+<hr class="section-divider"/>
 <h1>🧰 Common Beginner Mistakes</h1>
 <ul>
 <li><p>Using = instead of ==</p>
