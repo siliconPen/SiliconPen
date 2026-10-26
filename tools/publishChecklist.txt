@@ -1,0 +1,57 @@
+| Section          | What to change                         |
+| ---------------- | -------------------------------------- |
+| Title (`<h1>`)   | Article heading                        |
+| Subtitle         | One-line summary                       |
+| Date             | Real date                              |
+| Reading time     | 2–5 min estimate                       |
+| Cover Image      | Update path                            |
+| TOC              | Update anchor IDs                      |
+| Content          | Replace everything                     |
+| Meta Title       | Set inside `<title>` tag               |
+| Meta Description | Set inside `<meta name="description">` |
+
+{
+  "slug": "posts/your-article-slug.html",
+  "title": "Full Article Title",
+  "subtitle": "Short one-line description",
+  "cover": "images/folder/cover.webp",
+  "date": "YYYY-MM-DD",
+  "series": "pathway-arduino"
+}
+
+/images/<series-folder>/
+
+git add .
+git commit -m "uploaded delay"
+git push
+
+
+| Section            | What to Edit            |
+| ------------------ | ----------------------- |
+| Series title       | e.g., **Real Circuits** |
+| Series description | 1–2 lines               |
+| Series cover image | Change                  |
+| Series slug        | page file name          |
+
+
+sitemap.xml
+
+Add a new <url> block with:
+
+<loc>https://siliconpen.com/posts/your-slug.html</loc>
+
+<lastmod>YYYY-MM-DD</lastmod>
+
+rss.xml
+
+Add a new <item> with:
+
+<title> (SEO title)
+
+<link> full URL
+
+<guid> (same as link is fine)
+
+<pubDate> in RFC-style date
+
+<description> short summary / teaser

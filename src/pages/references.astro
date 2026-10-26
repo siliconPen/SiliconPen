@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="SiliconPen Citadel: The Ultimate Reference Vault — Silicon Pen"
+  description="The central hub of datasheets, research papers, articles, and references that fuel SiliconPen narratives."
+>
+  <main class="page-main container" style="padding-top: 2rem; padding-bottom: 4rem;">
+    <article class="post-article">
+      <header class="post-hero-wrapper" style="text-align: left; margin-bottom: 2rem;">
+        <h1 class="post-title-main">📚 SiliconPen Citadel: The Reference Vault</h1>
+        <p class="post-subtitle-bar">
+          The central hub of knowledge that fuels every article on SiliconPen. From the neural roots of AI to physical circuit behavior, this vault compiles the resources, papers, blogs, and datasheets that shaped the narratives.
+        </p>
+      </header>
+
+      <!-- 3-Column Layout: post-left | post-content-shell | post-toc -->
+      <div class="post-layout">
+        <aside class="post-left">
+          <!-- Left spacer matching site layout -->
+        </aside>
+
+        <section class="post-content-shell">
+          <div class="post-main">
+            <div class="post-content">
+              <section id="refs-ghibli-effect">
+                <h1>
+                  <a href="/posts/the-ghibli-effect-why-are-chatgpts-processors-melting.html">
+                    The Ghibli Effect: Why are ChatGPT’s processors melting?
+                  </a>
+                </h1>
+
+                <h2>Ghibli Trend and History</h2>
+                <ol>
+                  <li><a href="https://en.wikipedia.org/wiki/Studio_Ghibli" target="_blank" rel="noopener">Studio Ghibli (Wikipedia)</a></li>
+                  <li><a href="https://mymodernmet.com/history-of-studio-ghibli/" target="_blank" rel="noopener">History of Studio Ghibli (MyModernMet)</a></li>
+                  <li><a href="https://www.imdb.com/list/ls066662290/" target="_blank" rel="noopener">Studio Ghibli Filmography (IMDb)</a></li>
+                  <li><a href="https://www.forbes.com/sites/danidiplacido/2025/03/27/the-ai-generated-studio-ghibli-trend-explained/" target="_blank" rel="noopener">The AI-Generated Studio Ghibli Trend Explained (Forbes)</a></li>
+                  <li><a href="https://economictimes.indiatimes.com/news/new-updates/who-started-the-ai-generated-ghibli-photo-trend-meet-the-man-behind-the-internets-latest-obsession/articleshow/119811083.cms" target="_blank" rel="noopener">Who Started the AI Ghibli Photo Trend (Economic Times)</a></li>
+                  <li><a href="https://www.financialexpress.com/trending/ghibli-style-ai-art-trend-who-started-it-and-why-it-went-viral/3795740/" target="_blank" rel="noopener">Ghibli-Style AI Art Trend (Financial Express)</a></li>
+                </ol>
+
+                <h2>Debates &amp; Privacy</h2>
+                <ol>
+                  <li><a href="https://www.ndtv.com/offbeat/ghibli-art-fun-trend-or-privacy-nightmare-experts-warn-of-risks-involved-8059734" target="_blank" rel="noopener">Fun Trend or Privacy Nightmare? Experts Warn of Risks (NDTV)</a></li>
+                </ol>
+
+                <h2>Generative AI &amp; Workloads</h2>
+                <ol>
+                  <li><a href="https://barstow.libguides.com/generative-ai/timeline" target="_blank" rel="noopener">Generative AI Timeline (Barstow)</a></li>
+                  <li><a href="https://news.mit.edu/2023/explained-generative-ai-1109" target="_blank" rel="noopener">Explained: Generative AI (MIT News)</a></li>
+                  <li><a href="https://indianexpress.com/article/technology/artificial-intelligence/sam-altman-says-openais-gpus-are-melting-over-ghibli-style-ai-art-9913054/" target="_blank" rel="noopener">Sam Altman Says OpenAI GPUs Are Melting (Indian Express)</a></li>
+                  <li><a href="https://www.simform.com/blog/how-does-generative-ai-work/" target="_blank" rel="noopener">How Does Generative AI Work? (Simform)</a></li>
+                </ol>
+
+                <h2>GPUs, NPUs &amp; Silicon Accelerators</h2>
+                <ol>
+                  <li><a href="https://blogs.nvidia.com/blog/accelerating-ai-artificial-intelligence-gpus/" target="_blank" rel="noopener">Accelerating AI: GPUs (NVIDIA)</a></li>
+                  <li><a href="https://usa.seco.com/blog/details/the-evolution-of-ai-accelerators-from-cpus-to-npus" target="_blank" rel="noopener">The Evolution of AI Accelerators: CPUs to NPUs (SECO)</a></li>
+                  <li><a href="https://www.cnet.com/tech/services-and-software/chatgpts-gpus-are-melting-as-people-make-studio-ghibli-esque-ai-images/" target="_blank" rel="noopener">ChatGPT's GPUs Are Melting (CNET)</a></li>
+                  <li><a href="https://analyticsindiamag.com/global-tech/ai-chips-will-eventually-replace-gpus-and-even-nvidia-knows-this/" target="_blank" rel="noopener">AI Chips Will Eventually Replace GPUs (AIM)</a></li>
+                </ol>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <!-- Dynamic TOC on right -->
+        <aside class="post-toc">
+          <div class="post-toc-title">On this page</div>
+          <nav id="post-toc-list"></nav>
+        </aside>
+      </div>
+    </article>
+  </main>
+</BaseLayout>
+
+<script is:inline>
+  function initReferencesTOC() {
+    const content = document.querySelector(".post-content");
+    const tocList = document.getElementById("post-toc-list");
+    if (!content || !tocList) return;
+
+    tocList.innerHTML = "";
+    const headings = content.querySelectorAll("h1, h2");
+    if (!headings.length) return;
+
+    const items = [];
+    headings.forEach((h) => {
+      if (!h.id) {
+        h.id = h.textContent
+          .trim()
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, "");
+      }
+
+      const level = h.tagName === "H1" ? 2 : 3;
+      const link = document.createElement("a");
+      link.href = "#" + h.id;
+      link.textContent = h.textContent.trim();
+      link.className = "toc-link toc-level-" + level;
+
+      const wrapper = document.createElement("div");
+      wrapper.appendChild(link);
+      tocList.appendChild(wrapper);
+      items.push({ heading: h, link: link });
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const item = items.find((i) => i.heading === entry.target);
+          if (!item) return;
+          if (entry.isIntersecting) {
+            items.forEach((i) => i.link.classList.remove("active"));
+            item.link.classList.add("active");
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0.1 }
+    );
+
+    items.forEach(({ heading }) => observer.observe(heading));
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initReferencesTOC);
+  } else {
+    initReferencesTOC();
+  }
+</script>

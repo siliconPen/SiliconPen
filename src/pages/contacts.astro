@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsletterBox from '../components/NewsletterBox.astro';
+---
+
+<BaseLayout
+  title="Contacts — Silicon Pen"
+  description="Get in touch with Rishi Srivastava at SiliconPen. Corrections, ideas, questions, or collaboration."
+>
+  <main class="page-main container" style="padding-top: 3rem; padding-bottom: 4rem; max-width: 760px;">
+    <h1 style="font-size: 2.2rem; margin-bottom: 1rem;">Contact SiliconPen</h1>
+    
+    <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">
+      SiliconPen is an independent technical publication. If you have feedback, technical corrections, questions about an article, or collaboration ideas, I'd love to hear from you.
+    </p>
+
+    <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 14px; padding: 24px; margin-bottom: 2rem;">
+      <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">
+        📧 <strong>Email:</strong> <a href="mailto:pr.rishi.2764@gmail.com" style="color: #ff9f1c;">pr.rishi.2764@gmail.com</a>
+      </p>
+      <p style="font-size: 0.95rem; color: #94a3b8; margin: 0;">
+        I read every email. If you're pointing out a bug or schematic error, please mention the article URL.
+      </p>
+    </div>
+
+    <NewsletterBox
+      title="Stay in the Loop"
+      description="Don't want to email but want to follow along? Subscribe for future article releases."
+      source="/contacts.html"
+    />
+  </main>
+</BaseLayout>

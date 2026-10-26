@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+allPosts.sort((a, b) => b.data.date.localeCompare(a.data.date));
+
+const latestPost = allPosts[0];
+const otherPosts = allPosts.slice(1, 7); // Show top 6 others in 2x3 grid
+---
+
+<BaseLayout
+  title="Silicon Pen — Penning Down the Language of Electronics"
+  description="Independent writing on electronics, hardware, embedded systems, and engineering thought."
+>
+  <!-- Hero Section (Seamlessly attached to dark header) -->
+  <section class="home-hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1>Penning Down the Language of Electronics.</h1>
+        <p>
+          Independent writing on electronics, hardware, and engineering thought —
+          built slowly, from scratch.
+        </p>
+
+        <div class="hero-actions">
+          <a href="/articles.html" class="btn-primary">Read Articles</a>
+          <a href="/series.html" class="btn-secondary">Explore Series</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <img src="/images/cover.webp" alt="SiliconPen visual collage" />
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="page-main">
+    <section class="container main-grid">
+      <!-- LATEST POST -->
+      {latestPost && (
+        <section class="latest-card-wrapper">
+          <header class="section-header">
+            <h2>Latest Post</h2>
+          </header>
+
+          <div id="latest-card-slot">
+            <a href={`/posts/${latestPost.id}.html`} class="latest-card">
+              <div class="latest-cover">
+                {latestPost.data.cover ? (
+                  <img src={latestPost.data.cover} alt={`${latestPost.data.title} cover`} />
+                ) : (
+                  <span>Cover Page</span>
+                )}
+              </div>
+              <div class="latest-info">
+                <h3 class="latest-title">{latestPost.data.title}</h3>
+                <p class="latest-subtitle">{latestPost.data.subtitle || ''}</p>
+              </div>
+            </a>
+          </div>
+        </section>
+      )}
+
+      <!-- SEE MORE (Exact classes from styles.css for 2x3 grid & responsive collapse) -->
+      <section class="see-more-wrapper" id="see-more">
+        <header class="section-header see-more-header">
+          <h2>See More</h2>
+        </header>
+
+        <div class="see-more-scroll" id="see-more-slot">
+          {otherPosts.map((post) => (
+            <article class="post-card">
+              <a href={`/posts/${post.id}.html`} class="post-card-inner">
+                <div class="post-cover">
+                  {post.data.cover ? (
+                    <img src={post.data.cover} alt={`${post.data.title} cover`} />
+                  ) : (
+                    <span>Cover Page</span>
+                  )}
+                </div>
+                <div class="post-meta">
+                  <h3 class="post-title">{post.data.title}</h3>
+                  <p class="post-subtitle">{post.data.subtitle || ''}</p>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+
+        <div class="home-posts-more">
+          <a href="/articles.html" class="btn-outline">View all articles →</a>
+        </div>
+      </section>
+    </section>
+
+    <!-- ABOUT PREVIEW -->
+    <section class="container info-section" id="about">
+      <h2>
+        <a href="/about.html" class="section-link"> About Silicon Pen </a>
+      </h2>
+      <p>
+        A quick intro to who I am, what Silicon Pen is about, and why this
+        corner of the internet exists. For the full story, visit the dedicated
+        About page.
+      </p>
+    </section>
+
+    <!-- REFERENCES PREVIEW -->
+    <section class="container info-section" id="references">
+      <h2>
+        <a href="/references.html" class="section-link"> References </a>
+      </h2>
+      <p>
+        A growing library of datasheets, papers, books, and tools I keep
+        referring to when writing deep-dive articles. The full References page
+        collects everything in one place.
+      </p>
+    </section>
+
+    <!-- SERIES PREVIEW -->
+    <section class="container info-section" id="series">
+      <h2>
+        <a href="/series.html" class="section-link"> Series </a>
+      </h2>
+      <p>
+        Long-form series like <em>Rant Electronics</em>, project logs, and
+        story arcs live here. The Series page keeps every multi-part journey
+        organized so you can follow from Episode 1.
+      </p>
+    </section>
+  </main>
+</BaseLayout>

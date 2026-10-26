@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+// Count tag frequencies
+const tagMap: Record<string, number> = {};
+posts.forEach(p => {
+  (p.data.tags || []).forEach(t => {
+    tagMap[t] = (tagMap[t] || 0) + 1;
+  });
+});
+
+const tagList = Object.entries(tagMap).sort((a, b) => b[1] - a[1]);
+
+const postsData = posts.map(p => ({
+  id: p.id,
+  title: p.data.title,
+  subtitle: p.data.subtitle || '',
+  date: p.data.date,
+  cover: p.data.cover || '/images/cover.webp',
+  tags: p.data.tags || []
+}));
+---
+
+<BaseLayout
+  title="Tags — Silicon Pen"
+  description="Explore SiliconPen articles organized by technical topics and tags."
+>
+  <main class="page-main">
+    <section class="container archive" style="padding-top: 2rem;">
+      <h1 id="tag-title" class="archive-title">Explore Topics & Tags</h1>
+      <p class="archive-intro">Select a tag below to filter technical notes and guides.</p>
+
+      <!-- Tag Cloud -->
+      <div class="post-tags" style="margin-bottom: 2rem;">
+        <button class="tag-chip active-chip" id="btn-all-tags" style="cursor: pointer;">
+          #all ({posts.length})
+        </button>
+        {tagList.map(([tag, count]) => (
+          <button class="tag-chip" data-tag={tag} style="cursor: pointer;">
+            #{tag} ({count})
+          </button>
+        ))}
+      </div>
+
+      <div class="archive-list" id="archive-list">
+        {posts.map(post => (
+          <a href={`/posts/${post.id}.html`} class="archive-item">
+            <div class="archive-thumb">
+              <img src={post.data.cover || '/images/cover.webp'} alt="" />
+            </div>
+            <div class="archive-info">
+              <h2>{post.data.title}</h2>
+              <p>{post.data.subtitle || ''}</p>
+              <span class="archive-date">{post.data.date}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .active-chip {
+    background: #ff9f1c !important;
+    color: #050816 !important;
+    font-weight: 600;
+  }
+</style>
+
+<script define:vars={{ postsData }}>
+  const container = document.getElementById("archive-list");
+  const titleEl = document.getElementById("tag-title");
+  const chips = document.querySelectorAll(".tag-chip");
+  const allBtn = document.getElementById("btn-all-tags");
+
+  function render(list) {
+    if (!container) return;
+    if (!list.length) {
+      container.innerHTML = "<p style='color: #94a3b8; padding: 2rem 0;'>No matching articles found.</p>";
+      return;
+    }
+    container.innerHTML = list.map(p => `
+      <a href="/posts/${p.id}.html" class="archive-item">
+        <div class="archive-thumb">
+          <img src="${p.cover}" alt="">
+        </div>
+        <div class="archive-info">
+          <h2>${p.title}</h2>
+          <p>${p.subtitle}</p>
+          <span class="archive-date">${p.date}</span>
+        </div>
+      </a>
+    `).join("");
+  }
+
+  function setActiveTag(tag) {
+    chips.forEach(c => c.classList.remove("active-chip"));
+    if (!tag) {
+      if (allBtn) allBtn.classList.add("active-chip");
+      if (titleEl) titleEl.textContent = "All Topics & Articles";
+      render(postsData);
+      return;
+    }
+
+    const activeBtn = Array.from(chips).find(c => c.getAttribute("data-tag") === tag);
+    if (activeBtn) activeBtn.classList.add("active-chip");
+    if (titleEl) titleEl.textContent = `Articles tagged with #${tag}`;
+
+    const filtered = postsData.filter(p => p.tags.includes(tag));
+    render(filtered);
+  }
+
+  // Handle URL query parameter ?tag=...
+  const params = new URLSearchParams(window.location.search);
+  const initialTag = params.get("tag");
+  if (initialTag) {
+    setActiveTag(initialTag);
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener("click", () => {
+      const tag = chip.getAttribute("data-tag");
+      const url = new URL(window.location.href);
+      if (tag) {
+        url.searchParams.set("tag", tag);
+      } else {
+        url.searchParams.delete("tag");
+      }
+      window.history.pushState({}, "", url);
+      setActiveTag(tag);
+    });
+  });
+</script>

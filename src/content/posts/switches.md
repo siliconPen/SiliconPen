@@ -1,0 +1,248 @@
+---
+title: "Switches"
+subtitle: "A Hands-On Look at How Switches Behave in Real Circuits"
+description: "Understand switches the right way—by seeing how they feel, behave, and connect in real circuits. No theory overload. Just a clear, practical explanation of what a switch actually is and how it controls current in your projects."
+date: "2025-12-28"
+cover: "/images/real-circuits/cover.png"
+series: "real-circuits"
+order: 3
+draft: false
+---
+
+<div class="post-content">
+<h1>The Most Basic Definition</h1>
+<p>A <strong>switch</strong> is a device that intentionally opens or closes an electrical path.</p>
+<p>In simple words:<br /><sp-fact><strong>It decides whether current can flow or not.</strong></sp-fact></p>
+<p>By controlling <em>when</em> and <em>how</em> current flows, even a very simple device can control a circuit.</p>
+<p>Let’s look at the most commonly used switches.</p>
+<hr class="section-divider"/>
+
+<h1>🔹 1) Push Button (Momentary)</h1>
+<p>A push button opens or closes a circuit <strong>only for the duration it is pressed</strong>.<br />Once you release it, the switch returns to its original state.</p>
+<p>There is <strong>no state holding</strong>.</p>
+<h2>Types of Push Buttons</h2>
+<h3>a) NO — Normally Open</h3>
+<img src="/images/real-circuits/switches/1.png" alt="" />
+<ul>
+<li><p>Circuit is open by default</p>
+</li>
+<li><p>Circuit is completed only while the button is pressed</p>
+</li>
+</ul>
+<h3>b) NC — Normally Closed</h3>
+<img src="/images/real-circuits/switches/2.png" alt="" />
+<ul>
+<li><p>Circuit is closed by default</p>
+</li>
+<li><p>Circuit opens only while the button is pressed</p>
+</li>
+</ul>
+<h2>Inside a Push Button (Super Simplified😅)</h2>
+<img src="/images/real-circuits/switches/3.png" alt="" />
+<img src="/images/real-circuits/switches/16.png" alt="" />
+<h3>Inside a push button:</h3>
+<ul>
+<li><p>A small metal contact bridges/separates two terminals when pressed</p>
+</li>
+<li><p>When released, the contact separates/connects again</p>
+</li>
+</ul>
+<p><sp-warning>⚠️ Important practical detail</sp-warning></p>
+<img src="/images/real-circuits/switches/4.png" alt="" />
+<h3>In common 4-pin push buttons:</h3>
+<ul>
+<li><p>The two pins on each side are internally connected</p>
+</li>
+<li><p>Pressing the button connects both sides together</p>
+</li>
+</ul>
+<h3>💡 Simple trick:</h3>
+<p><sp-q>Always use <strong>diagonally opposite</strong> pins when wiring a push button.
+<br />This avoids confusion and wiring mistakes.</sp-q></p>
+<h2>Practical Circuit — Push Button + LED</h2>
+<p>Component List: </p>
+<img src="/images/real-circuits/switches/5.jpeg" alt="" />
+<p>Circuit Diagram: </p>
+<img src="/images/real-circuits/switches/6.png" alt="" />
+<p>Completed Circuit: </p>
+<img src="/images/real-circuits/switches/7.jpeg" alt="" />
+<p>Video Link: </p>
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/5pkq0bPZbTw"
+    title="Live demo: Push Button Switch Test"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+<p class="video-caption">
+  Push Button Switch Test Demo
+</p>
+<p>This lets you see current flow only while the button is pressed.</p>
+<h2>Where Push Buttons Are Used</h2>
+<ul>
+<li><p>Keyboard keys</p>
+</li>
+<li><p>Game controllers</p>
+</li>
+<li><p>Reset buttons</p>
+</li>
+<li><p>Momentary user inputs</p>
+</li>
+</ul>
+<p>Anywhere you want a temporary action, not a maintained state.</p>
+<hr class="section-divider"/>
+
+<h1>🔹 2) Toggle Switch</h1>
+<p>After momentary switches, we need switches that can <strong>hold their state</strong> even after the user lets go.</p>
+<p>This is where <strong>toggle switches</strong> come in.</p>
+<p>A toggle switch uses a <strong>mechanical latching mechanism</strong> that stays in position until changed again</p>
+<h2>Inside a Toggle Switch (Super Simplified😅)</h2>
+<img src="/images/real-circuits/switches/8.png" alt="" />
+<h3>Internally:</h3>
+<ul>
+<li><p>A moving metal contact switches between two different plates</p>
+</li>
+<li><p>Each position completes a different circuit</p>
+</li>
+</ul>
+<h3>This allows:</h3>
+<ul>
+<li><p>Circuit A in one position</p>
+</li>
+<li><p>Circuit B in the other position</p>
+</li>
+</ul>
+<h2>Practical Circuit — Toggle Switch + LED</h2>
+<p>Component List: </p>
+<img src="/images/real-circuits/switches/9.jpeg" alt="" />
+<img src="/images/real-circuits/switches/10.jpeg" alt="" />
+<p>Circuit Diagram: </p>
+<img src="/images/real-circuits/switches/11.png" alt="" />
+<p>Completed Circuit: </p>
+<img src="/images/real-circuits/switches/12.jpeg" alt="" />
+<p>Video Link: </p>
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/JHGH36uPBlM"
+    title="Live demo: Toggle Switch Test"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+<p class="video-caption">
+  Toggle Switch Test Demo
+</p>
+<h2>Making a Simple ON–OFF Circuit</h2>
+<p>If we remove the second circuit:</p>
+<ul>
+<li><p>One position → <strong>ON</strong></p>
+</li>
+<li><p>Other position → <strong>OFF</strong></p>
+</li>
+</ul>
+<p>That’s how a basic ON–OFF switch works.</p>
+<hr class="section-divider"/>
+
+<h1>🔹 3) Slide Switch</h1>
+<p>Slide switches work on the <strong>same principle as toggle switches</strong>, but:</p>
+<ul>
+<li><p>They are more compact</p>
+</li>
+<li><p>More stable for small boards</p>
+</li>
+<li><p>Commonly used on modules and PCBs</p>
+</li>
+</ul>
+<img src="/images/real-circuits/switches/13.png" alt="" />
+<h2>Why Slide Switches Are Sometimes Better</h2>
+<h3>With toggle switches:</h3>
+<ul>
+<li><p>During switching, both contacts may briefly connect</p>
+</li>
+<li><p>This can momentarily short circuits or cause disturbances</p>
+</li>
+</ul>
+<p><sp-fact>Slide switches usually avoid this problem and provide <strong>cleaner transitions</strong>.</sp-fact></p>
+<h2>Practical Circuit — Slide Switch + LED</h2>
+<p>Component List: </p>
+<p>Use the same components as toggle switch, <br />just replace the toggle swtich with slide switch. And <br />we need only <ul><li>1 LED</li> <li>and 1 resistor</li></ul></p>
+<p>Circuit Diagram: </p>
+<img src="/images/real-circuits/switches/14.png" alt="" />
+<p>Completed Circuit: </p>
+<img src="/images/real-circuits/switches/15.jpeg" alt="" />
+<p>Video Link: </p>
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/ClgjuZKZp10"
+    title="Live demo: Slide Switch Test"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+<p class="video-caption">
+  Slide Switch Test
+</p>
+<hr class="section-divider"/>
+
+<h1>Quick Fact</h1>
+<p>Most ON–OFF switches you see on appliances are <strong>rocker switches</strong><br />They are just another mechanical implementation of the same idea.</p>
+<h2>🧠 A Very Important Insight</h2>
+<p><sp-pro>A switch is an analog mechanical device pretending to be digital.</sp-pro></p>
+<h3>Inside:</h3>
+<ul>
+<li><p>Metal contacts move</p>
+</li>
+<li><p>They hit</p>
+</li>
+<li><p>They bounce</p>
+</li>
+<li><p>They vibrate</p>
+</li>
+</ul>
+<hr class="section-divider"/>
+
+<h1>⚠️ Switch Bouncing (The Hidden Problem)</h1>
+<p><sp-con>Metal contacts do not connect cleanly.</sp-con></p>
+<h3>When pressed:</h3>
+<ul>
+<li><p>Contacts bounce rapidly</p>
+</li>
+<li><p>This creates multiple ON–OFF transitions in a very short time</p>
+</li>
+</ul>
+<p>In <strong>analog circuits</strong>, this is usually ignored.</p>
+<h3>But in digital systems, especially with fast microcontrollers:</h3>
+<ul>
+<li>One press can be read as multiple presses</li>
+</ul>
+<p><sp-example>This is called switch bouncing.</sp-example></p>
+<p>We’ll handle this properly in an upcoming post on <strong>debouncing strategies</strong>. (On Jan 5!)</p>
+<hr class="section-divider"/>
+
+<h1>🔗 Switches + Microcontrollers</h1>
+<p>Now that you understand what a switch physically does,<br />we can let a microcontroller <strong>read</strong> that behavior.</p>
+<p>I’ll link a dedicated article on <strong>digital inputs using a button here</strong>,<br />where we handle the code side properly.</p>
+
+<hr class="section-divider"/>
+
+<h1>❌ Common Mistakes (Short but Real)</h1>
+<ul>
+<li><p>Misunderstanding 4-pin push buttons</p>
+</li>
+<li><p>Floating connections</p>
+</li>
+<li><p>Loose jumper wires</p>
+</li>
+<li><p>Wrong pin pairing</p>
+</li>
+<li><p>Expecting perfectly clean ON/OFF signals</p>
+</li>
+</ul>
+<h3>Golden rule:</h3>
+<p><sp-quote>If touching the button changes behavior,<br />the problem is mechanical, not logical.</sp-quote></p>
+<hr class="section-divider"/>
+
+<h3>Next Post Coming Soon!!</h3>
+
+</div>

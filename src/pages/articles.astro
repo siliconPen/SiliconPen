@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+posts.sort((a, b) => b.data.date.localeCompare(a.data.date));
+
+// Data array for client-side search
+const postSearchData = posts.map(p => ({
+  id: p.id,
+  title: p.data.title,
+  subtitle: p.data.subtitle || '',
+  date: p.data.date,
+  cover: p.data.cover || '/images/cover.webp',
+  tags: p.data.tags || [],
+  series: p.data.series || ''
+}));
+---
+
+<BaseLayout
+  title="All Articles — Silicon Pen"
+  description="Browse every technical article, hardware deep dive, and guide published on SiliconPen."
+>
+  <main class="page-main">
+    <section class="archive container">
+      <h1 class="archive-title">All Articles</h1>
+      <p class="archive-intro">
+        Every post on SiliconPen, in one place. Search by keyword, title, or tag.
+      </p>
+
+      <input
+        type="search"
+        id="articleSearch"
+        class="archive-search"
+        placeholder="Search articles or tags..."
+        aria-label="Search articles"
+      />
+
+      <div class="archive-controls">
+        <select id="sortSelect" class="archive-sort" aria-label="Sort articles">
+          <option value="latest">Latest first</option>
+          <option value="oldest">Oldest first</option>
+          <option value="az">A → Z</option>
+        </select>
+      </div>
+
+      <div class="archive-list" id="archive-list">
+        {posts.map(post => (
+          <a href={`/posts/${post.id}.html`} class="archive-item">
+            <div class="archive-thumb">
+              <img src={post.data.cover || '/images/cover.webp'} alt={post.data.title} />
+            </div>
+            <div class="archive-info">
+              <h2>{post.data.title}</h2>
+              <p>{post.data.subtitle || ''}</p>
+              <span class="archive-date">{post.data.date}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<script define:vars={{ postSearchData }}>
+  const container = document.getElementById("archive-list");
+  const searchInput = document.getElementById("articleSearch");
+  const sortSelect = document.getElementById("sortSelect");
+
+  function render(list) {
+    if (!container) return;
+    if (list.length === 0) {
+      container.innerHTML = "<p style='color: #94a3b8; padding: 2rem 0;'>No articles found matching your query.</p>";
+      return;
+    }
+
+    container.innerHTML = list.map(post => `
+      <a href="/posts/${post.id}.html" class="archive-item">
+        <div class="archive-thumb">
+          <img src="${post.cover}" alt="">
+        </div>
+        <div class="archive-info">
+          <h2>${post.title}</h2>
+          <p>${post.subtitle}</p>
+          <span class="archive-date">${post.date}</span>
+        </div>
+      </a>
+    `).join("");
+  }
+
+  function sortList(list, mode) {
+    const sorted = [...list];
+    if (mode === "latest") {
+      sorted.sort((a, b) => b.date.localeCompare(a.date));
+    } else if (mode === "oldest") {
+      sorted.sort((a, b) => a.date.localeCompare(b.date));
+    } else if (mode === "az") {
+      sorted.sort((a, b) => a.title.localeCompare(b.title));
+    }
+    return sorted;
+  }
+
+  function filterPosts() {
+    const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
+    const mode = sortSelect ? sortSelect.value : "latest";
+
+    let filtered = postSearchData;
+    if (query) {
+      filtered = postSearchData.filter(p =>
+        p.title.toLowerCase().includes(query) ||
+        p.subtitle.toLowerCase().includes(query) ||
+        p.tags.some(t => t.toLowerCase().includes(query)) ||
+        p.series.toLowerCase().includes(query)
+      );
+    }
+
+    filtered = sortList(filtered, mode);
+    render(filtered);
+  }
+
+  if (searchInput) searchInput.addEventListener("input", filterPosts);
+  if (sortSelect) sortSelect.addEventListener("change", filterPosts);
+</script>

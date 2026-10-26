@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import seriesData from '../../data/series.json';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+  const seriesKeys = new Set(Object.keys(seriesData));
+
+  // Also collect any series defined in posts
+  allPosts.forEach(p => {
+    if (p.data.series) seriesKeys.add(p.data.series);
+  });
+
+  return Array.from(seriesKeys).map(seriesKey => ({
+    params: { series: seriesKey },
+    props: {
+      seriesKey,
+      meta: (seriesData as Record<string, { name: string; description: string; cover: string }>)[seriesKey] || {
+        name: seriesKey.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+        description: `Explore all articles in the ${seriesKey} series.`,
+        cover: '/images/cover.webp'
+      }
+    }
+  }));
+}
+
+const { seriesKey, meta } = Astro.props;
+
+const seriesPosts = await getCollection('posts', ({ data }) => !data.draft && data.series === seriesKey);
+
+seriesPosts.sort((a, b) => {
+  if (a.data.order !== undefined && b.data.order !== undefined) {
+    return a.data.order - b.data.order;
+  }
+  return a.data.date.localeCompare(b.data.date);
+});
+---
+
+<BaseLayout
+  title={`${meta.name} — Silicon Pen`}
+  description={meta.description}
+  image={meta.cover}
+>
+  <main class="series-landing container">
+    <div class="series-landing-header">
+      <h1 id="series-title">{meta.name}</h1>
+      <p id="series-description" class="series-desc">{meta.description}</p>
+    </div>
+
+    <div class="series-posts">
+      {seriesPosts.map(post => (
+        <a href={`/posts/${post.id}.html`} class="series-post-card">
+          <img src={post.data.cover || meta.cover} class="series-thumb" alt={post.data.title} />
+          <h2 class="series-card-title">{post.data.title}</h2>
+          <p class="series-card-sub">{post.data.subtitle || ''}</p>
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>

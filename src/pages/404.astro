@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page Not Found (404) — Silicon Pen"
+  description="The requested page could not be found on SiliconPen."
+>
+  <main class="page-main container" style="padding: 4rem 1rem; text-align: center; min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <div id="redirect-notice" style="display: none; padding: 1.5rem 2rem; border-radius: 999px; background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(255, 159, 28, 0.3); color: #f8fafc; font-size: 1rem;">
+      Redirecting you to the article…
+    </div>
+
+    <div id="not-found-ui">
+      <div style="font-size: 4rem; font-weight: 700; color: #ff9f1c; margin-bottom: 0.5rem;">404</div>
+      <h1 style="font-size: 2rem; margin-bottom: 1rem;">Signal Lost in Transmission</h1>
+      <p style="color: #94a3b8; max-width: 500px; margin: 0 auto 2rem; line-height: 1.6;">
+        The circuit you're looking for seems to be broken, disconnected, or moved to a new address.
+      </p>
+      
+      <div style="display: flex; gap: 12px; justify-content: center;">
+        <a href="/" class="btn-primary">Return Home</a>
+        <a href="/articles.html" class="btn-secondary">Browse All Articles</a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<script is:inline>
+  // Smart redirect for legacy slugs e.g. /what-is-arduino/ -> /posts/what-is-arduino.html
+  (function () {
+    const rawPath = window.location.pathname.replace(/^\/+|\/+$/g, "");
+    if (!rawPath) return;
+
+    // Known legacy remappings
+    const legacyMap = {
+      "citadel-reference-vault": "/references.html",
+      "archive": "/articles.html",
+      "newletter": "/newsletter.html"
+    };
+
+    if (legacyMap[rawPath]) {
+      document.getElementById("redirect-notice").style.display = "block";
+      document.getElementById("not-found-ui").style.display = "none";
+      window.location.replace(legacyMap[rawPath]);
+      return;
+    }
+
+    // If it's a bare slug without file extension (e.g. "what-is-arduino" or "oscillations-1")
+    if (!rawPath.includes("/") && !rawPath.includes(".")) {
+      document.getElementById("redirect-notice").style.display = "block";
+      document.getElementById("not-found-ui").style.display = "none";
+      window.location.replace("/posts/" + rawPath + ".html");
+    }
+  })();
+</script>

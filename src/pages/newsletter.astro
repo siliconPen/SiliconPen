@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsletterBox from '../components/NewsletterBox.astro';
+---
+
+<BaseLayout
+  title="Newsletter — Silicon Pen"
+  description="Subscribe to the SiliconPen newsletter for raw engineering breakdowns, hardware notes, and companion circuit files."
+>
+  <main class="page-main container" style="padding-top: 3rem; padding-bottom: 4rem; max-width: 760px;">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <h1 style="font-size: 2.2rem; margin-bottom: 0.75rem;">The SiliconPen Dispatch</h1>
+      <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.6;">
+        Every week or two, I publish candid engineering essays, deep-dive circuit teardowns, and practical guides on hardware design.
+      </p>
+    </div>
+
+    <NewsletterBox
+      title="Never Miss a Hardware Breakdown"
+      description="Subscribe to get new articles delivered to your inbox, along with project files, code, and schematics."
+      source="/newsletter.html"
+      buttonText="Join the Dispatches"
+    />
+
+    <div style="margin-top: 2.5rem; color: #cbd5e1; line-height: 1.8;">
+      <h3>What you'll get:</h3>
+      <ul style="padding-left: 1.25rem; margin-top: 0.5rem;">
+        <li>⚡ <strong>Engineering Deep Dives:</strong> Real breakdowns of why circuits behave the way they do in physical reality.</li>
+        <li>🛠️ <strong>Project Files:</strong> Companion Arduino code, schematics, and simulation links.</li>
+        <li>🔥 <strong>Rant Electronics:</strong> Honest, unfiltered thoughts on components, quirks, and engineering tantrums.</li>
+      </ul>
+    </div>
+  </main>
+</BaseLayout>

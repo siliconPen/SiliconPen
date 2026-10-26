@@ -1,0 +1,247 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ShareRow from '../components/ShareRow.astro';
+import Comments from '../components/Comments.astro';
+import NewsletterBox from '../components/NewsletterBox.astro';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  date: string;
+  cover?: string;
+  series?: string;
+  order?: number;
+  tags?: string[];
+}
+
+const {
+  title,
+  subtitle,
+  description = subtitle || title,
+  date,
+  cover,
+  series,
+  order,
+  tags = []
+} = Astro.props;
+
+// Auto-calculate Previous / Next Chapter if part of a series
+let prevPost = null;
+let nextPost = null;
+
+if (series) {
+  const allPosts = await getCollection('posts', ({ data }) => !data.draft && data.series === series);
+  // Sort by order or by date
+  allPosts.sort((a, b) => {
+    if (a.data.order !== undefined && b.data.order !== undefined) {
+      return a.data.order - b.data.order;
+    }
+    return a.data.date.localeCompare(b.data.date);
+  });
+
+  const currentIndex = allPosts.findIndex(p => p.data.title === title || (order !== undefined && p.data.order === order));
+  if (currentIndex > 0) {
+    prevPost = allPosts[currentIndex - 1];
+  }
+  if (currentIndex >= 0 && currentIndex < allPosts.length - 1) {
+    nextPost = allPosts[currentIndex + 1];
+  }
+}
+
+const fullUrl = new URL(Astro.url.pathname, Astro.site || "https://siliconpen.com").toString();
+---
+
+<BaseLayout title={`${title} — Silicon Pen`} description={description} image={cover} article={true}>
+  <main class="page-main">
+    <article class="container post-article">
+    <!-- Hero Header -->
+    <header class="post-hero-wrapper">
+      {cover && (
+        <div class="post-hero">
+          <img src={cover} alt={title} class="post-hero-image" />
+        </div>
+      )}
+      <h1 class="post-title-main">{title}</h1>
+      {subtitle && <p class="post-subtitle-bar">“{subtitle}”</p>}
+    </header>
+
+    <!-- Meta bar -->
+    <div class="post-meta-bar">
+      <span class="post-date">{date}</span>
+      <span class="post-reading-time" id="reading-time"></span>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress-bar">
+      <div class="scroll-progress-fill"></div>
+    </div>
+
+    <!-- Main Content Layout -->
+    <div class="post-layout">
+      <div id="post-left"></div>
+
+      <section class="post-content-shell">
+        <div class="post-main">
+          <div class="post-content">
+            <slot />
+            
+            <!-- In-Article Newsletter & Resource Download -->
+            <NewsletterBox
+              title="Enjoyed this deep dive?"
+              description="Get raw engineering breakdowns and companion circuit schematics straight to your inbox."
+              source={Astro.url.pathname}
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Dynamic Table of Contents -->
+      <aside class="post-toc">
+        <div class="post-toc-title">On this page</div>
+        <nav id="post-toc-list"></nav>
+      </aside>
+    </div>
+
+    <!-- Post Footer: Sharing, Tags, Series Navigation, Comments -->
+    <section class="post-footer-extra">
+      <ShareRow title={title} url={fullUrl} />
+
+      {tags.length > 0 && (
+        <div class="post-tags">
+          {tags.map(t => (
+            <a href={`/tags.html?tag=${encodeURIComponent(t)}`} class="tag-chip">
+              #{t}
+            </a>
+          ))}
+        </div>
+      )}
+
+      <!-- Automated Previous / Next Series Navigation -->
+      {(prevPost || nextPost) && (
+        <div class="post-related">
+          <h2>Continue Reading</h2>
+          <div class="post-related-grid">
+            {prevPost && (
+              <a href={`/posts/${prevPost.id}.html`} class="post-related-card">
+                <div class="related-thumb">
+                  <img src={prevPost.data.cover || cover} alt={prevPost.data.title} />
+                </div>
+                <div class="related-badge">← PREVIOUS CHAPTER</div>
+                <h3 class="related-title">{prevPost.data.title}</h3>
+              </a>
+            )}
+            {nextPost && (
+              <a href={`/posts/${nextPost.id}.html`} class="post-related-card">
+                <div class="related-thumb">
+                  <img src={nextPost.data.cover || cover} alt={nextPost.data.title} />
+                </div>
+                <div class="related-badge">NEXT CHAPTER →</div>
+                <h3 class="related-title">{nextPost.data.title}</h3>
+              </a>
+            )}
+          </div>
+        </div>
+      )}
+
+      <Comments />
+    </section>
+  </article>
+  </main>
+</BaseLayout>
+
+<script>
+  function initPostFeatures() {
+    // 1. Reading Time
+    const contentEl = document.querySelector(".post-content") as HTMLElement;
+    const readingEl = document.getElementById("reading-time");
+    if (contentEl && readingEl) {
+      const text = contentEl.innerText || "";
+      const words = text.trim().split(/\s+/).length;
+      const minutes = Math.max(1, Math.round(words / 200));
+      readingEl.textContent = `${minutes} min read`;
+    }
+
+    // 2. Dynamic Table of Contents
+    const tocList = document.getElementById("post-toc-list");
+    if (contentEl && tocList) {
+      tocList.innerHTML = "";
+      const headings = contentEl.querySelectorAll("h1, h2");
+      if (!headings.length) {
+        const tocContainer = tocList.closest(".post-toc") as HTMLElement;
+        if (tocContainer) tocContainer.style.display = "none";
+      } else {
+        const items: { heading: Element; link: HTMLAnchorElement }[] = [];
+        headings.forEach((h) => {
+          if (!h.id) {
+            h.id = (h.textContent || "")
+              .trim()
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, "-")
+              .replace(/(^-|-$)/g, "");
+          }
+          const level = h.tagName === "H1" ? 2 : 3;
+          const link = document.createElement("a");
+          link.href = `#${h.id}`;
+          link.textContent = h.textContent?.trim() || "";
+          link.className = `toc-link toc-level-${level}`;
+
+          const wrapper = document.createElement("div");
+          wrapper.appendChild(link);
+          tocList.appendChild(wrapper);
+          items.push({ heading: h, link });
+        });
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              const item = items.find((i) => i.heading === entry.target);
+              if (!item) return;
+              if (entry.isIntersecting) {
+                items.forEach((i) => i.link.classList.remove("active"));
+                item.link.classList.add("active");
+              }
+            });
+          },
+          { rootMargin: "-40% 0px -55% 0px", threshold: 0.1 }
+        );
+        items.forEach(({ heading }) => observer.observe(heading));
+      }
+    }
+
+    // 3. Scroll Progress
+    const fill = document.querySelector(".scroll-progress-fill") as HTMLElement;
+    if (fill) {
+      const updateProgress = () => {
+        const doc = document.documentElement;
+        const scrollTop = doc.scrollTop || document.body.scrollTop;
+        const scrollHeight = doc.scrollHeight - doc.clientHeight;
+        const percent = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        fill.style.width = percent + "%";
+      };
+      window.addEventListener("scroll", updateProgress, { passive: true });
+      updateProgress();
+    }
+
+    // 4. Code Block Copy Buttons
+    document.querySelectorAll("pre").forEach((pre) => {
+      if (pre.querySelector(".copy-btn")) return;
+      pre.classList.add("code-block");
+      const btn = document.createElement("button");
+      btn.className = "copy-btn";
+      btn.innerText = "Copy";
+      btn.onclick = () => {
+        const code = pre.querySelector("code")?.innerText || pre.innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          btn.innerText = "Copied!";
+          setTimeout(() => (btn.innerText = "Copy"), 1500);
+        });
+      };
+      pre.appendChild(btn);
+    });
+  }
+
+  initPostFeatures();
+  document.addEventListener('astro:after-swap', initPostFeatures);
+</script>

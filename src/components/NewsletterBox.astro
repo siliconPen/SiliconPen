@@ -1,0 +1,201 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  resource?: string;
+  source?: string;
+  buttonText?: string;
+}
+
+const {
+  title = "Join the SiliconPen Newsletter",
+  description = "Get raw engineering deep-dives, hardware rants, and project notes straight to your inbox.",
+  resource = "general",
+  source = Astro.url.pathname,
+  buttonText = "Subscribe"
+} = Astro.props;
+---
+
+<div class="newsletter-card">
+  <div class="newsletter-content">
+    <div class="newsletter-badge">⚡ SILICONPEN DISPATCHES</div>
+    <h3 class="newsletter-title">{title}</h3>
+    <p class="newsletter-desc">{description}</p>
+    
+    <form
+      class="newsletter-form sp-ml-form"
+      action="https://assets.mailerlite.com/jsonp/1527172/forms/154629942434333832/subscribe"
+      method="post"
+    >
+      <!-- Source tracking for lead-magnets and analytics -->
+      <input type="hidden" name="fields[signup_source]" value={source} />
+      <input type="hidden" name="fields[resource_requested]" value={resource} />
+      <input type="hidden" name="ml-submit" value="1" />
+      <input type="hidden" name="anticsrf" value="true" />
+
+      <div class="newsletter-input-group">
+        <input
+          type="email"
+          name="fields[email]"
+          class="newsletter-input"
+          placeholder="your.email@example.com"
+          required
+          autocomplete="email"
+        />
+        <button type="submit" class="newsletter-btn">
+          {buttonText}
+        </button>
+      </div>
+      <p class="newsletter-privacy">No spam, ever. Unsubscribe at any time.</p>
+    </form>
+
+    <!-- Inline Success Message -->
+    <div class="newsletter-success-box" style="display: none;">
+      <div style="font-size: 2rem; margin-bottom: 8px;">🎉</div>
+      <h4 style="color: #ff9f1c; font-size: 1.3rem; margin-bottom: 6px; font-weight: 700;">Thank you for subscribing!</h4>
+      <p style="color: #e2e8f0; font-size: 0.95rem; line-height: 1.6; margin: 0;">
+        You have successfully joined the SiliconPen dispatch list. Check your inbox to confirm your subscription and access your project files.
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .newsletter-card {
+    background: linear-gradient(145deg, #0d1326, #070a16);
+    border: 1px solid rgba(255, 159, 28, 0.25);
+    border-radius: 18px;
+    padding: 32px 28px;
+    margin: 40px 0;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+  }
+  .newsletter-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #ff9f1c;
+    background: rgba(255, 159, 28, 0.12);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .newsletter-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 8px;
+  }
+  .newsletter-desc {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .newsletter-input-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .newsletter-input {
+    flex: 1 1 240px;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: #f8fafc;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .newsletter-input:focus {
+    border-color: #ff9f1c;
+  }
+  .newsletter-btn {
+    background: #ff9f1c;
+    color: #050816;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.2s, transform 0.1s;
+  }
+  .newsletter-btn:hover {
+    filter: brightness(1.1);
+  }
+  .newsletter-btn:active {
+    transform: scale(0.98);
+  }
+  .newsletter-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  .newsletter-privacy {
+    color: #64748b;
+    font-size: 0.8rem;
+    margin-top: 10px;
+  }
+  .newsletter-success-box {
+    background: rgba(15, 23, 42, 0.9);
+    border: 1px solid rgba(255, 159, 28, 0.4);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    margin-top: 16px;
+  }
+</style>
+
+<script is:inline>
+  function attachNewsletterSubmit() {
+    const forms = document.querySelectorAll(".sp-ml-form");
+    forms.forEach((form) => {
+      if (form.dataset.attached) return;
+      form.dataset.attached = "true";
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const btn = form.querySelector(".newsletter-btn");
+        const card = form.closest(".newsletter-card");
+        const successBox = card ? card.querySelector(".newsletter-success-box") : null;
+        const emailInput = form.querySelector('input[type="email"]');
+
+        if (!emailInput || !emailInput.value) return;
+
+        const originalBtnText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = "Subscribing...";
+
+        try {
+          const formData = new FormData(form);
+
+          // Submit to MailerLite JSONP endpoint via fetch
+          await fetch(form.action, {
+            method: "POST",
+            body: formData,
+            mode: "no-cors"
+          });
+
+          // Show inline success message seamlessly
+          form.style.display = "none";
+          if (successBox) {
+            successBox.style.display = "block";
+          }
+        } catch (err) {
+          console.error("Newsletter submission error:", err);
+          btn.disabled = false;
+          btn.textContent = originalBtnText;
+          alert("Submission could not be completed. Please try again.");
+        }
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", attachNewsletterSubmit);
+  } else {
+    attachNewsletterSubmit();
+  }
+</script>

@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import seriesData from '../../data/series.json';
+
+const seriesEntries = Object.entries(seriesData);
+---
+
+<BaseLayout
+  title="Series — Silicon Pen"
+  description="Explore multi-part engineering tracks, hardware rants, and structured Arduino courses on SiliconPen."
+>
+  <main class="container page-content">
+    <div class="series-header">
+      <h1>All Series</h1>
+      <p>A collection of themed series, engineering journals, and multi-part deep dives.</p>
+    </div>
+
+    <div class="series-list">
+      {seriesEntries.map(([key, data]) => (
+        <a href={`/series/${key}.html`} class="series-card">
+          <img src={data.cover} alt={data.name} class="series-cover" />
+          <h2>{data.name}</h2>
+          <p>{data.description}</p>
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>

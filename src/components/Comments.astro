@@ -1,0 +1,39 @@
+---
+---
+
+<section class="post-comments" id="comments">
+  <h2 class="section-title">Comments</h2>
+  <p class="post-comments-note">
+    Share your thoughts, questions, or corrections below. Be kind and keep it on-topic ✨
+  </p>
+
+  <div id="giscus_container" style="margin-top: 24px;"></div>
+</section>
+
+<script>
+  function loadGiscus() {
+    const container = document.getElementById("giscus_container");
+    if (!container || container.hasChildNodes()) return;
+
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.crossOrigin = "anonymous";
+    script.setAttribute("data-repo", "siliconPen/SiliconPen");
+    script.setAttribute("data-repo-id", "R_kgDOQjGn8g");
+    script.setAttribute("data-category", "Comments");
+    script.setAttribute("data-category-id", "DIC_kwDOQjGn8s4Czfyv");
+    script.setAttribute("data-mapping", "pathname");
+    script.setAttribute("data-strict", "0");
+    script.setAttribute("data-reactions-enabled", "1");
+    script.setAttribute("data-emit-metadata", "0");
+    script.setAttribute("data-input-position", "bottom");
+    script.setAttribute("data-theme", "dark_dimmed");
+    script.setAttribute("data-lang", "en");
+
+    container.appendChild(script);
+  }
+
+  loadGiscus();
+  document.addEventListener('astro:after-swap', loadGiscus);
+</script>

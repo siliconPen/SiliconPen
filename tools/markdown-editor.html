@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SiliconPen Markdown → HTML</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Simple dark styling -->
+    <style>
+      :root {
+        --bg: #050816;
+        --bg-elevated: #0b1020;
+        --border-subtle: #1b2236;
+        --accent: #ff9f1c;
+        --accent-soft: rgba(255, 159, 28, 0.12);
+        --text-main: #f5f7ff;
+        --text-muted: #98a0c6;
+        --font-ui: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+          "Segoe UI", sans-serif;
+        --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+          Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        --radius-lg: 18px;
+        --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.45);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at top, #141b33 0, #050816 52%);
+        color: var(--text-main);
+        font-family: var(--font-ui);
+        display: flex;
+        justify-content: center;
+        padding: 24px 10px;
+      }
+
+      .app {
+        width: 100%;
+        max-width: 1220px;
+        background: linear-gradient(145deg, #080d1a, #070918);
+        border-radius: 28px;
+        padding: 20px 20px 18px;
+        box-shadow: var(--shadow-soft);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .app-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 4px 4px 8px;
+      }
+
+      .app-title-block h1 {
+        font-size: 20px;
+        letter-spacing: 0.03em;
+        margin: 0;
+      }
+
+      .app-title-block p {
+        margin: 4px 0 0;
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+
+      .tag-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 11px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 12px;
+      }
+
+      .tag-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      .controls-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        padding: 8px 4px 0;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 999px;
+        padding: 7px 14px;
+        font-size: 13px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: inherit;
+        transition: transform 0.08s ease, box-shadow 0.08s ease,
+          background 0.08s ease;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #050816;
+        box-shadow: 0 8px 20px rgba(255, 159, 28, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 28px rgba(255, 159, 28, 0.36);
+      }
+
+      .btn-ghost {
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--text-muted);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .btn-ghost:hover {
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .checkbox-inline {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      .checkbox-inline input {
+        width: 14px;
+        height: 14px;
+      }
+
+      .panes {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 14px;
+        margin-top: 6px;
+      }
+
+      .pane {
+        background: radial-gradient(circle at top left, #111730, #070c19);
+        border-radius: var(--radius-lg);
+        padding: 12px 12px 10px;
+        border: 1px solid var(--border-subtle);
+        display: flex;
+        flex-direction: column;
+        min-height: 340px;
+      }
+
+      .pane-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 6px;
+      }
+
+      .pane-title {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--text-muted);
+      }
+
+      .pane-subtitle {
+        font-size: 11px;
+        color: var(--text-muted);
+      }
+
+      textarea,
+      pre {
+        width: 100%;
+        flex: 1;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(2, 6, 23, 0.9);
+        padding: 10px 11px;
+        color: var(--text-main);
+        font-size: 13px;
+        resize: vertical;
+        min-height: 260px;
+        font-family: var(--font-mono);
+        line-height: 1.5;
+      }
+
+      textarea:focus {
+        outline: 1px solid var(--accent);
+        box-shadow: 0 0 0 1px rgba(255, 159, 28, 0.2);
+      }
+
+      pre {
+        margin: 0;
+        overflow: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+      .preview {
+        flex: 1;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: rgba(3, 10, 30, 0.95);
+        padding: 12px 14px 16px;
+        overflow: auto;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .preview h1,
+      .preview h2,
+      .preview h3,
+      .preview h4 {
+        margin-top: 1.2em;
+        margin-bottom: 0.5em;
+      }
+
+      .preview p {
+        margin: 0.5em 0;
+      }
+
+      .preview ul,
+      .preview ol {
+        padding-left: 1.5em;
+      }
+
+      .preview code {
+        font-family: var(--font-mono);
+        background: rgba(15, 23, 42, 0.9);
+        padding: 1px 4px;
+        border-radius: 4px;
+        font-size: 0.9em;
+      }
+
+      .preview pre code {
+        display: block;
+        padding: 8px 10px;
+        border-radius: 8px;
+      }
+
+      .helper-row {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 11px;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+
+      .helper-row span {
+        opacity: 0.8;
+      }
+
+      @media (max-width: 900px) {
+        .panes {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+    </style>
+
+    <!-- Markdown parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  </head>
+
+  <body>
+    <div class="app">
+      <div class="app-header">
+        <div class="app-title-block">
+          <h1>SiliconPen Markdown → HTML</h1>
+          <p>
+            Paste your article in Markdown on the left. Copy clean HTML for your
+            <code>post-content</code> on the right.
+          </p>
+        </div>
+        <div class="tag-pill">
+          <span class="tag-dot"></span>
+          <span>Local editor • no backend</span>
+        </div>
+      </div>
+
+      <div class="controls-row">
+        <button class="btn btn-primary" id="btn-render">
+          🔁 Render / Refresh
+        </button>
+        <button class="btn btn-ghost" id="btn-copy-html">
+          📋 Copy HTML
+        </button>
+
+        <label class="checkbox-inline">
+          <input type="checkbox" id="wrap-content" checked />
+          <span>Wrap with <code>&lt;div class="post-content"&gt;</code></span>
+        </label>
+      </div>
+
+      <div class="panes">
+        <!-- Markdown input -->
+        <section class="pane">
+          <div class="pane-header">
+            <div>
+              <div class="pane-title">Markdown Input</div>
+              <div class="pane-subtitle">
+                Write here or paste from Obsidian / VS Code.
+              </div>
+            </div>
+          </div>
+
+          <textarea id="md-input" spellcheck="false"></textarea>
+          <div class="helper-row">
+            <span>Supports basic Markdown + inline LaTeX like <code>\\(V=IR\\)</code>.</span>
+          </div>
+        </section>
+
+        <!-- Right column: HTML + Preview -->
+        <section class="pane">
+          <div class="preview" id="preview"></div>
+          <div class="pane-header">
+            <div>
+              <div class="pane-title">HTML Output &amp; Preview</div>
+              <div class="pane-subtitle">
+                Copy this into your article file inside the content block.
+              </div>
+            </div>
+          </div>
+
+          <pre id="html-output"></pre>
+          <div class="helper-row">
+            <span>Above is raw HTML • Below is how it roughly renders.</span>
+          </div>
+
+          
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const mdInput = document.getElementById("md-input");
+      const htmlOutput = document.getElementById("html-output");
+      const preview = document.getElementById("preview");
+      const wrapCheckbox = document.getElementById("wrap-content");
+      const btnRender = document.getElementById("btn-render");
+      const btnCopyHtml = document.getElementById("btn-copy-html");
+      let renderTimer = null;
+      const DEBOUNCE_DELAY = 300; // ms
+
+
+      // Some starter text so it isn't empty the first time
+      const starter = `### Ever looked at a circuit and felt lost?
+
+*\"Ahh, what are these arrows and zigzag lines??\"*
+
+This is **Markdown**. Write your article here, then hit **Render**.
+
+- Supports bullet lists  
+- *Italics*, **bold**, \`inline code\`
+- Headings: \`##\`, \`###\`, etc.
+
+You can also write LaTeX like \\\\(V = IR\\\\) which your page will later render via MathJax (same as before).`;
+
+      mdInput.value = starter;
+
+      function renderMarkdown() {
+        const md = mdInput.value;
+
+        // Convert to HTML
+        const rawHtml = marked.parse(md, {
+          breaks: true,
+        });
+
+        const wrapped = wrapCheckbox.checked
+          ? `<div class="post-content">\n${rawHtml}\n</div>`
+          : rawHtml;
+
+        htmlOutput.textContent = wrapped;
+        preview.innerHTML = rawHtml;
+      }
+
+      btnRender.addEventListener("click", renderMarkdown);
+      mdInput.addEventListener("input", () => {
+  clearTimeout(renderTimer);
+
+  renderTimer = setTimeout(() => {
+    renderMarkdown();
+  }, DEBOUNCE_DELAY);
+});
+
+
+      // Ctrl+Enter = render
+      mdInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+          e.preventDefault();
+          renderMarkdown();
+        }
+      });
+
+      btnCopyHtml.addEventListener("click", async () => {
+        const text = htmlOutput.textContent;
+        try {
+          await navigator.clipboard.writeText(text);
+          btnCopyHtml.textContent = "✅ Copied!";
+          setTimeout(() => (btnCopyHtml.textContent = "📋 Copy HTML"), 1200);
+        } catch (err) {
+          alert("Copy failed. You can select the text and copy manually.");
+        }
+      });
+
+      // Initial render
+      renderMarkdown();
+    </script>
+  </body>
+</html>

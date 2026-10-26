@@ -1,0 +1,388 @@
+---
+title: "Know Your Weapons: The Electronics You’ll Work With"
+subtitle: "A Practical Introduction to the Core Components You’ll Touch in Every Electronics Project"
+description: "Before building projects or writing code, you need to understand the core electronic components you’ll work with. This post introduces the fundamental parts—what they do, how they behave, and how they fail—in a simple, practical way."
+date: "2025-12-24"
+cover: "/images/real-circuits/cover.png"
+series: "real-circuits"
+order: 2
+draft: false
+---
+
+<p>This first post is exactly about that.</p>
+<p>Before sensors, before projects, before code,<br />we need to understand the <strong>basic tools and components of the electronic world</strong> — the things you’ll touch in every build.</p>
+<p>This post doesn’t teach theory.<br />It teaches <strong>familiarity</strong>.</p>
+<hr class="section-divider"/>
+
+<h1>🧱 1. Breadboard — Your Battlefield</h1>
+<p><blockquote>A breadboard exists so you can build, break, and rebuild circuits without soldering.</blockquote></p>
+<p>It is a temporary prototyping platform.<br />Inside it are metal strips that electrically connect certain holes.</p>
+<img src="/images/real-circuits/know-your-weapons/1.png" alt="brdbod" />
+<h3>It is for:</h3>
+<ul>
+<li><p>Learning</p>
+</li>
+<li><p>Experimenting</p>
+</li>
+<li><p>Making mistakes safely</p>
+</li>
+</ul>
+<h3>Not for:</h3>
+<ul>
+<li><p>Permanent circuits</p>
+</li>
+<li><p>High-current loads</p>
+</li>
+<li><p>High-frequency precision</p>
+</li>
+</ul>
+<h2>🔹 Types of Prototyping Boards</h2>
+<p>These are not types, rather they are progression levels</p>
+<h3>1️⃣ Solderless Breadboard</h3>
+<p>This is the default battlefield. We are going to use this for our projects!</p>
+<img src="/images/real-circuits/know-your-weapons/2.png" alt="" />
+<ul>
+<li><p><strong>Internal Metal Strips</strong><br />Breadboards contains these metal strips, which connect the holes together.<br />There are two kinds of connections:<br /> 1. Parallel pin connections - These give us pins with same voltage! <br />2. Power rail connections - These are meant to power the entire board.</p>
+</li>
+<li><p><strong>Center gap for ICs</strong><br />You might notice a broad gap in the middle.<br />This gap is provided to insert IC, or tools which need its pins to be on different lines. This will become clear in the next post with examples!</p>
+</li>
+<li><p><strong>Power rails</strong><br />The power rails are not mandatory with any special connection, <br />instead it their arrangement which makes them efficeint in providing power to each section of the board!<br />(<em>Not compulsory by logic, but a good practice!</em>)</p>
+</li>
+<li><p><strong>Different sizes (mini, half, full)</strong><br />Yes, they come in different sizes. Though we&#39;ll mostly be using the full one.<br />The small and half ones are used to compensate for projects requiring it to compact!</p>
+</li>
+</ul>
+<h3>Common mishaps</h3>
+<ul style="list-style-type: '❌';">
+<li><p>Forgetting that long breadboards split power rails in the middle<br /><sp-warning>This is the most common mistakes commited by beginners.<br /> As you see in the image, the power rail for the full board is brokem in the middle,<br />hence you must connect them!</sp-warning></p>
+</li>
+<li><p>Assuming both sides of the board share power</p>
+</li>
+<li><p>Bent component legs not making contact</p>
+</li>
+<li><p>Not pushing jumper pins fully in</p>
+</li>
+<li><p>Worn-out breadboards causing intermittent contact</p>
+</li>
+</ul>
+<p><strong>Real Circuits rule:</strong><br /><sp-rule>If a circuit behaves randomly, touch the breadboard first.</sp-rule></p>
+<h3>2️⃣ Perfboard / Dot PCB</h3>
+<p>This board looks like a PCB,<br />but it isn&#39;t!</p>
+<img src="/images/real-circuits/know-your-weapons/3.png" alt="" />
+<p>Look closely. <br />The holes aren&#39;t connected with each other.<br />For this type of board you must put the components and then manually solder the connections!</p>
+<p>When to use this board?</p>
+<ul>
+<li>Breadboard prototyping is complete &amp;</li>
+<li>You want stability</li>
+</ul>
+<h3>3️⃣ Custom PCB (Final Destination)</h3>
+<p>The last step when you want to finalize your product or project.<br />We need a PCB, a compact board with the connections pre-etched into it.<br /><br />It requires the same components but in their compact form!<br />There is a lot to PCB designing, but we won&#39;t go there yet.</p>
+<img src="/images/real-circuits/know-your-weapons/4.png" alt="" />
+<h3>This completes our mental journey:</h3>
+<p><sp-fact><em>breadboard → perfboard → PCB</em></sp-fact></p>
+<hr class="section-divider"/>
+
+<h1>🔌 2. Wires — More Important Than They Look</h1>
+<p>Wires are not <em>“just connections”</em>.<br />They define signal integrity, reliability, and <strong>sanity</strong>.</p>
+<h2>Types of wires you’ll actually use</h2>
+<h3>🔹 Jumper Wires</h3>
+<p>Used on breadboards.</p>
+<img src="/images/real-circuits/know-your-weapons/5.png" alt="" />
+<ul>
+<li><p>Male–Male → breadboard ↔ breadboard</p>
+</li>
+<li><p>Male–Female → breadboard ↔ module</p>
+</li>
+<li><p>Female–Female → module ↔ module</p>
+</li>
+</ul>
+<p>Cheap jumpers often cause:</p>
+<ul>
+<li><p>Loose connections</p>
+</li>
+<li><p>Random resets</p>
+</li>
+<li><p>Sensor glitches</p>
+</li>
+</ul>
+<p><strong>We will use these mostly!!</strong></p>
+<h3>🔹 Alligator (Crocodile) Clips</h3>
+<img src="/images/real-circuits/know-your-weapons/6.png" alt="" />
+<p>Used for:</p>
+<ul>
+<li><p>Temporary power connections</p>
+</li>
+<li><p>Testing motors, batteries, relays</p>
+</li>
+<li><p>Quick experiments</p>
+</li>
+</ul>
+<p>Downside:</p>
+<ul>
+<li>Bad for precision. Easy to short things.</li>
+</ul>
+<h3>Solid-Core Wires</h3>
+<ul>
+<li><p>Best for breadboards</p>
+</li>
+<li><p>Hold shape</p>
+</li>
+<li><p>Reliable contact</p>
+</li>
+</ul>
+<h3>Stranded Wires</h3>
+<ul>
+<li><p>Flexible</p>
+</li>
+<li><p>Better for moving parts</p>
+</li>
+<li><p>Worse for breadboards unless tinned</p>
+</li>
+</ul>
+<h3>🔹 Direct / Soldered Wires</h3>
+<p>Used when:</p>
+<ul>
+<li><p>Breadboard phase is over</p>
+</li>
+<li><p>Circuit must be stable</p>
+</li>
+<li><p>Noise must be minimized</p>
+</li>
+</ul>
+
+<h2>🔥Soldering — When Wires Are Not Enough</h2>
+<p>Sooner or later, you’ll reach a point where jumper wires are not enough.</p>
+<h3>Some components — like:</h3>
+<ul>
+<li><p>IMU sensors</p>
+</li>
+<li><p>Small breakout boards</p>
+</li>
+<li><p>Header pins</p>
+</li>
+<li><p>Certain modules</p>
+</li>
+</ul>
+<p>must be soldered before they can even be used on a breadboard.</p>
+<h3>Soldering is simply the process of:</h3>
+<ul>
+<li><p>Making a permanent electrical connection</p>
+</li>
+<li><p>By melting solder to join a component lead and a copper pad</p>
+</li>
+</ul>
+<p>It is <strong>not advanced electronics</strong> —<br />it’s a basic skill, like tightening a screw.</p>
+<h3>What you should know for now</h3>
+<ul>
+<li><p>Soldering is required, not optional, in real projects</p>
+</li>
+<li><p>Bad solder joints cause intermittent and confusing failures</p>
+</li>
+<li><p>Many sensors won’t work at all until headers are soldered</p>
+</li>
+</ul>
+<p>But don’t worry.</p>
+<p>We’re Not Teaching Soldering Yet</p>
+<h3>In this series:</h3>
+<ul>
+<li><p>We’ll start on breadboards</p>
+</li>
+<li><p>Then move to modules</p>
+</li>
+</ul>
+<p>And when the time comes, we’ll properly learn soldering</p>
+<p>Slowly.<br />Safely.<br />Step by step.</p>
+
+
+<hr class="section-divider"/>
+
+<h1>📏 3. Multimeter — Your Eyes</h1>
+<blockquote><br />If you build without a multimeter,<br />
+you’re fighting blind.</blockquote>
+<img src="/images/real-circuits/know-your-weapons/7.png" alt="" />
+<p>A cheap, <strong>small multimeter</strong> is enough.</p>
+<h3>What you actually need:</h3>
+<ul>
+<li><p>Voltage measurement (DC)</p>
+</li>
+<li><p>Continuity test (beep mode)</p>
+</li>
+<li><p>Resistance measurement</p>
+</li>
+<li><p>Basic current measurement</p>
+</li>
+</ul>
+<h3>What beginners miss:</h3>
+<ul>
+<li><p>Checking continuity of wires</p>
+</li>
+<li><p>Verifying power rails</p>
+</li>
+<li><p>Measuring battery voltage under load</p>
+</li>
+</ul>
+<hr class="section-divider"/>
+
+<h1>🔋 4. Power — Batteries &amp; Holders</h1>
+<h3>Common options:</h3>
+<ul>
+<li><p>9V batteries (worst for current-heavy loads)</p>
+</li>
+<li><p>AA battery packs</p>
+</li>
+<li><p>Li-ion / LiPo cells (advanced)</p>
+</li>
+<li><p>USB power (5V)</p>
+</li>
+</ul>
+<h3>Battery holders matter:</h3>
+<ul>
+<li><p>Loose springs cause voltage drops</p>
+</li>
+<li><p>Thin wires heat up</p>
+</li>
+<li><p>Wrong polarity kills ICs fast</p>
+</li>
+</ul>
+<p>A wrong power source can easily wreck your project and burn your sensors, microcontroller and ICs!</p>
+<h3>Rule:</h3>
+<p><sp-rule>Power problems look like logic problems.</sp-rule></p>
+<hr class="section-divider"/>
+
+<h1>🧠 5. Microcontrollers — The Brain</h1>
+<img src="/images/real-circuits/know-your-weapons/8.png" alt="" />
+<h3>A microcontroller is:</h3>
+<ul>
+<li><p>CPU</p>
+</li>
+<li><p>Memory</p>
+</li>
+<li><p>I/O pins</p>
+</li>
+<li><p>Peripherals<br />all inside one chip.</p>
+</li>
+</ul>
+<p>We will use two famous microcontrollers for our digital electronics projects!</p>
+<ul>
+<li>Arduino UNO/Nano   (<em>Learn here!</em>: <a href="/series/pathway-to-arduino.html"> Pathways To Arduino</a>)</li>
+<li>ESP32</li>
+</ul>
+<hr class="section-divider"/>
+
+<h1>🧩 6. ICs — More Than Just Chips</h1>
+<img src="/images/real-circuits/know-your-weapons/9.png" alt="" />
+<h3>ICs can be:</h3>
+<ul>
+<li><p>Logic ICs</p>
+</li>
+<li><p>Sensor ICs</p>
+</li>
+<li><p>Driver ICs</p>
+</li>
+<li><p>Power ICs</p>
+</li>
+</ul>
+<h3>Things beginners miss:</h3>
+<ul>
+<li><p>Pin orientation</p>
+</li>
+<li><p>Absolute max ratings</p>
+</li>
+<li><p>Need for decoupling capacitors</p>
+</li>
+<li><p>Why some ICs “randomly” die</p>
+</li>
+</ul>
+<p>We will explore all this in our upcoming projects in this series!</p>
+<hr class="section-divider"/>
+
+<h1>⚡ 7. Analog Components</h1>
+<h3>These deal with continuous values.</h3>
+<ul>
+<li><p>Resistors</p>
+</li>
+<li><p>Capacitors</p>
+</li>
+<li><p>Potentiometers</p>
+</li>
+<li><p>Diodes</p>
+</li>
+<li><p>Transistors</p>
+</li>
+</ul>
+<h3>Analog parts are:</h3>
+<ul>
+<li><p>Sensitive</p>
+</li>
+<li><p>Noisy</p>
+</li>
+<li><p>Honest</p>
+</li>
+</ul>
+<p>They respond to physics, not code.</p>
+<hr class="section-divider"/>
+
+<h1>🔢 8. Digital Components</h1>
+<h3>These deal with states.</h3>
+<ul>
+<li><p>Logic ICs</p>
+</li>
+<li><p>Buttons</p>
+</li>
+<li><p>Digital sensors</p>
+</li>
+<li><p>Microcontroller pins</p>
+</li>
+</ul>
+<p>Digital signals pretend to be clean.<br />In reality, they’re built on analog behavior.</p>
+<h3>Key idea:</h3>
+<p><sp-fact>Digital works because analog behaves within limits.</sp-fact></p>
+<hr class="section-divider"/>
+
+<h1>🧭 What to Do Next</h1>
+<p>Don’t overthink this part.</p>
+<p>You don’t need expensive tools.<br />You don’t need advanced sensors.<br />You don’t need to know everything yet.</p>
+<h2>Start simple.</h2>
+<h3>Get yourself a basic electronics kit:</h3>
+<ul>
+<li><p>A breadboard</p>
+</li>
+<li><p>Jumper wires</p>
+</li>
+<li><p>A few resistors and LEDs</p>
+</li>
+<li><p>A basic power source</p>
+</li>
+<li><p>A small multimeter (if possible)</p>
+</li>
+<li><p>Arduino UNO (for digital projects)</p>
+</li>
+</ul>
+<p>I started with <a href="https://www.flipkart.com/electrobot-diy-ultrasonic-distance-sensor-starter-kit-uno-r3-lcd1602-breadboad-educational-electronic-hobby/p/itmfg73umy2mgen8?pid=EHKH3HHQ8U2ZQHV5&lid=LSTEHKH3HHQ8U2ZQHV5YNNJZ6&marketplace=FLIPKART&cmpid=content_electronic-hobby-kit_8965229628_gmc">this kit</a>.</p>
+<p>That’s enough to begin.</p>
+<p>Start building very <strong>simple circuits</strong> — both analog and digital.<br />Focus on connecting things, observing behavior, and getting comfortable with the tools you just learned about.</p>
+<h2>About Projects in This Series</h2>
+<p>In Real Circuits, I’ll be posting projects that you can follow along with —<br />but remember:</p>
+<p>Projects here are not just about getting a result.<br />They are about <strong>understanding</strong> why the circuit behaves the way it does.</p>
+<p>If something doesn’t work, that’s not a failure —<br />that’s the point.</p>
+<h2>A Note on Arduino &amp; Code</h2>
+<p>For digital microcontroller based projects we&#39;ll use Arduino for most beginner level projects!</p>
+<p>If you’re new to Arduino or feel unsure about the code side, I strongly recommend checking out my Pathway to Arduino series.</p>
+<h3>That series focuses on:</h3>
+<ul>
+<li><p>Arduino basics</p>
+</li>
+<li><p>Pins, code structure, and simple logic</p>
+</li>
+<li><p>Understanding what the code is doing, not just copying it</p>
+</li>
+</ul>
+<h3>Real Circuits and Pathway to Arduino are designed to go hand in hand:</h3>
+<ul>
+<li><p>Pathway to Arduino → helps you understand the code</p>
+</li>
+<li><p>Real Circuits → helps you understand the hardware</p>
+</li>
+</ul>
+<p>Together, they give you the full picture.</p>
+<h3>That’s it for now.</h3>
+<p>Pick up your tools.<br />Set up your breadboard.<br />And get comfortable at the bench.</p>

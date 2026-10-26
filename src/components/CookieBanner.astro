@@ -1,0 +1,60 @@
+<div id="cookieConsent" class="cookie-banner" style="display: none;">
+  <div class="cookie-banner-inner container">
+    <p>We use cookies to improve your experience and deliver relevant content.</p>
+    <button id="cookieAccept" class="btn-primary" style="padding: 6px 16px; font-size: 0.9rem;">Accept</button>
+  </div>
+</div>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #0b1020;
+    border-top: 1px solid rgba(148, 163, 184, 0.2);
+    padding: 14px 0;
+    z-index: 9999;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  }
+  .cookie-banner-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    color: #e2e8f0;
+    font-size: 0.9rem;
+  }
+</style>
+
+<script>
+  function initCookieBanner() {
+    const banner = document.getElementById("cookieConsent");
+    const acceptBtn = document.getElementById("cookieAccept");
+    if (!banner || !acceptBtn) return;
+
+    function loadAdsense() {
+      if (document.getElementById("adsense-script")) return;
+      const s = document.createElement("script");
+      s.id = "adsense-script";
+      s.async = true;
+      s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3169103084290208";
+      s.setAttribute("crossorigin", "anonymous");
+      document.head.appendChild(s);
+    }
+
+    if (localStorage.getItem("sp_cookie_ok")) {
+      loadAdsense();
+    } else {
+      banner.style.display = "block";
+      acceptBtn.onclick = () => {
+        localStorage.setItem("sp_cookie_ok", "yes");
+        banner.style.display = "none";
+        loadAdsense();
+      };
+    }
+  }
+
+  initCookieBanner();
+  document.addEventListener('astro:after-swap', initCookieBanner);
+</script>
