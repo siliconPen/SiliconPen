@@ -35,27 +35,125 @@ seriesPosts.sort((a, b) => {
   }
   return a.data.date.localeCompare(b.data.date);
 });
+
+// Calculate statistics
+const totalMinutes = seriesPosts.reduce((acc, p) => {
+  const words = (p.body || '').trim().split(/\s+/).length;
+  return acc + Math.max(1, Math.round(words / 200));
+}, 0);
+
+const totalLabs = seriesPosts.filter(p => (p.body || '').includes('<sp-lab')).length;
+const firstPost = seriesPosts[0];
 ---
 
 <BaseLayout
-  title={`${meta.name} — Silicon Pen`}
+  title={`${meta.name} — Curriculum Track &bull; Silicon Pen`}
   description={meta.description}
   image={meta.cover}
 >
   <main class="series-landing container">
-    <div class="series-landing-header">
-      <h1 id="series-title">{meta.name}</h1>
-      <p id="series-description" class="series-desc">{meta.description}</p>
+    <!-- Breadcrumb back link -->
+    <div class="series-nav-back">
+      <a href="/series.html" class="series-back-link">
+        &larr; Back to All Curriculum Tracks
+      </a>
     </div>
 
-    <div class="series-posts">
-      {seriesPosts.map(post => (
-        <a href={`/posts/${post.id}.html`} class="series-post-card">
-          <img src={post.data.cover || meta.cover} class="series-thumb" alt={post.data.title} />
-          <h2 class="series-card-title">{post.data.title}</h2>
-          <p class="series-card-sub">{post.data.subtitle || ''}</p>
-        </a>
-      ))}
-    </div>
+    <!-- Hero Curriculum Header -->
+    <header class="series-landing-header">
+      <div class="series-header-badge-row">
+        <span class="series-badge-pill">⚡ STRUCTURED LEARNING TRACK</span>
+      </div>
+
+      <h1 id="series-title" class="series-hero-title">{meta.name}</h1>
+      <p id="series-description" class="series-desc">{meta.description}</p>
+
+      <!-- Stats Bar -->
+      <div class="series-stats-bar">
+        <div class="series-stat-chip">
+          <span class="stat-icon">📚</span>
+          <span><strong>{seriesPosts.length}</strong> Chapters</span>
+        </div>
+        <div class="series-stat-chip">
+          <span class="stat-icon">⏱️</span>
+          <span><strong>~{totalMinutes}</strong> Min Read Time</span>
+        </div>
+        {totalLabs > 0 && (
+          <div class="series-stat-chip lab">
+            <span class="stat-icon">🧪</span>
+            <span><strong>{totalLabs}</strong> Virtual Labs</span>
+          </div>
+        )}
+        <div class="series-stat-chip highlight">
+          <span class="stat-icon">✓</span>
+          <span>Open Engineering Access</span>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      {firstPost && (
+        <div class="series-hero-cta">
+          <a href={`/posts/${firstPost.id}.html`} class="series-start-btn">
+            <span>▶ Start Track &bull; Chapter 01</span>
+          </a>
+        </div>
+      )}
+    </header>
+
+    <!-- Course Curriculum Section -->
+    <section class="series-curriculum-section">
+      <div class="curriculum-section-header">
+        <h2 class="curriculum-section-title">Course Syllabus & Progression</h2>
+        <p class="curriculum-section-sub">Follow each chapter sequentially to build deep foundational mastery.</p>
+      </div>
+
+      <div class="curriculum-timeline">
+        {seriesPosts.map((post, idx) => {
+          const chapterNum = String(idx + 1).padStart(2, '0');
+          const words = (post.body || '').trim().split(/\s+/).length;
+          const readMin = Math.max(1, Math.round(words / 200));
+          const hasLab = (post.body || '').includes('<sp-lab');
+
+          return (
+            <div class="curriculum-step-row">
+              <!-- Visual Track Node -->
+              <div class="curriculum-step-rail">
+                <div class="curriculum-step-node">
+                  <span>{chapterNum}</span>
+                </div>
+                {idx < seriesPosts.length - 1 && <div class="curriculum-step-line" />}
+              </div>
+
+              <!-- Chapter Card -->
+              <a href={`/posts/${post.id}.html`} class="curriculum-step-card">
+                <div class="curriculum-step-meta">
+                  <span class="curriculum-step-badge">CHAPTER {chapterNum}</span>
+                  <span class="curriculum-step-time">⏱️ {readMin} min read</span>
+                  {hasLab && <span class="curriculum-step-lab">🧪 Virtual Lab Included</span>}
+                  <span class="curriculum-step-date">{post.data.date}</span>
+                </div>
+
+                <h3 class="curriculum-step-title">{post.data.title}</h3>
+                {post.data.subtitle && (
+                  <p class="curriculum-step-desc">{post.data.subtitle}</p>
+                )}
+
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <div class="curriculum-step-tags">
+                    {post.data.tags.slice(0, 4).map((t: string) => (
+                      <span class="curriculum-step-tag">#{t}</span>
+                    ))}
+                  </div>
+                )}
+
+                <div class="curriculum-step-footer">
+                  <span class="curriculum-read-link">Read Chapter &rarr;</span>
+                </div>
+              </a>
+            </div>
+          );
+        })}
+      </div>
+    </section>
   </main>
 </BaseLayout>

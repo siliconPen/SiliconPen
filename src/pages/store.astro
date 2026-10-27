@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsletterBox from '../components/NewsletterBox.astro';
+---
+
+<BaseLayout
+  title="Hardware Lab & Gear — Coming Soon &bull; Silicon Pen"
+  description="Handcrafted custom PCBs, assembled hardware kits, and official engineering apparel. Built and bench-tested by SiliconPen."
+>
+  <main class="page-main container store-page">
+    <!-- Store Hero -->
+    <header class="store-hero">
+      <div class="store-badge-pill">⚡ HARDWARE LAB & GEAR &bull; COMING SOON</div>
+      <h1 class="store-title">Handcrafted Hardware & Engineering Gear</h1>
+      <p class="store-subtitle">
+        Free open documentation for DIY builders. Pre-assembled, bench-tested hardware for makers who want ready-to-run tools. Designed, soldered, and benchmarked on our workbench.
+      </p>
+    </header>
+
+    <!-- Product Tracks & Previews -->
+    <section class="store-grid">
+      <!-- 1. Finished Hardware Products -->
+      <div class="store-card">
+        <div class="store-card-header">
+          <span class="store-status-badge prototype">🛠️ IN BENCH TESTING</span>
+          <span class="store-category">FINISHED HARDWARE</span>
+        </div>
+        <h2 class="store-card-title">Assembled Modules & Circuit Kits</h2>
+        <p class="store-card-desc">
+          Love the project but don't want to source 15 different components or solder tiny SMD pins yourself? We assemble, flash, test, and ship finished circuit builds directly from our lab.
+        </p>
+        <ul class="store-card-features">
+          <li>✓ 100% Open-Source schematics & code on the blog</li>
+          <li>✓ Hand-soldered, bench-tested & verified</li>
+          <li>✓ Includes companion wiring guide & code examples</li>
+        </ul>
+        <div class="store-card-footer">
+          <span class="store-eta">Status: First prototype batch in progress</span>
+        </div>
+      </div>
+
+      <!-- 2. DIY Open Source Packs -->
+      <div class="store-card highlight">
+        <div class="store-card-header">
+          <span class="store-status-badge active">📥 100% FREE DIY FILES</span>
+          <span class="store-category">OPEN KNOWLEDGE</span>
+        </div>
+        <h2 class="store-card-title">Full DIY Schematics, Code & Gerbers</h2>
+        <p class="store-card-desc">
+          Prefer building everything from scratch? Every single project published on SiliconPen includes full component lists, companion Arduino/C++ code, and PCB Gerber files free for readers.
+        </p>
+        <ul class="store-card-features">
+          <li>✓ Complete step-by-step assembly guides</li>
+          <li>✓ Bill of Materials (BOM) with supplier links</li>
+          <li>✓ Interactive in-browser Wokwi / Tinkercad simulations</li>
+        </ul>
+        <div class="store-card-footer">
+          <a href="/articles.html" class="store-diy-link">Browse Project Tutorials &rarr;</a>
+        </div>
+      </div>
+
+      <!-- 3. Print On Demand Merch -->
+      <div class="store-card">
+        <div class="store-card-header">
+          <span class="store-status-badge pod">👕 PRINT ON DEMAND</span>
+          <span class="store-category">OFFICIAL APPAREL</span>
+        </div>
+        <h2 class="store-card-title">Minimalist Hardware Engineer Apparel</h2>
+        <p class="store-card-desc">
+          Custom gear tailored specifically for embedded builders: heavyweight tees with subtle circuit traces, pinout desk mats, schematic stickers, and workbench mugs.
+        </p>
+        <ul class="store-card-features">
+          <li>✓ Exclusive designs derived from SiliconPen circuit art</li>
+          <li>✓ Heavyweight premium cotton fabrics</li>
+          <li>✓ Global on-demand shipping with eco-friendly fulfillment</li>
+        </ul>
+        <div class="store-card-footer">
+          <span class="store-eta">Status: Storefront under construction</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- The SiliconPen Hardware Promise -->
+    <section class="store-promise-section">
+      <h2 class="store-promise-title">The SiliconPen Hardware Promise</h2>
+      <div class="store-promise-grid">
+        <div class="promise-card">
+          <div class="promise-icon">🔬</div>
+          <h3>Open-First Philosophy</h3>
+          <p>You never have to buy hardware to learn. Every project is fully documented on the blog with open code, schematics, and interactive simulations.</p>
+        </div>
+        <div class="promise-card">
+          <div class="promise-icon">⚡</div>
+          <h3>Bench-Tested Rigor</h3>
+          <p>Every finished unit is assembled, oscilloscope-checked, and flashed with test firmware before leaving the bench. No dud pins, no guesswork.</p>
+        </div>
+        <div class="promise-card">
+          <div class="promise-icon">🤝</div>
+          <h3>Direct-from-Maker Pricing</h3>
+          <p>Fair, transparent pricing that directly funds components, research tools, and free educational writing for the electronics community.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIP Launch Notification -->
+    <section class="store-waitlist-section">
+      <NewsletterBox
+        title="Get First Access When the Hardware Drops"
+        description="Be the first to know when prototype batches and apparel go live. Early subscribers receive early-bird workbench pricing and exclusive build logs."
+        source="/store.html"
+      />
+    </section>
+  </main>
+</BaseLayout>

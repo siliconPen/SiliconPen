@@ -4,7 +4,37 @@ const currentYear = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>© {currentYear} SiliconPen. All rights reserved.</p>
-    <a href="/privacy-policy.html" style="color: rgb(158, 155, 155); text-decoration: none;">Privacy Policy</a>
+    <p>© {currentYear} SiliconPen — Penning Down the Language of Electronics.</p>
+    <div class="footer-links">
+      <a href="/about.html">About</a>
+      <span>•</span>
+      <a href="/newsletter.html">Newsletter</a>
+      <span>•</span>
+      <a href="/store.html">Lab Store</a>
+      <span>•</span>
+      <a href="/contacts.html">Contact</a>
+      <span>•</span>
+      <a href="/privacy-policy.html">Privacy Policy</a>
+    </div>
   </div>
 </footer>
+
+<style>
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.18s ease;
+  }
+  .footer-links a:hover {
+    color: var(--accent);
+  }
+</style>

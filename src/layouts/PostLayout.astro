@@ -3,6 +3,8 @@ import BaseLayout from './BaseLayout.astro';
 import ShareRow from '../components/ShareRow.astro';
 import Comments from '../components/Comments.astro';
 import NewsletterBox from '../components/NewsletterBox.astro';
+import ArticleFeedback from '../components/ArticleFeedback.astro';
+import seriesData from '../data/series.json';
 import { getCollection } from 'astro:content';
 
 interface Props {
@@ -14,6 +16,7 @@ interface Props {
   series?: string;
   order?: number;
   tags?: string[];
+  slug?: string;
 }
 
 const {
@@ -24,14 +27,25 @@ const {
   cover,
   series,
   order,
-  tags = []
+  tags = [],
+  slug,
 } = Astro.props;
 
-// Auto-calculate Previous / Next Chapter if part of a series
-let prevPost = null;
-let nextPost = null;
+// Auto-calculate Series Track info, Chapter Progress, and Previous / Next Chapter
+let seriesMeta: { name: string; description: string; cover: string } | null = null;
+let currentChapter = 0;
+let totalChapters = 0;
+let progressPercent = 0;
+let prevPost: any = null;
+let nextPost: any = null;
 
 if (series) {
+  seriesMeta = (seriesData as Record<string, { name: string; description: string; cover: string }>)[series] || {
+    name: series.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+    description: `Articles in the ${series} series.`,
+    cover: '/images/cover.webp'
+  };
+
   const allPosts = await getCollection('posts', ({ data }) => !data.draft && data.series === series);
   // Sort by order or by date
   allPosts.sort((a, b) => {
@@ -41,12 +55,17 @@ if (series) {
     return a.data.date.localeCompare(b.data.date);
   });
 
-  const currentIndex = allPosts.findIndex(p => p.data.title === title || (order !== undefined && p.data.order === order));
-  if (currentIndex > 0) {
-    prevPost = allPosts[currentIndex - 1];
-  }
-  if (currentIndex >= 0 && currentIndex < allPosts.length - 1) {
-    nextPost = allPosts[currentIndex + 1];
+  totalChapters = allPosts.length;
+  const currentIndex = allPosts.findIndex(p => (slug && p.id === slug) || p.data.title === title || (order !== undefined && p.data.order === order));
+  if (currentIndex !== -1) {
+    currentChapter = currentIndex + 1;
+    progressPercent = Math.round((currentChapter / totalChapters) * 100);
+    if (currentIndex > 0) {
+      prevPost = allPosts[currentIndex - 1];
+    }
+    if (currentIndex < allPosts.length - 1) {
+      nextPost = allPosts[currentIndex + 1];
+    }
   }
 }
 
@@ -58,6 +77,27 @@ const fullUrl = new URL(Astro.url.pathname, Astro.site || "https://siliconpen.co
     <article class="container post-article">
     <!-- Hero Header -->
     <header class="post-hero-wrapper">
+      {series && seriesMeta && (
+        <div class="post-series-banner">
+          <div class="series-banner-top">
+            <a href={`/series/${series}.html`} class="series-banner-track" title="View all chapters in this curriculum">
+              <span class="series-banner-icon">📚</span>
+              <span class="series-banner-name">{seriesMeta.name}</span>
+              <span class="series-banner-arrow">&rarr;</span>
+            </a>
+            <div class="series-banner-metrics">
+              <span class="series-banner-step">
+                Chapter <strong>{String(currentChapter).padStart(2, '0')}</strong> of {String(totalChapters).padStart(2, '0')}
+              </span>
+              <span class="series-banner-pct">{progressPercent}% Track Complete</span>
+            </div>
+          </div>
+          <div class="series-banner-progress-track">
+            <div class="series-banner-progress-bar" style={`width: ${progressPercent}%;`}></div>
+          </div>
+        </div>
+      )}
+
       {cover && (
         <div class="post-hero">
           <img src={cover} alt={title} class="post-hero-image" />
@@ -80,7 +120,7 @@ const fullUrl = new URL(Astro.url.pathname, Astro.site || "https://siliconpen.co
 
     <!-- Main Content Layout -->
     <div class="post-layout">
-      <div id="post-left"></div>
+      <div id="post-left" class="post-left"></div>
 
       <section class="post-content-shell">
         <div class="post-main">
@@ -99,6 +139,38 @@ const fullUrl = new URL(Astro.url.pathname, Astro.site || "https://siliconpen.co
 
       <!-- Dynamic Table of Contents -->
       <aside class="post-toc">
+        {series && seriesMeta && (
+          <div class="toc-series-box">
+            <div class="toc-series-label">CURRICULUM TRACK</div>
+            <a href={`/series/${series}.html`} class="toc-series-title">
+              {seriesMeta.name}
+            </a>
+            <div class="toc-series-meter-bar">
+              <div class="toc-series-meter-fill" style={`width: ${progressPercent}%;`}></div>
+            </div>
+            <div class="toc-series-stats">
+              <span>Chapter {currentChapter} of {totalChapters}</span>
+              <span>{progressPercent}%</span>
+            </div>
+            <div class="toc-series-nav-row">
+              {prevPost ? (
+                <a href={`/posts/${prevPost.id}.html`} class="toc-nav-btn prev" title={prevPost.data.title}>
+                  &larr; Ch {currentChapter - 1}
+                </a>
+              ) : (
+                <span class="toc-nav-btn disabled">&larr; Start</span>
+              )}
+              {nextPost ? (
+                <a href={`/posts/${nextPost.id}.html`} class="toc-nav-btn next" title={nextPost.data.title}>
+                  Ch {currentChapter + 1} &rarr;
+                </a>
+              ) : (
+                <span class="toc-nav-btn disabled">Complete &check;</span>
+              )}
+            </div>
+          </div>
+        )}
+
         <div class="post-toc-title">On this page</div>
         <nav id="post-toc-list"></nav>
       </aside>
@@ -118,37 +190,72 @@ const fullUrl = new URL(Astro.url.pathname, Astro.site || "https://siliconpen.co
         </div>
       )}
 
-      <!-- Automated Previous / Next Series Navigation -->
+      <!-- Automated Previous / Next Series Curriculum Navigation -->
       {(prevPost || nextPost) && (
-        <div class="post-related">
-          <h2>Continue Reading</h2>
-          <div class="post-related-grid">
+        <div class="post-curriculum-footer">
+          <div class="curriculum-footer-header">
+            <span class="curriculum-footer-badge">CURRICULUM TRACK</span>
+            <h2 class="curriculum-footer-title">
+              {nextPost
+                ? `Up Next in ${seriesMeta ? seriesMeta.name : 'this series'}`
+                : `You've Completed the ${seriesMeta ? seriesMeta.name : 'Series'} Track!`}
+            </h2>
+            <p class="curriculum-footer-sub">
+              Chapter {currentChapter} of {totalChapters} &bull; {progressPercent}% of track completed
+            </p>
+          </div>
+
+          <div class="curriculum-footer-grid">
             {prevPost && (
-              <a href={`/posts/${prevPost.id}.html`} class="post-related-card">
-                <div class="related-thumb">
-                  <img src={prevPost.data.cover || cover} alt={prevPost.data.title} />
-                </div>
-                <div class="related-badge">← PREVIOUS CHAPTER</div>
-                <h3 class="related-title">{prevPost.data.title}</h3>
+              <a href={`/posts/${prevPost.id}.html`} class="curriculum-card prev">
+                <div class="curriculum-card-badge">&larr; PREVIOUS CHAPTER</div>
+                <div class="curriculum-card-step">Chapter {String(currentChapter - 1).padStart(2, '0')}</div>
+                <h3 class="curriculum-card-title">{prevPost.data.title}</h3>
+                <span class="curriculum-card-action">&larr; Review previous topic</span>
               </a>
             )}
             {nextPost && (
-              <a href={`/posts/${nextPost.id}.html`} class="post-related-card">
-                <div class="related-thumb">
-                  <img src={nextPost.data.cover || cover} alt={nextPost.data.title} />
+              <a href={`/posts/${nextPost.id}.html`} class="curriculum-card next">
+                <div class="curriculum-card-badge">NEXT CHAPTER &rarr;</div>
+                <div class="curriculum-card-step">Chapter {String(currentChapter + 1).padStart(2, '0')}</div>
+                <h3 class="curriculum-card-title">{nextPost.data.title}</h3>
+                <div class="curriculum-card-btn">
+                  <span>Continue Learning</span>
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <polygon points="5,3 19,12 5,21" />
+                  </svg>
                 </div>
-                <div class="related-badge">NEXT CHAPTER →</div>
-                <h3 class="related-title">{nextPost.data.title}</h3>
               </a>
             )}
           </div>
+
+          {series && seriesMeta && (
+            <div class="curriculum-footer-all">
+              <a href={`/series/${series}.html`} class="curriculum-all-link">
+                View Full {seriesMeta.name} Syllabus ({totalChapters} Chapters) &rarr;
+              </a>
+            </div>
+          )}
         </div>
       )}
+
+      <!-- Community Feedback & GitHub Actions -->
+      <ArticleFeedback title={title} slug={slug} url={fullUrl} />
 
       <Comments />
     </section>
   </article>
   </main>
+
+  <!-- Lightbox Modal for Schematics and Diagrams -->
+  <div id="sp-lightbox" class="sp-lightbox" aria-hidden="true" role="dialog">
+    <div class="sp-lightbox-backdrop" id="sp-lightbox-backdrop"></div>
+    <div class="sp-lightbox-dialog">
+      <button class="sp-lightbox-close" id="sp-lightbox-close" type="button" aria-label="Close image">✕</button>
+      <img id="sp-lightbox-img" src="" alt="" />
+      <p id="sp-lightbox-caption" class="sp-lightbox-caption"></p>
+    </div>
+  </div>
 </BaseLayout>
 
 <script>
@@ -224,22 +331,108 @@ const fullUrl = new URL(Astro.url.pathname, Astro.site || "https://siliconpen.co
       updateProgress();
     }
 
-    // 4. Code Block Copy Buttons
-    document.querySelectorAll("pre").forEach((pre) => {
-      if (pre.querySelector(".copy-btn")) return;
-      pre.classList.add("code-block");
-      const btn = document.createElement("button");
-      btn.className = "copy-btn";
-      btn.innerText = "Copy";
-      btn.onclick = () => {
-        const code = pre.querySelector("code")?.innerText || pre.innerText;
-        navigator.clipboard.writeText(code).then(() => {
-          btn.innerText = "Copied!";
-          setTimeout(() => (btn.innerText = "Copy"), 1500);
+    // 4. IDE-Style Code Blocks & Interactive Copy
+    document.querySelectorAll(".post-content pre").forEach((pre) => {
+      if (pre.closest(".ide-window")) return;
+
+      const codeEl = pre.querySelector("code");
+      const rawCode = codeEl ? codeEl.innerText : (pre as HTMLElement).innerText;
+
+      // Infer code language
+      let lang = "Code";
+      const classAttr = (codeEl?.className || "") + " " + pre.className;
+      const langMatch = classAttr.match(/language-(\w+)/i);
+      if (langMatch) {
+        lang = langMatch[1].toUpperCase();
+      } else if (/void\s+(setup|loop)\s*\(|pinMode|digitalWrite|analogRead|#include/i.test(rawCode)) {
+        lang = "Arduino / C++";
+      } else if (/import\s+[\w.]+|def\s+\w+\s*\(/.test(rawCode)) {
+        lang = "Python";
+      } else if (/^(npm|git|npx|cd|mkdir)\s+/m.test(rawCode)) {
+        lang = "Terminal";
+      } else if (/\{[\s\S]*"[\w]+"\s*:/.test(rawCode)) {
+        lang = "JSON";
+      }
+
+      // Create IDE window wrapper
+      const windowDiv = document.createElement("div");
+      windowDiv.className = "ide-window";
+
+      const header = document.createElement("div");
+      header.className = "ide-header";
+      header.innerHTML = `
+        <div class="ide-dots">
+          <span class="ide-dot ide-dot-red"></span>
+          <span class="ide-dot ide-dot-yellow"></span>
+          <span class="ide-dot ide-dot-green"></span>
+        </div>
+        <span class="ide-lang-badge">${lang}</span>
+        <button class="ide-copy-btn" type="button" aria-label="Copy code">
+          <svg class="copy-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span class="copy-text">Copy</span>
+        </button>
+      `;
+
+      const copyBtn = header.querySelector(".ide-copy-btn") as HTMLButtonElement;
+      const copyText = copyBtn.querySelector(".copy-text") as HTMLElement;
+      copyBtn.onclick = () => {
+        navigator.clipboard.writeText(rawCode.trim()).then(() => {
+          copyBtn.classList.add("copied");
+          copyText.textContent = "Copied!";
+          setTimeout(() => {
+            copyBtn.classList.remove("copied");
+            copyText.textContent = "Copy";
+          }, 1800);
         });
       };
-      pre.appendChild(btn);
+
+      pre.parentNode?.insertBefore(windowDiv, pre);
+      windowDiv.appendChild(header);
+      windowDiv.appendChild(pre);
     });
+
+    // 5. Click-to-Zoom Schematic Lightbox
+    const lightbox = document.getElementById("sp-lightbox");
+    const lightboxImg = document.getElementById("sp-lightbox-img") as HTMLImageElement;
+    const lightboxCaption = document.getElementById("sp-lightbox-caption") as HTMLElement;
+    const closeBtn = document.getElementById("sp-lightbox-close");
+    const backdrop = document.getElementById("sp-lightbox-backdrop");
+
+    if (lightbox && lightboxImg) {
+      const closeLightbox = () => {
+        lightbox.classList.remove("active");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      };
+
+      closeBtn?.addEventListener("click", closeLightbox);
+      backdrop?.addEventListener("click", closeLightbox);
+      lightboxImg.addEventListener("click", closeLightbox);
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.classList.contains("active")) {
+          closeLightbox();
+        }
+      });
+
+      document.querySelectorAll(".post-content img").forEach((imgEl) => {
+        const img = imgEl as HTMLImageElement;
+        img.addEventListener("click", () => {
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt || "SiliconPen schematic illustration";
+          if (lightboxCaption) {
+            lightboxCaption.textContent = img.alt || "";
+            lightboxCaption.style.display = img.alt ? "block" : "none";
+          }
+          lightbox.classList.add("active");
+          lightbox.setAttribute("aria-hidden", "false");
+          document.body.style.overflow = "hidden";
+        });
+      });
+    }
   }
 
   initPostFeatures();

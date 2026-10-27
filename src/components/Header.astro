@@ -25,12 +25,16 @@ const isActive = (path: string) => {
       <a href="/contacts.html" class={`nav-link ${isActive('/contacts')}`}>Contacts</a>
 
       <div class="nav-dropdown">
-        <button class="nav-link dropdown-toggle" type="button">
+        <button
+          class={`nav-link dropdown-toggle ${currentPath.startsWith('/references') || currentPath.startsWith('/series') || currentPath.startsWith('/store') ? 'nav-link-active' : ''}`}
+          type="button"
+        >
           Explore ▾
         </button>
         <div class="dropdown-menu">
           <a href="/references.html">References</a>
           <a href="/series.html">Series</a>
+          <a href="/store.html">Lab Store ⚡</a>
         </div>
       </div>
     </nav>

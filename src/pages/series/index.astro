@@ -1,26 +1,98 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import seriesData from '../../data/series.json';
+import { getCollection } from 'astro:content';
 
-const seriesEntries = Object.entries(seriesData);
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+
+const seriesList = Object.entries(seriesData).map(([key, data]) => {
+  const posts = allPosts.filter(p => p.data.series === key);
+  posts.sort((a, b) => {
+    if (a.data.order !== undefined && b.data.order !== undefined) {
+      return a.data.order - b.data.order;
+    }
+    return a.data.date.localeCompare(b.data.date);
+  });
+
+  const totalMinutes = posts.reduce((acc, p) => {
+    const words = (p.body || '').trim().split(/\s+/).length;
+    return acc + Math.max(1, Math.round(words / 200));
+  }, 0);
+
+  const labCount = posts.filter(p => (p.body || '').includes('<sp-lab')).length;
+
+  return {
+    key,
+    ...data,
+    posts,
+    chapterCount: posts.length,
+    totalMinutes,
+    labCount,
+    firstChapter: posts[0] || null,
+    lastChapter: posts[posts.length - 1] || null,
+  };
+});
 ---
 
 <BaseLayout
-  title="Series — Silicon Pen"
-  description="Explore multi-part engineering tracks, hardware rants, and structured Arduino courses on SiliconPen."
+  title="Curriculum Tracks & Series — Silicon Pen"
+  description="Structured hardware engineering curriculums, Arduino course tracks, and practical circuit deep dives on SiliconPen."
 >
-  <main class="container page-content">
+  <main class="container page-content series-catalog-page">
     <div class="series-header">
-      <h1>All Series</h1>
-      <p>A collection of themed series, engineering journals, and multi-part deep dives.</p>
+      <div class="series-badge-pill">⚡ STRUCTURED KNOWLEDGE TRACKS</div>
+      <h1>Engineering Series & Curriculums</h1>
+      <p class="series-catalog-desc">
+        Multi-part learning paths and unfiltered engineering journals designed to take you from foundational concepts to production-grade hardware thinking.
+      </p>
     </div>
 
-    <div class="series-list">
-      {seriesEntries.map(([key, data]) => (
-        <a href={`/series/${key}.html`} class="series-card">
-          <img src={data.cover} alt={data.name} class="series-cover" />
-          <h2>{data.name}</h2>
-          <p>{data.description}</p>
+    <div class="series-tracks-grid">
+      {seriesList.map(track => (
+        <a href={`/series/${track.key}.html`} class="track-card">
+          <div class="track-card-cover-wrapper">
+            <img src={track.cover} alt={track.name} class="track-card-cover" />
+            <div class="track-card-gradient" />
+            <div class="track-card-badge-row">
+              <span class="track-card-badge">CURRICULUM</span>
+              {track.labCount > 0 && (
+                <span class="track-card-lab-badge">🧪 {track.labCount} Labs</span>
+              )}
+            </div>
+          </div>
+
+          <div class="track-card-body">
+            <div class="track-card-stats">
+              <span>📚 <strong>{track.chapterCount}</strong> Chapters</span>
+              <span>&bull;</span>
+              <span>⏱️ <strong>~{track.totalMinutes}</strong> min</span>
+            </div>
+
+            <h2 class="track-card-title">{track.name}</h2>
+            <p class="track-card-desc">{track.description}</p>
+
+            {track.firstChapter && track.lastChapter && track.chapterCount > 1 && (
+              <div class="track-card-scope">
+                <div class="scope-line">
+                  <span class="scope-dot start" />
+                  <span class="scope-label">Starts:</span>
+                  <span class="scope-title">{track.firstChapter.data.title}</span>
+                </div>
+                <div class="scope-line">
+                  <span class="scope-dot end" />
+                  <span class="scope-label">Ends:</span>
+                  <span class="scope-title">{track.lastChapter.data.title}</span>
+                </div>
+              </div>
+            )}
+
+            <div class="track-card-footer">
+              <span class="track-card-btn">
+                <span>Explore Track</span>
+                <span class="track-btn-arrow">&rarr;</span>
+              </span>
+            </div>
+          </div>
         </a>
       ))}
     </div>

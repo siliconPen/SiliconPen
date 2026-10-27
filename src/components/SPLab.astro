@@ -1,0 +1,45 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  image?: string;
+  link?: string;
+  button?: string;
+  wokwi?: string;
+  tinkercad?: string;
+  embed?: string;
+  mode?: 'preview' | 'live';
+  height?: string;
+  class?: string;
+}
+
+const {
+  title,
+  subtitle,
+  image,
+  link,
+  button,
+  wokwi,
+  tinkercad,
+  embed,
+  mode = 'preview',
+  height = '500px',
+  class: className = '',
+} = Astro.props;
+---
+
+<sp-lab
+  title={title}
+  subtitle={subtitle}
+  image={image}
+  link={link}
+  button={button}
+  wokwi={wokwi}
+  tinkercad={tinkercad}
+  embed={embed}
+  mode={mode}
+  height={height}
+  class={className}
+>
+  <slot />
+</sp-lab>

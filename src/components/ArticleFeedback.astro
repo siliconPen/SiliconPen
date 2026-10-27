@@ -1,0 +1,152 @@
+---
+interface Props {
+  title: string;
+  slug?: string;
+  url: string;
+}
+
+const { title, slug, url } = Astro.props;
+const githubEditUrl = slug
+  ? `https://github.com/siliconPen/SiliconPen/edit/main/src/content/posts/${slug}.md`
+  : `https://github.com/siliconPen/SiliconPen`;
+
+const githubIssueUrl = `https://github.com/siliconPen/SiliconPen/issues/new?title=${encodeURIComponent(`[Feedback] ${title}`)}&body=${encodeURIComponent(`Article: ${url}\n\n**Describe the typo, correction, or circuit question:**\n`)}`;
+---
+
+<div class="article-feedback-card" id="article-feedback">
+  <div class="feedback-prompt-state" id="feedback-prompt">
+    <div class="feedback-question">
+      <span class="feedback-icon">💡</span>
+      <span>Was this hardware breakdown helpful?</span>
+    </div>
+    <div class="feedback-buttons">
+      <button type="button" class="feedback-btn" id="feedback-yes" data-value="helpful">
+        <span>👍</span>
+        <span>Yes, helpful</span>
+      </button>
+      <button type="button" class="feedback-btn" id="feedback-no" data-value="unclear">
+        <span>🤔</span>
+        <span>Needs clarification</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="feedback-thanks-state hidden" id="feedback-thanks" style="display: none;">
+    <div class="feedback-thanks-message">
+      <span class="feedback-thanks-icon">✨</span>
+      <span class="feedback-thanks-text" id="feedback-thanks-text">
+        Thank you! Your feedback helps us write sharper engineering notes.
+      </span>
+    </div>
+    <button type="button" class="feedback-undo-btn" id="feedback-undo" title="Change your response">
+      Change
+    </button>
+  </div>
+
+  <!-- Open Engineering & GitHub Actions Row -->
+  <div class="feedback-github-row">
+    <span class="feedback-github-text">Found a typo, circuit bug, or want to contribute?</span>
+    <div class="feedback-github-links">
+      {slug && (
+        <a href={githubEditUrl} target="_blank" rel="noopener noreferrer" class="feedback-gh-link" title="Edit this article markdown on GitHub">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"></path>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+          </svg>
+          <span>Suggest Edit on GitHub</span>
+        </a>
+      )}
+      <a href={githubIssueUrl} target="_blank" rel="noopener noreferrer" class="feedback-gh-link" title="Open an issue on GitHub">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>Report Circuit Bug</span>
+      </a>
+      <a href="https://github.com/siliconPen/SiliconPen" target="_blank" rel="noopener noreferrer" class="feedback-gh-link gh-star" title="Star SiliconPen on GitHub">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+          <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" />
+        </svg>
+        <span>Star on GitHub</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initFeedback() {
+    const pathname = window.location.pathname;
+    const storageKey = `sp_feedback_${pathname}`;
+    const promptEl = document.getElementById("feedback-prompt");
+    const thanksEl = document.getElementById("feedback-thanks");
+    const thanksText = document.getElementById("feedback-thanks-text");
+    const undoBtn = document.getElementById("feedback-undo");
+    const yesBtn = document.getElementById("feedback-yes");
+    const noBtn = document.getElementById("feedback-no");
+
+    if (!promptEl || !thanksEl) return;
+
+    function showThanks(choice: string) {
+      promptEl.style.display = "none";
+      thanksEl.classList.remove("hidden");
+      thanksEl.style.display = "flex";
+
+      if (thanksText) {
+        if (choice === "helpful") {
+          thanksText.textContent = "Glad this breakdown was helpful! Thanks for reading SiliconPen.";
+        } else {
+          thanksText.textContent = "Thanks for the feedback! Feel free to leave a comment below or report circuit issues on GitHub so we can improve it.";
+        }
+      }
+    }
+
+    function showPrompt() {
+      thanksEl.classList.add("hidden");
+      thanksEl.style.display = "none";
+      promptEl.style.display = "flex";
+    }
+
+    // Check existing stored vote
+    try {
+      const stored = localStorage.getItem(storageKey);
+      if (stored) {
+        showThanks(stored);
+      } else {
+        showPrompt();
+      }
+    } catch {
+      showPrompt();
+    }
+
+    function recordFeedback(val: string) {
+      try {
+        localStorage.setItem(storageKey, val);
+      } catch {}
+
+      // Track in GA4 Analytics (Real Counts in Google Analytics Dashboard!)
+      if (typeof (window as any).gtag === "function") {
+        (window as any).gtag("event", "article_feedback", {
+          article_title: document.title,
+          feedback_rating: val, // 'helpful' or 'unclear'
+          page_path: pathname,
+        });
+      }
+
+      showThanks(val);
+    }
+
+    yesBtn?.addEventListener("click", () => recordFeedback("helpful"));
+    noBtn?.addEventListener("click", () => recordFeedback("unclear"));
+
+    undoBtn?.addEventListener("click", () => {
+      try {
+        localStorage.removeItem(storageKey);
+      } catch {}
+      showPrompt();
+    });
+  }
+
+  initFeedback();
+  document.addEventListener('astro:after-swap', initFeedback);
+</script>

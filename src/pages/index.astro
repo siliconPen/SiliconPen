@@ -55,6 +55,7 @@ const otherPosts = allPosts.slice(1, 7); // Show top 6 others in 2x3 grid
                 )}
               </div>
               <div class="latest-info">
+                <span class="latest-badge">⚡ LATEST RELEASE • {latestPost.data.date}</span>
                 <h3 class="latest-title">{latestPost.data.title}</h3>
                 <p class="latest-subtitle">{latestPost.data.subtitle || ''}</p>
               </div>
@@ -128,6 +129,17 @@ const otherPosts = allPosts.slice(1, 7); // Show top 6 others in 2x3 grid
         Long-form series like <em>Rant Electronics</em>, project logs, and
         story arcs live here. The Series page keeps every multi-part journey
         organized so you can follow from Episode 1.
+      </p>
+    </section>
+
+    <!-- HARDWARE LAB STORE PREVIEW -->
+    <section class="container info-section store-preview-section" id="store">
+      <div class="store-badge-pill">⚡ COMING SOON</div>
+      <h2>
+        <a href="/store.html" class="section-link"> Hardware Lab & Gear </a>
+      </h2>
+      <p>
+        Handcrafted custom PCBs, assembled hardware kits, and official engineering apparel. Every product comes with free open-source documentation, companion schematics, and clean code on the blog.
       </p>
     </section>
   </main>
