@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <title>SiliconPen Studio — Live Article Authoring</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/styles/global.css" />
+  <script type="module" src="/js/custom-elements.js"></script>
+  <!-- Marked parser from CDN with fallback -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    :root {
+      --studio-bg: #030712;
+      --studio-panel: #0b1120;
+      --studio-border: rgba(255, 255, 255, 0.08);
+      --studio-header-h: 60px;
+      --studio-toolbar-h: 46px;
+    }
+
+    html[data-theme="light"] {
+      --studio-bg: #f8fafc;
+      --studio-panel: #ffffff;
+      --studio-border: rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--studio-bg);
+      color: var(--text-main);
+      font-family: var(--font-sans, system-ui, sans-serif);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Top Navigation Bar */
+    .studio-header {
+      height: var(--studio-header-h);
+      background: var(--studio-panel);
+      border-bottom: 1px solid var(--studio-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      gap: 12px;
+      z-index: 100;
+    }
+
+    .brand-cluster {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(255, 159, 28, 0.2), rgba(0, 245, 212, 0.15));
+      border: 1px solid rgba(255, 159, 28, 0.4);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+
+    .studio-select-post {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--studio-border);
+      color: var(--text-main);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 13px;
+      max-width: 260px;
+      cursor: pointer;
+      outline: none;
+    }
+    html[data-theme="light"] .studio-select-post {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      background: transparent;
+      color: var(--text-main);
+    }
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #050816;
+      border-color: var(--accent);
+      box-shadow: 0 4px 14px rgba(255, 159, 28, 0.3);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 6px 18px rgba(255, 159, 28, 0.45);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--studio-border);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .view-toggles {
+      display: flex;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--studio-border);
+      border-radius: 8px;
+      padding: 2px;
+    }
+    .view-btn {
+      padding: 5px 11px;
+      font-size: 12px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    .view-btn.active {
+      background: rgba(255, 159, 28, 0.2);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* Metadata Drawer */
+    .meta-drawer {
+      background: var(--studio-panel);
+      border-bottom: 1px solid var(--studio-border);
+      padding: 10px 16px;
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 1fr auto;
+      gap: 10px;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .meta-field {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .meta-field label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .meta-field input, .meta-field select {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--studio-border);
+      color: var(--text-main);
+      padding: 6px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      outline: none;
+      font-family: inherit;
+    }
+    .meta-field input:focus, .meta-field select:focus {
+      border-color: var(--accent);
+    }
+    html[data-theme="light"] .meta-field input,
+    html[data-theme="light"] .meta-field select {
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    .draft-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      margin-top: 14px;
+      user-select: none;
+    }
+
+    /* Action & Custom Component Toolbar */
+    .studio-toolbar {
+      height: var(--studio-toolbar-h);
+      background: var(--studio-panel);
+      border-bottom: 1px solid var(--studio-border);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tb-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding-right: 8px;
+      border-right: 1px solid var(--studio-border);
+    }
+    .tb-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid transparent;
+      color: var(--text-main);
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: inherit;
+    }
+    .tb-btn:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: var(--studio-border);
+    }
+    .tb-btn.sp-component {
+      background: rgba(255, 159, 28, 0.1);
+      border-color: rgba(255, 159, 28, 0.25);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .tb-btn.sp-component:hover {
+      background: rgba(255, 159, 28, 0.2);
+    }
+
+    /* Main Workspace Workspace: Left Editor, Right Live Preview */
+    .studio-workspace {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      position: relative;
+    }
+    .studio-workspace.view-editor {
+      grid-template-columns: 1fr 0px;
+    }
+    .studio-workspace.view-preview {
+      grid-template-columns: 0px 1fr;
+    }
+
+    /* Left: Editor Pane */
+    .editor-pane {
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--studio-border);
+      background: rgba(2, 6, 23, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+    html[data-theme="light"] .editor-pane {
+      background: #ffffff;
+    }
+
+    .editor-textarea {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-family: var(--font-mono, "JetBrains Mono", Consolas, monospace);
+      font-size: 14px;
+      line-height: 1.65;
+      padding: 16px 20px;
+      resize: none;
+      outline: none;
+      overflow-y: auto;
+    }
+
+    .editor-pane.drag-over {
+      outline: 2px dashed var(--accent);
+      outline-offset: -8px;
+      background: rgba(255, 159, 28, 0.05);
+    }
+
+    /* Right: Preview Pane */
+    .preview-pane {
+      overflow-y: auto;
+      background: var(--bg);
+      position: relative;
+      scroll-behavior: smooth;
+    }
+
+    .preview-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px 20px 80px;
+    }
+
+    .preview-header-meta {
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .preview-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+    .preview-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .preview-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .preview-cover-box {
+      margin: 18px 0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      max-height: 380px;
+      display: flex;
+      justify-content: center;
+      background: rgba(0,0,0,0.2);
+    }
+    .preview-cover-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Bottom Status Bar */
+    .studio-footer {
+      height: 30px;
+      background: var(--studio-panel);
+      border-top: 1px solid var(--studio-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 40px;
+      right: 24px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .toast {
+      background: #0f172a;
+      color: #f8fafc;
+      border: 1px solid var(--accent);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: toastSlide 0.25s ease-out;
+    }
+    @keyframes toastSlide {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Modal dialog */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: var(--studio-panel);
+      border: 1px solid var(--studio-border);
+      border-radius: 16px;
+      padding: 24px;
+      width: 90%;
+      max-width: 520px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="studio-header">
+    <div class="brand-cluster">
+      <div class="brand-logo-badge">⚡ SILICONPEN STUDIO</div>
+      <select id="post-selector" class="studio-select-post">
+        <option value="">— Load Existing Post —</option>
+      </select>
+      <button id="btn-new-post" class="btn btn-secondary">➕ New Post</button>
+    </div>
+
+    <div class="header-actions">
+      <div class="view-toggles">
+        <button class="view-btn active" data-view="split">Split</button>
+        <button class="view-btn" data-view="editor">Editor</button>
+        <button class="view-btn" data-view="preview">Article</button>
+      </div>
+
+      <button id="btn-theme-toggle" class="btn btn-secondary" title="Toggle Light/Dark Theme">
+        🌓 Theme
+      </button>
+
+      <button id="btn-save" class="btn btn-primary">
+        💾 Save Article <span style="font-size:11px;opacity:0.75;margin-left:4px">(Ctrl+S)</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Frontmatter / Metadata Drawer -->
+  <div class="meta-drawer">
+    <div class="meta-field">
+      <label>Article Title</label>
+      <input type="text" id="meta-title" placeholder="e.g. Understanding I2C Protocol..." />
+    </div>
+
+    <div class="meta-field">
+      <label>Article Slug (URL)</label>
+      <input type="text" id="meta-slug" placeholder="e.g. understanding-i2c-protocol" />
+    </div>
+
+    <div class="meta-field">
+      <label>Series</label>
+      <select id="meta-series">
+        <option value="">Standalone Article</option>
+      </select>
+    </div>
+
+    <div class="meta-field">
+      <label>Chapter Order</label>
+      <input type="number" id="meta-order" min="1" placeholder="Auto" />
+    </div>
+
+    <div class="meta-field">
+      <label>Date</label>
+      <input type="date" id="meta-date" />
+    </div>
+
+    <div class="meta-field">
+      <label>Cover Image</label>
+      <input type="text" id="meta-cover" placeholder="/images/.../cover.webp" />
+    </div>
+
+    <div class="draft-toggle">
+      <input type="checkbox" id="meta-draft" />
+      <label for="meta-draft" style="font-size:12px;cursor:pointer;">Draft</label>
+    </div>
+  </div>
+
+  <!-- Writing & Custom Elements Toolbar -->
+  <div class="studio-toolbar">
+    <div class="tb-group">
+      <button class="tb-btn" id="tb-bold" title="Bold (Ctrl+B)"><strong>B</strong></button>
+      <button class="tb-btn" id="tb-italic" title="Italic (Ctrl+I)"><em>I</em></button>
+      <button class="tb-btn" id="tb-h1">H1</button>
+      <button class="tb-btn" id="tb-h2">H2</button>
+      <button class="tb-btn" id="tb-h3">H3</button>
+      <button class="tb-btn" id="tb-quote">” Quote</button>
+      <button class="tb-btn" id="tb-code">&lt;/&gt; Code</button>
+      <button class="tb-btn" id="tb-link">🔗 Link</button>
+      <button class="tb-btn" id="tb-hr">— Divider</button>
+    </div>
+
+    <div class="tb-group">
+      <button class="tb-btn" id="tb-img">🖼️ Upload Image</button>
+      <input type="file" id="file-input-image" accept="image/*" style="display:none;" />
+    </div>
+
+    <div class="tb-group">
+      <span style="font-size:11px;color:var(--text-muted);font-weight:600;margin-right:2px">COMPONENTS:</span>
+      <button class="tb-btn sp-component" id="tb-sp-lab">🧪 &lt;sp-lab&gt;</button>
+      <button class="tb-btn sp-component" id="tb-sp-rule">⚡ Rule Box</button>
+      <button class="tb-btn sp-component" id="tb-sp-warning">⚠️ Warning Box</button>
+      <button class="tb-btn sp-component" id="tb-sp-fact">💡 Tech Fact</button>
+      <button class="tb-btn sp-component" id="tb-sp-checkpoint">🎯 Checkpoint</button>
+      <button class="tb-btn sp-component" id="tb-sp-quiz">❓ Quiz</button>
+    </div>
+  </div>
+
+  <!-- Two-Column Workspace -->
+  <div class="studio-workspace" id="studio-workspace">
+    <!-- Left: Markdown Editor -->
+    <div class="editor-pane" id="editor-pane">
+      <textarea
+        id="editor-textarea"
+        class="editor-textarea"
+        placeholder="Type or paste your markdown here... Drag-and-drop or paste (Ctrl+V) images directly!"
+        spellcheck="false"
+      ></textarea>
+    </div>
+
+    <!-- Right: Live Preview Pane -->
+    <div class="preview-pane" id="preview-pane">
+      <div class="preview-inner">
+        <header class="preview-header-meta">
+          <div id="preview-series-badge" style="display:none;margin-bottom:8px;"></div>
+          <h1 id="preview-title" class="preview-title">Article Title</h1>
+          <p id="preview-subtitle" class="preview-subtitle" style="display:none;"></p>
+          <div class="preview-meta-row">
+            <span id="preview-date">📅 Today</span>
+            <span id="preview-read-time">⏱️ 3 min read</span>
+            <span id="preview-draft-badge" style="display:none;color:#ef4444;font-weight:700;">[DRAFT]</span>
+          </div>
+          <div id="preview-cover-wrap" class="preview-cover-box" style="display:none;">
+            <img id="preview-cover-img" src="" alt="Cover preview" />
+          </div>
+        </header>
+
+        <!-- SiliconPen Main Article Content Shell -->
+        <div class="post-content-shell">
+          <main class="post-main">
+            <div id="preview-content" class="post-content"></div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Status Bar -->
+  <footer class="studio-footer">
+    <div id="status-counts">0 words • 0 characters • 0 images</div>
+    <div id="status-file">Ready</div>
+  </footer>
+
+  <!-- Toast Notification Stack -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Modal for <sp-lab> Insert -->
+  <div class="modal-overlay" id="modal-lab">
+    <div class="modal-card">
+      <div class="modal-title">🧪 Insert Interactive &lt;sp-lab&gt;</div>
+      <div class="modal-body">
+        <div class="meta-field">
+          <label>Lab Platform</label>
+          <select id="lab-platform">
+            <option value="wokwi">Wokwi Simulation (Real-time Arduino/ESP32)</option>
+            <option value="tinkercad">Autodesk Tinkercad Circuits</option>
+          </select>
+        </div>
+        <div class="meta-field">
+          <label id="lab-id-label">Wokwi Project ID</label>
+          <input type="text" id="lab-id" placeholder="e.g. 3829104829104" />
+        </div>
+        <div class="meta-field">
+          <label>Title</label>
+          <input type="text" id="lab-title" placeholder="e.g. LED Blink and PWM Circuit" />
+        </div>
+        <div class="meta-field">
+          <label>Launch Mode</label>
+          <select id="lab-mode">
+            <option value="preview">Preview Card (Click to Launch Workbench)</option>
+            <option value="live">Always Live (Embedded directly on page)</option>
+          </select>
+        </div>
+        <div class="meta-field">
+          <label>Thumbnail Image URL (Optional)</label>
+          <input type="text" id="lab-image" placeholder="/images/.../schematic.png" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="lab-cancel">Cancel</button>
+        <button class="btn btn-primary" id="lab-insert">Insert &lt;sp-lab&gt;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Studio Client Script -->
+  <script>
+    (function() {
+      // DOM Elements
+      const editor = document.getElementById('editor-textarea');
+      const editorPane = document.getElementById('editor-pane');
+      const previewContent = document.getElementById('preview-content');
+      const metaTitle = document.getElementById('meta-title');
+      const metaSlug = document.getElementById('meta-slug');
+      const metaSeries = document.getElementById('meta-series');
+      const metaOrder = document.getElementById('meta-order');
+      const metaDate = document.getElementById('meta-date');
+      const metaCover = document.getElementById('meta-cover');
+      const metaDraft = document.getElementById('meta-draft');
+      const postSelector = document.getElementById('post-selector');
+      const btnSave = document.getElementById('btn-save');
+      const btnNewPost = document.getElementById('btn-new-post');
+      const btnThemeToggle = document.getElementById('btn-theme-toggle');
+      const fileInputImage = document.getElementById('file-input-image');
+      const statusCounts = document.getElementById('status-counts');
+      const statusFile = document.getElementById('status-file');
+      const toastContainer = document.getElementById('toast-container');
+
+      // Preview Elements
+      const previewTitle = document.getElementById('preview-title');
+      const previewSubtitle = document.getElementById('preview-subtitle');
+      const previewDate = document.getElementById('preview-date');
+      const previewReadTime = document.getElementById('preview-read-time');
+      const previewDraftBadge = document.getElementById('preview-draft-badge');
+      const previewCoverWrap = document.getElementById('preview-cover-wrap');
+      const previewCoverImg = document.getElementById('preview-cover-img');
+      const previewSeriesBadge = document.getElementById('preview-series-badge');
+
+      // State
+      let seriesMap = {};
+      let allPosts = [];
+      let isAutoSlug = true;
+
+      // Toast Notification
+      function showToast(msg, isError = false) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        if (isError) toast.style.borderColor = '#ef4444';
+        toast.innerHTML = (isError ? '⚠️ ' : '✅ ') + msg;
+        toastContainer.appendChild(toast);
+        setTimeout(() => toast.remove(), 4000);
+      }
+
+      // Initialize Today's Date
+      const todayStr = new Date().toISOString().slice(0, 10);
+      metaDate.value = todayStr;
+
+      // Load Series and Posts on Boot
+      async function initData() {
+        try {
+          const sRes = await fetch('/api/series');
+          seriesMap = await sRes.json();
+          metaSeries.innerHTML = '<option value="">Standalone Article</option>';
+          for (const key of Object.keys(seriesMap)) {
+            const s = seriesMap[key];
+            const opt = document.createElement('option');
+            opt.value = key;
+            opt.textContent = `${s.name} (Next: #${s.maxOrder + 1})`;
+            metaSeries.appendChild(opt);
+          }
+        } catch (e) {
+          console.error('Failed to load series', e);
+        }
+
+        try {
+          const pRes = await fetch('/api/posts');
+          allPosts = await pRes.json();
+          renderPostSelector();
+        } catch (e) {
+          console.error('Failed to load posts', e);
+        }
+      }
+
+      function renderPostSelector() {
+        postSelector.innerHTML = '<option value="">— Load Existing Post (' + allPosts.length + ') —</option>';
+        for (const p of allPosts) {
+          const opt = document.createElement('option');
+          opt.value = p.slug;
+          opt.textContent = `${p.series ? '[' + p.series + '] ' : ''}${p.title}`;
+          postSelector.appendChild(opt);
+        }
+      }
+
+      // Series Selection -> Auto Calculate Next Order
+      metaSeries.addEventListener('change', () => {
+        const sKey = metaSeries.value;
+        if (sKey && seriesMap[sKey]) {
+          metaOrder.value = seriesMap[sKey].maxOrder + 1;
+        } else {
+          metaOrder.value = '';
+        }
+        updatePreview();
+      });
+
+      // Title Input -> Auto Generate Slug
+      metaTitle.addEventListener('input', () => {
+        if (isAutoSlug) {
+          metaSlug.value = metaTitle.value
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+        }
+        updatePreview();
+      });
+
+      metaSlug.addEventListener('input', () => {
+        isAutoSlug = (metaSlug.value.trim() === '');
+      });
+
+      [metaDate, metaCover, metaDraft].forEach(el => el.addEventListener('input', updatePreview));
+
+      // Markdown Rendering Helper (Uses marked if available, or lightweight fallback)
+      function renderMarkdown(md) {
+        if (window.marked && typeof window.marked.parse === 'function') {
+          return window.marked.parse(md);
+        }
+        // Minimal offline fallback
+        return md
+          .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+          .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+          .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+          .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
+          .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+          .replace(/!\[([^\]]*)\]\((.*?)\)/gim, '<img alt="$1" src="$2" />')
+          .replace(/\[([^\]]*)\]\((.*?)\)/gim, '<a href="$2">$1</a>')
+          .replace(/\n/gim, '<br />');
+      }
+
+      // Live Preview Updater
+      let previewTimer = null;
+      function updatePreview() {
+        clearTimeout(previewTimer);
+        previewTimer = setTimeout(() => {
+          // Update Header Meta
+          const title = metaTitle.value.trim() || 'Untitled Article';
+          previewTitle.textContent = title;
+          document.title = title + ' — SiliconPen Studio';
+
+          previewDate.textContent = '📅 ' + (metaDate.value || 'Today');
+          previewDraftBadge.style.display = metaDraft.checked ? 'inline' : 'none';
+
+          if (metaCover.value.trim()) {
+            previewCoverImg.src = metaCover.value.trim();
+            previewCoverWrap.style.display = 'flex';
+          } else {
+            previewCoverWrap.style.display = 'none';
+          }
+
+          if (metaSeries.value && seriesMap[metaSeries.value]) {
+            const s = seriesMap[metaSeries.value];
+            previewSeriesBadge.style.display = 'inline-block';
+            previewSeriesBadge.innerHTML = `<span class="tag-pill"><span class="tag-dot"></span>${s.name} ${metaOrder.value ? '• Chapter ' + metaOrder.value : ''}</span>`;
+          } else {
+            previewSeriesBadge.style.display = 'none';
+          }
+
+          // Render Body Content
+          const rawMd = editor.value;
+          previewContent.innerHTML = renderMarkdown(rawMd);
+
+          // Update Word Count & Reading Time
+          const words = rawMd.trim().split(/\s+/).filter(Boolean).length;
+          const chars = rawMd.length;
+          const imgMatches = rawMd.match(/!\[[^\]]*\]\([^)]+\)|<img /g) || [];
+          const readMin = Math.max(1, Math.ceil(words / 200));
+
+          statusCounts.textContent = `${words.toLocaleString()} words • ${chars.toLocaleString()} chars • ${imgMatches.length} images`;
+          previewReadTime.textContent = `⏱️ ${readMin} min read`;
+        }, 80);
+      }
+
+      editor.addEventListener('input', updatePreview);
+
+      // Tab Key handling in Editor
+      editor.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          const start = editor.selectionStart;
+          const end = editor.selectionEnd;
+          editor.value = editor.value.substring(0, start) + '  ' + editor.value.substring(end);
+          editor.selectionStart = editor.selectionEnd = start + 2;
+          updatePreview();
+        }
+        // Ctrl+S / Cmd+S Shortcut
+        if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+          e.preventDefault();
+          saveArticle();
+        }
+        // Ctrl+B Shortcut
+        if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+          e.preventDefault();
+          wrapSelection('**', '**');
+        }
+        // Ctrl+I Shortcut
+        if ((e.ctrlKey || e.metaKey) && e.key === 'i') {
+          e.preventDefault();
+          wrapSelection('*', '*');
+        }
+        // Ctrl+K Shortcut
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+          e.preventDefault();
+          wrapSelection('[', '](https://)');
+        }
+      });
+
+      function wrapSelection(before, after) {
+        const start = editor.selectionStart;
+        const end = editor.selectionEnd;
+        const sel = editor.value.substring(start, end) || 'text';
+        editor.value = editor.value.substring(0, start) + before + sel + after + editor.value.substring(end);
+        editor.selectionStart = start + before.length;
+        editor.selectionEnd = start + before.length + sel.length;
+        editor.focus();
+        updatePreview();
+      }
+
+      function insertTextAtCursor(snippet) {
+        const start = editor.selectionStart;
+        const end = editor.selectionEnd;
+        editor.value = editor.value.substring(0, start) + snippet + editor.value.substring(end);
+        editor.selectionStart = editor.selectionEnd = start + snippet.length;
+        editor.focus();
+        updatePreview();
+      }
+
+      // Toolbar Buttons
+      document.getElementById('tb-bold').onclick = () => wrapSelection('**', '**');
+      document.getElementById('tb-italic').onclick = () => wrapSelection('*', '*');
+      document.getElementById('tb-h1').onclick = () => insertTextAtCursor('\n# Heading 1\n');
+      document.getElementById('tb-h2').onclick = () => insertTextAtCursor('\n## Heading 2\n');
+      document.getElementById('tb-h3').onclick = () => insertTextAtCursor('\n### Heading 3\n');
+      document.getElementById('tb-quote').onclick = () => insertTextAtCursor('\n> Insert wise quote here\n');
+      document.getElementById('tb-code').onclick = () => insertTextAtCursor('\n```cpp\nvoid setup() {\n  // Init\n}\n```\n');
+      document.getElementById('tb-link').onclick = () => wrapSelection('[', '](https://)');
+      document.getElementById('tb-hr').onclick = () => insertTextAtCursor('\n<hr class="section-divider"/>\n');
+
+      // Custom Component Shortcuts
+      document.getElementById('tb-sp-rule').onclick = () => {
+        insertTextAtCursor(
+          '\n<div class="sp-rule-box">\n' +
+          '  <div class="sp-rule-title">⚡ Engineering Rule</div>\n' +
+          '  <p>Never connect an LED directly to a power source without a current-limiting resistor.</p>\n' +
+          '</div>\n'
+        );
+      };
+
+      document.getElementById('tb-sp-warning').onclick = () => {
+        insertTextAtCursor(
+          '\n<div class="sp-warning-box">\n' +
+          '  <div class="sp-warning-title">⚠️ Magic Smoke Alert</div>\n' +
+          '  <p>Exceeding 40mA on any GPIO pin can permanently damage the microcontroller port register.</p>\n' +
+          '</div>\n'
+        );
+      };
+
+      document.getElementById('tb-sp-fact').onclick = () => {
+        insertTextAtCursor(
+          '\n<div class="sp-fact-box">\n' +
+          '  <div class="sp-fact-title">💡 Silicon Fact</div>\n' +
+          '  <p>Did you know? The ATmega328P can toggle an I/O pin in just 62.5 nanoseconds at 16 MHz.</p>\n' +
+          '</div>\n'
+        );
+      };
+
+      document.getElementById('tb-sp-checkpoint').onclick = () => {
+        insertTextAtCursor(
+          '\n<sp-checkpoint>\n' +
+          '  <p>✅ Checkpoint 1: Connect 5V and GND rail to breadboard.</p>\n' +
+          '  <p>✅ Checkpoint 2: Place 220Ω resistor in series with the anode.</p>\n' +
+          '</sp-checkpoint>\n'
+        );
+      };
+
+      document.getElementById('tb-sp-quiz').onclick = () => {
+        insertTextAtCursor(
+          '\n<sp-quiz title="Circuit Sanity Check">\n' +
+          '  <sp-q>\n' +
+          '    <q>What happens if you connect an LED directly to 5V without a resistor?</q>\n' +
+          '    <o correct>The LED burns out immediately due to excessive current</o>\n' +
+          '    <o>The Arduino automatically limits current to 20mA</o>\n' +
+          '    <o>The LED stays dim</o>\n' +
+          '  </sp-q>\n' +
+          '</sp-quiz>\n'
+        );
+      };
+
+      // Modal <sp-lab> Handler
+      const modalLab = document.getElementById('modal-lab');
+      document.getElementById('tb-sp-lab').onclick = () => {
+        modalLab.classList.add('open');
+      };
+      document.getElementById('lab-cancel').onclick = () => {
+        modalLab.classList.remove('open');
+      };
+      document.getElementById('lab-platform').onchange = (e) => {
+        const isWokwi = e.target.value === 'wokwi';
+        document.getElementById('lab-id-label').textContent = isWokwi ? 'Wokwi Project ID' : 'Tinkercad Embed URL / ID';
+        document.getElementById('lab-id').placeholder = isWokwi ? 'e.g. 3829104829104' : 'e.g. https://www.tinkercad.com/things/...';
+      };
+      document.getElementById('lab-insert').onclick = () => {
+        const platform = document.getElementById('lab-platform').value;
+        const id = document.getElementById('lab-id').value.trim();
+        const title = document.getElementById('lab-title').value.trim() || 'Interactive Circuit';
+        const mode = document.getElementById('lab-mode').value;
+        const img = document.getElementById('lab-image').value.trim();
+
+        let tag = `<sp-lab title="${title}" ${platform}="${id}" mode="${mode}"`;
+        if (img) tag += ` image="${img}"`;
+        tag += `></sp-lab>\n`;
+
+        modalLab.classList.remove('open');
+        insertTextAtCursor('\n' + tag);
+      };
+
+      // Image Upload and Drop/Paste Handling
+      document.getElementById('tb-img').onclick = () => fileInputImage.click();
+
+      fileInputImage.onchange = () => {
+        if (fileInputImage.files && fileInputImage.files[0]) {
+          uploadAndInsertImage(fileInputImage.files[0]);
+        }
+      };
+
+      // Drag and Drop Images
+      editorPane.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        editorPane.classList.add('drag-over');
+      });
+      editorPane.addEventListener('dragleave', () => editorPane.classList.remove('drag-over'));
+      editorPane.addEventListener('drop', (e) => {
+        e.preventDefault();
+        editorPane.classList.remove('drag-over');
+        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+          const file = e.dataTransfer.files[0];
+          if (file.type.startsWith('image/')) {
+            uploadAndInsertImage(file);
+          }
+        }
+      });
+
+      // Paste Images from Clipboard (Ctrl+V)
+      editor.addEventListener('paste', (e) => {
+        const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+        for (const item of items) {
+          if (item.kind === 'file' && item.type.startsWith('image/')) {
+            const blob = item.getAsFile();
+            uploadAndInsertImage(blob, 'pasted-' + Date.now() + '.png');
+            e.preventDefault();
+            break;
+          }
+        }
+      });
+
+      async function uploadAndInsertImage(file, defaultName) {
+        const slug = metaSlug.value.trim() || 'general';
+        const filename = defaultName || file.name.replace(/[^a-zA-Z0-9._-]/g, '-');
+
+        statusFile.textContent = '⏳ Uploading image ' + filename + '...';
+
+        const reader = new FileReader();
+        reader.onload = async () => {
+          try {
+            const res = await fetch('/api/upload-image', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                slug,
+                filename,
+                dataUrl: reader.result
+              })
+            });
+            const data = await res.json();
+            if (data.success) {
+              const snippet = `\n![${data.filename}](${data.url})\n`;
+              insertTextAtCursor(snippet);
+              showToast(`Image uploaded to ${data.url}`);
+              statusFile.textContent = '✓ Image saved';
+            } else {
+              showToast(data.error || 'Upload failed', true);
+            }
+          } catch (err) {
+            showToast('Upload error: ' + err.message, true);
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+
+      // Save Article
+      async function saveArticle() {
+        const title = metaTitle.value.trim();
+        if (!title) {
+          showToast('Please enter an Article Title before saving', true);
+          metaTitle.focus();
+          return;
+        }
+
+        const slug = (metaSlug.value.trim() || title)
+          .toLowerCase()
+          .replace(/[^a-z0-9_-]/g, '-')
+          .replace(/-+/g, '-');
+
+        metaSlug.value = slug;
+
+        const frontmatter = {
+          title,
+          subtitle: metaTitle.value.trim() ? metaTitle.value.trim() : undefined,
+          date: metaDate.value || todayStr,
+          series: metaSeries.value || undefined,
+          order: metaOrder.value ? Number(metaOrder.value) : undefined,
+          cover: metaCover.value.trim() || undefined,
+          draft: metaDraft.checked
+        };
+
+        const content = editor.value;
+
+        btnSave.disabled = true;
+        btnSave.textContent = '💾 Saving...';
+
+        try {
+          const res = await fetch('/api/save-post', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ slug, frontmatter, content })
+          });
+          const result = await res.json();
+
+          if (result.success) {
+            showToast(`Article saved to ${result.path}!`);
+            statusFile.textContent = '✓ Saved: ' + result.path;
+
+            // Refresh posts list
+            initData();
+          } else {
+            showToast(result.error || 'Failed to save', true);
+          }
+        } catch (err) {
+          showToast('Error saving: ' + err.message, true);
+        } finally {
+          btnSave.disabled = false;
+          btnSave.innerHTML = '💾 Save Article <span style="font-size:11px;opacity:0.75;margin-left:4px">(Ctrl+S)</span>';
+        }
+      }
+
+      btnSave.onclick = saveArticle;
+
+      // Load Existing Post
+      postSelector.onchange = async () => {
+        const slug = postSelector.value;
+        if (!slug) return;
+
+        try {
+          statusFile.textContent = '⏳ Loading ' + slug + '...';
+          const res = await fetch(`/api/post?slug=${encodeURIComponent(slug)}`);
+          const data = await res.json();
+
+          if (data.error) {
+            showToast(data.error, true);
+            return;
+          }
+
+          const fm = data.frontmatter || {};
+          metaTitle.value = fm.title || slug;
+          metaSlug.value = slug;
+          isAutoSlug = false;
+          metaSeries.value = fm.series || '';
+          metaOrder.value = (typeof fm.order === 'number') ? fm.order : '';
+          metaDate.value = fm.date || todayStr;
+          metaCover.value = fm.cover || '';
+          metaDraft.checked = Boolean(fm.draft);
+
+          editor.value = data.content || '';
+          statusFile.textContent = `Loaded: src/content/posts/${slug}.md`;
+          showToast(`Loaded "${fm.title || slug}"`);
+          updatePreview();
+        } catch (err) {
+          showToast('Failed to load post: ' + err.message, true);
+        }
+      };
+
+      // New Post
+      btnNewPost.onclick = () => {
+        metaTitle.value = '';
+        metaSlug.value = '';
+        isAutoSlug = true;
+        metaSeries.value = '';
+        metaOrder.value = '';
+        metaDate.value = todayStr;
+        metaCover.value = '';
+        metaDraft.checked = false;
+        editor.value = '';
+        postSelector.value = '';
+        statusFile.textContent = 'New Draft';
+        showToast('Created new blank article draft');
+        metaTitle.focus();
+        updatePreview();
+      };
+
+      // View Layout Mode Toggles
+      const workspace = document.getElementById('studio-workspace');
+      document.querySelectorAll('.view-btn').forEach(btn => {
+        btn.onclick = () => {
+          document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const view = btn.dataset.view;
+          workspace.className = 'studio-workspace view-' + view;
+        };
+      });
+
+      // Theme Switcher (Dark / Light)
+      btnThemeToggle.onclick = () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('siliconpen-studio-theme', next);
+      };
+
+      const savedTheme = localStorage.getItem('siliconpen-studio-theme');
+      if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      }
+
+      // Initial Boot
+      initData();
+      updatePreview();
+    })();
+  </script>
+</body>
+</html>

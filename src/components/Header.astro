@@ -15,34 +15,58 @@ const isActive = (path: string) => {
       <span class="brand-name">Silicon Pen</span>
     </a>
 
-    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    <div class="header-right-cluster">
+      <nav class="nav-pill">
+        <a href="/" class={`nav-link ${isActive('/')}`}>Home</a>
+        <a href="/about.html" class={`nav-link ${isActive('/about')}`}>About</a>
+        <a href="/articles.html" class={`nav-link ${isActive('/articles')}`}>All Articles</a>
+        <a href="/newsletter.html" class={`nav-link ${isActive('/newsletter')}`}>Newsletter</a>
+        <a href="/contacts.html" class={`nav-link ${isActive('/contacts')}`}>Contacts</a>
 
-    <nav class="nav-pill">
-      <a href="/" class={`nav-link ${isActive('/')}`}>Home</a>
-      <a href="/about.html" class={`nav-link ${isActive('/about')}`}>About</a>
-      <a href="/articles.html" class={`nav-link ${isActive('/articles')}`}>All Articles</a>
-      <a href="/newsletter.html" class={`nav-link ${isActive('/newsletter')}`}>Newsletter</a>
-      <a href="/contacts.html" class={`nav-link ${isActive('/contacts')}`}>Contacts</a>
-
-      <div class="nav-dropdown">
-        <button
-          class={`nav-link dropdown-toggle ${currentPath.startsWith('/references') || currentPath.startsWith('/series') || currentPath.startsWith('/store') ? 'nav-link-active' : ''}`}
-          type="button"
-        >
-          Explore ▾
-        </button>
-        <div class="dropdown-menu">
-          <a href="/references.html">References</a>
-          <a href="/series.html">Series</a>
-          <a href="/store.html">Lab Store ⚡</a>
+        <div class="nav-dropdown">
+          <button
+            class={`nav-link dropdown-toggle ${currentPath.startsWith('/references') || currentPath.startsWith('/series') || currentPath.startsWith('/store') ? 'nav-link-active' : ''}`}
+            type="button"
+          >
+            Explore ▾
+          </button>
+          <div class="dropdown-menu">
+            <a href="/references.html">References</a>
+            <a href="/series.html">Series</a>
+            <a href="/store.html">Lab Store ⚡</a>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      <!-- Light / Dark Theme Toggle Button -->
+      <button type="button" id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle light or dark theme" title="Toggle theme">
+        <!-- Sun icon (visible in dark mode) -->
+        <svg class="theme-icon sun-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <!-- Moon icon (visible in light mode) -->
+        <svg class="theme-icon moon-icon hidden" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- Mobile Navigation Hamburger -->
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    </div>
   </div>
 </header>
 
 <script is:inline>
-  function initNav() {
+  function initHeaderControls() {
+    // 1. Mobile Nav Toggle
     const navToggle = document.querySelector(".nav-toggle");
     const navPill = document.querySelector(".nav-pill");
     const dropdownToggle = document.querySelector(".dropdown-toggle");
@@ -64,11 +88,43 @@ const isActive = (path: string) => {
         dropdownMenu.classList.remove("dropdown-open");
       };
     }
+
+    // 2. Light / Dark Theme Switcher
+    const toggleBtn = document.getElementById("theme-toggle");
+    if (!toggleBtn) return;
+
+    const sunIcon = toggleBtn.querySelector(".sun-icon");
+    const moonIcon = toggleBtn.querySelector(".moon-icon");
+
+    function updateIcons(isLight) {
+      if (isLight) {
+        sunIcon?.classList.add("hidden");
+        moonIcon?.classList.remove("hidden");
+      } else {
+        sunIcon?.classList.remove("hidden");
+        moonIcon?.classList.add("hidden");
+      }
+    }
+
+    // Sync icons with active theme
+    const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
+    updateIcons(currentTheme === "light");
+
+    toggleBtn.onclick = function() {
+      const isLightNow = document.documentElement.getAttribute("data-theme") === "light";
+      const nextTheme = isLightNow ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", nextTheme);
+      try {
+        localStorage.setItem("sp_theme", nextTheme);
+      } catch (e) {}
+      updateIcons(nextTheme === "light");
+    };
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initNav);
+    document.addEventListener("DOMContentLoaded", initHeaderControls);
   } else {
-    initNav();
+    initHeaderControls();
   }
+  document.addEventListener("astro:after-swap", initHeaderControls);
 </script>
