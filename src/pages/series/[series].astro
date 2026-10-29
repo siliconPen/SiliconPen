@@ -5,14 +5,14 @@ import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('posts', ({ data }) => !data.draft);
-  const seriesKeys = new Set(Object.keys(seriesData));
-
-  // Also collect any series defined in posts
+  
+  // Only generate landing pages for series that have at least one active (non-draft) post
+  const activeSeriesKeys = new Set<string>();
   allPosts.forEach(p => {
-    if (p.data.series) seriesKeys.add(p.data.series);
+    if (p.data.series) activeSeriesKeys.add(p.data.series);
   });
 
-  return Array.from(seriesKeys).map(seriesKey => ({
+  return Array.from(activeSeriesKeys).map(seriesKey => ({
     params: { series: seriesKey },
     props: {
       seriesKey,

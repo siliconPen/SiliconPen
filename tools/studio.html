@@ -14,8 +14,8 @@
       --studio-bg: #030712;
       --studio-panel: #0b1120;
       --studio-border: rgba(255, 255, 255, 0.08);
-      --studio-header-h: 60px;
-      --studio-toolbar-h: 46px;
+      --studio-header-h: 56px;
+      --studio-toolbar-h: 44px;
     }
 
     html[data-theme="light"] {
@@ -95,7 +95,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 7px 14px;
+      padding: 6px 13px;
       border-radius: 8px;
       font-size: 13px;
       font-weight: 600;
@@ -107,6 +107,12 @@
       color: var(--text-main);
     }
     .btn:hover { transform: translateY(-1px); }
+
+    .btn-sm {
+      padding: 4px 9px;
+      font-size: 11px;
+      border-radius: 6px;
+    }
 
     .btn-primary {
       background: var(--accent);
@@ -149,35 +155,45 @@
       font-weight: 600;
     }
 
-    /* Metadata Drawer */
+    /* Metadata Drawer - 2 Clean Structured Rows */
     .meta-drawer {
       background: var(--studio-panel);
       border-bottom: 1px solid var(--studio-border);
-      padding: 10px 16px;
-      display: grid;
-      grid-template-columns: 2fr 1.5fr 1fr 1fr 1fr 1fr auto;
-      gap: 10px;
-      align-items: center;
+      padding: 8px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
       font-size: 12px;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
     }
 
     .meta-field {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 2px;
     }
+    .meta-field.flex-1 { flex: 1; min-width: 140px; }
+    .meta-field.flex-2 { flex: 2; min-width: 220px; }
+    .meta-field.flex-3 { flex: 3; min-width: 280px; }
+
     .meta-field label {
-      font-size: 11px;
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       color: var(--text-muted);
-      font-weight: 600;
+      font-weight: 700;
     }
     .meta-field input, .meta-field select {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--studio-border);
       color: var(--text-main);
-      padding: 6px 8px;
+      padding: 5px 8px;
       border-radius: 6px;
       font-size: 12px;
       outline: none;
@@ -192,12 +208,18 @@
       color: #0f172a;
     }
 
+    .series-input-cluster {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     .draft-toggle {
       display: flex;
       align-items: center;
       gap: 6px;
       cursor: pointer;
-      margin-top: 14px;
+      margin-top: 12px;
       user-select: none;
     }
 
@@ -225,7 +247,7 @@
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid transparent;
       color: var(--text-main);
-      padding: 5px 8px;
+      padding: 4px 8px;
       border-radius: 6px;
       font-size: 12px;
       cursor: pointer;
@@ -248,7 +270,7 @@
       background: rgba(255, 159, 28, 0.2);
     }
 
-    /* Main Workspace Workspace: Left Editor, Right Live Preview */
+    /* Main Workspace: Left Editor, Right Live Preview */
     .studio-workspace {
       flex: 1;
       display: grid;
@@ -338,6 +360,12 @@
       font-size: 13px;
       color: var(--text-muted);
     }
+    .preview-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
     .preview-cover-box {
       margin: 18px 0;
       border-radius: 14px;
@@ -356,7 +384,7 @@
 
     /* Bottom Status Bar */
     .studio-footer {
-      height: 30px;
+      height: 28px;
       background: var(--studio-panel);
       border-top: 1px solid var(--studio-border);
       display: flex;
@@ -369,7 +397,7 @@
 
     .toast-container {
       position: fixed;
-      bottom: 40px;
+      bottom: 36px;
       right: 24px;
       z-index: 1000;
       display: flex;
@@ -394,7 +422,56 @@
       to { transform: translateY(0); opacity: 1; }
     }
 
-    /* Modal dialog */
+    .btn-danger-sm {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+    .btn-danger-sm:hover {
+      background: rgba(239, 68, 68, 0.3);
+    }
+
+    .series-manager-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 160px;
+      overflow-y: auto;
+      padding: 6px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      border: 1px solid var(--studio-border);
+    }
+    .series-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    .series-item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .series-item-name {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .series-item-key {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Modals */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -466,41 +543,65 @@
 
   <!-- Frontmatter / Metadata Drawer -->
   <div class="meta-drawer">
-    <div class="meta-field">
-      <label>Article Title</label>
-      <input type="text" id="meta-title" placeholder="e.g. Understanding I2C Protocol..." />
+    <!-- Row 1: Core Article Identity -->
+    <div class="meta-row">
+      <div class="meta-field flex-2">
+        <label>Article Title *</label>
+        <input type="text" id="meta-title" placeholder="e.g. Understanding PWM & LED Fading..." />
+      </div>
+
+      <div class="meta-field flex-2">
+        <label>Article Slug (URL)</label>
+        <input type="text" id="meta-slug" placeholder="e.g. understanding-pwm-led-fading" />
+      </div>
+
+      <div class="meta-field flex-2">
+        <label>Series</label>
+        <div class="series-input-cluster">
+          <select id="meta-series" style="flex:1;">
+            <option value="">Standalone Article</option>
+          </select>
+          <button type="button" id="btn-open-series-modal" class="btn btn-secondary btn-sm" title="Manage or Create Series">⚙️ Manage Series</button>
+        </div>
+      </div>
+
+      <div class="meta-field" style="width: 90px;">
+        <label>Order #</label>
+        <input type="number" id="meta-order" min="1" placeholder="Auto" />
+      </div>
+
+      <div class="meta-field" style="width: 130px;">
+        <label>Date</label>
+        <input type="date" id="meta-date" />
+      </div>
+
+      <div class="draft-toggle">
+        <input type="checkbox" id="meta-draft" />
+        <label for="meta-draft" style="font-size:12px;cursor:pointer;">Draft</label>
+      </div>
     </div>
 
-    <div class="meta-field">
-      <label>Article Slug (URL)</label>
-      <input type="text" id="meta-slug" placeholder="e.g. understanding-i2c-protocol" />
-    </div>
+    <!-- Row 2: Subtitle, Description, Cover, and Tags -->
+    <div class="meta-row">
+      <div class="meta-field flex-2">
+        <label>Subtitle (Catchy Hook)</label>
+        <input type="text" id="meta-subtitle" placeholder="e.g. How Arduino Fakes Analog Output Using High-Speed Switching" />
+      </div>
 
-    <div class="meta-field">
-      <label>Series</label>
-      <select id="meta-series">
-        <option value="">Standalone Article</option>
-      </select>
-    </div>
+      <div class="meta-field flex-3">
+        <label>Description (SEO / Card Summary)</label>
+        <input type="text" id="meta-description" placeholder="e.g. If Arduino can only output HIGH or LOW, how does it fade an LED? Learn how PWM works..." />
+      </div>
 
-    <div class="meta-field">
-      <label>Chapter Order</label>
-      <input type="number" id="meta-order" min="1" placeholder="Auto" />
-    </div>
+      <div class="meta-field flex-2">
+        <label>Tags (Comma Separated)</label>
+        <input type="text" id="meta-tags" placeholder="electronics, arduino, pwm, analog, explainer" />
+      </div>
 
-    <div class="meta-field">
-      <label>Date</label>
-      <input type="date" id="meta-date" />
-    </div>
-
-    <div class="meta-field">
-      <label>Cover Image</label>
-      <input type="text" id="meta-cover" placeholder="/images/.../cover.webp" />
-    </div>
-
-    <div class="draft-toggle">
-      <input type="checkbox" id="meta-draft" />
-      <label for="meta-draft" style="font-size:12px;cursor:pointer;">Draft</label>
+      <div class="meta-field flex-2">
+        <label>Cover Image URL</label>
+        <input type="text" id="meta-cover" placeholder="/images/.../cover.webp" />
+      </div>
     </div>
   </div>
 
@@ -515,6 +616,7 @@
       <button class="tb-btn" id="tb-quote">” Quote</button>
       <button class="tb-btn" id="tb-code">&lt;/&gt; Code</button>
       <button class="tb-btn" id="tb-link">🔗 Link</button>
+      <button class="tb-btn" id="tb-table" title="Insert Markdown Table">📋 Table</button>
       <button class="tb-btn" id="tb-hr">— Divider</button>
     </div>
 
@@ -525,12 +627,17 @@
 
     <div class="tb-group">
       <span style="font-size:11px;color:var(--text-muted);font-weight:600;margin-right:2px">COMPONENTS:</span>
-      <button class="tb-btn sp-component" id="tb-sp-lab">🧪 &lt;sp-lab&gt;</button>
-      <button class="tb-btn sp-component" id="tb-sp-rule">⚡ Rule Box</button>
-      <button class="tb-btn sp-component" id="tb-sp-warning">⚠️ Warning Box</button>
-      <button class="tb-btn sp-component" id="tb-sp-fact">💡 Tech Fact</button>
-      <button class="tb-btn sp-component" id="tb-sp-checkpoint">🎯 Checkpoint</button>
-      <button class="tb-btn sp-component" id="tb-sp-quiz">❓ Quiz</button>
+      <button class="tb-btn sp-component" id="tb-sp-specs" title="Insert Hardware Quick Specs Box">📊 Specs</button>
+      <button class="tb-btn sp-component" id="tb-sp-troubleshoot" title="Insert Troubleshooting & Triage Box">🔧 Triage</button>
+      <button class="tb-btn sp-component" id="tb-sp-compare" title="Insert Hardware Architecture Comparison">⚖️ Compare</button>
+      <button class="tb-btn sp-component" id="tb-sp-pinout" title="Insert GPIO Pin Safety & Classification Guide">⚡ Pinout</button>
+      <button class="tb-btn sp-component" id="tb-sp-youtube" title="Insert YouTube Video Embed">▶️ YouTube</button>
+      <button class="tb-btn sp-component" id="tb-sp-lab" title="Insert Interactive Lab Embed">🧪 &lt;sp-lab&gt;</button>
+      <button class="tb-btn sp-component" id="tb-sp-rule" title="Insert Engineering Rule Box">⚡ Rule Box</button>
+      <button class="tb-btn sp-component" id="tb-sp-warning" title="Insert Hardware Warning Alert">⚠️ Warning Box</button>
+      <button class="tb-btn sp-component" id="tb-sp-fact" title="Insert Silicon Tech Fact">💡 Tech Fact</button>
+      <button class="tb-btn sp-component" id="tb-sp-checkpoint" title="Insert Hands-on Checkpoint">🎯 Checkpoint</button>
+      <button class="tb-btn sp-component" id="tb-sp-quiz" title="Insert Interactive Sanity Quiz">❓ Quiz</button>
     </div>
   </div>
 
@@ -558,6 +665,7 @@
             <span id="preview-read-time">⏱️ 3 min read</span>
             <span id="preview-draft-badge" style="display:none;color:#ef4444;font-weight:700;">[DRAFT]</span>
           </div>
+          <div id="preview-tags-row" class="preview-tags-row" style="display:none;"></div>
           <div id="preview-cover-wrap" class="preview-cover-box" style="display:none;">
             <img id="preview-cover-img" src="" alt="Cover preview" />
           </div>
@@ -581,6 +689,44 @@
 
   <!-- Toast Notification Stack -->
   <div class="toast-container" id="toast-container"></div>
+
+  <!-- Modal for Managing & Creating Series -->
+  <div class="modal-overlay" id="modal-series">
+    <div class="modal-card" style="max-width: 560px;">
+      <div class="modal-title">⚙️ Curriculum Series Manager</div>
+      <div class="modal-body">
+        <label style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;">Active Curriculum Series</label>
+        <div class="series-manager-list" id="series-manager-list">
+          <!-- Populated dynamically: name, key, post count, Delete button -->
+        </div>
+
+        <hr style="border:none;border-top:1px solid var(--studio-border);margin:6px 0;" />
+
+        <div style="font-size:13px;font-weight:700;color:var(--accent);">➕ Add New Curriculum Series</div>
+
+        <div class="meta-field">
+          <label>Series Display Name *</label>
+          <input type="text" id="new-series-name" placeholder="e.g. Guide to ESP32" />
+        </div>
+        <div class="meta-field">
+          <label>Series URL Slug / Key</label>
+          <input type="text" id="new-series-key" placeholder="e.g. guide-to-esp32" />
+        </div>
+        <div class="meta-field">
+          <label>Description (Curriculum Overview) *</label>
+          <input type="text" id="new-series-desc" placeholder="e.g. Master the ESP32 from pinouts and wireless protocols to real IoT projects." />
+        </div>
+        <div class="meta-field">
+          <label>Cover Image Path</label>
+          <input type="text" id="new-series-cover" placeholder="/images/guide-to-esp32/cover.png" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="series-cancel">Close</button>
+        <button class="btn btn-primary" id="series-save">Save & Select Series</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Modal for <sp-lab> Insert -->
   <div class="modal-overlay" id="modal-lab">
@@ -628,13 +774,19 @@
       const editor = document.getElementById('editor-textarea');
       const editorPane = document.getElementById('editor-pane');
       const previewContent = document.getElementById('preview-content');
+
+      // Frontmatter Fields
       const metaTitle = document.getElementById('meta-title');
       const metaSlug = document.getElementById('meta-slug');
+      const metaSubtitle = document.getElementById('meta-subtitle');
+      const metaDescription = document.getElementById('meta-description');
       const metaSeries = document.getElementById('meta-series');
       const metaOrder = document.getElementById('meta-order');
       const metaDate = document.getElementById('meta-date');
       const metaCover = document.getElementById('meta-cover');
+      const metaTags = document.getElementById('meta-tags');
       const metaDraft = document.getElementById('meta-draft');
+
       const postSelector = document.getElementById('post-selector');
       const btnSave = document.getElementById('btn-save');
       const btnNewPost = document.getElementById('btn-new-post');
@@ -653,6 +805,7 @@
       const previewCoverWrap = document.getElementById('preview-cover-wrap');
       const previewCoverImg = document.getElementById('preview-cover-img');
       const previewSeriesBadge = document.getElementById('preview-series-badge');
+      const previewTagsRow = document.getElementById('preview-tags-row');
 
       // State
       let seriesMap = {};
@@ -678,14 +831,7 @@
         try {
           const sRes = await fetch('/api/series');
           seriesMap = await sRes.json();
-          metaSeries.innerHTML = '<option value="">Standalone Article</option>';
-          for (const key of Object.keys(seriesMap)) {
-            const s = seriesMap[key];
-            const opt = document.createElement('option');
-            opt.value = key;
-            opt.textContent = `${s.name} (Next: #${s.maxOrder + 1})`;
-            metaSeries.appendChild(opt);
-          }
+          renderSeriesSelect();
         } catch (e) {
           console.error('Failed to load series', e);
         }
@@ -696,6 +842,21 @@
           renderPostSelector();
         } catch (e) {
           console.error('Failed to load posts', e);
+        }
+      }
+
+      function renderSeriesSelect(selectedKey = null) {
+        const curVal = selectedKey || metaSeries.value;
+        metaSeries.innerHTML = '<option value="">Standalone Article</option>';
+        for (const key of Object.keys(seriesMap)) {
+          const s = seriesMap[key];
+          const opt = document.createElement('option');
+          opt.value = key;
+          opt.textContent = `${s.name} (Next: #${s.maxOrder + 1})`;
+          metaSeries.appendChild(opt);
+        }
+        if (curVal) {
+          metaSeries.value = curVal;
         }
       }
 
@@ -735,7 +896,9 @@
         isAutoSlug = (metaSlug.value.trim() === '');
       });
 
-      [metaDate, metaCover, metaDraft].forEach(el => el.addEventListener('input', updatePreview));
+      [metaSubtitle, metaDescription, metaTags, metaDate, metaCover, metaDraft].forEach(el => {
+        el.addEventListener('input', updatePreview);
+      });
 
       // Markdown Rendering Helper (Uses marked if available, or lightweight fallback)
       function renderMarkdown(md) {
@@ -764,9 +927,19 @@
           previewTitle.textContent = title;
           document.title = title + ' — SiliconPen Studio';
 
+          // Subtitle
+          const sub = metaSubtitle.value.trim();
+          if (sub) {
+            previewSubtitle.textContent = sub;
+            previewSubtitle.style.display = 'block';
+          } else {
+            previewSubtitle.style.display = 'none';
+          }
+
           previewDate.textContent = '📅 ' + (metaDate.value || 'Today');
           previewDraftBadge.style.display = metaDraft.checked ? 'inline' : 'none';
 
+          // Cover Image
           if (metaCover.value.trim()) {
             previewCoverImg.src = metaCover.value.trim();
             previewCoverWrap.style.display = 'flex';
@@ -774,6 +947,7 @@
             previewCoverWrap.style.display = 'none';
           }
 
+          // Series Badge
           if (metaSeries.value && seriesMap[metaSeries.value]) {
             const s = seriesMap[metaSeries.value];
             previewSeriesBadge.style.display = 'inline-block';
@@ -782,9 +956,33 @@
             previewSeriesBadge.style.display = 'none';
           }
 
+          // Tags Row
+          const tagsStr = metaTags.value.trim();
+          if (tagsStr) {
+            const tags = tagsStr.split(',').map(t => t.trim()).filter(Boolean);
+            if (tags.length > 0) {
+              previewTagsRow.innerHTML = tags.map(t => `<span class="tag-pill" style="font-size:11px;padding:3px 9px;">#${t}</span>`).join(' ');
+              previewTagsRow.style.display = 'flex';
+            } else {
+              previewTagsRow.style.display = 'none';
+            }
+          } else {
+            previewTagsRow.style.display = 'none';
+          }
+
           // Render Body Content
           const rawMd = editor.value;
           previewContent.innerHTML = renderMarkdown(rawMd);
+
+          // Wrap tables in responsive table-scroll container
+          previewContent.querySelectorAll('table').forEach(tbl => {
+            if (tbl.parentElement && !tbl.parentElement.classList.contains('table-scroll')) {
+              const wrapper = document.createElement('div');
+              wrapper.className = 'table-scroll';
+              tbl.parentElement.insertBefore(wrapper, tbl);
+              wrapper.appendChild(tbl);
+            }
+          });
 
           // Update Word Count & Reading Time
           const words = rawMd.trim().split(/\s+/).filter(Boolean).length;
@@ -860,9 +1058,87 @@
       document.getElementById('tb-quote').onclick = () => insertTextAtCursor('\n> Insert wise quote here\n');
       document.getElementById('tb-code').onclick = () => insertTextAtCursor('\n```cpp\nvoid setup() {\n  // Init\n}\n```\n');
       document.getElementById('tb-link').onclick = () => wrapSelection('[', '](https://)');
+      document.getElementById('tb-table').onclick = () => {
+        insertTextAtCursor(
+          '\n| Parameter | ESP32-WROOM-32 | ATmega328P (Uno) | Status |\n' +
+          '| :--- | :--- | :--- | :--- |\n' +
+          '| **Architecture** | 32-bit Dual-Core 240MHz | 8-bit Single-Core 16MHz | Active |\n' +
+          '| **SRAM Memory** | 520 KB | 2 KB | 260x More |\n' +
+          '| **Flash Memory** | 4 MB / 8 MB SPI | 32 KB | Standard |\n' +
+          '| **Wireless** | Wi-Fi 802.11 b/g/n + BLE | None (Needs Shield) | Built-in |\n' +
+          '| **Logic Voltage** | 3.3V Strict (Not 5V tolerant) | 5.0V Standard | Caution |\n'
+        );
+      };
       document.getElementById('tb-hr').onclick = () => insertTextAtCursor('\n<hr class="section-divider"/>\n');
 
       // Custom Component Shortcuts
+      document.getElementById('tb-sp-specs').onclick = () => {
+        insertTextAtCursor(
+          '\n<sp-specs title="ESP32-WROOM-32 Module" subtitle="Tensilica Xtensa Dual-Core 32-bit Microcontroller">\n' +
+          '  <item label="Processor">Xtensa dual-core 32-bit LX6 up to 240 MHz</item>\n' +
+          '  <item label="Memory">520 KB SRAM, 448 KB ROM, 4 MB SPI Flash</item>\n' +
+          '  <item label="Wireless">Wi-Fi 802.11 b/g/n (150 Mbps) + Bluetooth v4.2 BR/EDR & BLE</item>\n' +
+          '  <item label="Operating Voltage">3.0V – 3.6V (Strict 3.3V GPIO Logic)</item>\n' +
+          '  <item label="Analog ADC">12-bit SAR ADC up to 18 channels (0 – 4095)</item>\n' +
+          '  <item label="Peripheral Interfaces">3x UART, 3x SPI, 2x I2C, 16x PWM Channels, 2x DAC</item>\n' +
+          '</sp-specs>\n'
+        );
+      };
+
+      document.getElementById('tb-sp-troubleshoot').onclick = () => {
+        insertTextAtCursor(
+          '\n<sp-troubleshoot title="ESP32 Brownout Bootloop">\n' +
+          '  <symptom>Serial Monitor outputs <code>rst:0x10 (RTCWDT_RTC_RESET)</code> and the ESP32 restarts every 2 seconds when Wi-Fi begins transmitting.</symptom>\n' +
+          '  <cause>Wi-Fi RF power amplification demands brief instantaneous current surges (~300-500mA). Weak USB cables or unbuffered 3.3V regulators sag below 2.43V.</cause>\n' +
+          '  <fix>Solder a 10µF to 100µF electrolytic or tantalum capacitor directly across the <code>3V3</code> and <code>GND</code> pins of the board, or power via an external 5V 1A+ regulator.</fix>\n' +
+          '</sp-troubleshoot>\n'
+        );
+      };
+
+      document.getElementById('tb-sp-compare').onclick = () => {
+        insertTextAtCursor(
+          '\n<sp-compare left-title="ESP32 (IoT & Advanced)" right-title="Arduino Uno (Intro Electronics)">\n' +
+          '  <div slot="left">\n' +
+          '    <ul>\n' +
+          '      <li><strong>240 MHz</strong> Dual-Core 32-bit Xtensa processor</li>\n' +
+          '      <li><strong>520 KB</strong> internal SRAM memory</li>\n' +
+          '      <li>Built-in Wi-Fi &amp; Bluetooth BLE radios</li>\n' +
+          '      <li><strong>3.3V Logic</strong> (Requires level shifter for 5V)</li>\n' +
+          '    </ul>\n' +
+          '  </div>\n' +
+          '  <div slot="right">\n' +
+          '    <ul>\n' +
+          '      <li><strong>16 MHz</strong> Single-Core 8-bit AVR RISC processor</li>\n' +
+          '      <li><strong>2 KB</strong> internal SRAM memory</li>\n' +
+          '      <li>No wireless without add-on expansion shields</li>\n' +
+          '      <li><strong>5.0V Logic</strong> (Tolerant of amateur breadboard wiring)</li>\n' +
+          '    </ul>\n' +
+          '  </div>\n' +
+          '</sp-compare>\n'
+        );
+      };
+
+      document.getElementById('tb-sp-pinout').onclick = () => {
+        insertTextAtCursor(
+          '\n<sp-pinout title="ESP32 GPIO Pin Classification Matrix">\n' +
+          '  <pin pin="GPIO 16, 17, 18, 19, 21, 22, 23" type="safe">Full standard GPIO with internal pull-ups/pull-downs. 100% safe for general sensors and actuators.</pin>\n' +
+          '  <pin pin="GPIO 34, 35, 36 (VP), 39 (VN)" type="input-only">Input-only pins with no internal pull-ups or pull-downs. Dedicated exclusively to ADC analog reading.</pin>\n' +
+          '  <pin pin="GPIO 0, 2, 5, 12, 15" type="strapping">Strapping pins that determine boot mode (flashing vs SPI boot). Avoid pulling HIGH or LOW during boot sequence.</pin>\n' +
+          '  <pin pin="GPIO 6 through 11" type="danger">Connected directly to the onboard SPI Flash memory chip. Connecting circuits here causes an instant CPU freeze.</pin>\n' +
+          '</sp-pinout>\n'
+        );
+      };
+
+      document.getElementById('tb-sp-youtube').onclick = () => {
+        insertTextAtCursor(
+          '\n<sp-youtube\n' +
+          '  url="https://www.youtube.com/watch?v=dQw4w9WgXcQ"\n' +
+          '  title="Video Title or Lab Demonstration"\n' +
+          '  caption="Explanation of the demonstration or observed oscilloscope waveform."\n' +
+          '></sp-youtube>\n'
+        );
+      };
+
       document.getElementById('tb-sp-rule').onclick = () => {
         insertTextAtCursor(
           '\n<div class="sp-rule-box">\n' +
@@ -940,6 +1216,156 @@
         insertTextAtCursor('\n' + tag);
       };
 
+      // Modal: Manage & Create Series
+      const modalSeries = document.getElementById('modal-series');
+      const btnOpenSeriesModal = document.getElementById('btn-open-series-modal');
+      const seriesManagerList = document.getElementById('series-manager-list');
+      const newSeriesName = document.getElementById('new-series-name');
+      const newSeriesKey = document.getElementById('new-series-key');
+      const newSeriesDesc = document.getElementById('new-series-desc');
+      const newSeriesCover = document.getElementById('new-series-cover');
+      const seriesCancel = document.getElementById('series-cancel');
+      const seriesSave = document.getElementById('series-save');
+
+      function renderSeriesManagerList() {
+        seriesManagerList.innerHTML = '';
+        const keys = Object.keys(seriesMap);
+        if (keys.length === 0) {
+          seriesManagerList.innerHTML = '<div style="color:var(--text-muted);font-size:12px;padding:8px;">No series registered.</div>';
+          return;
+        }
+
+        for (const k of keys) {
+          const s = seriesMap[k];
+          const item = document.createElement('div');
+          item.className = 'series-item';
+
+          const info = document.createElement('div');
+          info.className = 'series-item-info';
+          info.innerHTML = `
+            <span class="series-item-name">${s.name}</span>
+            <span class="series-item-key"><code>${s.key}</code> • ${s.count || 0} chapters (max #${s.maxOrder || 0})</span>
+          `;
+
+          const delBtn = document.createElement('button');
+          delBtn.className = 'btn-danger-sm';
+          delBtn.textContent = '🗑️ Delete';
+          delBtn.title = `Delete "${s.name}" from series.json`;
+          delBtn.onclick = async () => {
+            const confirmed = confirm(`Are you sure you want to delete the series "${s.name}" (${s.key})?\n\n(Existing posts will remain safely intact, but their series tag will be cleared/standalone).`);
+            if (!confirmed) return;
+
+            try {
+              delBtn.disabled = true;
+              delBtn.textContent = 'Deleting...';
+              const res = await fetch('/api/delete-series', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ key: s.key })
+              });
+              if (!res.ok) {
+                const errText = await res.text();
+                throw new Error(`Server returned ${res.status} (${errText}). If studio was running previously, please restart "npm run write" in your terminal.`);
+              }
+              const data = await res.json();
+              if (data.success) {
+                showToast(`Series "${s.name}" deleted!`);
+                const sRes = await fetch('/api/series');
+                seriesMap = await sRes.json();
+                renderSeriesSelect();
+                renderSeriesManagerList();
+                if (metaSeries.value === s.key) {
+                  metaSeries.value = '';
+                  metaOrder.value = '';
+                }
+                updatePreview();
+              } else {
+                showToast(data.error || 'Failed to delete series', true);
+              }
+            } catch (err) {
+              showToast('Error deleting series: ' + err.message, true);
+            }
+          };
+
+          item.appendChild(info);
+          item.appendChild(delBtn);
+          seriesManagerList.appendChild(item);
+        }
+      }
+
+      btnOpenSeriesModal.onclick = () => {
+        newSeriesName.value = '';
+        newSeriesKey.value = '';
+        newSeriesDesc.value = '';
+        newSeriesCover.value = '';
+        renderSeriesManagerList();
+        modalSeries.classList.add('open');
+        newSeriesName.focus();
+      };
+
+      seriesCancel.onclick = () => {
+        modalSeries.classList.remove('open');
+      };
+
+      newSeriesName.addEventListener('input', () => {
+        const slug = newSeriesName.value
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+        newSeriesKey.value = slug;
+        if (!newSeriesCover.value || newSeriesCover.value.startsWith('/images/')) {
+          newSeriesCover.value = `/images/${slug}/cover.png`;
+        }
+      });
+
+      seriesSave.onclick = async () => {
+        const name = newSeriesName.value.trim();
+        const key = newSeriesKey.value.trim() || name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        const description = newSeriesDesc.value.trim();
+        const cover = newSeriesCover.value.trim();
+
+        if (!name) {
+          showToast('Please enter a Series Display Name', true);
+          newSeriesName.focus();
+          return;
+        }
+
+        seriesSave.disabled = true;
+        seriesSave.textContent = 'Saving...';
+
+        try {
+          const res = await fetch('/api/save-series', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ key, name, description, cover })
+          });
+          if (!res.ok) {
+            const errText = await res.text();
+            throw new Error(`Server returned ${res.status} (${errText}). If studio was running previously, please restart "npm run write" in your terminal to load the newest endpoints.`);
+          }
+          const result = await res.json();
+          if (result.success) {
+            showToast(`Series "${name}" created!`);
+            modalSeries.classList.remove('open');
+
+            // Refresh series and auto-select
+            const sRes = await fetch('/api/series');
+            seriesMap = await sRes.json();
+            renderSeriesSelect(key);
+            metaSeries.value = key;
+            metaOrder.value = 1;
+            updatePreview();
+          } else {
+            showToast(result.error || 'Failed to save series', true);
+          }
+        } catch (err) {
+          showToast('Error creating series: ' + err.message, true);
+        } finally {
+          seriesSave.disabled = false;
+          seriesSave.textContent = 'Save & Select Series';
+        }
+      };
+
       // Image Upload and Drop/Paste Handling
       document.getElementById('tb-img').onclick = () => fileInputImage.click();
 
@@ -997,6 +1423,10 @@
                 dataUrl: reader.result
               })
             });
+            if (!res.ok) {
+              const errText = await res.text();
+              throw new Error(`Server returned ${res.status}: ${errText}`);
+            }
             const data = await res.json();
             if (data.success) {
               const snippet = `\n![${data.filename}](${data.url})\n`;
@@ -1029,13 +1459,21 @@
 
         metaSlug.value = slug;
 
+        // Parse tags
+        const tagsArr = metaTags.value
+          .split(',')
+          .map(t => t.trim())
+          .filter(Boolean);
+
         const frontmatter = {
           title,
-          subtitle: metaTitle.value.trim() ? metaTitle.value.trim() : undefined,
+          subtitle: metaSubtitle.value.trim() || undefined,
+          description: metaDescription.value.trim() || undefined,
           date: metaDate.value || todayStr,
           series: metaSeries.value || undefined,
           order: metaOrder.value ? Number(metaOrder.value) : undefined,
           cover: metaCover.value.trim() || undefined,
+          tags: tagsArr.length > 0 ? tagsArr : undefined,
           draft: metaDraft.checked
         };
 
@@ -1050,6 +1488,10 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ slug, frontmatter, content })
           });
+          if (!res.ok) {
+            const errText = await res.text();
+            throw new Error(`Server returned ${res.status}: ${errText}`);
+          }
           const result = await res.json();
 
           if (result.success) {
@@ -1090,11 +1532,22 @@
           metaTitle.value = fm.title || slug;
           metaSlug.value = slug;
           isAutoSlug = false;
+
+          metaSubtitle.value = fm.subtitle || '';
+          metaDescription.value = fm.description || '';
           metaSeries.value = fm.series || '';
           metaOrder.value = (typeof fm.order === 'number') ? fm.order : '';
           metaDate.value = fm.date || todayStr;
           metaCover.value = fm.cover || '';
           metaDraft.checked = Boolean(fm.draft);
+
+          if (Array.isArray(fm.tags)) {
+            metaTags.value = fm.tags.join(', ');
+          } else if (typeof fm.tags === 'string') {
+            metaTags.value = fm.tags;
+          } else {
+            metaTags.value = '';
+          }
 
           editor.value = data.content || '';
           statusFile.textContent = `Loaded: src/content/posts/${slug}.md`;
@@ -1110,10 +1563,13 @@
         metaTitle.value = '';
         metaSlug.value = '';
         isAutoSlug = true;
+        metaSubtitle.value = '';
+        metaDescription.value = '';
         metaSeries.value = '';
         metaOrder.value = '';
         metaDate.value = todayStr;
         metaCover.value = '';
+        metaTags.value = '';
         metaDraft.checked = false;
         editor.value = '';
         postSelector.value = '';

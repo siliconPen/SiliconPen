@@ -7,8 +7,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "write": "node tools/studio.mjs",
-    "studio": "node tools/studio.mjs",
+    "write": "node --watch tools/studio.mjs",
+    "studio": "node --watch tools/studio.mjs",
     "astro": "astro"
   },
   "dependencies": {

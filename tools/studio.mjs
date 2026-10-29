@@ -34,13 +34,35 @@ function parsePostMarkdown(raw) {
   const frontmatter = {};
 
   const lines = rawYaml.split(/\r?\n/);
+  let currentKey = null;
+
   for (const line of lines) {
     const trimmed = line.trim();
     if (!trimmed || trimmed.startsWith('#')) continue;
+
+    // Check if line is a list item under a previous key (e.g. `  - "tag"`)
+    if (currentKey && /^\s*-\s+/.test(line)) {
+      const itemVal = line.replace(/^\s*-\s+/, '').trim().replace(/^['"]|['"]$/g, '');
+      if (Array.isArray(frontmatter[currentKey])) {
+        frontmatter[currentKey].push(itemVal);
+      }
+      continue;
+    }
+
     const colonIdx = line.indexOf(':');
     if (colonIdx === -1) continue;
+
     const key = line.slice(0, colonIdx).trim();
     let val = line.slice(colonIdx + 1).trim();
+
+    if (val === '') {
+      // Key with empty value -> list follows on next lines
+      currentKey = key;
+      frontmatter[key] = [];
+      continue;
+    }
+
+    currentKey = null;
 
     if (val.startsWith('"') && val.endsWith('"')) {
       val = val.slice(1, -1).replace(/\\"/g, '"');
@@ -77,7 +99,10 @@ function serializePostMarkdown(frontmatter, content) {
     lines.push(`order: ${frontmatter.order}`);
   }
   if (Array.isArray(frontmatter.tags) && frontmatter.tags.length > 0) {
-    lines.push(`tags: ${JSON.stringify(frontmatter.tags)}`);
+    lines.push('tags:');
+    for (const tag of frontmatter.tags) {
+      lines.push(`  - ${JSON.stringify(tag)}`);
+    }
   }
   lines.push(`draft: ${frontmatter.draft === true ? 'true' : 'false'}`);
   lines.push('---');
@@ -102,12 +127,13 @@ function getAllPosts() {
         slug,
         title: frontmatter.title || slug,
         subtitle: frontmatter.subtitle || '',
+        description: frontmatter.description || '',
         date: frontmatter.date || '',
         series: frontmatter.series || '',
         order: typeof frontmatter.order === 'number' ? frontmatter.order : null,
         draft: Boolean(frontmatter.draft),
         cover: frontmatter.cover || '',
-        tags: frontmatter.tags || []
+        tags: Array.isArray(frontmatter.tags) ? frontmatter.tags : []
       });
     } catch (err) {
       console.error(`Error reading ${file}:`, err);
@@ -142,8 +168,20 @@ function getSeriesInfo() {
     };
   }
 
+  // Also include any series found in posts but not yet in series.json
   for (const post of posts) {
-    if (post.series && seriesStats[post.series]) {
+    if (post.series) {
+      if (!seriesStats[post.series]) {
+        const defaultName = post.series.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        seriesStats[post.series] = {
+          key: post.series,
+          name: defaultName,
+          description: post.subtitle || `Learning track for ${defaultName}.`,
+          cover: post.cover || '/images/cover.webp',
+          count: 0,
+          maxOrder: 0
+        };
+      }
       seriesStats[post.series].count++;
       if (typeof post.order === 'number' && post.order > seriesStats[post.series].maxOrder) {
         seriesStats[post.series].maxOrder = post.order;
@@ -216,6 +254,77 @@ const server = http.createServer((req, res) => {
   // --- API Endpoints ---
   if (pathname === '/api/series' && req.method === 'GET') {
     return sendJson(200, getSeriesInfo());
+  }
+
+  if (pathname === '/api/save-series' && req.method === 'POST') {
+    return readJsonBody((err, data) => {
+      if (err) return sendJson(400, { error: 'Invalid JSON body' });
+
+      let { key, name, description, cover } = data;
+      if (!name || !name.trim()) {
+        return sendJson(400, { error: 'Series display name is required' });
+      }
+
+      if (!key || !key.trim()) {
+        key = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+      }
+      key = key.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '-').replace(/-+/g, '-');
+
+      let seriesData = {};
+      if (fs.existsSync(SERIES_FILE)) {
+        try {
+          seriesData = JSON.parse(fs.readFileSync(SERIES_FILE, 'utf8'));
+        } catch (e) {
+          seriesData = {};
+        }
+      }
+
+      seriesData[key] = {
+        name: name.trim(),
+        description: (description || `Comprehensive series and curriculum notes for ${name}.`).trim(),
+        cover: (cover || `/images/${key}/cover.png`).trim()
+      };
+
+      try {
+        fs.writeFileSync(SERIES_FILE, JSON.stringify(seriesData, null, 2), 'utf8');
+        return sendJson(200, {
+          success: true,
+          key,
+          series: seriesData[key]
+        });
+      } catch (saveErr) {
+        return sendJson(500, { error: saveErr.message });
+      }
+    });
+  }
+
+  if (pathname === '/api/delete-series' && req.method === 'POST') {
+    return readJsonBody((err, data) => {
+      if (err) return sendJson(400, { error: 'Invalid JSON body' });
+
+      const { key } = data;
+      if (!key) return sendJson(400, { error: 'Series key is required' });
+
+      let seriesData = {};
+      if (fs.existsSync(SERIES_FILE)) {
+        try {
+          seriesData = JSON.parse(fs.readFileSync(SERIES_FILE, 'utf8'));
+        } catch (e) {
+          seriesData = {};
+        }
+      }
+
+      if (seriesData[key]) {
+        delete seriesData[key];
+        try {
+          fs.writeFileSync(SERIES_FILE, JSON.stringify(seriesData, null, 2), 'utf8');
+        } catch (saveErr) {
+          return sendJson(500, { error: saveErr.message });
+        }
+      }
+
+      return sendJson(200, { success: true, key });
+    });
   }
 
   if (pathname === '/api/posts' && req.method === 'GET') {

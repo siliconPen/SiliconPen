@@ -393,3 +393,343 @@ class SPReveal extends HTMLElement {
 }
 
 customElements.define("sp-reveal", SPReveal);
+
+// ==========================================
+// NEW SOLID SILICONPEN ENGINEERING COMPONENTS
+// ==========================================
+
+// 1. Hardware Datasheet & Quick Specs Component (<sp-specs>)
+class SPSpecs extends HTMLElement {
+  connectedCallback() {
+    const title = this.getAttribute("title") || "Hardware Specifications";
+    const subtitle = this.getAttribute("subtitle") || "";
+    const items = Array.from(this.querySelectorAll("item, [data-label]"));
+
+    let gridHtml = "";
+    if (items.length > 0) {
+      gridHtml = items
+        .map((item) => {
+          const label = item.getAttribute("label") || item.getAttribute("data-label") || "Spec";
+          const val = item.innerHTML.trim();
+          return `
+            <div class="sp-spec-row">
+              <span class="sp-spec-key">${label}</span>
+              <span class="sp-spec-val">${val}</span>
+            </div>
+          `;
+        })
+        .join("");
+    } else {
+      gridHtml = `<div class="sp-spec-body">${this.innerHTML}</div>`;
+    }
+
+    this.innerHTML = `
+      <div class="sp-specs-card">
+        <div class="sp-specs-header">
+          <div class="sp-specs-badge">
+            <span class="sp-specs-dot"></span>
+            DATASHEET QUICK SPECS
+          </div>
+          <div class="sp-specs-title">${title}</div>
+          ${subtitle ? `<div class="sp-specs-subtitle">${subtitle}</div>` : ""}
+        </div>
+        <div class="sp-specs-grid">
+          ${gridHtml}
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("sp-specs", SPSpecs);
+
+// 2. Circuit Triage & Troubleshooting (<sp-troubleshoot>)
+class SPTroubleshoot extends HTMLElement {
+  connectedCallback() {
+    const title = this.getAttribute("title") || "Hardware Troubleshooting & Fix";
+    const symptomEl = this.querySelector('[slot="symptom"], symptom');
+    const causeEl = this.querySelector('[slot="cause"], cause');
+    const fixEl = this.querySelector('[slot="fix"], fix, [slot="solution"], solution');
+
+    const symptom = symptomEl ? symptomEl.innerHTML.trim() : (this.getAttribute("symptom") || "");
+    const cause = causeEl ? causeEl.innerHTML.trim() : (this.getAttribute("cause") || "");
+    const fix = fixEl ? fixEl.innerHTML.trim() : (this.getAttribute("fix") || this.innerHTML.trim());
+
+    this.innerHTML = `
+      <div class="sp-troubleshoot-card">
+        <div class="sp-tb-header">
+          <span class="sp-tb-badge">
+            <span class="sp-tb-icon">🔧</span>
+            CIRCUIT TRIAGE
+          </span>
+          <h4 class="sp-tb-title">${title}</h4>
+        </div>
+
+        <div class="sp-tb-sections">
+          ${symptom ? `
+            <div class="sp-tb-section symptom">
+              <div class="sp-tb-label">🚨 Symptom / Error</div>
+              <div class="sp-tb-content">${symptom}</div>
+            </div>
+          ` : ""}
+          ${cause ? `
+            <div class="sp-tb-section cause">
+              <div class="sp-tb-label">🔍 Root Cause</div>
+              <div class="sp-tb-content">${cause}</div>
+            </div>
+          ` : ""}
+          ${fix ? `
+            <div class="sp-tb-section fix">
+              <div class="sp-tb-label">⚡ Verified Solution</div>
+              <div class="sp-tb-content">${fix}</div>
+            </div>
+          ` : ""}
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("sp-troubleshoot", SPTroubleshoot);
+
+// 3. Side-by-Side Benchmark & Comparison (<sp-compare>)
+class SPCompare extends HTMLElement {
+  connectedCallback() {
+    const leftTitle = this.getAttribute("left-title") || this.getAttribute("a-title") || "Option A";
+    const rightTitle = this.getAttribute("right-title") || this.getAttribute("b-title") || "Option B";
+    const leftEl = this.querySelector('[slot="left"], [slot="a"]');
+    const rightEl = this.querySelector('[slot="right"], [slot="b"]');
+
+    const leftContent = leftEl ? leftEl.innerHTML : "";
+    const rightContent = rightEl ? rightEl.innerHTML : "";
+
+    this.innerHTML = `
+      <div class="sp-compare-card">
+        <div class="sp-compare-badge">⚖️ HARDWARE BENCHMARK</div>
+        <div class="sp-compare-grid">
+          <div class="sp-compare-col left">
+            <div class="sp-col-header">${leftTitle}</div>
+            <div class="sp-col-body">${leftContent}</div>
+          </div>
+          <div class="sp-compare-col right">
+            <div class="sp-col-header">${rightTitle}</div>
+            <div class="sp-col-body">${rightContent}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("sp-compare", SPCompare);
+
+// 4. GPIO Safety & Pinout Reference (<sp-pinout>)
+class SPPinout extends HTMLElement {
+  connectedCallback() {
+    const title = this.getAttribute("title") || "GPIO Pinout & Safety Guide";
+    const pins = Array.from(this.querySelectorAll("pin, [data-pin]"));
+
+    let listHtml = "";
+    if (pins.length > 0) {
+      listHtml = pins
+        .map((p) => {
+          const type = p.getAttribute("type") || "safe";
+          const pin = p.getAttribute("pin") || p.getAttribute("data-pin") || "";
+          const desc = p.innerHTML.trim();
+          return `
+            <div class="sp-pin-item type-${type}">
+              <div class="sp-pin-tag ${type}">
+                <span class="sp-pin-dot"></span>
+                ${pin}
+              </div>
+              <div class="sp-pin-desc">${desc}</div>
+            </div>
+          `;
+        })
+        .join("");
+    } else {
+      listHtml = `<div class="sp-pin-raw">${this.innerHTML}</div>`;
+    }
+
+    this.innerHTML = `
+      <div class="sp-pinout-card">
+        <div class="sp-pinout-header">
+          <span class="sp-pinout-badge">⚡ PINOUT SAFETY REFERENCE</span>
+          <h4 class="sp-pinout-title">${title}</h4>
+        </div>
+        <div class="sp-pinout-list">
+          ${listHtml}
+        </div>
+      </div>
+    `;
+  }
+}
+customElements.define("sp-pinout", SPPinout);
+
+// 5. Solid Web Component Callouts (<sp-rule>, <sp-warning>, <sp-fact>, <sp-pro>)
+class SPRule extends HTMLElement {
+  connectedCallback() {
+    const title = this.getAttribute("title") || "Engineering Rule";
+    const content = this.innerHTML;
+    this.innerHTML = `
+      <div class="sp-rule-box">
+        <div class="sp-rule-title">⚡ ${title}</div>
+        <div class="sp-rule-body">${content}</div>
+      </div>
+    `;
+  }
+}
+customElements.define("sp-rule", SPRule);
+
+class SPWarning extends HTMLElement {
+  connectedCallback() {
+    const title = this.getAttribute("title") || "Magic Smoke Alert";
+    const content = this.innerHTML;
+    this.innerHTML = `
+      <div class="sp-warning-box">
+        <div class="sp-warning-title">⚠️ ${title}</div>
+        <div class="sp-warning-body">${content}</div>
+      </div>
+    `;
+  }
+}
+customElements.define("sp-warning", SPWarning);
+
+class SPFact extends HTMLElement {
+  connectedCallback() {
+    const title = this.getAttribute("title") || "Silicon Fact";
+    const content = this.innerHTML;
+    this.innerHTML = `
+      <div class="sp-fact-box">
+        <div class="sp-fact-title">💡 ${title}</div>
+        <div class="sp-fact-body">${content}</div>
+      </div>
+    `;
+  }
+}
+customElements.define("sp-fact", SPFact);
+
+class SPPro extends HTMLElement {
+  connectedCallback() {
+    const title = this.getAttribute("title") || "Lab Pro Tip";
+    const content = this.innerHTML;
+    this.innerHTML = `
+      <div class="sp-pro-box">
+        <div class="sp-pro-title">🚀 ${title}</div>
+        <div class="sp-pro-body">${content}</div>
+      </div>
+    `;
+  }
+}
+customElements.define("sp-pro", SPPro);
+
+// 6. Cyber-Lab YouTube Video Embed Component (<sp-youtube>)
+class SPYouTube extends HTMLElement {
+  connectedCallback() {
+    const rawInput = (
+      this.getAttribute("id") ||
+      this.getAttribute("url") ||
+      this.getAttribute("src") ||
+      this.getAttribute("v") ||
+      this.getAttribute("video") ||
+      ""
+    ).trim();
+
+    const title = this.getAttribute("title") || "";
+    // Allow caption attribute or innerHTML as caption
+    const caption = this.getAttribute("caption") || this.innerHTML.trim();
+    let startTime = this.getAttribute("start") || this.getAttribute("t") || "";
+
+    // 1. Extract 11-char Video ID
+    let videoId = "";
+    if (/^[a-zA-Z0-9_-]{11}$/.test(rawInput)) {
+      videoId = rawInput;
+    } else {
+      const match = rawInput.match(
+        /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/
+      );
+      if (match) {
+        videoId = match[1];
+      }
+      // Also extract start time from URL query param if present (e.g. ?t=90 or &t=1m30s)
+      if (!startTime) {
+        const timeMatch = rawInput.match(/[?&]t=([0-9a-zA-Z]+)/);
+        if (timeMatch) {
+          startTime = timeMatch[1];
+        }
+      }
+    }
+
+    if (!videoId) {
+      this.innerHTML = `
+        <div class="sp-yt-card sp-yt-error">
+          <div class="sp-yt-header">
+            <span class="sp-yt-badge">
+              <span class="sp-yt-icon">▶</span>
+              YOUTUBE EMBED
+            </span>
+            <span class="sp-yt-title">Configuration Needed</span>
+          </div>
+          <div style="padding: 18px; color: #f87171; font-size: 0.9rem; line-height: 1.5;">
+            ⚠️ Missing or invalid YouTube video URL or ID.<br/>
+            Usage: <code>&lt;sp-youtube url="https://www.youtube.com/watch?v=..." title="..."&gt;&lt;/sp-youtube&gt;</code>
+          </div>
+        </div>
+      `;
+      return;
+    }
+
+    // 2. Build privacy-friendly embed URL
+    let embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0`;
+    if (startTime) {
+      const seconds = this.parseTime(startTime);
+      if (seconds > 0) {
+        embedUrl += `&start=${seconds}`;
+      }
+    }
+
+    // 3. Render Cyber-Lab video player card
+    this.innerHTML = `
+      <figure class="sp-yt-card">
+        ${
+          title
+            ? `
+          <div class="sp-yt-header">
+            <span class="sp-yt-badge">
+              <span class="sp-yt-icon">▶</span>
+              VIDEO DEMO
+            </span>
+            <span class="sp-yt-title">${title}</span>
+          </div>
+        `
+            : ""
+        }
+        <div class="sp-yt-frame-wrapper">
+          <iframe
+            src="${embedUrl}"
+            title="${title || "YouTube video player"}"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+        ${
+          caption
+            ? `<figcaption class="sp-yt-caption">${caption}</figcaption>`
+            : ""
+        }
+      </figure>
+    `;
+  }
+
+  parseTime(t) {
+    if (!t) return 0;
+    if (/^\d+$/.test(t)) return parseInt(t, 10);
+    let total = 0;
+    const m = t.match(/(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?/);
+    if (m) {
+      if (m[1]) total += parseInt(m[1], 10) * 3600;
+      if (m[2]) total += parseInt(m[2], 10) * 60;
+      if (m[3]) total += parseInt(m[3], 10);
+    }
+    return total;
+  }
+}
+customElements.define("sp-youtube", SPYouTube);

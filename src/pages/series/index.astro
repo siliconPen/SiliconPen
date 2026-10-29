@@ -5,7 +5,13 @@ import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('posts', ({ data }) => !data.draft);
 
-const seriesList = Object.entries(seriesData).map(([key, data]) => {
+// Combine series defined in series.json with any series found in posts
+const allSeriesKeys = new Set(Object.keys(seriesData));
+allPosts.forEach(p => {
+  if (p.data.series) allSeriesKeys.add(p.data.series);
+});
+
+const seriesList = Array.from(allSeriesKeys).map((key) => {
   const posts = allPosts.filter(p => p.data.series === key);
   posts.sort((a, b) => {
     if (a.data.order !== undefined && b.data.order !== undefined) {
@@ -13,6 +19,12 @@ const seriesList = Object.entries(seriesData).map(([key, data]) => {
     }
     return a.data.date.localeCompare(b.data.date);
   });
+
+  const rawMeta = (seriesData as Record<string, { name?: string; description?: string; cover?: string }>)[key] || {};
+  const defaultName = key.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+  const name = rawMeta.name || defaultName;
+  const description = rawMeta.description || (posts[0]?.data.description || posts[0]?.data.subtitle || `Comprehensive learning track and notes for ${name}.`);
+  const cover = rawMeta.cover || (posts[0]?.data.cover || '/images/cover.webp');
 
   const totalMinutes = posts.reduce((acc, p) => {
     const words = (p.body || '').trim().split(/\s+/).length;
@@ -23,7 +35,9 @@ const seriesList = Object.entries(seriesData).map(([key, data]) => {
 
   return {
     key,
-    ...data,
+    name,
+    description,
+    cover,
     posts,
     chapterCount: posts.length,
     totalMinutes,
@@ -31,7 +45,7 @@ const seriesList = Object.entries(seriesData).map(([key, data]) => {
     firstChapter: posts[0] || null,
     lastChapter: posts[posts.length - 1] || null,
   };
-});
+}).filter(track => track.chapterCount > 0);
 ---
 
 <BaseLayout

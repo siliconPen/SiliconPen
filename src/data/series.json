@@ -18,5 +18,10 @@
     "name": "Real Circuits",
     "description": "Deep dives into real-world projects and circuit breakdowns with practical engineering insights.",
     "cover": "/images/real-circuits/cover.png"
+  },
+  "guide-to-esp32": {
+    "name": "Guide To ESP32",
+    "description": "Hands-on embedded systems · Code, circuits, and downloadable project files",
+    "cover": "/images/guide-to-esp32/cover.png"
   }
 }

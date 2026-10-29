@@ -72,7 +72,7 @@ if (series) {
 const fullUrl = new URL(Astro.url.pathname, Astro.site || "https://siliconpen.com").toString();
 ---
 
-<BaseLayout title={`${title} — Silicon Pen`} description={description} image={cover} article={true}>
+<BaseLayout title={`${title} — Silicon Pen`} description={description} image={cover} article={true} date={date} tags={tags}>
   <main class="page-main">
     <article class="container post-article">
     <!-- Hero Header -->
@@ -394,7 +394,17 @@ const fullUrl = new URL(Astro.url.pathname, Astro.site || "https://siliconpen.co
       windowDiv.appendChild(pre);
     });
 
-    // 5. Click-to-Zoom Schematic Lightbox
+    // 5. Responsive Scroll Wrapper for Markdown Tables
+    document.querySelectorAll(".post-content table").forEach((tbl) => {
+      if (tbl.parentElement && !tbl.parentElement.classList.contains("table-scroll")) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "table-scroll";
+        tbl.parentElement.insertBefore(wrapper, tbl);
+        wrapper.appendChild(tbl);
+      }
+    });
+
+    // 6. Click-to-Zoom Schematic Lightbox
     const lightbox = document.getElementById("sp-lightbox");
     const lightboxImg = document.getElementById("sp-lightbox-img") as HTMLImageElement;
     const lightboxCaption = document.getElementById("sp-lightbox-caption") as HTMLElement;
