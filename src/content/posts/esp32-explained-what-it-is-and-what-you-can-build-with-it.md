@@ -242,22 +242,34 @@ You won't need to configure everything before continuing with this introduction.
 
 We'll follow a practical learning path, starting with the hardware and gradually moving towards complete projects.
 
-- **ESP32 Explained:** What it is and what you can build with it.
-- **ESP32 Pinout:** Understanding GPIO, ADC, PWM, and communication interfaces.
-- **VS Code + PlatformIO:** Setting up the development environment.
-- **Your First ESP32 Program:** GPIO and serial debugging.
-- **Reading Inputs and Controlling Outputs:** Buttons, ADC, and PWM.
-- **Organizing ESP32 Projects:** Understanding project structure and reusable code.
-- **Building Breakout:** Our first arcade game.
-- *Building Flappy Bird:** Gravity, obstacles, and collision detection.
-- **Understanding Game Loops:** The programming concepts behind both games.
-- **Project Source Code:** Accessing and modifying the completed projects.
+- ESP32 Explained: What it is, its capabilities, and what you can build with it.
 
-Later, we'll move into ***Wi-Fi, web interfaces, sensors, and integrated systems.***
+- ESP32 Pinout: Understanding GPIO, ADC, PWM, and communication interfaces.
 
-The goal isn't just to copy code and make something work. It's to understand the components well enough to modify them, debug them, and eventually build something of your ****own****.
+- VS Code + PlatformIO: Setting up our development environment and organising our first project.
 
-Source code and project resources will be shared through a GitHub repository as the projects are published.
+- Building with ESP32: Combining GPIO, digital inputs, ADC, PWM, and program logic to create interactive applications.
+
+- Working with Sensors: Reading sensor data, processing measurements, and controlling hardware based on real-world conditions.
+
+- ESP32 Connectivity: Exploring Wi-Fi, web servers, and browser-based interfaces.
+
+- Building Breakout: Creating our first arcade game on a colour TFT display.
+
+- Building Flappy Bird: Exploring gravity, obstacles, and collision detection through another game.
+
+- Understanding Game Loops: Exploring the programming concepts behind our arcade projects.
+
+**Project Source Code:** Accessing, understanding, and modifying the completed projects.
+
+As we progress, we'll combine these concepts into more integrated systems, introducing additional peripherals, communication methods, and ESP32-specific capabilities along the way.
+
+We'll also provide interactive simulations through **Wokwi** wherever applicable, allowing you to experiment with circuits and code directly in your browser.
+
+*Source code and project resources will be shared through GitHub repositories as the projects are published.*
+
+The goal isn't just to copy code and make something work. It's to understand how the different parts of an embedded system interact, develop the confidence to modify and debug existing projects, and eventually build something entirely of your own.
+
 
 <hr class="section-divider"/>
 

@@ -1,0 +1,902 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-11-19T09:57:32.945Z",
+  "site": "https://siliconpen.com",
+  "series": {
+    "oscillations": {
+      "name": "Oscillations",
+      "description": "Weekly tech newsletter decoding global tech wars, AI battles, and emerging disruptions.",
+      "cover": "/images/oscillations/cover.webp"
+    },
+    "rant-electronics": {
+      "name": "Rant Electronics",
+      "description": "The chaotic, sarcastic, brutally honest electronics notes — like the diary of a frustrated engineer.",
+      "cover": "/images/rant-electronics/cover.webp"
+    },
+    "pathway-to-arduino": {
+      "name": "Pathway to Arduino",
+      "description": "A structured learning path to master Arduino fundamentals from zero to real projects.",
+      "cover": "/images/pathway-to-arduino/cover.webp"
+    },
+    "real-circuits": {
+      "name": "Real Circuits",
+      "description": "Deep dives into real-world projects and circuit breakdowns with practical engineering insights.",
+      "cover": "/images/real-circuits/cover.png"
+    },
+    "guide-to-esp32": {
+      "name": "Guide To ESP32",
+      "description": "Hands-on embedded systems · Code, circuits, and downloadable project files",
+      "cover": "/images/guide-to-esp32/cover.png"
+    }
+  },
+  "stats": {
+    "totalPosts": 35,
+    "totalCircuits": 0,
+    "totalLabs": 10,
+    "totalVideos": 10
+  },
+  "posts": [
+    {
+      "id": "setting-up-vs-code-and-platformio-for-esp32-development",
+      "title": "Setting Up VS Code and PlatformIO for ESP32 Development",
+      "subtitle": "Set up your ESP32 development environment with Visual Studio Code and PlatformIO, from your first project to uploading code and debugging through the Serial Monitor.",
+      "description": "Learn how to program an ESP32 using VS Code and PlatformIO. Create your first project, configure the board, upload code, and use the Serial Monitor.",
+      "date": "2026-11-19",
+      "cover": "/images/guide-to-esp32/cover.png",
+      "series": "guide-to-esp32",
+      "order": 4,
+      "tags": [
+        "ESP32",
+        "PlatformIO",
+        "VS Code",
+        "Embedded Systems",
+        "Arduino Framework",
+        "Microcontrollers",
+        "Electronics",
+        "Programming"
+      ],
+      "url": "/posts/setting-up-vs-code-and-platformio-for-esp32-development.html"
+    },
+    {
+      "id": "a-small-change-in-how-we-ll-learn-esp32",
+      "title": "A Small Change in How We'll Learn ESP32",
+      "subtitle": "Clarification About our Approach Philosophy",
+      "description": "SiliconPen provides clarification regarding the appraoch to the \\\"Guide To ESP32\\\" series",
+      "date": "2026-11-08",
+      "cover": "/images/guide-to-esp32/cover.png",
+      "series": "guide-to-esp32",
+      "order": 3,
+      "tags": [
+        "ESP32"
+      ],
+      "url": "/posts/a-small-change-in-how-we-ll-learn-esp32.html"
+    },
+    {
+      "id": "esp32-pinout-explained-gpio-adc-pwm-spi-and-i-c",
+      "title": "ESP32 Pinout Explained: GPIO, ADC, PWM, SPI and I²C",
+      "subtitle": "Your practical guide to understanding ESP32 pins, choosing the right GPIOs, and connecting your first sensors, displays, and actuators.",
+      "description": "Learn ESP32 pinouts, GPIO, ADC, PWM, UART, SPI, and I²C. Understand pin restrictions and choose the right pins for sensors, displays, and embedded projects.",
+      "date": "2026-11-01",
+      "cover": "/images/guide-to-esp32/cover.png",
+      "series": "guide-to-esp32",
+      "order": 2,
+      "tags": [
+        "ESP32",
+        "Embedded Systems",
+        "Microcontrollers",
+        "GPIO",
+        "PlatformIO",
+        "Electronics",
+        "IOT"
+      ],
+      "url": "/posts/esp32-pinout-explained-gpio-adc-pwm-spi-and-i-c.html"
+    },
+    {
+      "id": "esp32-explained-what-it-is-and-what-you-can-build-with-it",
+      "title": "ESP32 Explained: What It Is and What You Can Build With It",
+      "subtitle": "From a tiny microcontroller to wireless devices, robotics, and even arcade games — let's explore the ESP32.",
+      "description": "Learn ESP32 with me, and make interesting projects! Get in depth concept, free project files and guidance!",
+      "date": "2026-10-29",
+      "cover": "/images/guide-to-esp32/cover.png",
+      "series": "guide-to-esp32",
+      "order": 1,
+      "tags": [
+        "esp32",
+        "electronics",
+        "embedded",
+        "explainer",
+        "microcontr"
+      ],
+      "url": "/posts/esp32-explained-what-it-is-and-what-you-can-build-with-it.html"
+    },
+    {
+      "id": "loop-conditions-and-decisions-in-embedded-systems",
+      "title": "Loop Conditions & Decisions in Embedded Systems",
+      "subtitle": "How Arduino Uses Logic to Think, React, and Make Real Decisions",
+      "description": "Learn how Arduino makes decisions using loops, conditions, and control flow. This chapter explains how embedded systems think, react, and choose actions based on real-world inputs — the foundation of intelligent behavior in electronics.",
+      "date": "2026-08-10",
+      "cover": "/images/pathway-to-arduino/cover.webp",
+      "series": "pathway-to-arduino",
+      "order": 14,
+      "tags": [
+        "electronics",
+        "arduino",
+        "inputs",
+        "code",
+        "explainer"
+      ],
+      "url": "/posts/loop-conditions-and-decisions-in-embedded-systems.html"
+    },
+    {
+      "id": "variables-functions-and-clean-code-structure",
+      "title": "Variables, Functions & Clean Code Structure",
+      "subtitle": "How to Organize Your Arduino Programs So They Stay Clean, Simple, and Easy to Fix",
+      "description": "Your Arduino code works—but it’s getting messy. This chapter teaches how to use variables, functions, and clean code structure to organize your programs, avoid repetition, and make changes easily. Perfect for beginners leveling up their coding skills.",
+      "date": "2026-08-03",
+      "cover": "/images/pathway-to-arduino/cover.webp",
+      "series": "pathway-to-arduino",
+      "order": 13,
+      "tags": [
+        "electronics",
+        "arduino",
+        "inputs",
+        "code",
+        "explainer"
+      ],
+      "url": "/posts/variables-functions-and-clean-code-structure.html"
+    },
+    {
+      "id": "serial-monitor-your-first-debug-tool",
+      "title": "Serial Monitor: Your First Debug Tool",
+      "subtitle": "The Window That Lets You See What Your Arduino Is Really Doing",
+      "description": "Learn how to use the Arduino Serial Monitor to debug your code, view sensor values, and understand what your program is thinking. A beginner-friendly chapter on printing, monitoring, and troubleshooting real-time data.",
+      "date": "2026-07-26",
+      "cover": "/images/pathway-to-arduino/cover.webp",
+      "series": "pathway-to-arduino",
+      "order": 12,
+      "tags": [
+        "electronics",
+        "arduino",
+        "inputs",
+        "serial monitor",
+        "explainer"
+      ],
+      "url": "/posts/serial-monitor-your-first-debug-tool.html"
+    },
+    {
+      "id": "delays-vs-non-blocking-code-millis",
+      "title": "Delays vs Non-Blocking Code millis()",
+      "subtitle": "Why delay() Freezes Your Arduino — and How millis() Frees It",
+      "description": "Using delay() works for beginners, but it stops your Arduino from doing multiple tasks. This chapter explains why delay() becomes a bottleneck and how millis() helps you write smooth, non-blocking, multitasking-friendly code.",
+      "date": "2026-07-20",
+      "cover": "/images/pathway-to-arduino/cover.webp",
+      "series": "pathway-to-arduino",
+      "order": 11,
+      "tags": [
+        "electronics",
+        "arduino",
+        "delay",
+        "inputs",
+        "signals",
+        "explainer"
+      ],
+      "url": "/posts/delays-vs-non-blocking-code-millis.html"
+    },
+    {
+      "id": "understanding-PWM-and-LED-fading",
+      "title": "Understanding PWM & LED Fading",
+      "subtitle": "How Arduino Fakes Analog Output Using High-Speed Digital Switching",
+      "description": "If Arduino can only output HIGH or LOW, how does it control brightness or motor speed? This chapter explains Pulse Width Modulation (PWM) in simple terms—how it fakes analog output and lets you fade LEDs or control power smoothly.",
+      "date": "2026-07-13",
+      "cover": "/images/pathway-to-arduino/cover.webp",
+      "series": "pathway-to-arduino",
+      "order": 10,
+      "tags": [
+        "electronics",
+        "arduino",
+        "analog",
+        "inputs",
+        "signals",
+        "explainer",
+        "PWM"
+      ],
+      "url": "/posts/understanding-PWM-and-LED-fading.html"
+    },
+    {
+      "id": "using-potentiometers-and-mapping-values",
+      "title": "Using Potentiometers & Mapping Values",
+      "subtitle": "Transforming Raw Analog Values into Useful Ranges for Real-World Control",
+      "description": "Learn how to use potentiometers with Arduino and convert raw analogRead() values into useful ranges. This chapter explains voltage division, reading 0–1023 values, and mapping them to angles, brightness, speed, or any custom scale.",
+      "date": "2026-01-17",
+      "cover": "/images/pathway-to-arduino/cover.webp",
+      "series": "pathway-to-arduino",
+      "order": 9,
+      "tags": [
+        "electronics",
+        "arduino",
+        "analog",
+        "inputs",
+        "signals",
+        "explainer"
+      ],
+      "url": "/posts/using-potentiometers-and-mapping-values.html"
+    },
+    {
+      "id": "analog-input-reading-sensors-with-analogread",
+      "title": "Analog Input: Reading Sensors with analogRead()",
+      "subtitle": "How Arduino Measures the Real World Through Voltage Levels and Sensors",
+      "description": "Learn how Arduino reads real-world signals using analogRead(). This chapter explains analog inputs, voltage levels, and how sensors provide continuous values instead of simple HIGH/LOW signals. Perfect for beginners exploring sensors and data.",
+      "date": "2026-01-13",
+      "cover": "/images/pathway-to-arduino/cover.webp",
+      "series": "pathway-to-arduino",
+      "order": 8,
+      "tags": [
+        "electronics",
+        "arduino",
+        "analog",
+        "inputs",
+        "signals",
+        "explainer"
+      ],
+      "url": "/posts/analog-input-reading-sensors-with-analogread.html"
+    },
+    {
+      "id": "potentiometer",
+      "title": "Potentiometer",
+      "subtitle": "The Variable Resistor That Lets You Control Electronics Smoothly",
+      "description": "A beginner-friendly look at potentiometers—what they are, how they work, and why they let humans control circuits smoothly instead of just ON/OFF. Clear, practical, and perfect for real-world electronics learning.",
+      "date": "2026-01-09",
+      "cover": "/images/real-circuits/cover.png",
+      "series": "real-circuits",
+      "order": 4,
+      "tags": [
+        "electronics",
+        "analog",
+        "circuits",
+        "inputs",
+        "foundations",
+        "explainer"
+      ],
+      "url": "/posts/potentiometer.html"
+    },
+    {
+      "id": "debouncing-why-buttons-misbehave",
+      "title": "Debouncing: Why Buttons Misbehave",
+      "subtitle": "Understanding Switch Bounce and How Arduino Handles Noisy Button Presses",
+      "description": "Learn why a simple button press can cause multiple signals in Arduino. This chapter explains the physics behind switch bounce, how it affects digital inputs, and the practical debouncing techniques used in real electronics.",
+      "date": "2026-01-05",
+      "cover": "/images/pathway-to-arduino/cover.webp",
+      "series": "pathway-to-arduino",
+      "order": 7,
+      "tags": [
+        "electronics",
+        "embedded-systems",
+        "arduino",
+        "digital",
+        "inputs",
+        "foundations",
+        "explainer"
+      ],
+      "url": "/posts/debouncing-why-buttons-misbehave.html"
+    },
+    {
+      "id": "newyear26",
+      "title": "From Confusion to Curiosity — One Year of SiliconPen",
+      "subtitle": "Learning didn’t start with answers — it started with taking the steps!",
+      "description": "SiliconPen began with confusion—not clarity. This New Year reflection looks back at one year of questioning, unlearning, and rebuilding understanding in electronics, moving from memorized formulas to real curiosity and intuition.",
+      "date": "2026-01-01",
+      "cover": "/images/cover.webp",
+      "series": null,
+      "order": null,
+      "tags": [],
+      "url": "/posts/newyear26.html"
+    },
+    {
+      "id": "using-digital-inputs-in-arduino",
+      "title": "Using Digital Inputs In Arduino",
+      "subtitle": "How Arduino Listens to the World Through Buttons, Switches, and Digital Input Signals",
+      "description": "Learn how digital inputs work in Arduino using buttons and switches. Understand how the board listens to external signals, reads HIGH/LOW states, and reacts to real-world interactions. Perfect for beginners building interactive projects.",
+      "date": "2026-01-01",
+      "cover": "/images/pathway-to-arduino/cover.webp",
+      "series": "pathway-to-arduino",
+      "order": 6,
+      "tags": [],
+      "url": "/posts/using-digital-inputs-in-arduino.html"
+    },
+    {
+      "id": "switches",
+      "title": "Switches",
+      "subtitle": "A Hands-On Look at How Switches Behave in Real Circuits",
+      "description": "Understand switches the right way—by seeing how they feel, behave, and connect in real circuits. No theory overload. Just a clear, practical explanation of what a switch actually is and how it controls current in your projects.",
+      "date": "2025-12-28",
+      "cover": "/images/real-circuits/cover.png",
+      "series": "real-circuits",
+      "order": 3,
+      "tags": [],
+      "url": "/posts/switches.html"
+    },
+    {
+      "id": "know-your-weapons",
+      "title": "Know Your Weapons: The Electronics You’ll Work With",
+      "subtitle": "A Practical Introduction to the Core Components You’ll Touch in Every Electronics Project",
+      "description": "Before building projects or writing code, you need to understand the core electronic components you’ll work with. This post introduces the fundamental parts—what they do, how they behave, and how they fail—in a simple, practical way.",
+      "date": "2025-12-24",
+      "cover": "/images/real-circuits/cover.png",
+      "series": "real-circuits",
+      "order": 2,
+      "tags": [],
+      "url": "/posts/know-your-weapons.html"
+    },
+    {
+      "id": "overview-real-circuits",
+      "title": "Overview: Real Circuits",
+      "subtitle": "A Practical Journey into How Electronic Components Behave in the Real World",
+      "description": "Electronics is more than equations and more than plug-and-play tutorials. This overview of the Real Circuits series explains the gap between theory and practical circuits, showing how components behave in real life and why that matters.",
+      "date": "2025-12-20",
+      "cover": "/images/real-circuits/cover.png",
+      "series": "real-circuits",
+      "order": 1,
+      "tags": [],
+      "url": "/posts/overview-real-circuits.html"
+    },
+    {
+      "id": "understanding-digital-output",
+      "title": "Understanding Digital Output",
+      "subtitle": "HIGHs and LOWs of the Arduino World!",
+      "description": "Learn what digital output truly means in electronics. Go beyond code and understand how Arduino pins use HIGH and LOW signals to control real components like LEDs, sensors, and modules. Perfect for beginners exploring embedded systems.",
+      "date": "2025-12-20",
+      "cover": "/images/pathway-to-arduino/cover.webp",
+      "series": "pathway-to-arduino",
+      "order": 5,
+      "tags": [],
+      "url": "/posts/understanding-digital-output.html"
+    },
+    {
+      "id": "blink-with-an-external-LED",
+      "title": "Blink with an External LED",
+      "subtitle": "Understanding the Brain and Bones of Arduino Circuits!",
+      "description": "Controlling LED using Arduino!",
+      "date": "2025-12-17",
+      "cover": "/images/pathway-to-arduino/cover.webp",
+      "series": "pathway-to-arduino",
+      "order": 4,
+      "tags": [],
+      "url": "/posts/blink-with-an-external-LED.html"
+    },
+    {
+      "id": "setting-up-the-arduino-IDE",
+      "title": "Setting Up the Arduino IDE",
+      "subtitle": "Starting up the Arduino Engine!",
+      "description": "Learn about the components and functions of the Arduino Uno board to enhance your coding and circuit-building skills",
+      "date": "2025-12-13",
+      "cover": "/images/pathway-to-arduino/cover.webp",
+      "series": "pathway-to-arduino",
+      "order": 3,
+      "tags": [],
+      "url": "/posts/setting-up-the-arduino-IDE.html"
+    },
+    {
+      "id": "welcome-to-the-new-siliconpen",
+      "title": "Welcome to the New SiliconPen",
+      "subtitle": "Migration To a New Home.",
+      "description": "SiliconPen has moved from Hashnode to its own home. Here’s why the move happened, what’s new on the site, and what’s still being built.",
+      "date": "2025-12-07",
+      "cover": "/images/cover.webp",
+      "series": null,
+      "order": null,
+      "tags": [],
+      "url": "/posts/welcome-to-the-new-siliconpen.html"
+    },
+    {
+      "id": "understanding-the-arduino-uno-board",
+      "title": "Understanding the Arduino Uno Board",
+      "subtitle": "Peeking into arduino's circuits.",
+      "description": "Learn about the components and functions of the Arduino Uno board to enhance your coding and circuit-building skills",
+      "date": "2025-12-05",
+      "cover": "/images/pathway-to-arduino/cover.webp",
+      "series": "pathway-to-arduino",
+      "order": 2,
+      "tags": [],
+      "url": "/posts/understanding-the-arduino-uno-board.html"
+    },
+    {
+      "id": "what-is-arduino",
+      "title": "What Is Arduino?",
+      "subtitle": "Overview for arduino and its working.",
+      "description": "Arduino simplifies electronics and programming, allowing beginners to prototype and innovate quickly with its user-friendly microcontroller platform",
+      "date": "2025-12-04",
+      "cover": "/images/pathway-to-arduino/cover.webp",
+      "series": "pathway-to-arduino",
+      "order": 1,
+      "tags": [],
+      "url": "/posts/what-is-arduino.html"
+    },
+    {
+      "id": "watts-really-going-on-inside-the-lightbulb-part-2-rant-electronics-3",
+      "title": "Watt’s Really Going On Inside the Lightbulb Part-2 [Rant Electronics #3]",
+      "subtitle": "Engineering tantrums dressed as insights.",
+      "description": "Discover how lightbulbs transfer heat through conduction, convection, and radiation, with engaging stories and insights",
+      "date": "2025-06-14",
+      "cover": "/images/rant-electronics/cover.webp",
+      "series": "rant-electronics",
+      "order": 6,
+      "tags": [],
+      "url": "/posts/watts-really-going-on-inside-the-lightbulb-part-2-rant-electronics-3.html"
+    },
+    {
+      "id": "oscillations-2",
+      "title": "Oscillations #2",
+      "subtitle": "Not just headlines — oscillations of a changing world, filtered through ambition, soul, and silicon.",
+      "description": "Discover the latest tech shifts in June 2025 — from AI giants tightening APIs, Amazon’s humanoid delivery robots, and India’s booming fintech and space tech",
+      "date": "2025-06-08",
+      "cover": "/images/oscillations/cover.webp",
+      "series": "oscillations",
+      "order": 3,
+      "tags": [],
+      "url": "/posts/oscillations-2.html"
+    },
+    {
+      "id": "watts-really-going-on-inside-the-lightbulb-part-1-rant-electronics-3",
+      "title": "Watt’s Really Going On Inside the Lightbulb Part-1 [Rant Electronics #3]",
+      "subtitle": "Engineering tantrums dressed as insights.",
+      "description": "Explore the chaotic world of lightbulbs, resistors, and Tungsten",
+      "date": "2025-06-07",
+      "cover": "/images/rant-electronics/cover.webp",
+      "series": "rant-electronics",
+      "order": 5,
+      "tags": [],
+      "url": "/posts/watts-really-going-on-inside-the-lightbulb-part-1-rant-electronics-3.html"
+    },
+    {
+      "id": "oscillations-1",
+      "title": "Oscillations #1",
+      "subtitle": "Not just headlines — oscillations of a changing world, filtered through ambition, soul, and silicon.",
+      "description": "Discover this week’s major tech shifts: OpenAI’s potential Chrome integration, US export ban on chip design software to China, Tesla’s robotaxi launch plans",
+      "date": "2025-06-01",
+      "cover": "/images/oscillations/cover.webp",
+      "series": "oscillations",
+      "order": 2,
+      "tags": [],
+      "url": "/posts/oscillations-1.html"
+    },
+    {
+      "id": "wires-the-sneaky-snakes-of-circuits-rant-electronics-2-part-2",
+      "title": "Wires — The Sneaky Snakes of Circuits [Rant Electronics #2] Part 2",
+      "subtitle": "Engineering tantrums dressed as insights.",
+      "description": "Explore wire chaos in circuits, revealing resistance, electromagnetism, and quirks in part two of this series",
+      "date": "2025-05-31",
+      "cover": "/images/rant-electronics/cover.webp",
+      "series": "rant-electronics",
+      "order": 4,
+      "tags": [],
+      "url": "/posts/wires-the-sneaky-snakes-of-circuits-rant-electronics-2-part-2.html"
+    },
+    {
+      "id": "wires-the-sneaky-snakes-of-circuits-rant-electronics-2-part-1",
+      "title": "Wires — The Sneaky Snakes of Circuits [Rant Electronics #2] Part 1",
+      "subtitle": "Engineering tantrums dressed as insights.",
+      "description": "Explore chaotic electronics with wiry betrayals, circuits, rodents, and relentless switches in this electrifying tale",
+      "date": "2025-05-26",
+      "cover": "/images/rant-electronics/cover.webp",
+      "series": "rant-electronics",
+      "order": 3,
+      "tags": [],
+      "url": "/posts/wires-the-sneaky-snakes-of-circuits-rant-electronics-2-part-1.html"
+    },
+    {
+      "id": "overview-oscillations-0",
+      "title": "Overview: Oscillations #0",
+      "subtitle": "Not just headlines — oscillations of a changing world, filtered through ambition, soul, and silicon.",
+      "description": "Discover SiliconPen",
+      "date": "2025-05-17",
+      "cover": "/images/oscillations/cover.webp",
+      "series": "oscillations",
+      "order": 1,
+      "tags": [],
+      "url": "/posts/overview-oscillations-0.html"
+    },
+    {
+      "id": "the-mighty-switch-rant-electronics-1",
+      "title": "The Mighty Switch [Rant Electronics #1]",
+      "subtitle": "Engineering tantrums dressed as insights.",
+      "description": "Discover how a simple switch holds deep life lessons — with sarcasm, philosophy, and electronics blended into one chaotic rant. Because why not romanticize.",
+      "date": "2025-05-16",
+      "cover": "/images/rant-electronics/cover.webp",
+      "series": "rant-electronics",
+      "order": 2,
+      "tags": [],
+      "url": "/posts/the-mighty-switch-rant-electronics-1.html"
+    },
+    {
+      "id": "overview-rant-electronics-0",
+      "title": "Overview [Rant Electronics #0]",
+      "subtitle": "Engineering tantrums dressed as insights.",
+      "description": "A humorous take on electronics, mixing engineering stress with rants, tangents, and existential musings. Not your typical tech guide",
+      "date": "2025-05-15",
+      "cover": "/images/rant-electronics/cover.webp",
+      "series": "rant-electronics",
+      "order": 1,
+      "tags": [],
+      "url": "/posts/overview-rant-electronics-0.html"
+    },
+    {
+      "id": "the-ghibli-effect-why-are-chatgpts-processors-melting",
+      "title": "The Ghibli Effect: Why are ChatGPT's Processors Melting?",
+      "subtitle": "Tracing the GenAI Boom Through Ghibli Aesthetics, Model Mayhem, and Online Debates.",
+      "description": "Ghibli-inspired AI art is taking over the internet. Discover the tech behind it—GANs, Diffusion, Transformers—and why ChatGPT can",
+      "date": "2025-04-10",
+      "cover": "/images/the-ghibli-effect-why-are-chatgpts-processors-melting/cover.webp",
+      "series": null,
+      "order": null,
+      "tags": [],
+      "url": "/posts/the-ghibli-effect-why-are-chatgpts-processors-melting.html"
+    },
+    {
+      "id": "how-to-read-circuit-diagrams",
+      "title": "How to Read Circuit Diagrams: A Beginner’s Guide",
+      "subtitle": "Explore circuit diagrams with ease by grasping basic symbols and essential electronics insights.",
+      "description": "Learn how to read circuit diagrams like a pro! This beginner-friendly guide breaks down symbols, connections, and tips to decode schematics with ease.",
+      "date": "2025-04-02",
+      "cover": "/images/teach/cover.webp",
+      "series": null,
+      "order": null,
+      "tags": [],
+      "url": "/posts/how-to-read-circuit-diagrams.html"
+    }
+  ],
+  "circuits": [],
+  "labs": [
+    {
+      "id": "analog-input-reading-sensors-with-analogread-lab-1",
+      "title": "Arduino Potentiometer Input",
+      "subtitle": "Interactive simulation built in Tinkercad",
+      "platform": "tinkercad",
+      "wokwiId": "",
+      "tinkercadSlug": "",
+      "link": "https://www.tinkercad.com/things/28BDNczwmpV-reading-potentiometer-using-arduino",
+      "buttonText": "Open Simulation in Tinkercad",
+      "image": "/images/pathway-to-arduino/analog-input-reading-sensors-with-analogread/2.png",
+      "mode": "preview",
+      "description": "Try rotating the potentiometer and observe how the analog value\r\n  changes in the Serial Monitor.",
+      "post": {
+        "id": "analog-input-reading-sensors-with-analogread",
+        "title": "Analog Input: Reading Sensors with analogRead()",
+        "url": "/posts/analog-input-reading-sensors-with-analogread.html",
+        "series": "pathway-to-arduino",
+        "date": "2026-01-13"
+      }
+    },
+    {
+      "id": "delays-vs-non-blocking-code-millis-lab-2",
+      "title": "Blocking Delays",
+      "subtitle": "Interactive simulation built in Tinkercad",
+      "platform": "tinkercad",
+      "wokwiId": "",
+      "tinkercadSlug": "",
+      "link": "https://www.tinkercad.com/things/1fkyfMkIOo6-blocking-delay",
+      "buttonText": "Open Simulation in Tinkercad",
+      "image": "/images/pathway-to-arduino/delays-vs-non-blocking-code-millis/1.png",
+      "mode": "preview",
+      "description": "Try using the button in this simulation to notice the blocking nature of Delay!",
+      "post": {
+        "id": "delays-vs-non-blocking-code-millis",
+        "title": "Delays vs Non-Blocking Code millis()",
+        "url": "/posts/delays-vs-non-blocking-code-millis.html",
+        "series": "pathway-to-arduino",
+        "date": "2026-07-20"
+      }
+    },
+    {
+      "id": "delays-vs-non-blocking-code-millis-lab-3",
+      "title": "Non-Blocking Millis",
+      "subtitle": "Interactive simulation built in Tinkercad",
+      "platform": "tinkercad",
+      "wokwiId": "",
+      "tinkercadSlug": "",
+      "link": "https://www.tinkercad.com/things/jzL6xxqgbjb-non-blocking-delay-millus",
+      "buttonText": "Open Simulation in Tinkercad",
+      "image": "/images/pathway-to-arduino/delays-vs-non-blocking-code-millis/1.png",
+      "mode": "preview",
+      "description": "Try using the button in this simulation to notice the non blocking nature of Millis!",
+      "post": {
+        "id": "delays-vs-non-blocking-code-millis",
+        "title": "Delays vs Non-Blocking Code millis()",
+        "url": "/posts/delays-vs-non-blocking-code-millis.html",
+        "series": "pathway-to-arduino",
+        "date": "2026-07-20"
+      }
+    },
+    {
+      "id": "loop-conditions-and-decisions-in-embedded-systems-lab-4",
+      "title": "Decision-Making Simulation",
+      "subtitle": "Interactive simulation built in Tinkercad",
+      "platform": "tinkercad",
+      "wokwiId": "",
+      "tinkercadSlug": "",
+      "link": "https://www.tinkercad.com/things/2eWyPW5EN2l-decision-making",
+      "buttonText": "Open Simulation in Tinkercad",
+      "image": "/images/pathway-to-arduino/loop-conditions-and-decisions-in-embedded-systems/3.png",
+      "mode": "preview",
+      "description": "Try pressing the button and observe how the LED responds in real-time.",
+      "post": {
+        "id": "loop-conditions-and-decisions-in-embedded-systems",
+        "title": "Loop Conditions & Decisions in Embedded Systems",
+        "url": "/posts/loop-conditions-and-decisions-in-embedded-systems.html",
+        "series": "pathway-to-arduino",
+        "date": "2026-08-10"
+      }
+    },
+    {
+      "id": "serial-monitor-your-first-debug-tool-lab-5",
+      "title": "Serial Monitor",
+      "subtitle": "Interactive simulation built in Tinkercad",
+      "platform": "tinkercad",
+      "wokwiId": "",
+      "tinkercadSlug": "",
+      "link": "https://www.tinkercad.com/things/esmuApJAw3g-serial-monitor",
+      "buttonText": "Open Simulation in Tinkercad",
+      "image": "/images/pathway-to-arduino/serial-monitor-your-first-debug-tool/4.png",
+      "mode": "preview",
+      "description": "Try using the button and seeing the serial monitor window change.",
+      "post": {
+        "id": "serial-monitor-your-first-debug-tool",
+        "title": "Serial Monitor: Your First Debug Tool",
+        "url": "/posts/serial-monitor-your-first-debug-tool.html",
+        "series": "pathway-to-arduino",
+        "date": "2026-07-26"
+      }
+    },
+    {
+      "id": "setting-up-vs-code-and-platformio-for-esp32-development-lab-6",
+      "title": "Serial Monito Demo ESP32",
+      "subtitle": "",
+      "platform": "wokwi",
+      "wokwiId": "480109625533065217",
+      "tinkercadSlug": "",
+      "link": "",
+      "buttonText": "Launch Simulation",
+      "image": "/images/guide-to-esp32/lab.png",
+      "mode": "preview",
+      "description": "",
+      "post": {
+        "id": "setting-up-vs-code-and-platformio-for-esp32-development",
+        "title": "Setting Up VS Code and PlatformIO for ESP32 Development",
+        "url": "/posts/setting-up-vs-code-and-platformio-for-esp32-development.html",
+        "series": "guide-to-esp32",
+        "date": "2026-11-19"
+      }
+    },
+    {
+      "id": "understanding-PWM-and-LED-fading-lab-7",
+      "title": "Arduino Basic PWM",
+      "subtitle": "Interactive simulation built in Tinkercad",
+      "platform": "tinkercad",
+      "wokwiId": "",
+      "tinkercadSlug": "",
+      "link": "https://www.tinkercad.com/things/8wEFnZn7DDA-pwm-basic",
+      "buttonText": "Open Simulation in Tinkercad",
+      "image": "/images/pathway-to-arduino/understanding-PWM-and-LED-fading/1.png",
+      "mode": "preview",
+      "description": "Try playing with the voltage value and see different levels of brightness!",
+      "post": {
+        "id": "understanding-PWM-and-LED-fading",
+        "title": "Understanding PWM & LED Fading",
+        "url": "/posts/understanding-PWM-and-LED-fading.html",
+        "series": "pathway-to-arduino",
+        "date": "2026-07-13"
+      }
+    },
+    {
+      "id": "understanding-PWM-and-LED-fading-lab-8",
+      "title": "Arduino Fading LED PWM",
+      "subtitle": "",
+      "platform": "tinkercad",
+      "wokwiId": "",
+      "tinkercadSlug": "kTncBdyO7dY-pwm-fading-led",
+      "link": "",
+      "buttonText": "Launch Simulation",
+      "image": "/images/pathway-to-arduino/understanding-PWM-and-LED-fading/1.png",
+      "mode": "preview",
+      "description": "Try changing the delay to obtain different speeds of fading!",
+      "post": {
+        "id": "understanding-PWM-and-LED-fading",
+        "title": "Understanding PWM & LED Fading",
+        "url": "/posts/understanding-PWM-and-LED-fading.html",
+        "series": "pathway-to-arduino",
+        "date": "2026-07-13"
+      }
+    },
+    {
+      "id": "understanding-PWM-and-LED-fading-lab-9",
+      "title": "Arduino PWM using Potentiometer Input",
+      "subtitle": "Interactive simulation built in Tinkercad",
+      "platform": "tinkercad",
+      "wokwiId": "",
+      "tinkercadSlug": "",
+      "link": "https://www.tinkercad.com/things/gHHbhdqs8h7-using-pwm-with-potentiometer",
+      "buttonText": "Open Simulation in Tinkercad",
+      "image": "/images/pathway-to-arduino/understanding-PWM-and-LED-fading/2.png",
+      "mode": "preview",
+      "description": "Try rotating the potentiometer and observe how the LED brightness\n  changes in real time.",
+      "post": {
+        "id": "understanding-PWM-and-LED-fading",
+        "title": "Understanding PWM & LED Fading",
+        "url": "/posts/understanding-PWM-and-LED-fading.html",
+        "series": "pathway-to-arduino",
+        "date": "2026-07-13"
+      }
+    },
+    {
+      "id": "using-potentiometers-and-mapping-values-lab-10",
+      "title": "Arduino Potentiometer Input",
+      "subtitle": "Interactive simulation built in Tinkercad",
+      "platform": "tinkercad",
+      "wokwiId": "",
+      "tinkercadSlug": "",
+      "link": "https://www.tinkercad.com/things/28BDNczwmpV-reading-potentiometer-using-arduino",
+      "buttonText": "Open Simulation in Tinkercad",
+      "image": "/images/pathway-to-arduino/analog-input-reading-sensors-with-analogread/2.png",
+      "mode": "preview",
+      "description": "Try rotating the potentiometer and observe how the analog value\r\n  changes in the Serial Monitor.",
+      "post": {
+        "id": "using-potentiometers-and-mapping-values",
+        "title": "Using Potentiometers & Mapping Values",
+        "url": "/posts/using-potentiometers-and-mapping-values.html",
+        "series": "pathway-to-arduino",
+        "date": "2026-01-17"
+      }
+    }
+  ],
+  "videos": [
+    {
+      "id": "GH0lQ8gcdgc",
+      "youtubeId": "GH0lQ8gcdgc",
+      "title": "Live demo: Arduino and Potentiometer",
+      "caption": "Live demo of Arduino and Potentiometer.",
+      "embedUrl": "https://www.youtube.com/embed/GH0lQ8gcdgc",
+      "thumbnail": "https://img.youtube.com/vi/GH0lQ8gcdgc/hqdefault.jpg",
+      "post": {
+        "id": "analog-input-reading-sensors-with-analogread",
+        "title": "Analog Input: Reading Sensors with analogRead()",
+        "url": "/posts/analog-input-reading-sensors-with-analogread.html",
+        "series": "pathway-to-arduino",
+        "date": "2026-01-13"
+      }
+    },
+    {
+      "id": "62NnJl6dVho",
+      "youtubeId": "62NnJl6dVho",
+      "title": "Blink with an External LED",
+      "caption": "",
+      "embedUrl": "https://www.youtube.com/embed/62NnJl6dVho",
+      "thumbnail": "https://img.youtube.com/vi/62NnJl6dVho/hqdefault.jpg",
+      "post": {
+        "id": "blink-with-an-external-LED",
+        "title": "Blink with an External LED",
+        "url": "/posts/blink-with-an-external-LED.html",
+        "series": "pathway-to-arduino",
+        "date": "2025-12-17"
+      }
+    },
+    {
+      "id": "PJb9DAd-wRk",
+      "youtubeId": "PJb9DAd-wRk",
+      "title": "Potentiometer",
+      "caption": "",
+      "embedUrl": "https://www.youtube.com/embed/PJb9DAd-wRk",
+      "thumbnail": "https://img.youtube.com/vi/PJb9DAd-wRk/hqdefault.jpg",
+      "post": {
+        "id": "potentiometer",
+        "title": "Potentiometer",
+        "url": "/posts/potentiometer.html",
+        "series": "real-circuits",
+        "date": "2026-01-09"
+      }
+    },
+    {
+      "id": "1gbpGyHG5kw",
+      "youtubeId": "1gbpGyHG5kw",
+      "title": "Setting Up the Arduino IDE",
+      "caption": "",
+      "embedUrl": "https://www.youtube.com/embed/1gbpGyHG5kw",
+      "thumbnail": "https://img.youtube.com/vi/1gbpGyHG5kw/hqdefault.jpg",
+      "post": {
+        "id": "setting-up-the-arduino-IDE",
+        "title": "Setting Up the Arduino IDE",
+        "url": "/posts/setting-up-the-arduino-IDE.html",
+        "series": "pathway-to-arduino",
+        "date": "2025-12-13"
+      }
+    },
+    {
+      "id": "5pkq0bPZbTw",
+      "youtubeId": "5pkq0bPZbTw",
+      "title": "Switches",
+      "caption": "",
+      "embedUrl": "https://www.youtube.com/embed/5pkq0bPZbTw",
+      "thumbnail": "https://img.youtube.com/vi/5pkq0bPZbTw/hqdefault.jpg",
+      "post": {
+        "id": "switches",
+        "title": "Switches",
+        "url": "/posts/switches.html",
+        "series": "real-circuits",
+        "date": "2025-12-28"
+      }
+    },
+    {
+      "id": "JHGH36uPBlM",
+      "youtubeId": "JHGH36uPBlM",
+      "title": "Switches",
+      "caption": "",
+      "embedUrl": "https://www.youtube.com/embed/JHGH36uPBlM",
+      "thumbnail": "https://img.youtube.com/vi/JHGH36uPBlM/hqdefault.jpg",
+      "post": {
+        "id": "switches",
+        "title": "Switches",
+        "url": "/posts/switches.html",
+        "series": "real-circuits",
+        "date": "2025-12-28"
+      }
+    },
+    {
+      "id": "ClgjuZKZp10",
+      "youtubeId": "ClgjuZKZp10",
+      "title": "Switches",
+      "caption": "",
+      "embedUrl": "https://www.youtube.com/embed/ClgjuZKZp10",
+      "thumbnail": "https://img.youtube.com/vi/ClgjuZKZp10/hqdefault.jpg",
+      "post": {
+        "id": "switches",
+        "title": "Switches",
+        "url": "/posts/switches.html",
+        "series": "real-circuits",
+        "date": "2025-12-28"
+      }
+    },
+    {
+      "id": "rjBdaUb70OM",
+      "youtubeId": "rjBdaUb70OM",
+      "title": "Using Digital Inputs In Arduino",
+      "caption": "",
+      "embedUrl": "https://www.youtube.com/embed/rjBdaUb70OM",
+      "thumbnail": "https://img.youtube.com/vi/rjBdaUb70OM/hqdefault.jpg",
+      "post": {
+        "id": "using-digital-inputs-in-arduino",
+        "title": "Using Digital Inputs In Arduino",
+        "url": "/posts/using-digital-inputs-in-arduino.html",
+        "series": "pathway-to-arduino",
+        "date": "2026-01-01"
+      }
+    },
+    {
+      "id": "--gNV4AALw0",
+      "youtubeId": "--gNV4AALw0",
+      "title": "Using Digital Inputs In Arduino",
+      "caption": "",
+      "embedUrl": "https://www.youtube.com/embed/--gNV4AALw0",
+      "thumbnail": "https://img.youtube.com/vi/--gNV4AALw0/hqdefault.jpg",
+      "post": {
+        "id": "using-digital-inputs-in-arduino",
+        "title": "Using Digital Inputs In Arduino",
+        "url": "/posts/using-digital-inputs-in-arduino.html",
+        "series": "pathway-to-arduino",
+        "date": "2026-01-01"
+      }
+    },
+    {
+      "id": "GH0lQ8gcdgc",
+      "youtubeId": "GH0lQ8gcdgc",
+      "title": "Live demo: Arduino and Potentiometer",
+      "caption": "Live demo of Arduino and Potentiometer.",
+      "embedUrl": "https://www.youtube.com/embed/GH0lQ8gcdgc",
+      "thumbnail": "https://img.youtube.com/vi/GH0lQ8gcdgc/hqdefault.jpg",
+      "post": {
+        "id": "using-potentiometers-and-mapping-values",
+        "title": "Using Potentiometers & Mapping Values",
+        "url": "/posts/using-potentiometers-and-mapping-values.html",
+        "series": "pathway-to-arduino",
+        "date": "2026-01-17"
+      }
+    }
+  ]
+}

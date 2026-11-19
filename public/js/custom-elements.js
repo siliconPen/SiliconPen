@@ -733,3 +733,253 @@ class SPYouTube extends HTMLElement {
   }
 }
 customElements.define("sp-youtube", SPYouTube);
+
+// 7. Workbench Circuit & Hardware Wiring Components (<sp-circuit>, <sp-dev>, <sp-wire>)
+class SPDev extends HTMLElement {}
+if (!customElements.get("sp-dev")) {
+  customElements.define("sp-dev", SPDev);
+}
+
+class SPWire extends HTMLElement {}
+if (!customElements.get("sp-wire")) {
+  customElements.define("sp-wire", SPWire);
+}
+
+class SPCircuit extends HTMLElement {
+  connectedCallback() {
+    if (!this._initializedData) {
+      const devEls = Array.from(this.querySelectorAll("sp-dev"));
+      const wireEls = Array.from(this.querySelectorAll("sp-wire"));
+
+      this._devices = devEls.map((d) => ({
+        id: (d.getAttribute("id") || "").trim(),
+        model: (d.getAttribute("model") || "").trim(),
+        label: (
+          d.getAttribute("label") ||
+          d.getAttribute("name") ||
+          d.getAttribute("id") ||
+          "Device"
+        ).trim(),
+        value: (d.getAttribute("value") || "").trim(),
+      }));
+
+      this._wires = wireEls.map((w) => ({
+        from: (w.getAttribute("from") || "").trim(),
+        to: (w.getAttribute("to") || "").trim(),
+        color: (w.getAttribute("color") || "gray").trim().toLowerCase(),
+        signal: (w.getAttribute("signal") || "-").trim(),
+        why: (w.getAttribute("why") || w.innerHTML.trim() || "").trim(),
+      }));
+
+      this._initializedData = true;
+    }
+
+    const title = this.getAttribute("title") || "Circuit Connections & Wiring";
+    const subtitle = this.getAttribute("subtitle") || "";
+    const isBreadboard = this.getAttribute("breadboard") !== "false";
+
+    // Map devices for quick pin name resolution
+    const devMap = {};
+    for (const d of this._devices) {
+      if (d.id) devMap[d.id] = d;
+    }
+
+    // Helper to format From / To endpoints (e.g. esp32:3V3 -> ESP32 Board [3V3])
+    const formatEndpoint = (ep) => {
+      if (!ep) return '<span class="sp-muted-dash">—</span>';
+      if (ep.includes(":")) {
+        const parts = ep.split(":");
+        const devId = parts[0].trim();
+        const pin = parts.slice(1).join(":").trim();
+        const dev = devMap[devId];
+        const devName = dev ? dev.label : devId;
+        return `
+          <div class="sp-pin-ref" data-dev="${devId}">
+            <span class="sp-dev-name">${devName}</span>
+            <code class="sp-pin-code">${pin}</code>
+          </div>
+        `;
+      }
+      return `<code class="sp-pin-code">${ep}</code>`;
+    };
+
+    // Helper for Signal badge styling
+    const formatSignal = (sig) => {
+      if (!sig || sig === "-") return '<span class="sp-muted-dash">—</span>';
+      const sLower = sig.toLowerCase();
+      let typeClass = "sp-sig-generic";
+      if (sLower.includes("gnd") || sLower.includes("ground")) {
+        typeClass = "sp-sig-gnd";
+      } else if (
+        sLower.includes("power") ||
+        sLower.includes("vcc") ||
+        sLower.includes("3.3v") ||
+        sLower.includes("5v")
+      ) {
+        typeClass = "sp-sig-power";
+      } else if (
+        sLower.includes("i2c") ||
+        sLower.includes("sda") ||
+        sLower.includes("scl")
+      ) {
+        typeClass = "sp-sig-i2c";
+      } else if (
+        sLower.includes("spi") ||
+        sLower.includes("mosi") ||
+        sLower.includes("miso") ||
+        sLower.includes("sck") ||
+        sLower.includes("cs")
+      ) {
+        typeClass = "sp-sig-spi";
+      } else if (
+        sLower.includes("uart") ||
+        sLower.includes("tx") ||
+        sLower.includes("rx") ||
+        sLower.includes("serial")
+      ) {
+        typeClass = "sp-sig-uart";
+      } else if (sLower.includes("analog") || sLower.includes("adc")) {
+        typeClass = "sp-sig-analog";
+      } else if (
+        sLower.includes("pwm") ||
+        sLower.includes("gpio") ||
+        sLower.includes("digital")
+      ) {
+        typeClass = "sp-sig-digital";
+      }
+      return `<span class="sp-sig-tag ${typeClass}">${sig}</span>`;
+    };
+
+    // Wire rows
+    let rowsHtml = this._wires
+      .map((w, idx) => {
+        const fromParts = w.from.split(":");
+        const toParts = w.to.split(":");
+        const devAttrs = [fromParts[0], toParts[0]].filter(Boolean).join(" ");
+
+        return `
+          <tr class="sp-wire-row wire-color-${w.color}" data-wire-idx="${idx}" data-devs="${devAttrs}">
+            <td class="sp-col-wire">
+              <span class="sp-wire-pill color-${w.color}" title="${w.color} jumper wire">
+                <span class="sp-wire-dot"></span>
+                <span class="sp-wire-name">${w.color.toUpperCase()}</span>
+              </span>
+            </td>
+            <td class="sp-col-from">${formatEndpoint(w.from)}</td>
+            <td class="sp-col-to">${formatEndpoint(w.to)}</td>
+            <td class="sp-col-signal">${formatSignal(w.signal)}</td>
+            <td class="sp-col-why">
+              ${
+                w.why
+                  ? `<div class="sp-why-wrap"><span class="sp-why-text">${w.why}</span></div>`
+                  : '<span class="sp-muted-dash">—</span>'
+              }
+            </td>
+          </tr>
+        `;
+      })
+      .join("");
+
+    if (!rowsHtml) {
+      rowsHtml = `<tr><td colspan="5" style="text-align:center;padding:18px;color:var(--text-muted);">No wire connections specified.</td></tr>`;
+    }
+
+    // Devices BOM bar
+    let devicesHtml = "";
+    if (this._devices.length > 0) {
+      devicesHtml = `
+        <div class="sp-circuit-devices">
+          <div class="sp-devices-header">
+            <span class="sp-devices-label">📦 Modules &amp; Components</span>
+            <span class="sp-devices-hint">(Click module to highlight wires)</span>
+          </div>
+          <div class="sp-devices-chips">
+            <button type="button" class="sp-dev-chip active-filter" data-filter="all">All (${this._wires.length} Wires)</button>
+            ${this._devices
+              .map(
+                (d) => `
+              <button type="button" class="sp-dev-chip" data-filter="${d.id}" title="Filter wires for ${d.label}">
+                <span class="sp-dev-chip-dot">●</span>
+                <span class="sp-dev-chip-label">${d.label}</span>
+                ${d.model ? `<span class="sp-dev-chip-model">${d.model}</span>` : ""}
+                ${d.value ? `<span class="sp-dev-chip-val">${d.value}</span>` : ""}
+              </button>
+            `
+              )
+              .join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    this.innerHTML = `
+      <div class="sp-circuit-card">
+        <div class="sp-circuit-header">
+          <div class="sp-circuit-meta-row">
+            <span class="sp-circuit-badge">
+              <span class="sp-circuit-dot"></span>
+              🔌 WORKBENCH WIRING GUIDE
+            </span>
+            ${isBreadboard ? '<span class="sp-breadboard-tag">🍞 Breadboard Layout</span>' : ""}
+          </div>
+          <h4 class="sp-circuit-title">${title}</h4>
+          ${subtitle ? `<div class="sp-circuit-subtitle">${subtitle}</div>` : ""}
+        </div>
+
+        ${devicesHtml}
+
+        <div class="table-scroll">
+          <table class="sp-circuit-table">
+            <thead>
+              <tr>
+                <th style="width: 110px;">Wire</th>
+                <th>From (Source)</th>
+                <th>To (Target)</th>
+                <th>Signal</th>
+                <th>Reason / Electrical Rationale</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rowsHtml}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="sp-circuit-footer">
+          <span class="sp-circuit-footer-hint">⚡ Common Ground Check: Ensure all module GND pins share a common rail to establish a stable reference voltage.</span>
+        </div>
+      </div>
+    `;
+
+    // Interactive module filtering
+    const chips = this.querySelectorAll(".sp-dev-chip");
+    const rows = this.querySelectorAll(".sp-wire-row");
+
+    chips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const targetId = chip.getAttribute("data-filter");
+        chips.forEach((c) => c.classList.remove("active-filter"));
+        chip.classList.add("active-filter");
+
+        if (targetId === "all") {
+          rows.forEach((r) => {
+            r.classList.remove("is-faded");
+            r.classList.remove("is-highlighted");
+          });
+        } else {
+          rows.forEach((r) => {
+            const devs = (r.getAttribute("data-devs") || "").split(" ");
+            if (devs.includes(targetId)) {
+              r.classList.remove("is-faded");
+              r.classList.add("is-highlighted");
+            } else {
+              r.classList.add("is-faded");
+              r.classList.remove("is-highlighted");
+            }
+          });
+        }
+      });
+    });
+  }
+}
+customElements.define("sp-circuit", SPCircuit);

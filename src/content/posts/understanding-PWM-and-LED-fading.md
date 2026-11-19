@@ -124,15 +124,10 @@ void loop() {
   }
 }
 </code></pre>
-<sp-lab
-  title="Arduino Fading LED PWM"
-  subtitle="Interactive simulation built in Tinkercad"
-  link="https://www.tinkercad.com/things/kTncBdyO7dY-pwm-fading-led"
-  button="Open Simulation in Tinkercad"
-  image="/images/pathway-to-arduino/understanding-PWM-and-LED-fading/1.png"
->
-  Try changing the delay to obtain different speeds of fading!
-</sp-lab>
+
+<sp-lab title="Arduino Fading LED PWM" tinkercad="kTncBdyO7dY-pwm-fading-led" mode="preview" image="/images/pathway-to-arduino/understanding-PWM-and-LED-fading/1.png">Try changing the delay to obtain different speeds of fading!</sp-lab>
+
+
 <p>This gradually changes the duty cycle, making the LED fade in and out.</p>
 <hr class="section-divider"/>
 

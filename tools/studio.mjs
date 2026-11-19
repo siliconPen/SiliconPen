@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { exec } from 'child_process';
+import { generateManifest } from './generate-manifest.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -411,6 +412,7 @@ const server = http.createServer((req, res) => {
 
       try {
         fs.writeFileSync(targetPath, serialized, 'utf8');
+        try { generateManifest(); } catch (mErr) { console.warn('[Manifest] Auto-generation error:', mErr); }
         return sendJson(200, {
           success: true,
           slug,

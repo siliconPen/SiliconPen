@@ -631,6 +631,7 @@
       <button class="tb-btn sp-component" id="tb-sp-troubleshoot" title="Insert Troubleshooting & Triage Box">🔧 Triage</button>
       <button class="tb-btn sp-component" id="tb-sp-compare" title="Insert Hardware Architecture Comparison">⚖️ Compare</button>
       <button class="tb-btn sp-component" id="tb-sp-pinout" title="Insert GPIO Pin Safety & Classification Guide">⚡ Pinout</button>
+      <button class="tb-btn sp-component" id="tb-sp-circuit" title="Insert Workbench Circuit & Wiring Table">🔌 Circuit</button>
       <button class="tb-btn sp-component" id="tb-sp-youtube" title="Insert YouTube Video Embed">▶️ YouTube</button>
       <button class="tb-btn sp-component" id="tb-sp-lab" title="Insert Interactive Lab Embed">🧪 &lt;sp-lab&gt;</button>
       <button class="tb-btn sp-component" id="tb-sp-rule" title="Insert Engineering Rule Box">⚡ Rule Box</button>
@@ -1126,6 +1127,23 @@
           '  <pin pin="GPIO 0, 2, 5, 12, 15" type="strapping">Strapping pins that determine boot mode (flashing vs SPI boot). Avoid pulling HIGH or LOW during boot sequence.</pin>\n' +
           '  <pin pin="GPIO 6 through 11" type="danger">Connected directly to the onboard SPI Flash memory chip. Connecting circuits here causes an instant CPU freeze.</pin>\n' +
           '</sp-pinout>\n'
+        );
+      };
+
+      document.getElementById('tb-sp-circuit').onclick = () => {
+        insertTextAtCursor(
+          '\n<sp-circuit title="ESP32 to MPU6050 IMU" breadboard="true">\n' +
+          '  <!-- 1. Connected Hardware Modules & Parts -->\n' +
+          '  <sp-dev id="esp32" model="esp32-devkit-v1" label="ESP32 Board"></sp-dev>\n' +
+          '  <sp-dev id="imu" model="mpu6050" label="MPU6050 IMU"></sp-dev>\n' +
+          '  <sp-dev id="c1" model="cap-ceramic" value="100nF" label="Decoupling Cap"></sp-dev>\n' +
+          '\n' +
+          '  <!-- 2. Wiring Connections & Electrical Rationale -->\n' +
+          '  <sp-wire from="esp32:3V3" to="imu:VCC" color="red" signal="3.3V Power" why="MPU6050 operates at 3.3V; 5V can damage logic pins."></sp-wire>\n' +
+          '  <sp-wire from="esp32:GND" to="imu:GND" color="black" signal="Ground" why="Common ground reference for power and logic."></sp-wire>\n' +
+          '  <sp-wire from="esp32:GPIO21" to="imu:SDA" color="yellow" signal="I2C Data" why="Default hardware I2C SDA pin on ESP32."></sp-wire>\n' +
+          '  <sp-wire from="esp32:GPIO22" to="imu:SCL" color="green" signal="I2C Clock" why="Default hardware I2C SCL pin on ESP32."></sp-wire>\n' +
+          '</sp-circuit>\n'
         );
       };
 

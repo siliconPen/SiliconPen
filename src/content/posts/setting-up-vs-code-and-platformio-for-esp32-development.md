@@ -2,10 +2,10 @@
 title: "Setting Up VS Code and PlatformIO for ESP32 Development"
 subtitle: "Set up your ESP32 development environment with Visual Studio Code and PlatformIO, from your first project to uploading code and debugging through the Serial Monitor."
 description: "Learn how to program an ESP32 using VS Code and PlatformIO. Create your first project, configure the board, upload code, and use the Serial Monitor."
-date: "2026-11-08"
+date: "2026-11-19"
 cover: "/images/guide-to-esp32/cover.png"
 series: "guide-to-esp32"
-order: 3
+order: 4
 tags:
   - "ESP32"
   - "PlatformIO"
@@ -15,7 +15,7 @@ tags:
   - "Microcontrollers"
   - "Electronics"
   - "Programming"
-draft: true
+draft: false
 ---
 
 # Introduction: From Hardware to Code
@@ -154,11 +154,17 @@ The exact board name shown can depend on the installed PlatformIO platform and b
 
 For our classic ESP32-WROOM-32 DevKit, the generic ESP32 Dev Module definition is commonly suitable. If you have a specific board variant, check its documentation and choose the matching definition when available.
 
+![screenshot-2026-11-08-155044.png](/images/setting-up-vs-code-and-platformio-for-esp32-development/screenshot-2026-11-08-155044.png)
+
 Choose a project location and create the project.
 
 PlatformIO will prepare the project and download the necessary packages. The first build can take longer than later builds because the toolchain and framework may need to be installed.
 
-## 7. Understand the Project Structure
+
+<hr class="section-divider"/>
+
+
+# Understand the Project Structure
 
 When the project opens, you will see a directory structure similar to this:
 
@@ -172,13 +178,15 @@ esp32_first_project/
 └── platformio.ini
 ```
 
+![screenshot-2026-11-08-155328.png](/images/setting-up-vs-code-and-platformio-for-esp32-development/screenshot-2026-11-08-155328.png)
+
 Each part has a purpose.
 
 ### `src/`
 
 This is where our main application code lives.
 
-For our project, the most important file is:
+For our project, the **most important file** is:
 
 `src/main.cpp`
 
@@ -188,7 +196,7 @@ This is where we will write our ESP32 program.
 
 This file contains the project's configuration. It specifies the target environment, framework, and other build or upload settings.
 
-For example:
+For example: *(Put this in your platformio.ini file, it would be needed for the following practice program!)*
 
 ```ini
 [env:esp32dev]
@@ -217,9 +225,11 @@ These directories support larger projects.
 
 We don't need to use all of them in our first program. As our projects grow, they will become more useful.
 
-## 8. Write Your First ESP32 Program
+<hr class="section-divider"/>
 
-Let's start with something simple: printing a message to the Serial Monitor.
+# Write Your First ESP32 Program
+
+Let's start with something simple: **printing a message to the Serial Monitor.**
 
 Open `src/main.cpp` and replace its contents with:
 
@@ -237,7 +247,14 @@ void loop() {
 }
 ```
 
-Let's understand the program.
+
+<div class="sp-warning-box">
+  <div class="sp-warning-title">⚠️ Possible Error Alert</div>
+  Don't forget to copy the aforementioned .ini code from above! 
+</div>
+
+
+<p>Now let's understand the program.</p>
 
 ### `#include <Arduino.h>`
 
@@ -247,15 +264,15 @@ This includes the Arduino framework declarations we need for functions such as `
 
 The `setup()` function executes once when the program starts or the board resets.
 
-We initialize serial communication here:
+**We initialize serial communication here:**
 
 ```cpp
 Serial.begin(115200);
 ```
 
-The number `115200` is the baud rate used for serial communication.
+The number `115200` is the baud rate used for serial communication. **The same should be set in the .ini file!**
 
-We then print a message:
+**We then print a message:**
 
 ```cpp
 Serial.println("Hello from the ESP32!");
@@ -274,11 +291,18 @@ delay(1000);
 
 This is a simple program, but it establishes the workflow we will use for debugging more complex systems.
 
-## 9. Connect the ESP32 to Your Computer
+
+<hr class="section-divider"/>
+
+# Connect the ESP32 to Your Computer
 
 Connect your ESP32 DevKit to your computer using the USB cable.
 
-Your computer should detect a serial device if the board's USB-to-serial interface and drivers are working correctly.
+Your computer should detect a serial device if the board's USB-to-serial interface and drivers are working correctly. 
+
+
+![screenshot-2026-11-19-150201.png](/images/setting-up-vs-code-and-platformio-for-esp32-development/screenshot-2026-11-19-150201.png)
+
 
 Depending on the board, USB interface, and operating system, the device may appear as a COM port on Windows or a serial device such as `/dev/ttyUSB0` or `/dev/ttyACM0` on Linux.
 
@@ -294,7 +318,21 @@ Some newer ESP32 boards have native USB interfaces, so the exact device name and
 
 **Important:** Do not select a serial port based only on its name. Confirm which port belongs to your connected board.
 
-## 10. Build and Upload the Program
+
+<div class="sp-fact-box">
+  <div class="sp-fact-title">💡 Windows Trick</div>
+  <p>To know your COM(Port),
+1- Keep your device plugged in.
+2- Press WIN+X -> Device Manager -> Expand 
+3- Now, keeping this open, remove your ESP
+4- Whichever port disappers is your port</p>
+</div>
+
+
+<hr class="section-divider"/>
+
+
+# Build and Upload the Program
 
 Now comes the satisfying part: putting our code onto the ESP32.
 
@@ -304,6 +342,10 @@ Follow this sequence:
 
 ### Step 1 — Build
 
+![screenshot-2026-11-19-151353.png](/images/setting-up-vs-code-and-platformio-for-esp32-development/screenshot-2026-11-19-151353.png)
+
+![screenshot-2026-11-19-151451.png](/images/setting-up-vs-code-and-platformio-for-esp32-development/screenshot-2026-11-19-151451.png)
+
 Choose **Build**.
 
 PlatformIO compiles your source code and prepares the firmware for the selected board.
@@ -311,6 +353,10 @@ PlatformIO compiles your source code and prepares the firmware for the selected 
 If there are compilation errors, the terminal will show diagnostic messages. Read the first relevant error rather than immediately changing multiple lines of code.
 
 ### Step 2 — Upload
+
+![screenshot-2026-11-19-151549.png](/images/setting-up-vs-code-and-platformio-for-esp32-development/screenshot-2026-11-19-151549.png)
+
+![screenshot-2026-11-19-151537.png](/images/setting-up-vs-code-and-platformio-for-esp32-development/screenshot-2026-11-19-151537.png)
 
 Connect the board and choose **Upload**.
 
@@ -322,9 +368,9 @@ Wait for the upload process to finish successfully.
 
 ### Step 3 — Open the Serial Monitor
 
-Choose **Monitor** from the PlatformIO toolbar or run the corresponding PlatformIO command.
+![screenshot-2026-11-19-151618.png](/images/setting-up-vs-code-and-platformio-for-esp32-development/screenshot-2026-11-19-151618.png)
 
-Set the baud rate to `115200`, matching our program.
+Choose **Monitor** from the PlatformIO toolbar or run the corresponding PlatformIO command.
 
 You should see output similar to:
 
@@ -339,7 +385,25 @@ Congratulations! You have compiled and uploaded your first program using Platfor
 
 If the message appears, the complete workflow is working: code, build tools, upload connection, firmware execution, and serial communication.
 
-## 11. Troubleshooting Common Problems
+<hr class="section-divider"/>
+
+# Your First Interactive ESP32 Lab
+
+Reading about embedded systems is one thing, but experimenting with them is where things start getting interesting.
+
+For this series, we'll be introducing *SiliconPen Interactive Labs*, powered by **Wokwi**. These labs let you explore circuits, run code, and experiment with virtual hardware directly from your browser.
+
+**Let's start with the program we just created. Run the simulation below, open the code editor, and watch the ESP32 communicate through the Serial Monitor.**
+
+Feel free to modify the messages, change the delay, or experiment with the code. There's no hardware to damage here!
+
+A small note: *You can use the embedded simulator directly or open the project on Wokwi for a larger workspace.*
+<sp-lab title="Serial Monito Demo ESP32" wokwi="480109625533065217" mode="preview" image="/images/guide-to-esp32/lab.png"></sp-lab>
+
+
+<hr class="section-divider"/>
+
+# Troubleshooting Common Problems
 
 Sometimes the first upload doesn't work. That's normal when setting up a new development environment.
 
@@ -376,7 +440,10 @@ Check that:
 
 Some boards reset when the Serial Monitor opens; give the output a moment to appear.
 
-## 12. Why We Are Using PlatformIO for This Series
+
+<hr class="section-divider"/>
+
+# Why We Are Using PlatformIO for This Series
 
 You might wonder why we're not simply using the Arduino IDE.
 
@@ -390,7 +457,10 @@ A project-based workflow makes these pieces easier to organize and reproduce.
 
 The goal isn't to make the development process unnecessarily complicated. It's to establish a workflow that can grow with our projects.
 
-## 13. What Comes Next?
+
+<hr class="section-divider"/>
+
+# What Comes Next?
 
 We now have a working ESP32 development environment.
 

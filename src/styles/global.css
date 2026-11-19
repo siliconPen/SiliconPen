@@ -5128,3 +5128,506 @@ html[data-theme="light"] .sp-yt-caption {
   border-top-color: rgba(0, 0, 0, 0.07);
   color: #475569;
 }
+
+/* 7. <sp-circuit>, <sp-dev>, <sp-wire> Workbench Wiring Guide Components */
+sp-dev,
+sp-wire {
+  display: none !important;
+}
+
+.sp-circuit-card {
+  margin: 36px 0;
+  background: linear-gradient(145deg, #0b1122 0%, #060914 100%);
+  border: 1px solid rgba(0, 245, 212, 0.25);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.sp-circuit-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent), transparent);
+}
+
+.sp-circuit-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.sp-circuit-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sp-circuit-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 245, 212, 0.1);
+  border: 1px solid rgba(0, 245, 212, 0.3);
+  color: var(--accent-cyan);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-family: var(--font-mono);
+}
+
+.sp-circuit-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-cyan);
+}
+
+.sp-breadboard-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 159, 28, 0.1);
+  border: 1px solid rgba(255, 159, 28, 0.3);
+  color: var(--accent);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.sp-circuit-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.sp-circuit-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Devices BOM Chips Bar */
+.sp-circuit-devices {
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sp-devices-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.sp-devices-label {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.sp-devices-hint {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 11px;
+}
+
+.sp-devices-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sp-dev-chip {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-main);
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.sp-dev-chip:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: var(--accent-cyan);
+  color: #ffffff;
+}
+
+.sp-dev-chip.active-filter {
+  background: rgba(0, 245, 212, 0.15);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(0, 245, 212, 0.2);
+}
+
+.sp-dev-chip-dot {
+  font-size: 8px;
+  color: var(--accent-cyan);
+}
+
+.sp-dev-chip-model {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1px 5px;
+  border-radius: 4px;
+  color: var(--text-muted);
+}
+
+.sp-dev-chip-val {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Circuit Table */
+.sp-circuit-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 !important;
+  font-size: 0.92rem;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.sp-circuit-table th {
+  background: rgba(255, 255, 255, 0.03);
+  color: #f1f5f9;
+  font-weight: 700;
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 2px solid rgba(0, 245, 212, 0.3);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.sp-circuit-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: middle;
+  transition: background 0.15s ease, opacity 0.2s ease;
+}
+
+.sp-circuit-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.sp-wire-row {
+  transition: opacity 0.2s ease, background 0.15s ease;
+}
+
+.sp-wire-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.sp-wire-row.is-faded {
+  opacity: 0.25;
+}
+
+.sp-wire-row.is-highlighted {
+  background: rgba(0, 245, 212, 0.06);
+}
+
+/* Endpoint from / to display */
+.sp-pin-ref {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.sp-dev-name {
+  font-weight: 600;
+  color: var(--text-main);
+  font-size: 0.88rem;
+}
+
+.sp-pin-code {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: #38bdf8;
+}
+
+/* Wire Color Pills */
+.sp-wire-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.sp-wire-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Color palettes */
+.sp-wire-pill.color-red {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}
+.sp-wire-pill.color-red .sp-wire-dot { background: #ef4444; box-shadow: 0 0 6px #ef4444; }
+
+.sp-wire-pill.color-black {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  color: #cbd5e1;
+}
+.sp-wire-pill.color-black .sp-wire-dot { background: #0f172a; border: 1px solid #94a3b8; }
+
+.sp-wire-pill.color-yellow {
+  background: rgba(234, 179, 8, 0.15);
+  border: 1px solid rgba(234, 179, 8, 0.4);
+  color: #fde047;
+}
+.sp-wire-pill.color-yellow .sp-wire-dot { background: #eab308; box-shadow: 0 0 6px #eab308; }
+
+.sp-wire-pill.color-green {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #86efac;
+}
+.sp-wire-pill.color-green .sp-wire-dot { background: #22c55e; box-shadow: 0 0 6px #22c55e; }
+
+.sp-wire-pill.color-blue {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: #93c5fd;
+}
+.sp-wire-pill.color-blue .sp-wire-dot { background: #3b82f6; box-shadow: 0 0 6px #3b82f6; }
+
+.sp-wire-pill.color-white {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+}
+.sp-wire-pill.color-white .sp-wire-dot { background: #ffffff; box-shadow: 0 0 6px #ffffff; }
+
+.sp-wire-pill.color-orange {
+  background: rgba(249, 115, 22, 0.15);
+  border: 1px solid rgba(249, 115, 22, 0.4);
+  color: #fdba74;
+}
+.sp-wire-pill.color-orange .sp-wire-dot { background: #f97316; box-shadow: 0 0 6px #f97316; }
+
+.sp-wire-pill.color-purple, .sp-wire-pill.color-violet {
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: #d8b4fe;
+}
+.sp-wire-pill.color-purple .sp-wire-dot, .sp-wire-pill.color-violet .sp-wire-dot { background: #a855f7; box-shadow: 0 0 6px #a855f7; }
+
+.sp-wire-pill.color-brown {
+  background: rgba(180, 83, 9, 0.15);
+  border: 1px solid rgba(180, 83, 9, 0.4);
+  color: #fcd34d;
+}
+.sp-wire-pill.color-brown .sp-wire-dot { background: #b45309; }
+
+.sp-wire-pill.color-gray, .sp-wire-pill.color-grey {
+  background: rgba(148, 163, 184, 0.15);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  color: #cbd5e1;
+}
+.sp-wire-pill.color-gray .sp-wire-dot, .sp-wire-pill.color-grey .sp-wire-dot { background: #94a3b8; }
+
+.sp-wire-pill.color-cyan {
+  background: rgba(0, 245, 212, 0.15);
+  border: 1px solid rgba(0, 245, 212, 0.4);
+  color: #00f5d4;
+}
+.sp-wire-pill.color-cyan .sp-wire-dot { background: #00f5d4; box-shadow: 0 0 6px #00f5d4; }
+
+/* Signal Badges */
+.sp-sig-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.sp-sig-power {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+}
+.sp-sig-gnd {
+  background: rgba(100, 116, 139, 0.18);
+  border: 1px solid rgba(100, 116, 139, 0.35);
+  color: #cbd5e1;
+}
+.sp-sig-i2c {
+  background: rgba(0, 245, 212, 0.1);
+  border: 1px solid rgba(0, 245, 212, 0.3);
+  color: var(--accent-cyan);
+}
+.sp-sig-spi {
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  color: #93c5fd;
+}
+.sp-sig-uart {
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  color: #d8b4fe;
+}
+.sp-sig-analog {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #6ee7b7;
+}
+.sp-sig-digital {
+  background: rgba(255, 159, 28, 0.12);
+  border: 1px solid rgba(255, 159, 28, 0.35);
+  color: var(--accent);
+}
+.sp-sig-generic {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-main);
+}
+
+/* Why / Rationale cell */
+.sp-why-wrap {
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+/* Footer note */
+.sp-circuit-footer {
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.015);
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.sp-circuit-footer-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Light Theme Overrides for Circuit Guide */
+html[data-theme="light"] .sp-circuit-card {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+html[data-theme="light"] .sp-circuit-header {
+  background: #f8fafc;
+  border-bottom-color: rgba(0, 0, 0, 0.07);
+}
+html[data-theme="light"] .sp-circuit-title {
+  color: #0f172a;
+}
+html[data-theme="light"] .sp-circuit-devices {
+  background: #f1f5f9;
+  border-bottom-color: rgba(0, 0, 0, 0.07);
+}
+html[data-theme="light"] .sp-dev-chip {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #334155;
+}
+html[data-theme="light"] .sp-dev-chip:hover {
+  background: #f8fafc;
+  border-color: #0d9488;
+  color: #0f172a;
+}
+html[data-theme="light"] .sp-dev-chip.active-filter {
+  background: #ccfbf1;
+  border-color: #0d9488;
+  color: #0f766e;
+}
+html[data-theme="light"] .sp-dev-chip-model {
+  background: #e2e8f0;
+  color: #475569;
+}
+html[data-theme="light"] .sp-circuit-table th {
+  background: #f8fafc;
+  color: #0f172a;
+  border-bottom-color: rgba(13, 148, 136, 0.35);
+}
+html[data-theme="light"] .sp-circuit-table td {
+  border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+html[data-theme="light"] .sp-dev-name {
+  color: #0f172a;
+}
+html[data-theme="light"] .sp-pin-code {
+  background: #f1f5f9;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #0284c7;
+}
+html[data-theme="light"] .sp-why-wrap {
+  color: #334155;
+}
+html[data-theme="light"] .sp-circuit-footer {
+  background: #f8fafc;
+  border-top-color: rgba(0, 0, 0, 0.07);
+  color: #475569;
+}
+html[data-theme="light"] .sp-wire-row:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+html[data-theme="light"] .sp-wire-row.is-highlighted {
+  background: rgba(13, 148, 136, 0.08);
+}
+html[data-theme="light"] .sp-wire-pill.color-black {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+html[data-theme="light"] .sp-wire-pill.color-white {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
