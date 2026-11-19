@@ -100,7 +100,7 @@ https://code.visualstudio.com/
 
 Choose the installer for your operating system and follow the installation instructions.
 
-![images.jpg](/images/setting-up-vs-code-and-platformio-for-esp32-development/images.jpg)
+![welcome-page.png](/images/setting-up-vs-code-and-platformio-for-esp32-development/welcome-page.png)
 
 Once installed, open ***VS Code.***
 
